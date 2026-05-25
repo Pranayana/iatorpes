@@ -1,0 +1,27 @@
+{
+  "name": "IAtorpes.com — La IA fácil",
+  "short_name": "IAtorpes",
+  "description": "La inteligencia artificial fácil y gratis para todos. Crea imágenes, resuelve dudas, cocina y mucho más sin conocimientos previos.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F2F0EB",
+  "theme_color": "#29B6E8",
+  "orientation": "portrait",
+  "lang": "es",
+  "scope": "/",
+  "categories": ["productivity", "education"],
+  "icons": [
+    {
+      "src": "robot-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "robot-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

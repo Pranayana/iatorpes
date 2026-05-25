@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "iatorpes",
+  "compatibility_date": "2026-05-25",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "subida"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}

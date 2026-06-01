@@ -135,7 +135,7 @@ html, body { height: 100%; font-family: 'Inter', sans-serif; background: var(--b
 /* ── INNER PAGES ── */
 #inner { display: none; flex-direction: column; position: fixed; inset: 62px 0 0 0; overflow-y: auto; background: var(--bg); padding: 0; }
 #inner.visible { display: flex; }
-.vista { display: none; flex-direction: column; min-height: 100%; padding-bottom: 80px; }
+.vista { display: none; flex-direction: column; min-height: 100%; padding-bottom: 140px; }
 .vista.active { display: flex; }
 .back-btn { 
   position: fixed;
@@ -3517,7 +3517,12 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
           <div class="acc-body">Puedes preguntarle lo que sea — por muy básico o vergonzoso que parezca — y siempre te responde con paciencia y sin juzgarte. No se cansa, no se aburre y no te hace sentir ignorante.</div>
         </div>
 
+        <div class="acc-item" style="visibility:hidden;pointer-events:none">
+          <div class="acc-header"><span class="acc-icon">.</span><span class="acc-title">.</span></div>
+        </div>
+
       </div>
+      <div style="height:120px"></div>
       <button class="back-btn" onclick="goHome()">← Volver</button>
     </div><!-- /v-sabias -->
 

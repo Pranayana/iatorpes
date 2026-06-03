@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v49 · Sección Sabías que con 12 curiosidades · 8 junio 2026 -->
+<!-- IAtorpes.com · v50 · Fix botón Volver se desplazaba al pulsar · 8 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -164,7 +164,7 @@ html, body { height: 100%; font-family: 'Inter', sans-serif; background: var(--b
   50% { opacity: 0.7; transform: scale(1.05); }
 }
 .back-btn::before { content: ""; position: absolute; inset: 0; background: linear-gradient(160deg,rgba(255,255,255,0.42) 0%,transparent 55%); border-radius: inherit; pointer-events: none; }
-.back-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+.back-btn:hover { transform: translateX(-50%) translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
 .hero { text-align: center; padding: 40px 24px 24px; flex-shrink: 0; }
 .hero-icon { font-size: 4rem; margin-bottom: 12px; }
 .hero-title { font-family: 'Sora',sans-serif; font-size: clamp(1.8rem,3.5vw,3rem); font-weight: 800; color: var(--text); margin-bottom: 10px; }

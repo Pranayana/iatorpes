@@ -1154,7 +1154,6 @@ body.dark .search-bar::placeholder { color: #555; }
 .result-btn.claude { background: linear-gradient(135deg, #D97706, #F59E0B); color: white; }
 .result-btn.gemini { background: linear-gradient(135deg, #4285F4, #29B6E8); color: white; }
 .result-btn.chatgpt { background: linear-gradient(135deg, #10a37f, #059669); color: white; }
-.result-btn.gemini { background: linear-gradient(135deg, #4285F4, #34A853); color: white; }
 
 body.dark .generator-section { background: linear-gradient(145deg, #1a5fa8, #1e90c8); }
 body.dark .generator-input { background: #1a1a2e; border-color: rgba(255,255,255,0.1); color: #E0E0E0; }
@@ -2255,7 +2254,6 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
             <button class="result-btn copy" onclick="msgCopy()">📋 Copiar</button>
             <button class="result-btn claude" onclick="msgOpen('https://claude.ai/new?q=')">🤖 Escribir en Claude</button>
             <button class="result-btn chatgpt" onclick="msgOpen('https://chat.openai.com/?q=')">🟢 Escribir en ChatGPT</button>
-            <button class="result-btn gemini" onclick="abrirGemini(msgPrompt)">✨ En Gemini</button>
           </div>
         </div>
 
@@ -2980,7 +2978,6 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
             <button class="result-btn copy" onclick="salCopy()">📋 Copiar</button>
             <button class="result-btn claude" onclick="salOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
             <button class="result-btn chatgpt" onclick="salOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
-            <button class="result-btn gemini" onclick="abrirGemini(salPrompt)">✨ En Gemini</button>
           </div>
         </div>
         <div class="info-box" style="margin-top:16px">
@@ -3063,7 +3060,6 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
             <button class="result-btn copy" onclick="movCopy()">📋 Copiar</button>
             <button class="result-btn claude" onclick="movOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
             <button class="result-btn chatgpt" onclick="movOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
-            <button class="result-btn gemini" onclick="abrirGemini(movPrompt)">✨ En Gemini</button>
           </div>
         </div>
         <div style="height:20px"></div>
@@ -3215,7 +3211,6 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
             <button class="result-btn copy" onclick="tra2Copy()">📋 Copiar</button>
             <button class="result-btn claude" onclick="tra2Open('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
             <button class="result-btn chatgpt" onclick="tra2Open('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
-            <button class="result-btn gemini" onclick="abrirGemini(tra2Prompt)">✨ En Gemini</button>
           </div>
         </div>
         <div style="height:20px"></div>
@@ -3327,7 +3322,6 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
             <button class="result-btn copy" onclick="tecCopy()">📋 Copiar</button>
             <button class="result-btn claude" onclick="tecOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
             <button class="result-btn chatgpt" onclick="tecOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
-            <button class="result-btn gemini" onclick="abrirGemini(tecPrompt)">✨ En Gemini</button>
           </div>
         </div>
         <div style="height:20px"></div>
@@ -3368,7 +3362,6 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
             <button class="result-btn copy" onclick="traCopy()">📋 Copiar</button>
             <button class="result-btn claude" onclick="traOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
             <button class="result-btn chatgpt" onclick="traOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
-            <button class="result-btn gemini" onclick="abrirGemini(traPrompt)">✨ En Gemini</button>
           </div>
         </div>
         <div style="height:20px"></div>
@@ -3409,7 +3402,6 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
             <button class="result-btn copy" onclick="labCopy()">📋 Copiar</button>
             <button class="result-btn claude" onclick="labOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
             <button class="result-btn chatgpt" onclick="labOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
-            <button class="result-btn gemini" onclick="abrirGemini(labPrompt)">✨ En Gemini</button>
           </div>
         </div>
         <div class="info-box" style="margin-top:16px">
@@ -3454,7 +3446,6 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
             <button class="result-btn copy" onclick="finCopy()">📋 Copiar</button>
             <button class="result-btn claude" onclick="finOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
             <button class="result-btn chatgpt" onclick="finOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
-            <button class="result-btn gemini" onclick="abrirGemini(finPrompt)">✨ En Gemini</button>
           </div>
         </div>
         <div class="info-box" style="margin-top:16px">
@@ -3497,7 +3488,6 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
             <button class="result-btn copy" onclick="emoCopy()">📋 Copiar</button>
             <button class="result-btn claude" onclick="emoOpen('https://claude.ai/new?q=')">🤖 Hablar con Claude</button>
             <button class="result-btn chatgpt" onclick="emoOpen('https://chat.openai.com/?q=')">🟢 Hablar con ChatGPT</button>
-            <button class="result-btn gemini" onclick="abrirGemini(emoPrompt)">✨ En Gemini</button>
           </div>
         </div>
         <div class="info-box" style="margin-top:16px">
@@ -3549,7 +3539,6 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
             <button class="result-btn copy" onclick="legCopy()">📋 Copiar</button>
             <button class="result-btn claude" onclick="legOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
             <button class="result-btn chatgpt" onclick="legOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
-            <button class="result-btn gemini" onclick="abrirGemini(legPrompt)">✨ En Gemini</button>
           </div>
         </div>
         <div class="info-box" style="margin-top:16px">
@@ -3600,7 +3589,6 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
             <button class="result-btn copy" onclick="medCopy()">📋 Copiar</button>
             <button class="result-btn claude" onclick="medOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
             <button class="result-btn chatgpt" onclick="medOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
-            <button class="result-btn gemini" onclick="abrirGemini(medPrompt)">✨ En Gemini</button>
           </div>
         </div>
         <div class="info-box" style="margin-top:16px">
@@ -3804,7 +3792,6 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
             <button class="result-btn copy" onclick="manCopy()">📋 Copiar</button>
             <button class="result-btn claude" onclick="manOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
             <button class="result-btn chatgpt" onclick="manOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
-            <button class="result-btn gemini" onclick="abrirGemini(manPrompt)">✨ En Gemini</button>
           </div>
         </div>
         <div style="height:20px"></div>
@@ -3854,7 +3841,6 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
             <button class="result-btn copy" onclick="chefCopy()">📋 Copiar</button>
             <button class="result-btn claude" onclick="chefOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
             <button class="result-btn chatgpt" onclick="chefOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
-            <button class="result-btn gemini" onclick="abrirGemini(chefPrompt)">✨ En Gemini</button>
           </div>
         </div>
         <div style="height:20px"></div>
@@ -4500,17 +4486,6 @@ function copyGeneratedPrompt() {
   });
 }
 
-function abrirGemini(prompt) {
-  // Abrir Gemini primero (respuesta directa al toque — no bloqueado)
-  window.open('https://gemini.google.com/app', '_blank');
-  // Luego copiar y mostrar aviso
-  navigator.clipboard.writeText(prompt).catch(() => {});
-  const toast = document.createElement('div');
-  toast.textContent = '✅ Prompt copiado — pégalo en Gemini';
-  toast.style.cssText = 'position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#fff;padding:12px 20px;border-radius:100px;font-size:0.85rem;font-weight:700;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,0.3)';
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 3000);
-}
 
 // ===== GENERADOR DE MENSAJES =====
 let msgTipo = 'WhatsApp';

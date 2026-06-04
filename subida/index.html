@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v69 · Generador de imágenes con formulario · 8 junio 2026 -->
+<!-- IAtorpes.com · v70 · Fix Gemini en generador de imágenes · 8 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -4960,13 +4960,13 @@ Crea la imagen directamente con los mejores parámetros técnicos: composición,
 
   const urls = {
     'ChatGPT': 'https://chat.openai.com/?q=',
-    'Gemini': 'https://gemini.google.com/app?q=',
+    'Gemini': 'https://gemini.google.com/',
     'Adobe Firefly': 'https://firefly.adobe.com/',
     'Ideogram': 'https://ideogram.ai/'
   };
 
   const url = urls[herramienta];
-  const necesitaCopiar = ['Adobe Firefly', 'Ideogram'].includes(herramienta);
+  const necesitaCopiar = ['Gemini', 'Adobe Firefly', 'Ideogram'].includes(herramienta);
 
   const btnsDiv = document.getElementById('img-result-btns');
   if (necesitaCopiar) {

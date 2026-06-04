@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v66 · SEO: datos estructurados, sitemap y robots · 8 junio 2026 -->
+<!-- IAtorpes.com · v69 · Generador de imágenes con formulario · 8 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -1920,15 +1920,41 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <div class="vista" id="v-imagen-rapido">
       <button class="back-btn" onclick="goHome()">← Volver</button>
-      <div class="hero"><div class="hero-icon">⚡</div><div class="hero-title">Imágenes</div><div class="hero-subtitle">Elige una herramienta gratuita y empieza a crear</div></div>
+      <div class="hero"><div class="hero-icon">🖼️</div><div class="hero-title">Quiero una imagen</div><div class="hero-subtitle">Descríbela y la IA la crea por ti</div></div>
       <div class="content">
-        <p style="text-align:center;color:var(--mid);margin-bottom:12px;font-size:0.92rem">Describe lo que quieres en español y la IA lo dibujará por ti.</p>
-        <div class="ia-buttons">
-          <button class="ia-btn featured" onclick="window.open('https://chat.openai.com','_blank')"><span style="font-size:1.6rem">🟢</span><div><span class="ia-label">GPT-Image 2 · ChatGPT</span><span class="featured-badge">⭐ Recomendado</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
-          <button class="ia-btn" onclick="window.open('https://gemini.google.com','_blank')"><span style="font-size:1.6rem">✨</span><div><span class="ia-label">Nano Banana · Gemini</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
-          <button class="ia-btn" onclick="window.open('https://firefly.adobe.com','_blank')"><span style="font-size:1.6rem">🔥</span><div><span class="ia-label">Adobe Firefly</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
-          <button class="ia-btn" onclick="window.open('https://ideogram.ai','_blank')"><span style="font-size:1.6rem">🖼️</span><div><span class="ia-label">Ideogram</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
+        <div class="msg-gen">
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">🖼️ ¿Qué imagen quieres crear?</label>
+            <input class="generator-input" id="img-descripcion" type="text" placeholder="Ej: un gato en la playa al atardecer, un logo de panadería, una foto de familia feliz...">
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">🎨 ¿Qué estilo?</label>
+            <div class="opt-btns" id="img-estilo">
+              <button class="opt-btn selected" onclick="msgSelect(this,'img-estilo')">Realista</button>
+              <button class="opt-btn" onclick="msgSelect(this,'img-estilo')">Dibujo</button>
+              <button class="opt-btn" onclick="msgSelect(this,'img-estilo')">Cartoon</button>
+              <button class="opt-btn" onclick="msgSelect(this,'img-estilo')">Pintura</button>
+              <button class="opt-btn" onclick="msgSelect(this,'img-estilo')">Fotografía</button>
+              <button class="opt-btn" onclick="msgSelect(this,'img-estilo')">Lo que la IA elija</button>
+            </div>
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">🛠️ ¿Con qué herramienta?</label>
+            <div class="opt-btns" id="img-herramienta">
+              <button class="opt-btn selected" onclick="msgSelect(this,'img-herramienta')">ChatGPT</button>
+              <button class="opt-btn" onclick="msgSelect(this,'img-herramienta')">Gemini</button>
+              <button class="opt-btn" onclick="msgSelect(this,'img-herramienta')">Adobe Firefly</button>
+              <button class="opt-btn" onclick="msgSelect(this,'img-herramienta')">Ideogram</button>
+            </div>
+          </div>
+          <button class="generator-btn" onclick="generateImagen()">🖼️ Crear mi imagen</button>
         </div>
+        <div class="generator-result" id="img-result" style="margin-top:16px">
+          <div class="result-label">📋 Tu prompt listo — pégalo en la herramienta elegida</div>
+          <div class="result-prompt" id="img-prompt-text"></div>
+          <div class="result-btns" id="img-result-btns"></div>
+        </div>
+        <div style="height:20px"></div>
       </div>
     </div>
 
@@ -4904,6 +4930,72 @@ function generateMovil() {
 function movCopy() { navigator.clipboard.writeText(movPrompt).then(()=>{ const b=document.querySelector('#mov-result .result-btn.copy'); b.textContent='✓ Copiado'; setTimeout(()=>b.textContent='📋 Copiar',2000); }); }
 function movOpen(base) { window.open(base+encodeURIComponent(movPrompt),'_blank'); }
 
+// ===== GENERADOR DE IMÁGENES =====
+let imgPrompt = '';
+
+function generateImagen() {
+  const descripcion = document.getElementById('img-descripcion').value.trim();
+  if (!descripcion) {
+    const campo = document.getElementById('img-descripcion');
+    campo.focus();
+    campo.style.borderColor = '#FF3B30';
+    setTimeout(() => campo.style.borderColor = '', 2000);
+    return;
+  }
+  const estilo = document.querySelector('#img-estilo .opt-btn.selected')?.textContent || 'Realista';
+  const herramienta = document.querySelector('#img-herramienta .opt-btn.selected')?.textContent || 'ChatGPT';
+
+  const estiloPrompt = estilo === 'Lo que la IA elija'
+    ? 'elige el estilo visual que mejor encaje con la imagen'
+    : `estilo ${estilo.toLowerCase()}`;
+
+  imgPrompt = `Eres un director artístico experto en generación de imágenes con IA. Voy a pedirte que crees una imagen y quiero que generes el prompt perfecto para obtener el mejor resultado posible.
+
+Lo que quiero: ${descripcion}
+Estilo: ${estiloPrompt}
+
+Crea la imagen directamente con los mejores parámetros técnicos: composición, iluminación, colores, detalles y calidad. Si puedes generarla tú mismo, hazlo ahora. Si necesitas que use otra herramienta, dame el prompt optimizado listo para pegar.`;
+
+  document.getElementById('img-prompt-text').textContent = imgPrompt;
+
+  const urls = {
+    'ChatGPT': 'https://chat.openai.com/?q=',
+    'Gemini': 'https://gemini.google.com/app?q=',
+    'Adobe Firefly': 'https://firefly.adobe.com/',
+    'Ideogram': 'https://ideogram.ai/'
+  };
+
+  const url = urls[herramienta];
+  const necesitaCopiar = ['Adobe Firefly', 'Ideogram'].includes(herramienta);
+
+  const btnsDiv = document.getElementById('img-result-btns');
+  if (necesitaCopiar) {
+    btnsDiv.innerHTML = `
+      <button class="result-btn copy" onclick="imgCopy()">📋 Copiar prompt</button>
+      <button class="result-btn claude" onclick="window.open('${url}','_blank')">🔗 Abrir ${herramienta}</button>`;
+  } else {
+    btnsDiv.innerHTML = `
+      <button class="result-btn copy" onclick="imgCopy()">📋 Copiar</button>
+      <button class="result-btn chatgpt" onclick="imgOpen('${url}')">🎨 Crear en ${herramienta}</button>`;
+  }
+
+  const result = document.getElementById('img-result');
+  result.classList.add('visible');
+  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function imgCopy() {
+  navigator.clipboard.writeText(imgPrompt).then(() => {
+    const btn = document.querySelector('#img-result .result-btn.copy');
+    btn.textContent = '✓ Copiado';
+    setTimeout(() => btn.textContent = '📋 Copiar', 2000);
+  });
+}
+
+function imgOpen(base) {
+  window.open(base + encodeURIComponent(imgPrompt), '_blank');
+}
+
 
 // ── NO SÉ QUÉ HACER ──
 function noSeQueHacer() {
@@ -5216,6 +5308,39 @@ const IA_DEL_DIA = [
   { dia:28, mes:6, tipo:'herramienta', emoji:'📸', titulo:'Herramienta del día: Remini', texto:'Restaura fotos antiguas y borrosas con IA. Fotos de tus abuelos, recuerdos familiares... las devuelve a la vida con una calidad increíble. Gratis.', cta:'Ver Remini', link:'https://remini.ai' },
   { dia:29, mes:6, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'La IA no duerme, no se cansa y no te juzga. Puedes preguntarle lo que sea a las 3 de la mañana y te responderá igual de bien que a mediodía.', cta:'Probarlo', link:'https://chatgpt.com' },
   { dia:30, mes:6, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un guía de viajes experto en España y destinos internacionales. Voy a hacer un viaje a [escribe el destino] durante [número de días] días con un presupuesto de [escribe el presupuesto]. Diseñame un itinerario día a día con lo mejor que ver, donde comer bien sin gastar demasiado y los consejos más útiles para aprovechar el viaje al máximo.', cta:'Planificar mi viaje', link:'https://chatgpt.com' },
+
+  // ===== JULIO 2026 =====
+  { dia:1, mes:7, tipo:'herramienta', emoji:'🎵', titulo:'Herramienta del día: Udio', texto:'Crea música original con IA en segundos. Solo describes el estilo y el tema — Udio genera la canción completa con letra y música. Gratis.', cta:'Crear música', link:'https://udio.com' },
+  { dia:2, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un experto en reclamaciones de consumidores en España. Voy a contarte una situación en la que me han tratado mal o no me han dado lo que corresponde: [describe la situación]. Redáctame una carta de reclamación formal, contundente y educada que pueda enviar a la empresa o al organismo correspondiente.', cta:'Redactar mi reclamación', link:'https://chatgpt.com' },
+  { dia:3, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un experto en ahorro y compras inteligentes. Necesito comprar [describe lo que necesitas comprar] con un presupuesto máximo de [escribe el presupuesto]. Dame los mejores consejos para conseguir la mejor relación calidad-precio, qué marcas o modelos buscar y qué errores comunes evitar al comprarlo.', cta:'Comprar con cabeza', link:'https://chatgpt.com' },
+  { dia:4, mes:7, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'La IA puede leer y analizar una foto de tu nevera y decirte qué recetas puedes hacer con lo que tienes dentro. Sin escribir nada — solo la foto.', cta:'Probarlo', link:'https://chatgpt.com' },
+  { dia:5, mes:7, tipo:'herramienta', emoji:'🎬', titulo:'Herramienta del día: Runway', texto:'Crea vídeos con IA a partir de texto o imágenes. Animaciones, efectos cinematográficos y transiciones imposibles. El futuro del vídeo ya está aquí.', cta:'Ver Runway', link:'https://runwayml.com' },
+  { dia:6, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un experto en presentaciones y comunicación oral. Tengo que hacer una presentación sobre [describe el tema] para [describe la audiencia]. Dame un esquema claro con los puntos clave, cómo empezar para captar la atención y cómo terminar para que se recuerde. Que dure aproximadamente [número de minutos] minutos.', cta:'Preparar mi presentación', link:'https://chatgpt.com' },
+  { dia:7, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un experto en búsqueda de empleo y currículos en España. Mi profesión es [escribe tu profesión] y llevo [tiempo buscando empleo] buscando trabajo. Revisa mi situación y dame 5 consejos concretos para mejorar mi búsqueda, qué plataformas usar y cómo destacar frente a otros candidatos.', cta:'Mejorar mi búsqueda', link:'https://chatgpt.com' },
+  { dia:8, mes:7, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'La IA puede ayudarte a aprender a tocar un instrumento desde cero. Te explica los acordes básicos, te da ejercicios progresivos y responde todas tus dudas con paciencia infinita.', cta:'Probarlo', link:'https://chatgpt.com' },
+  { dia:9, mes:7, tipo:'herramienta', emoji:'🖼️', titulo:'Herramienta del día: Adobe Firefly', texto:'El generador de imágenes con IA de Adobe. Integrado en Photoshop y con resultados profesionales. Ideal para diseño, publicidad y redes sociales. Gratis para empezar.', cta:'Ver Adobe Firefly', link:'https://firefly.adobe.com' },
+  { dia:10, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un coach de vida especializado en gestión del tiempo. Mi mayor problema con el tiempo es: [describe tu problema]. Diseñame una rutina diaria realista y práctica para ser más productivo, teniendo en cuenta que trabajo [número de horas] horas al día y que mi mayor distracción es [describe tu mayor distracción].', cta:'Organizar mi tiempo', link:'https://chatgpt.com' },
+  { dia:11, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un escritor creativo experto en historias personales. Quiero escribir una historia o anécdota sobre [describe el tema o experiencia]. Ayúdame a estructurarla de forma que enganche desde el primer momento, con un inicio impactante, un desarrollo interesante y un final memorable. El tono debe ser [elige: emotivo / divertido / reflexivo].', cta:'Escribir mi historia', link:'https://chatgpt.com' },
+  { dia:12, mes:7, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'Puedes pedirle a la IA que simule una entrevista de trabajo contigo. Te hace las preguntas más comunes, evalúa tus respuestas y te dice cómo mejorarlas. Como un entrenador personal para entrevistas.', cta:'Probarlo', link:'https://chatgpt.com' },
+  { dia:13, mes:7, tipo:'herramienta', emoji:'🔊', titulo:'Herramienta del día: Whisper (OpenAI)', texto:'Transcribe cualquier audio o vídeo a texto en segundos. Reuniones, entrevistas, clases... todo convertido en texto editable. Gratis y en español.', cta:'Ver Whisper', link:'https://openai.com/research/whisper' },
+  { dia:14, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un experto en contratos y documentos legales en España. Voy a mostrarte un contrato o documento que necesito entender: [pega aquí el texto o describe de qué trata]. Explícame en palabras simples qué dice exactamente, qué cláusulas son importantes, si hay algo que deba preocuparme y qué preguntas debería hacer antes de firmarlo.', cta:'Entender mi contrato', link:'https://chatgpt.com' },
+  { dia:15, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un nutricionista experto en alimentación saludable y práctica. Tengo [escribe tu edad] años y quiero mejorar mi alimentación. Mi mayor problema con la comida es [describe tu problema]. Dame un plan de alimentación sencillo para una semana, con recetas fáciles y rápidas, sin necesidad de contar calorías ni complicarme la vida.', cta:'Mejorar mi alimentación', link:'https://chatgpt.com' },
+  { dia:16, mes:7, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'La IA puede ayudarte a entender cualquier factura, extracto bancario o documento oficial. Solo le preguntas "¿qué significa esto?" y te lo explica en palabras de toda la vida.', cta:'Probarlo', link:'https://chatgpt.com' },
+  { dia:17, mes:7, tipo:'herramienta', emoji:'🤖', titulo:'Herramienta del día: Gemini', texto:'La IA de Google con acceso a información actualizada en tiempo real. Ideal para buscar noticias recientes, comparar productos y preguntas que requieran datos actuales.', cta:'Hablar con Gemini', link:'https://gemini.google.com' },
+  { dia:18, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un experto en redes sociales y contenido viral. Quiero publicar en [elige: Instagram / Facebook / TikTok / LinkedIn] sobre [describe el tema o tu negocio]. Escríbeme 5 ideas de publicaciones que puedan funcionar bien, con el texto listo para copiar y pegar, incluyendo emojis y hashtags adecuados.', cta:'Crear mis publicaciones', link:'https://chatgpt.com' },
+  { dia:19, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un experto en decoración de interiores. Tengo una habitación de [describe el espacio: salón, dormitorio, cocina...] de aproximadamente [metros cuadrados] metros cuadrados. El estilo que me gusta es [describe el estilo] y mi presupuesto para decorarla es [escribe el presupuesto]. Dame ideas concretas, qué muebles o elementos comprar y cómo organizarlo todo.', cta:'Decorar mi espacio', link:'https://chatgpt.com' },
+  { dia:20, mes:7, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'La IA puede ayudarte a preparar un discurso de boda, una despedida de soltera o un homenaje de jubilación en minutos. Le cuentas quién es la persona y ella escribe algo emotivo y personalizado.', cta:'Probarlo', link:'https://chatgpt.com' },
+  { dia:21, mes:7, tipo:'herramienta', emoji:'📝', titulo:'Herramienta del día: Notion AI', texto:'El bloc de notas inteligente que resume, organiza y mejora tus textos automáticamente. Ideal para tomar apuntes, gestionar proyectos y no perder ninguna idea.', cta:'Ver Notion AI', link:'https://notion.so' },
+  { dia:22, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un experto en educación y técnicas de estudio. Tengo que aprender o memorizar [describe el tema o materia] en [número de días] días. Diseñame un plan de estudio realista y eficaz, con las mejores técnicas para memorizar, cuánto tiempo dedicar cada día y cómo repasar antes del examen o la fecha importante.', cta:'Crear mi plan de estudio', link:'https://chatgpt.com' },
+  { dia:23, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un experto en mascotas y veterinaria. Tengo un [escribe el animal: perro, gato, pájaro...] de [edad] años que se llama [nombre de la mascota] y últimamente noto que [describe el comportamiento o síntoma que te preocupa]. Dime qué puede estar pasando, si debo ir al veterinario urgentemente y qué puedo hacer mientras tanto.', cta:'Consultar sobre mi mascota', link:'https://chatgpt.com' },
+  { dia:24, mes:7, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'La IA puede ayudarte a aprender cualquier idioma de forma personalizada. Le dices tu nivel, cuánto tiempo tienes y qué aspectos quieres mejorar, y te crea un plan de aprendizaje a medida.', cta:'Probarlo', link:'https://chatgpt.com' },
+  { dia:25, mes:7, tipo:'herramienta', emoji:'🔎', titulo:'Herramienta del día: Consensus', texto:'El buscador de IA que consulta estudios científicos reales para responder tus preguntas de salud, nutrición y bienestar. Sin opiniones — solo ciencia verificada.', cta:'Ver Consensus', link:'https://consensus.app' },
+  { dia:26, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un experto en finanzas personales y presupuestos familiares. Mis ingresos mensuales son aproximadamente [escribe los ingresos] euros y mis gastos principales son [describe tus gastos principales]. Ayúdame a crear un presupuesto mensual realista, dime dónde puedo ahorrar y cómo organizar mejor mi dinero.', cta:'Organizar mis finanzas', link:'https://chatgpt.com' },
+  { dia:27, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un experto en jardinería y plantas de interior. Tengo [describe tus plantas o el espacio donde quieres plantas] y no tengo mucha experiencia cuidándolas. Dame consejos prácticos sobre qué plantas son ideales para [describe la luz y el espacio disponible], cómo regarlas correctamente y qué errores comunes debo evitar para que no se mueran.', cta:'Cuidar mis plantas', link:'https://chatgpt.com' },
+  { dia:28, mes:7, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'Puedes pedirle a la IA que sea tu abogado personal para una negociación. Le describes la situación, ella te da los argumentos más sólidos y hasta te ensaya la conversación para que vayas preparado.', cta:'Probarlo', link:'https://chatgpt.com' },
+  { dia:29, mes:7, tipo:'herramienta', emoji:'🌐', titulo:'Herramienta del día: DeepL', texto:'El mejor traductor con IA del mundo. Más preciso que Google Translate, con matices naturales y opción de ajustar el tono. Traduce documentos enteros de golpe. Gratis.', cta:'Ver DeepL', link:'https://deepl.com' },
+  { dia:30, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un experto en seguridad digital y privacidad online. Quiero saber si estoy protegido en internet. Mis principales dudas son: [describe tus dudas o situaciones: contraseñas, estafas, privacidad en redes...]. Dame consejos prácticos y sencillos para estar más seguro online, explicados para alguien que no es experto en tecnología.', cta:'Protegerme online', link:'https://chatgpt.com' },
+  { dia:31, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un coach personal especializado en metas y objetivos. Estamos a finales de julio y quiero hacer balance del mes. Mis objetivos para este mes eran [describe tus objetivos] y lo que he conseguido es [describe lo que has logrado]. Ayúdame a analizar qué ha funcionado, qué no y cómo replantear los objetivos para agosto de forma más realista y motivadora.', cta:'Hacer mi balance', link:'https://chatgpt.com' },
 ];
 
 const TIPO_COLORES = {
@@ -5224,6 +5349,14 @@ const TIPO_COLORES = {
   prompt:     { bg: 'linear-gradient(135deg,#6C63FF,#48C6EF)', badge: '🎯 Prueba esto hoy' },
   curiosidad: { bg: 'linear-gradient(135deg,#11998e,#38ef7d)', badge: '🤔 ¿Lo sabías?' },
 };
+
+function extractBrackets(texto) {
+  const matches = [...texto.matchAll(/\[([^\]]+)\]/g)];
+  const vistos = new Set();
+  return matches
+    .filter(m => { if (vistos.has(m[1])) return false; vistos.add(m[1]); return true; })
+    .map(m => ({ full: m[0], label: m[1] }));
+}
 
 function renderIaDelDia() {
   const hoy = new Date();
@@ -5234,10 +5367,45 @@ function renderIaDelDia() {
   const color = TIPO_COLORES[contenido.tipo] || TIPO_COLORES.truco;
   const wrap = document.getElementById('ia-del-dia-wrap');
   if (!wrap) return;
+
   const esPrompt = ['truco','prompt'].includes(contenido.tipo);
-  const btnOnclick = esPrompt
-    ? `openChatGPT(decodeURIComponent('${encodeURIComponent(contenido.texto)}'))`
-    : `window.open('${contenido.link}','_blank')`;
+  const campos = esPrompt ? extractBrackets(contenido.texto) : [];
+
+  if (!esPrompt || campos.length === 0) {
+    // Herramienta o curiosidad — tarjeta normal
+    const btnOnclick = esPrompt
+      ? `openChatGPT(decodeURIComponent('${encodeURIComponent(contenido.texto)}'))`
+      : `window.open('${contenido.link}','_blank')`;
+    wrap.innerHTML = `
+      <div style="background:${color.bg};border-radius:20px;padding:20px;box-shadow:0 8px 24px rgba(0,0,0,0.15);position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(160deg,rgba(255,255,255,0.2) 0%,transparent 60%);pointer-events:none"></div>
+        <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+          <div style="background:#FF3B30;color:#fff;font-size:0.65rem;font-weight:900;padding:3px 10px;border-radius:100px;letter-spacing:0.5px;animation:hoyPulse 2s ease-in-out infinite">● HOY</div>
+        </div>
+        <div style="font-size:1.5rem;margin-bottom:6px">${contenido.emoji}</div>
+        <div style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;margin-bottom:8px">${contenido.titulo}</div>
+        <div style="font-size:0.88rem;color:rgba(255,255,255,0.92);line-height:1.5;margin-bottom:14px">${contenido.texto}</div>
+        <button onclick="${btnOnclick}" style="background:rgba(255,255,255,0.25);border:2px solid rgba(255,255,255,0.6);color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.85rem;padding:10px 20px;border-radius:100px;cursor:pointer;backdrop-filter:blur(4px)">
+          ${contenido.cta} →
+        </button>
+      </div>`;
+    return;
+  }
+
+  // Truco o prompt con corchetes — tarjeta con formulario
+  const camposHTML = campos.map((c, i) => `
+    <div style="margin-bottom:10px">
+      <label style="display:block;font-size:0.8rem;font-weight:700;color:rgba(255,255,255,0.9);margin-bottom:4px">✏️ ${c.label}</label>
+      <input id="idd-campo-${i}" type="text" placeholder="Escribe aquí..."
+        style="width:100%;box-sizing:border-box;padding:10px 12px;border-radius:12px;border:2px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.15);color:#fff;font-size:0.88rem;font-family:'Sora',sans-serif;outline:none;backdrop-filter:blur(4px)"
+        onfocus="this.style.borderColor='rgba(255,255,255,0.9)'"
+        onblur="this.style.borderColor='rgba(255,255,255,0.4)'"
+        placeholder="${c.label}">
+    </div>`).join('');
+
+  const textoEncoded = encodeURIComponent(contenido.texto);
+  const camposJSON = encodeURIComponent(JSON.stringify(campos));
+
   wrap.innerHTML = `
     <div style="background:${color.bg};border-radius:20px;padding:20px;box-shadow:0 8px 24px rgba(0,0,0,0.15);position:relative;overflow:hidden">
       <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(160deg,rgba(255,255,255,0.2) 0%,transparent 60%);pointer-events:none"></div>
@@ -5246,13 +5414,35 @@ function renderIaDelDia() {
       </div>
       <div style="font-size:1.5rem;margin-bottom:6px">${contenido.emoji}</div>
       <div style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;margin-bottom:8px">${contenido.titulo}</div>
-      <div style="font-size:0.88rem;color:rgba(255,255,255,0.92);line-height:1.5;margin-bottom:10px">${contenido.texto}</div>
-      ${esPrompt ? `<div style="font-size:0.75rem;color:rgba(255,255,255,0.7);margin-bottom:14px;font-style:italic">💬 Pulsa el botón — se abrirá ChatGPT con este mensaje listo. Solo escribe tu información donde aparezca [entre corchetes].</div>` : ''}
-      <button onclick="${btnOnclick}" style="background:rgba(255,255,255,0.25);border:2px solid rgba(255,255,255,0.6);color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.85rem;padding:10px 20px;border-radius:100px;cursor:pointer;backdrop-filter:blur(4px)">
-        ${contenido.cta} →
-      </button>
+      <div style="font-size:0.85rem;color:rgba(255,255,255,0.85);line-height:1.5;margin-bottom:14px">Rellena los campos y te preparamos el prompt completo:</div>
+      ${camposHTML}
+      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+        <button onclick="enviarPromptDia('${textoEncoded}','${camposJSON}','chatgpt')"
+          style="flex:1;min-width:120px;background:rgba(255,255,255,0.25);border:2px solid rgba(255,255,255,0.6);color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.82rem;padding:10px 14px;border-radius:100px;cursor:pointer;backdrop-filter:blur(4px)">
+          🟢 Abrir en ChatGPT →
+        </button>
+        <button onclick="enviarPromptDia('${textoEncoded}','${camposJSON}','claude')"
+          style="flex:1;min-width:120px;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.4);color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.82rem;padding:10px 14px;border-radius:100px;cursor:pointer;backdrop-filter:blur(4px)">
+          🤖 Abrir en Claude →
+        </button>
+      </div>
     </div>`;
 }
+
+function enviarPromptDia(textoEncoded, camposJSON, ia) {
+  const texto = decodeURIComponent(textoEncoded);
+  const campos = JSON.parse(decodeURIComponent(camposJSON));
+  let promptFinal = texto;
+  campos.forEach((c, i) => {
+    const val = document.getElementById('idd-campo-' + i)?.value.trim();
+    if (val) promptFinal = promptFinal.replace(c.full, val);
+  });
+  const url = ia === 'claude'
+    ? 'https://claude.ai/new?q=' + encodeURIComponent(promptFinal)
+    : 'https://chat.openai.com/?q=' + encodeURIComponent(promptFinal);
+  window.open(url, '_blank');
+}
+
 renderIaDelDia();
 </script>
 

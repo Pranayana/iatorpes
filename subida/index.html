@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v54 · Botón Volver directo a inicio (sin pantalla rápido/aprende) · 8 junio 2026 -->
+<!-- IAtorpes.com · v65 · Espacios hero y botón volver reducidos · 8 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -135,7 +135,7 @@ html, body { height: 100%; font-family: 'Inter', sans-serif; background: var(--b
 /* ── INNER PAGES ── */
 #inner { display: none; flex-direction: column; position: fixed; inset: 62px 0 0 0; overflow-y: auto; background: var(--bg); padding: 0; }
 #inner.visible { display: flex; }
-.vista { display: none; flex-direction: column; min-height: 100%; padding-bottom: 140px; }
+.vista { display: none; flex-direction: column; min-height: 100%; padding-bottom: 80px; }
 .vista.active { display: flex; }
 .back-btn { 
   position: fixed;
@@ -253,10 +253,10 @@ html, body { height: 100%; font-family: 'Inter', sans-serif; background: var(--b
 
   /* Inner pages */
   .back-btn { bottom: 16px; right: 16px; padding: 11px 18px; font-size: 0.88rem; }
-  .hero { padding: 4px 14px; }
-  .hero-icon { font-size: 1.4rem; }
-  .hero-title { font-size: 1rem; }
-  .hero-subtitle { font-size: 0.78rem; }
+  .hero { padding: 4px 14px 2px; }
+  .hero-icon { font-size: 1.4rem; margin-bottom: 4px; }
+  .hero-title { font-size: 1rem; margin-bottom: 4px; }
+  .hero-subtitle { font-size: 0.78rem; margin-bottom: 4px; }
 
   /* Modo buttons */
   .modo-buttons { padding: 10px 14px; gap: 12px; }
@@ -2891,18 +2891,38 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <div class="vista" id="v-salud-rapido">
       <button class="back-btn" onclick="goHome()">← Volver</button>
-      <div class="hero"><div class="hero-icon">⚡</div><div class="hero-title">Salud</div><div class="hero-subtitle">Consulta, entiende y pide cita — todo desde aquí</div></div>
+      <div class="hero"><div class="hero-icon">💊</div><div class="hero-title">Salud y medicamentos</div><div class="hero-subtitle">Cuéntanos qué te pasa y la IA te orientará</div></div>
       <div class="content">
-        <p style="text-align:center;color:var(--mid);margin-bottom:12px;font-size:0.95rem"><strong>Consulta a la IA</strong> — No sustituye al médico, pero te ayuda a entender</p>
-        <div class="ia-buttons">
-          <button class="ia-btn featured" onclick="window.open('https://claude.ai','_blank')"><span style="font-size:1.6rem">🤖</span><div><span class="ia-label">Claude</span><span class="featured-badge">⭐ Recomendado</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
-          <button class="ia-btn" onclick="window.open('https://chat.openai.com','_blank')"><span style="font-size:1.6rem">🟢</span><div><span class="ia-label">ChatGPT</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
+        <div class="msg-gen">
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">🩺 ¿Qué te pasa o qué quieres entender?</label>
+            <input class="generator-input" id="sal-problema" type="text" placeholder="Ej: me duele la cabeza, quiero entender este prospecto, tengo fiebre...">
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">📅 ¿Desde cuándo?</label>
+            <div class="opt-btns" id="sal-tiempo">
+              <button class="opt-btn selected" onclick="msgSelect(this,'sal-tiempo')">Hoy</button>
+              <button class="opt-btn" onclick="msgSelect(this,'sal-tiempo')">Varios días</button>
+              <button class="opt-btn" onclick="msgSelect(this,'sal-tiempo')">Más de una semana</button>
+              <button class="opt-btn" onclick="msgSelect(this,'sal-tiempo')">Es una duda general</button>
+            </div>
+          </div>
+          <button class="generator-btn" onclick="generateSalud()">💊 Consultar a la IA</button>
         </div>
-        <p style="text-align:center;color:var(--mid);margin:20px 0 12px;font-size:0.95rem"><strong>Pide cita médica online</strong></p>
-        <div class="ia-buttons">
-          <button class="ia-btn" onclick="window.open('https://www.seg-social.es/wps/portal/wss/internet/Inicio','_blank')"><span style="font-size:1.6rem">🏥</span><div><span class="ia-label">Seguridad Social</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
-          <button class="ia-btn" onclick="window.open('https://www.sanidad.gob.es','_blank')"><span style="font-size:1.6rem">🩺</span><div><span class="ia-label">Ministerio de Sanidad</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
+        <div class="generator-result" id="sal-result" style="margin-top:16px">
+          <div class="result-label">📋 Tu consulta lista — la IA te orientará</div>
+          <div class="result-prompt" id="sal-prompt-text"></div>
+          <div class="result-btns">
+            <button class="result-btn copy" onclick="salCopy()">📋 Copiar</button>
+            <button class="result-btn claude" onclick="salOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
+            <button class="result-btn chatgpt" onclick="salOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
+          </div>
         </div>
+        <div class="info-box" style="margin-top:16px">
+          <p style="font-size:0.85rem;font-weight:700;margin-bottom:4px">⚠️ Recuerda</p>
+          <p style="font-size:0.83rem;color:var(--mid)">La IA puede orientarte pero no sustituye a tu médico. Para decisiones importantes consulta siempre con un profesional.</p>
+        </div>
+        <div style="height:20px"></div>
       </div>
     </div>
 
@@ -2954,14 +2974,33 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <div class="vista" id="v-movil-rapido">
       <button class="back-btn" onclick="goHome()">← Volver</button>
-      <div class="hero"><div class="hero-icon">⚡</div><div class="hero-title">Móvil</div><div class="hero-subtitle">Pregunta a la IA cómo hacer cualquier cosa con tu móvil</div></div>
+      <div class="hero"><div class="hero-icon">📱</div><div class="hero-title">Usa tu móvil mejor</div><div class="hero-subtitle">Cuéntanos qué necesitas y la IA te explica paso a paso</div></div>
       <div class="content">
-        <p style="text-align:center;color:var(--mid);margin-bottom:12px;font-size:0.92rem">Escríbele exactamente lo que quieres hacer y te explicará paso a paso cómo hacerlo.</p>
-        <div class="ia-buttons">
-          <button class="ia-btn featured" onclick="window.open('https://claude.ai','_blank')"><span style="font-size:1.6rem">🤖</span><div><span class="ia-label">Claude</span><span class="featured-badge">⭐ Recomendado</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
-          <button class="ia-btn" onclick="window.open('https://chat.openai.com','_blank')"><span style="font-size:1.6rem">🟢</span><div><span class="ia-label">ChatGPT</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
-          <button class="ia-btn" onclick="window.open('https://gemini.google.com','_blank')"><span style="font-size:1.6rem">✨</span><div><span class="ia-label">Gemini</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
+        <div class="msg-gen">
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">📱 ¿Qué quieres hacer o qué te pasa?</label>
+            <input class="generator-input" id="mov-problema" type="text" placeholder="Ej: el móvil va lento, quiero hacer una videollamada, no encuentro una app...">
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">📲 ¿Qué móvil tienes?</label>
+            <div class="opt-btns" id="mov-tipo">
+              <button class="opt-btn selected" onclick="msgSelect(this,'mov-tipo')">Android</button>
+              <button class="opt-btn" onclick="msgSelect(this,'mov-tipo')">iPhone</button>
+              <button class="opt-btn" onclick="msgSelect(this,'mov-tipo')">No lo sé</button>
+            </div>
+          </div>
+          <button class="generator-btn" onclick="generateMovil()">📱 Consultar a la IA</button>
         </div>
+        <div class="generator-result" id="mov-result" style="margin-top:16px">
+          <div class="result-label">📋 Tu consulta lista — la IA te explicará cómo hacerlo</div>
+          <div class="result-prompt" id="mov-prompt-text"></div>
+          <div class="result-btns">
+            <button class="result-btn copy" onclick="movCopy()">📋 Copiar</button>
+            <button class="result-btn claude" onclick="movOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
+            <button class="result-btn chatgpt" onclick="movOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
+          </div>
+        </div>
+        <div style="height:20px"></div>
       </div>
     </div>
 
@@ -3083,14 +3122,36 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <div class="vista" id="v-tramites-rapido">
       <button class="back-btn" onclick="goHome()">← Volver</button>
-      <div class="hero"><div class="hero-icon">⚡</div><div class="hero-title">Trámites</div><div class="hero-subtitle">Pregunta a la IA sobre tu gestión o trámite</div></div>
+      <div class="hero"><div class="hero-icon">📋</div><div class="hero-title">Trámites y burocracia</div><div class="hero-subtitle">Cuéntanos qué necesitas y la IA te explica los pasos</div></div>
       <div class="content">
-        <p style="text-align:center;color:var(--mid);margin-bottom:12px;font-size:0.92rem">Cuéntale tu situación y te explicará qué pasos dar.</p>
-        <div class="ia-buttons">
-          <button class="ia-btn featured" onclick="window.open('https://claude.ai','_blank')"><span style="font-size:1.6rem">🤖</span><div><span class="ia-label">Claude</span><span class="featured-badge">⭐ Recomendado</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
-          <button class="ia-btn" onclick="window.open('https://chat.openai.com','_blank')"><span style="font-size:1.6rem">🟢</span><div><span class="ia-label">ChatGPT</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
-          <button class="ia-btn" onclick="window.open('https://gemini.google.com','_blank')"><span style="font-size:1.6rem">✨</span><div><span class="ia-label">Gemini</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
+        <div class="msg-gen">
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">🏛️ ¿Qué trámite necesitas hacer?</label>
+            <input class="generator-input" id="tra2-problema" type="text" placeholder="Ej: renovar el DNI, pedir el paro, hacer la declaración de la renta...">
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">📋 ¿De qué tipo es?</label>
+            <div class="opt-btns" id="tra2-tipo">
+              <button class="opt-btn selected" onclick="msgSelect(this,'tra2-tipo')">Hacienda / Renta</button>
+              <button class="opt-btn" onclick="msgSelect(this,'tra2-tipo')">Seguridad Social</button>
+              <button class="opt-btn" onclick="msgSelect(this,'tra2-tipo')">Ayuntamiento</button>
+              <button class="opt-btn" onclick="msgSelect(this,'tra2-tipo')">DNI / Pasaporte</button>
+              <button class="opt-btn" onclick="msgSelect(this,'tra2-tipo')">Subvención</button>
+              <button class="opt-btn" onclick="msgSelect(this,'tra2-tipo')">Otro</button>
+            </div>
+          </div>
+          <button class="generator-btn" onclick="generateTramite2()">🏛️ Consultar a la IA</button>
         </div>
+        <div class="generator-result" id="tra2-result" style="margin-top:16px">
+          <div class="result-label">📋 Tu consulta lista — la IA te explicará los pasos</div>
+          <div class="result-prompt" id="tra2-prompt-text"></div>
+          <div class="result-btns">
+            <button class="result-btn copy" onclick="tra2Copy()">📋 Copiar</button>
+            <button class="result-btn claude" onclick="tra2Open('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
+            <button class="result-btn chatgpt" onclick="tra2Open('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
+          </div>
+        </div>
+        <div style="height:20px"></div>
       </div>
     </div>
 
@@ -3165,6 +3226,317 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <!-- CONSULTAS GUIADAS -->
+    <!-- PROBLEMA TECNOLÓGICO -->
+    <div class="vista" id="v-consulta-tecno">
+      <button class="back-btn" onclick="showVista('v-consultas')">← Volver</button>
+      <div class="hero">
+        <div class="hero-icon">📱</div>
+        <div class="hero-title">Problema tecnológico</div>
+        <div class="hero-subtitle">Cuéntanos qué falla y la IA te explica cómo solucionarlo</div>
+      </div>
+      <div class="content">
+        <div class="msg-gen">
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">🔧 ¿Qué te está pasando?</label>
+            <input class="generator-input" id="tec-problema" type="text" placeholder="Ej: el móvil va muy lento, no me llega el WiFi, olvidé la contraseña...">
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">📱 ¿En qué dispositivo?</label>
+            <div class="opt-btns" id="tec-dispositivo">
+              <button class="opt-btn selected" onclick="msgSelect(this,'tec-dispositivo')">Móvil Android</button>
+              <button class="opt-btn" onclick="msgSelect(this,'tec-dispositivo')">iPhone</button>
+              <button class="opt-btn" onclick="msgSelect(this,'tec-dispositivo')">Ordenador Windows</button>
+              <button class="opt-btn" onclick="msgSelect(this,'tec-dispositivo')">Mac</button>
+              <button class="opt-btn" onclick="msgSelect(this,'tec-dispositivo')">Tablet</button>
+              <button class="opt-btn" onclick="msgSelect(this,'tec-dispositivo')">Otro</button>
+            </div>
+          </div>
+          <button class="generator-btn" onclick="generateTecno()">📱 Consultar a la IA</button>
+        </div>
+        <div class="generator-result" id="tec-result" style="margin-top:16px">
+          <div class="result-label">📋 Tu consulta lista — la IA te explicará cómo solucionarlo paso a paso</div>
+          <div class="result-prompt" id="tec-prompt-text"></div>
+          <div class="result-btns">
+            <button class="result-btn copy" onclick="tecCopy()">📋 Copiar</button>
+            <button class="result-btn claude" onclick="tecOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
+            <button class="result-btn chatgpt" onclick="tecOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
+          </div>
+        </div>
+        <div style="height:20px"></div>
+      </div>
+    </div><!-- /v-consulta-tecno -->
+
+    <!-- TRÁMITE ADMINISTRATIVO -->
+    <div class="vista" id="v-consulta-tramite">
+      <button class="back-btn" onclick="showVista('v-consultas')">← Volver</button>
+      <div class="hero">
+        <div class="hero-icon">🏛️</div>
+        <div class="hero-title">Trámite administrativo</div>
+        <div class="hero-subtitle">Cuéntanos qué necesitas y la IA te explica los pasos</div>
+      </div>
+      <div class="content">
+        <div class="msg-gen">
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">🏛️ ¿Qué trámite necesitas hacer?</label>
+            <input class="generator-input" id="tra-problema" type="text" placeholder="Ej: renovar el DNI, pedir el paro, hacer la declaración de la renta...">
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">📋 ¿De qué tipo es?</label>
+            <div class="opt-btns" id="tra-tipo">
+              <button class="opt-btn selected" onclick="msgSelect(this,'tra-tipo')">Hacienda / Renta</button>
+              <button class="opt-btn" onclick="msgSelect(this,'tra-tipo')">Seguridad Social</button>
+              <button class="opt-btn" onclick="msgSelect(this,'tra-tipo')">Ayuntamiento</button>
+              <button class="opt-btn" onclick="msgSelect(this,'tra-tipo')">DNI / Pasaporte</button>
+              <button class="opt-btn" onclick="msgSelect(this,'tra-tipo')">Subvención</button>
+              <button class="opt-btn" onclick="msgSelect(this,'tra-tipo')">Otro</button>
+            </div>
+          </div>
+          <button class="generator-btn" onclick="generateTramite()">🏛️ Consultar a la IA</button>
+        </div>
+        <div class="generator-result" id="tra-result" style="margin-top:16px">
+          <div class="result-label">📋 Tu consulta lista — la IA te explicará los pasos a seguir</div>
+          <div class="result-prompt" id="tra-prompt-text"></div>
+          <div class="result-btns">
+            <button class="result-btn copy" onclick="traCopy()">📋 Copiar</button>
+            <button class="result-btn claude" onclick="traOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
+            <button class="result-btn chatgpt" onclick="traOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
+          </div>
+        </div>
+        <div style="height:20px"></div>
+      </div>
+    </div><!-- /v-consulta-tramite -->
+
+    <!-- CONSULTA LABORAL -->
+    <div class="vista" id="v-consulta-laboral">
+      <button class="back-btn" onclick="showVista('v-consultas')">← Volver</button>
+      <div class="hero">
+        <div class="hero-icon">💼</div>
+        <div class="hero-title">Consulta laboral</div>
+        <div class="hero-subtitle">Cuéntanos tu situación y la IA te orientará</div>
+      </div>
+      <div class="content">
+        <div class="msg-gen">
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">💼 ¿Qué te pasa en el trabajo?</label>
+            <input class="generator-input" id="lab-problema" type="text" placeholder="Ej: me han despedido, no me pagan bien, quiero pedir la baja...">
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">📋 ¿De qué tipo es?</label>
+            <div class="opt-btns" id="lab-tipo">
+              <button class="opt-btn selected" onclick="msgSelect(this,'lab-tipo')">Despido</button>
+              <button class="opt-btn" onclick="msgSelect(this,'lab-tipo')">Nómina</button>
+              <button class="opt-btn" onclick="msgSelect(this,'lab-tipo')">Contrato</button>
+              <button class="opt-btn" onclick="msgSelect(this,'lab-tipo')">Paro</button>
+              <button class="opt-btn" onclick="msgSelect(this,'lab-tipo')">Acoso</button>
+              <button class="opt-btn" onclick="msgSelect(this,'lab-tipo')">Otro</button>
+            </div>
+          </div>
+          <button class="generator-btn" onclick="generateLaboral()">💼 Consultar a la IA</button>
+        </div>
+        <div class="generator-result" id="lab-result" style="margin-top:16px">
+          <div class="result-label">📋 Tu consulta lista — la IA te orientará con toda esta información</div>
+          <div class="result-prompt" id="lab-prompt-text"></div>
+          <div class="result-btns">
+            <button class="result-btn copy" onclick="labCopy()">📋 Copiar</button>
+            <button class="result-btn claude" onclick="labOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
+            <button class="result-btn chatgpt" onclick="labOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:16px">
+          <p style="font-size:0.85rem;font-weight:700;margin-bottom:4px">⚠️ Recuerda</p>
+          <p style="font-size:0.83rem;color:var(--mid)">La IA puede orientarte pero no sustituye a un abogado laboralista. Para decisiones importantes consulta siempre con un profesional.</p>
+        </div>
+        <div style="height:20px"></div>
+      </div>
+    </div><!-- /v-consulta-laboral -->
+
+    <!-- CONSULTA FINANCIERA -->
+    <div class="vista" id="v-consulta-financiera">
+      <button class="back-btn" onclick="showVista('v-consultas')">← Volver</button>
+      <div class="hero">
+        <div class="hero-icon">💰</div>
+        <div class="hero-title">Consulta financiera</div>
+        <div class="hero-subtitle">Cuéntanos tu duda y la IA te orientará</div>
+      </div>
+      <div class="content">
+        <div class="msg-gen">
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">💰 ¿Cuál es tu duda o problema?</label>
+            <input class="generator-input" id="fin-problema" type="text" placeholder="Ej: no llego a fin de mes, tengo una deuda, quiero empezar a ahorrar...">
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">📊 ¿De qué se trata?</label>
+            <div class="opt-btns" id="fin-tipo">
+              <button class="opt-btn selected" onclick="msgSelect(this,'fin-tipo')">Ahorrar</button>
+              <button class="opt-btn" onclick="msgSelect(this,'fin-tipo')">Deudas</button>
+              <button class="opt-btn" onclick="msgSelect(this,'fin-tipo')">Inversión</button>
+              <button class="opt-btn" onclick="msgSelect(this,'fin-tipo')">Pensión</button>
+              <button class="opt-btn" onclick="msgSelect(this,'fin-tipo')">Impuestos</button>
+              <button class="opt-btn" onclick="msgSelect(this,'fin-tipo')">Otro</button>
+            </div>
+          </div>
+          <button class="generator-btn" onclick="generateFinanciera()">💰 Consultar a la IA</button>
+        </div>
+        <div class="generator-result" id="fin-result" style="margin-top:16px">
+          <div class="result-label">📋 Tu consulta lista — la IA te dará consejo práctico</div>
+          <div class="result-prompt" id="fin-prompt-text"></div>
+          <div class="result-btns">
+            <button class="result-btn copy" onclick="finCopy()">📋 Copiar</button>
+            <button class="result-btn claude" onclick="finOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
+            <button class="result-btn chatgpt" onclick="finOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:16px">
+          <p style="font-size:0.85rem;font-weight:700;margin-bottom:4px">⚠️ Recuerda</p>
+          <p style="font-size:0.83rem;color:var(--mid)">La IA puede orientarte pero no sustituye a un asesor financiero. Para decisiones importantes consulta siempre con un profesional.</p>
+        </div>
+        <div style="height:20px"></div>
+      </div>
+    </div><!-- /v-consulta-financiera -->
+
+    <!-- APOYO EMOCIONAL -->
+    <div class="vista" id="v-consulta-emocional">
+      <button class="back-btn" onclick="showVista('v-consultas')">← Volver</button>
+      <div class="hero">
+        <div class="hero-icon">🧠</div>
+        <div class="hero-title">Apoyo emocional</div>
+        <div class="hero-subtitle">Cuéntanos cómo te sientes, sin juicios</div>
+      </div>
+      <div class="content">
+        <div class="msg-gen">
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">💬 ¿Qué te preocupa o cómo te sientes?</label>
+            <input class="generator-input" id="emo-problema" type="text" placeholder="Ej: me siento solo, estoy muy estresado, tuve una discusión, no puedo dormir...">
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">🎭 ¿Qué necesitas ahora mismo?</label>
+            <div class="opt-btns" id="emo-necesidad">
+              <button class="opt-btn selected" onclick="msgSelect(this,'emo-necesidad')">Desahogarme</button>
+              <button class="opt-btn" onclick="msgSelect(this,'emo-necesidad')">Consejo práctico</button>
+              <button class="opt-btn" onclick="msgSelect(this,'emo-necesidad')">Entender qué me pasa</button>
+              <button class="opt-btn" onclick="msgSelect(this,'emo-necesidad')">Solo escucharme</button>
+            </div>
+          </div>
+          <button class="generator-btn" onclick="generateEmocional()">🧠 Hablar con la IA</button>
+        </div>
+        <div class="generator-result" id="emo-result" style="margin-top:16px">
+          <div class="result-label">📋 Tu mensaje listo — la IA te escuchará y te apoyará</div>
+          <div class="result-prompt" id="emo-prompt-text"></div>
+          <div class="result-btns">
+            <button class="result-btn copy" onclick="emoCopy()">📋 Copiar</button>
+            <button class="result-btn claude" onclick="emoOpen('https://claude.ai/new?q=')">🤖 Hablar con Claude</button>
+            <button class="result-btn chatgpt" onclick="emoOpen('https://chat.openai.com/?q=')">🟢 Hablar con ChatGPT</button>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:16px">
+          <p style="font-size:0.85rem;font-weight:700;margin-bottom:4px">💙 Recuerda</p>
+          <p style="font-size:0.83rem;color:var(--mid)">La IA puede acompañarte y orientarte, pero no sustituye a un psicólogo. Si lo necesitas, no dudes en buscar ayuda profesional.</p>
+        </div>
+        <div style="height:20px"></div>
+      </div>
+    </div><!-- /v-consulta-emocional -->
+
+    <!-- CONSULTA LEGAL -->
+    <div class="vista" id="v-consulta-legal">
+      <button class="back-btn" onclick="showVista('v-consultas')">← Volver</button>
+      <div class="hero">
+        <div class="hero-icon">⚖️</div>
+        <div class="hero-title">Consulta legal</div>
+        <div class="hero-subtitle">Cuéntanos tu problema y la IA te orientará</div>
+      </div>
+      <div class="content">
+        <div class="msg-gen">
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">⚖️ ¿Cuál es tu problema legal?</label>
+            <input class="generator-input" id="leg-problema" type="text" placeholder="Ej: mi casero no me devuelve la fianza, me han despedido, tengo una multa...">
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">📍 ¿Dónde estás?</label>
+            <div class="opt-btns" id="leg-pais">
+              <button class="opt-btn selected" onclick="msgSelect(this,'leg-pais')">España</button>
+              <button class="opt-btn" onclick="msgSelect(this,'leg-pais')">Otro país</button>
+            </div>
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">🧾 ¿De qué tipo es?</label>
+            <div class="opt-btns" id="leg-tipo">
+              <button class="opt-btn selected" onclick="msgSelect(this,'leg-tipo')">Contrato</button>
+              <button class="opt-btn" onclick="msgSelect(this,'leg-tipo')">Despido</button>
+              <button class="opt-btn" onclick="msgSelect(this,'leg-tipo')">Herencia</button>
+              <button class="opt-btn" onclick="msgSelect(this,'leg-tipo')">Multa</button>
+              <button class="opt-btn" onclick="msgSelect(this,'leg-tipo')">Vecinos</button>
+              <button class="opt-btn" onclick="msgSelect(this,'leg-tipo')">Otro</button>
+            </div>
+          </div>
+          <button class="generator-btn" onclick="generateLegal()">⚖️ Consultar a la IA</button>
+        </div>
+        <div class="generator-result" id="leg-result" style="margin-top:16px">
+          <div class="result-label">📋 Tu consulta lista — la IA te orientará con toda esta información</div>
+          <div class="result-prompt" id="leg-prompt-text"></div>
+          <div class="result-btns">
+            <button class="result-btn copy" onclick="legCopy()">📋 Copiar</button>
+            <button class="result-btn claude" onclick="legOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
+            <button class="result-btn chatgpt" onclick="legOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:16px">
+          <p style="font-size:0.85rem;font-weight:700;margin-bottom:4px">⚠️ Recuerda</p>
+          <p style="font-size:0.83rem;color:var(--mid)">La IA puede orientarte pero no sustituye a un abogado. Para decisiones importantes, consulta siempre con un profesional.</p>
+        </div>
+        <div style="height:20px"></div>
+      </div>
+    </div><!-- /v-consulta-legal -->
+
+    <!-- CONSULTA MÉDICA -->
+    <div class="vista" id="v-consulta-medica">
+      <button class="back-btn" onclick="showVista('v-consultas')">← Volver</button>
+      <div class="hero">
+        <div class="hero-icon">👨‍⚕️</div>
+        <div class="hero-title">Consulta médica</div>
+        <div class="hero-subtitle">Cuéntanos qué te pasa y la IA te orientará</div>
+      </div>
+      <div class="content">
+        <div class="msg-gen">
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">🩺 ¿Qué te pasa?</label>
+            <input class="generator-input" id="med-problema" type="text" placeholder="Ej: me duele la cabeza, tengo fiebre, me noto un bulto...">
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">📅 ¿Desde cuándo?</label>
+            <div class="opt-btns" id="med-tiempo">
+              <button class="opt-btn selected" onclick="msgSelect(this,'med-tiempo')">Hoy</button>
+              <button class="opt-btn" onclick="msgSelect(this,'med-tiempo')">Varios días</button>
+              <button class="opt-btn" onclick="msgSelect(this,'med-tiempo')">Más de una semana</button>
+              <button class="opt-btn" onclick="msgSelect(this,'med-tiempo')">Más de un mes</button>
+            </div>
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">📍 ¿Dónde te duele o notas algo raro?</label>
+            <input class="generator-input" id="med-donde" type="text" placeholder="Ej: en el pecho, en el lado derecho, en la rodilla... (opcional)">
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">🌡️ ¿Tienes otros síntomas?</label>
+            <input class="generator-input" id="med-sintomas" type="text" placeholder="Ej: fiebre, mareo, cansancio, náuseas... (opcional)">
+          </div>
+          <button class="generator-btn" onclick="generateMedica()">👨‍⚕️ Consultar a la IA</button>
+        </div>
+        <div class="generator-result" id="med-result" style="margin-top:16px">
+          <div class="result-label">📋 Tu consulta lista — la IA te orientará con toda esta información</div>
+          <div class="result-prompt" id="med-prompt-text"></div>
+          <div class="result-btns">
+            <button class="result-btn copy" onclick="medCopy()">📋 Copiar</button>
+            <button class="result-btn claude" onclick="medOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
+            <button class="result-btn chatgpt" onclick="medOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:16px">
+          <p style="font-size:0.85rem;font-weight:700;margin-bottom:4px">⚠️ Recuerda</p>
+          <p style="font-size:0.83rem;color:var(--mid)">La IA puede orientarte pero no sustituye a tu médico. Para decisiones importantes, consulta siempre con un profesional de la salud.</p>
+        </div>
+        <div style="height:20px"></div>
+      </div>
+    </div><!-- /v-consulta-medica -->
+
     <div class="vista" id="v-consultas">
       <button class="back-btn" onclick="goHome()">← Volver</button>
       <div class="hero">
@@ -3175,37 +3547,37 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
       <div class="content">
         <p style="text-align:center;color:var(--mid);margin-bottom:16px;font-size:0.95rem">Elige tu consulta — ChatGPT te pedirá la información que necesita y te dará una respuesta personalizada</p>
         <div class="ia-buttons">
-          <button class="ia-btn featured" onclick="openChatGPT('Eres un asistente médico amable y claro. Voy a hacerte una consulta de salud. Antes de responder, hazme las preguntas necesarias para entender bien mi situación: síntomas, desde cuándo, edad, si tomo medicación y si tengo alguna enfermedad previa. Luego dame una orientación clara en español simple. Recuérdame siempre que consulte con mi médico para decisiones importantes.')">
+          <button class="ia-btn featured" onclick="showVista('v-consulta-medica')">
             <span style="font-size:1.6rem">👨‍⚕️</span>
             <div><span class="ia-label">Consulta médica</span><span class="featured-badge">⭐ Popular</span></div>
             <span style="margin-left:auto;color:#888">Abrir →</span>
           </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un psicólogo de apoyo emocional, empático, cálido y sin juicios. Voy a contarte cómo me siento o algo que me preocupa. Antes de responder, hazme las preguntas necesarias para entender bien mi situación. Luego dame orientación y apoyo en español simple y cercano. Recuérdame que si necesito ayuda profesional, es importante buscar un psicólogo.')">
+          <button class="ia-btn" onclick="showVista('v-consulta-emocional')">
             <span style="font-size:1.6rem">🧠</span>
             <div><span class="ia-label">Apoyo emocional y psicológico</span></div>
             <span style="margin-left:auto;color:#888">Abrir →</span>
           </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un asistente legal en España, claro y cercano. Voy a consultarte un problema legal. Antes de responder, hazme las preguntas necesarias para entender bien mi situación: de qué se trata, en qué comunidad autónoma estoy, qué ha pasado exactamente y qué quiero conseguir. Luego dame una orientación clara en español simple. Recuérdame que para decisiones importantes debo consultar con un abogado.')">
+          <button class="ia-btn" onclick="showVista('v-consulta-legal')">
             <span style="font-size:1.6rem">⚖️</span>
             <div><span class="ia-label">Consulta legal</span></div>
             <span style="margin-left:auto;color:#888">Abrir →</span>
           </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un asesor financiero personal amable y claro. Voy a hacerte una consulta sobre dinero o finanzas. Antes de responder, hazme las preguntas necesarias: de qué se trata, cuál es mi situación económica aproximada y qué quiero conseguir. Luego dame consejos claros y prácticos en español simple. Recuérdame que para decisiones importantes debo consultar con un asesor financiero.')">
+          <button class="ia-btn" onclick="showVista('v-consulta-financiera')">
             <span style="font-size:1.6rem">💰</span>
             <div><span class="ia-label">Consulta financiera</span></div>
             <span style="margin-left:auto;color:#888">Abrir →</span>
           </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un experto en trámites y burocracia española, claro y paciente. Voy a consultarte sobre un trámite administrativo. Antes de responder, hazme las preguntas necesarias: qué trámite necesito hacer, en qué comunidad autónoma estoy, cuál es mi situación y qué documentos creo que tengo. Luego dame los pasos claros a seguir en español simple.')">
+          <button class="ia-btn" onclick="showVista('v-consulta-tramite')">
             <span style="font-size:1.6rem">🏛️</span>
             <div><span class="ia-label">Trámite administrativo</span></div>
             <span style="margin-left:auto;color:#888">Abrir →</span>
           </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un asesor de empleo y trabajo en España, amable y práctico. Voy a consultarte algo relacionado con el trabajo. Antes de responder, hazme las preguntas necesarias: cuál es mi situación laboral, qué ha pasado o qué quiero conseguir, y en qué sector trabajo. Luego dame orientación clara y práctica en español simple.')">
+          <button class="ia-btn" onclick="showVista('v-consulta-laboral')">
             <span style="font-size:1.6rem">💼</span>
             <div><span class="ia-label">Consulta laboral</span></div>
             <span style="margin-left:auto;color:#888">Abrir →</span>
           </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un experto en tecnología y móviles, muy paciente y claro explicando. Voy a consultarte una duda sobre mi móvil, ordenador o cualquier dispositivo. Antes de responder, hazme las preguntas necesarias: qué dispositivo tengo, qué problema tengo exactamente y qué he intentado ya. Luego dame los pasos para solucionarlo en español muy simple.')">
+          <button class="ia-btn" onclick="showVista('v-consulta-tecno')">
             <span style="font-size:1.6rem">📱</span>
             <div><span class="ia-label">Problema tecnológico</span></div>
             <span style="margin-left:auto;color:#888">Abrir →</span>
@@ -3333,43 +3705,34 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
         <div class="hero-subtitle">La IA te guía paso a paso para arreglar cosas del hogar</div>
       </div>
       <div class="content">
-        <p style="text-align:center;color:var(--mid);margin-bottom:16px;font-size:0.95rem">Elige el tipo de problema — la IA te preguntará qué pasa y te dará la solución</p>
-        <div class="ia-buttons">
-          <button class="ia-btn featured" onclick="openChatGPT('Eres un fontanero experto, paciente y claro. Voy a contarte un problema de agua o fontanería en mi casa. Antes de responder, hazme las preguntas necesarias para entender bien el problema. Luego dame los pasos para solucionarlo o dime si necesito llamar a un profesional.')">
-            <span style="font-size:1.6rem">🚰</span>
-            <div><span class="ia-label">Fontanero</span><span class="featured-badge">⭐ Popular</span></div>
-            <span style="margin-left:auto;color:#888">Preguntar →</span>
-          </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un electricista experto, paciente y claro. Voy a contarte un problema eléctrico en mi casa. Antes de responder, hazme las preguntas necesarias para entender bien el problema. Luego dame los pasos para solucionarlo o dime si es peligroso y necesito llamar a un profesional.')">
-            <span style="font-size:1.6rem">⚡</span>
-            <div><span class="ia-label">Electricista</span></div>
-            <span style="margin-left:auto;color:#888">Preguntar →</span>
-          </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un albañil experto, paciente y claro. Voy a contarte un problema de obra o construcción en mi casa. Antes de responder, hazme las preguntas necesarias para entender bien el problema. Luego dame los pasos para solucionarlo o dime si necesito llamar a un profesional.')">
-            <span style="font-size:1.6rem">🧱</span>
-            <div><span class="ia-label">Albañil</span></div>
-            <span style="margin-left:auto;color:#888">Preguntar →</span>
-          </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un carpintero experto, paciente y claro. Voy a contarte un problema de madera, puertas o muebles en mi casa. Antes de responder, hazme las preguntas necesarias para entender bien el problema. Luego dame los pasos para solucionarlo o dime si necesito llamar a un profesional.')">
-            <span style="font-size:1.6rem">🪚</span>
-            <div><span class="ia-label">Carpintero</span></div>
-            <span style="margin-left:auto;color:#888">Preguntar →</span>
-          </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un jardinero experto, paciente y claro. Voy a contarte un problema con mis plantas, jardín o terraza. Antes de responder, hazme las preguntas necesarias para entender bien el problema. Luego dame los pasos para solucionarlo.')">
-            <span style="font-size:1.6rem">🌿</span>
-            <div><span class="ia-label">Jardinero</span></div>
-            <span style="margin-left:auto;color:#888">Preguntar →</span>
-          </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un técnico de electrodomésticos experto, paciente y claro. Voy a contarte un problema con un electrodoméstico de mi casa. Antes de responder, hazme las preguntas necesarias: qué electrodoméstico es, qué marca y modelo si lo sé, y qué problema tiene exactamente. Luego dame los pasos para solucionarlo o dime si necesito llamar al servicio técnico.')">
-            <span style="font-size:1.6rem">🧺</span>
-            <div><span class="ia-label">Electrodomésticos</span></div>
-            <span style="margin-left:auto;color:#888">Preguntar →</span>
-          </button>
+        <div class="msg-gen">
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">🔧 ¿Qué tienes que arreglar?</label>
+            <input class="generator-input" id="man-problema" type="text" placeholder="Ej: gotea el grifo, se fue la luz, la puerta no cierra bien...">
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">🏠 ¿De qué tipo es?</label>
+            <div class="opt-btns" id="man-tipo">
+              <button class="opt-btn selected" onclick="msgSelect(this,'man-tipo')">🚰 Fontanería</button>
+              <button class="opt-btn" onclick="msgSelect(this,'man-tipo')">⚡ Electricidad</button>
+              <button class="opt-btn" onclick="msgSelect(this,'man-tipo')">🧱 Albañilería</button>
+              <button class="opt-btn" onclick="msgSelect(this,'man-tipo')">🪚 Carpintería</button>
+              <button class="opt-btn" onclick="msgSelect(this,'man-tipo')">🌿 Jardín</button>
+              <button class="opt-btn" onclick="msgSelect(this,'man-tipo')">🧺 Electrodoméstico</button>
+            </div>
+          </div>
+          <button class="generator-btn" onclick="generateManitas()">🔧 Consultar a la IA</button>
         </div>
-        <div class="info-box" style="margin-top:16px">
-          <p style="font-size:0.85rem;font-weight:700;margin-bottom:4px">💡 ¿Cómo funciona?</p>
-          <p style="font-size:0.83rem;color:var(--mid)">Elige el tipo de problema → ChatGPT te hace preguntas → tú describes lo que pasa → te da la solución paso a paso o te dice si necesitas llamar a un profesional.</p>
+        <div class="generator-result" id="man-result" style="margin-top:16px">
+          <div class="result-label">📋 Tu consulta lista — la IA te dará los pasos para solucionarlo</div>
+          <div class="result-prompt" id="man-prompt-text"></div>
+          <div class="result-btns">
+            <button class="result-btn copy" onclick="manCopy()">📋 Copiar</button>
+            <button class="result-btn claude" onclick="manOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
+            <button class="result-btn chatgpt" onclick="manOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
+          </div>
         </div>
+        <div style="height:20px"></div>
       </div>
     </div>
 
@@ -3379,46 +3742,46 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
       <div class="hero">
         <div class="hero-icon">👨‍🍳</div>
         <div class="hero-title">El Chef</div>
-        <div class="hero-subtitle">La IA te ayuda a cocinar según tu estilo favorito</div>
+        <div class="hero-subtitle">Dinos qué tienes y te damos la receta perfecta</div>
       </div>
       <div class="content">
-        <p style="text-align:center;color:var(--mid);margin-bottom:16px;font-size:0.95rem">Elige tu estilo de cocina — el chef te preguntará y te dará la receta perfecta</p>
-        <div class="ia-buttons">
-          <button class="ia-btn featured" onclick="openChatGPT('Eres un chef experto en cocina casera española, cercano y claro. Voy a pedirte ayuda con una receta o comida. Antes de responder, hazme preguntas: qué ingredientes tengo, cuántas personas somos y cuánto tiempo tengo. Luego dame la receta paso a paso en español simple.')">
-            <span style="font-size:1.6rem">🍲</span>
-            <div><span class="ia-label">Cocina casera</span><span class="featured-badge">⭐ Popular</span></div>
-            <span style="margin-left:auto;color:#888">Preguntar →</span>
-          </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un chef experto en cocina mediterránea, cercano y claro. Voy a pedirte ayuda con una receta. Antes de responder, hazme preguntas: qué ingredientes tengo, cuántas personas somos y cuánto tiempo tengo. Luego dame la receta paso a paso en español simple.')">
-            <span style="font-size:1.6rem">🫒</span>
-            <div><span class="ia-label">Mediterránea</span></div>
-            <span style="margin-left:auto;color:#888">Preguntar →</span>
-          </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un chef experto en cocina saludable y nutritiva, cercano y claro. Voy a pedirte ayuda con una receta sana. Antes de responder, hazme preguntas: qué ingredientes tengo, si tengo alguna restricción alimentaria y cuántas personas somos. Luego dame la receta paso a paso con información nutricional básica.')">
-            <span style="font-size:1.6rem">🥗</span>
-            <div><span class="ia-label">Cocina saludable</span></div>
-            <span style="margin-left:auto;color:#888">Preguntar →</span>
-          </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un chef experto en cocina internacional y de diseño, cercano y claro. Voy a pedirte ayuda con una receta especial para sorprender. Antes de responder, hazme preguntas: qué ocasión es, qué ingredientes tengo disponibles y cuántas personas somos. Luego dame la receta paso a paso con consejos de presentación.')">
-            <span style="font-size:1.6rem">🍽️</span>
-            <div><span class="ia-label">Cocina de diseño</span></div>
-            <span style="margin-left:auto;color:#888">Preguntar →</span>
-          </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un chef experto en repostería y postres, cercano y claro. Voy a pedirte ayuda con un postre o dulce. Antes de responder, hazme preguntas: qué ingredientes tengo, si necesito horno y para cuántas personas es. Luego dame la receta paso a paso en español simple.')">
-            <span style="font-size:1.6rem">🍰</span>
-            <div><span class="ia-label">Repostería y postres</span></div>
-            <span style="margin-left:auto;color:#888">Preguntar →</span>
-          </button>
-          <button class="ia-btn" onclick="openChatGPT('Eres un chef experto en cocinar con lo que hay en la nevera, creativo y claro. Dime qué ingredientes tengo disponibles en casa y te haré una receta rica con eso. Hazme primero las preguntas necesarias sobre los ingredientes disponibles, cuántas personas somos y el tiempo que tengo.')">
-            <span style="font-size:1.6rem">🧊</span>
-            <div><span class="ia-label">¿Qué cocino con lo que tengo?</span></div>
-            <span style="margin-left:auto;color:#888">Preguntar →</span>
-          </button>
+        <div class="msg-gen">
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">🍳 ¿Qué quieres cocinar o qué ingredientes tienes?</label>
+            <input class="generator-input" id="chef-problema" type="text" placeholder="Ej: pollo y patatas, algo rápido para cenar, una tarta de cumpleaños...">
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">👨‍🍳 ¿Qué tipo de cocina?</label>
+            <div class="opt-btns" id="chef-tipo">
+              <button class="opt-btn selected" onclick="msgSelect(this,'chef-tipo')">🍲 Casera</button>
+              <button class="opt-btn" onclick="msgSelect(this,'chef-tipo')">🫒 Mediterránea</button>
+              <button class="opt-btn" onclick="msgSelect(this,'chef-tipo')">🥗 Saludable</button>
+              <button class="opt-btn" onclick="msgSelect(this,'chef-tipo')">🍽️ Para sorprender</button>
+              <button class="opt-btn" onclick="msgSelect(this,'chef-tipo')">🍰 Repostería</button>
+              <button class="opt-btn" onclick="msgSelect(this,'chef-tipo')">🧊 Lo que tengo</button>
+            </div>
+          </div>
+          <div class="msg-gen-field">
+            <label class="msg-gen-label">👥 ¿Para cuántas personas?</label>
+            <div class="opt-btns" id="chef-personas">
+              <button class="opt-btn selected" onclick="msgSelect(this,'chef-personas')">1 persona</button>
+              <button class="opt-btn" onclick="msgSelect(this,'chef-personas')">2 personas</button>
+              <button class="opt-btn" onclick="msgSelect(this,'chef-personas')">4 personas</button>
+              <button class="opt-btn" onclick="msgSelect(this,'chef-personas')">6 o más</button>
+            </div>
+          </div>
+          <button class="generator-btn" onclick="generateChef()">👨‍🍳 Dame la receta</button>
         </div>
-        <div class="info-box" style="margin-top:16px">
-          <p style="font-size:0.85rem;font-weight:700;margin-bottom:4px">💡 ¿Cómo funciona?</p>
-          <p style="font-size:0.83rem;color:var(--mid)">Elige el estilo → el chef te hace preguntas sobre ingredientes y personas → te da la receta completa paso a paso.</p>
+        <div class="generator-result" id="chef-result" style="margin-top:16px">
+          <div class="result-label">📋 Tu receta lista — ábrela en la IA y cocina con ella</div>
+          <div class="result-prompt" id="chef-prompt-text"></div>
+          <div class="result-btns">
+            <button class="result-btn copy" onclick="chefCopy()">📋 Copiar</button>
+            <button class="result-btn claude" onclick="chefOpen('https://claude.ai/new?q=')">🤖 Preguntar a Claude</button>
+            <button class="result-btn chatgpt" onclick="chefOpen('https://chat.openai.com/?q=')">🟢 Preguntar a ChatGPT</button>
+          </div>
         </div>
+        <div style="height:20px"></div>
       </div>
     </div>
 
@@ -4110,6 +4473,400 @@ function msgCopy() {
 function msgOpen(base) {
   window.open(base + encodeURIComponent(msgPrompt), '_blank');
 }
+
+// ===== CONSULTA MÉDICA =====
+let medPrompt = '';
+
+function generateMedica() {
+  const problema = document.getElementById('med-problema').value.trim();
+  if (!problema) {
+    const campo = document.getElementById('med-problema');
+    campo.focus();
+    campo.style.borderColor = '#FF3B30';
+    setTimeout(() => campo.style.borderColor = '', 2000);
+    return;
+  }
+  const tiempo = document.querySelector('#med-tiempo .opt-btn.selected')?.textContent || 'No especificado';
+  const donde = document.getElementById('med-donde').value.trim();
+  const sintomas = document.getElementById('med-sintomas').value.trim();
+
+  medPrompt = `Eres un asistente médico amable y claro. Te voy a dar información sobre lo que me pasa y quiero que me des una orientación útil y práctica desde el primer momento, sin hacerme preguntas antes de responder.
+
+Lo que me pasa: ${problema}
+Desde cuándo: ${tiempo}${donde ? `\nDónde: ${donde}` : ''}${sintomas ? `\nOtros síntomas: ${sintomas}` : ''}
+
+Dame ya una orientación clara en español simple: qué puede ser, qué puedo hacer, si debo ir al médico y cuándo. Al final, si necesitas saber algo más para afinar el consejo, pregúntamelo. Recuérdame que para decisiones importantes debo consultar con un profesional.`;
+
+  document.getElementById('med-prompt-text').textContent = medPrompt;
+  const result = document.getElementById('med-result');
+  result.classList.add('visible');
+  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function medCopy() {
+  navigator.clipboard.writeText(medPrompt).then(() => {
+    const btn = document.querySelector('#med-result .result-btn.copy');
+    btn.textContent = '✓ Copiado';
+    setTimeout(() => btn.textContent = '📋 Copiar', 2000);
+  });
+}
+
+function medOpen(base) {
+  window.open(base + encodeURIComponent(medPrompt), '_blank');
+}
+
+// ===== CONSULTA LEGAL =====
+let legPrompt = '';
+
+function generateLegal() {
+  const problema = document.getElementById('leg-problema').value.trim();
+  if (!problema) {
+    const campo = document.getElementById('leg-problema');
+    campo.focus();
+    campo.style.borderColor = '#FF3B30';
+    setTimeout(() => campo.style.borderColor = '', 2000);
+    return;
+  }
+  const pais = document.querySelector('#leg-pais .opt-btn.selected')?.textContent || 'España';
+  const tipo = document.querySelector('#leg-tipo .opt-btn.selected')?.textContent || 'Otro';
+
+  legPrompt = `Eres un asesor legal claro y cercano especializado en ${pais}. Te voy a contar mi problema legal y quiero que me des una orientación práctica desde el primer momento, sin hacerme preguntas antes de responder.
+
+Tipo de problema: ${tipo}
+Lo que me pasa: ${problema}
+País: ${pais}
+
+Dame ya una orientación clara en español simple: qué dice la ley, qué opciones tengo y qué pasos puedo dar. Al final, si necesitas saber algo más para afinar el consejo, pregúntamelo. Recuérdame que para decisiones importantes debo consultar con un abogado.`;
+
+  document.getElementById('leg-prompt-text').textContent = legPrompt;
+  const result = document.getElementById('leg-result');
+  result.classList.add('visible');
+  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function legCopy() {
+  navigator.clipboard.writeText(legPrompt).then(() => {
+    const btn = document.querySelector('#leg-result .result-btn.copy');
+    btn.textContent = '✓ Copiado';
+    setTimeout(() => btn.textContent = '📋 Copiar', 2000);
+  });
+}
+
+function legOpen(base) {
+  window.open(base + encodeURIComponent(legPrompt), '_blank');
+}
+
+// ===== APOYO EMOCIONAL =====
+let emoPrompt = '';
+
+function generateEmocional() {
+  const problema = document.getElementById('emo-problema').value.trim();
+  if (!problema) {
+    const campo = document.getElementById('emo-problema');
+    campo.focus();
+    campo.style.borderColor = '#FF3B30';
+    setTimeout(() => campo.style.borderColor = '', 2000);
+    return;
+  }
+  const necesidad = document.querySelector('#emo-necesidad .opt-btn.selected')?.textContent || 'Desahogarme';
+
+  emoPrompt = `Eres un acompañante emocional empático, cálido y sin juicios. Te voy a contar cómo me siento y lo que necesito ahora mismo es: ${necesidad.toLowerCase()}.
+
+Cómo me siento o qué me pasa: ${problema}
+
+Respóndeme desde el primer momento con calidez y comprensión, sin hacerme preguntas antes de responder. Acompáñame, valida cómo me siento y dame apoyo o consejo según lo que necesito. Usa un español cercano y simple. Si ves que puedo necesitar ayuda profesional, dímelo con cariño al final.`;
+
+  document.getElementById('emo-prompt-text').textContent = emoPrompt;
+  const result = document.getElementById('emo-result');
+  result.classList.add('visible');
+  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function emoCopy() {
+  navigator.clipboard.writeText(emoPrompt).then(() => {
+    const btn = document.querySelector('#emo-result .result-btn.copy');
+    btn.textContent = '✓ Copiado';
+    setTimeout(() => btn.textContent = '📋 Copiar', 2000);
+  });
+}
+
+function emoOpen(base) {
+  window.open(base + encodeURIComponent(emoPrompt), '_blank');
+}
+
+// ===== CONSULTA FINANCIERA =====
+let finPrompt = '';
+
+function generateFinanciera() {
+  const problema = document.getElementById('fin-problema').value.trim();
+  if (!problema) {
+    const campo = document.getElementById('fin-problema');
+    campo.focus();
+    campo.style.borderColor = '#FF3B30';
+    setTimeout(() => campo.style.borderColor = '', 2000);
+    return;
+  }
+  const tipo = document.querySelector('#fin-tipo .opt-btn.selected')?.textContent || 'Otro';
+
+  finPrompt = `Eres un asesor financiero personal amable y claro. Te voy a contar mi situación y quiero que me des consejo práctico desde el primer momento, sin hacerme preguntas antes de responder.
+
+Tema: ${tipo}
+Lo que me pasa o necesito: ${problema}
+
+Dame ya consejos claros y prácticos en español simple: qué opciones tengo, qué puedo hacer y por dónde empezar. Al final, si necesitas saber algo más para afinar el consejo, pregúntamelo. Recuérdame que para decisiones importantes debo consultar con un asesor financiero.`;
+
+  document.getElementById('fin-prompt-text').textContent = finPrompt;
+  const result = document.getElementById('fin-result');
+  result.classList.add('visible');
+  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function finCopy() {
+  navigator.clipboard.writeText(finPrompt).then(() => {
+    const btn = document.querySelector('#fin-result .result-btn.copy');
+    btn.textContent = '✓ Copiado';
+    setTimeout(() => btn.textContent = '📋 Copiar', 2000);
+  });
+}
+
+function finOpen(base) {
+  window.open(base + encodeURIComponent(finPrompt), '_blank');
+}
+
+// ===== CONSULTA LABORAL =====
+let labPrompt = '';
+
+function generateLaboral() {
+  const problema = document.getElementById('lab-problema').value.trim();
+  if (!problema) {
+    const campo = document.getElementById('lab-problema');
+    campo.focus();
+    campo.style.borderColor = '#FF3B30';
+    setTimeout(() => campo.style.borderColor = '', 2000);
+    return;
+  }
+  const tipo = document.querySelector('#lab-tipo .opt-btn.selected')?.textContent || 'Otro';
+
+  labPrompt = `Eres un asesor laboral en España, amable y práctico. Te voy a contar mi situación y quiero que me des orientación clara desde el primer momento, sin hacerme preguntas antes de responder.
+
+Tipo de consulta: ${tipo}
+Lo que me pasa: ${problema}
+
+Dame ya una orientación práctica en español simple: qué derechos tengo, qué opciones hay y qué pasos puedo dar. Al final, si necesitas saber algo más para afinar el consejo, pregúntamelo. Recuérdame que para decisiones importantes debo consultar con un abogado laboralista.`;
+
+  document.getElementById('lab-prompt-text').textContent = labPrompt;
+  const result = document.getElementById('lab-result');
+  result.classList.add('visible');
+  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function labCopy() {
+  navigator.clipboard.writeText(labPrompt).then(() => {
+    const btn = document.querySelector('#lab-result .result-btn.copy');
+    btn.textContent = '✓ Copiado';
+    setTimeout(() => btn.textContent = '📋 Copiar', 2000);
+  });
+}
+
+function labOpen(base) {
+  window.open(base + encodeURIComponent(labPrompt), '_blank');
+}
+
+// ===== TRÁMITE ADMINISTRATIVO =====
+let traPrompt = '';
+
+function generateTramite() {
+  const problema = document.getElementById('tra-problema').value.trim();
+  if (!problema) {
+    const campo = document.getElementById('tra-problema');
+    campo.focus();
+    campo.style.borderColor = '#FF3B30';
+    setTimeout(() => campo.style.borderColor = '', 2000);
+    return;
+  }
+  const tipo = document.querySelector('#tra-tipo .opt-btn.selected')?.textContent || 'Otro';
+
+  traPrompt = `Eres un experto en trámites y burocracia española, claro y muy paciente. Te voy a contar lo que necesito hacer y quiero que me expliques los pasos desde el primer momento, sin hacerme preguntas antes de responder.
+
+Tipo de trámite: ${tipo}
+Lo que necesito hacer: ${problema}
+
+Dame ya los pasos claros y ordenados en español simple: qué documentos necesito, dónde tengo que ir o entrar online, y en qué orden hacer las cosas. Al final, si necesitas saber algo más para afinar los pasos, pregúntamelo.`;
+
+  document.getElementById('tra-prompt-text').textContent = traPrompt;
+  const result = document.getElementById('tra-result');
+  result.classList.add('visible');
+  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function traCopy() {
+  navigator.clipboard.writeText(traPrompt).then(() => {
+    const btn = document.querySelector('#tra-result .result-btn.copy');
+    btn.textContent = '✓ Copiado';
+    setTimeout(() => btn.textContent = '📋 Copiar', 2000);
+  });
+}
+
+function traOpen(base) {
+  window.open(base + encodeURIComponent(traPrompt), '_blank');
+}
+
+// ===== PROBLEMA TECNOLÓGICO =====
+let tecPrompt = '';
+
+function generateTecno() {
+  const problema = document.getElementById('tec-problema').value.trim();
+  if (!problema) {
+    const campo = document.getElementById('tec-problema');
+    campo.focus();
+    campo.style.borderColor = '#FF3B30';
+    setTimeout(() => campo.style.borderColor = '', 2000);
+    return;
+  }
+  const dispositivo = document.querySelector('#tec-dispositivo .opt-btn.selected')?.textContent || 'Otro';
+
+  tecPrompt = `Eres un experto en tecnología, muy paciente y claro explicando. Te voy a contar mi problema y quiero que me des los pasos para solucionarlo desde el primer momento, sin hacerme preguntas antes de responder.
+
+Dispositivo: ${dispositivo}
+Lo que me pasa: ${problema}
+
+Dame ya los pasos claros y ordenados en español muy simple para solucionarlo, como si me lo explicaras a alguien que no sabe mucho de tecnología. Al final, si necesitas saber algo más para ayudarme mejor, pregúntamelo.`;
+
+  document.getElementById('tec-prompt-text').textContent = tecPrompt;
+  const result = document.getElementById('tec-result');
+  result.classList.add('visible');
+  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function tecCopy() {
+  navigator.clipboard.writeText(tecPrompt).then(() => {
+    const btn = document.querySelector('#tec-result .result-btn.copy');
+    btn.textContent = '✓ Copiado';
+    setTimeout(() => btn.textContent = '📋 Copiar', 2000);
+  });
+}
+
+function tecOpen(base) {
+  window.open(base + encodeURIComponent(tecPrompt), '_blank');
+}
+
+// ===== EL MANITAS =====
+let manPrompt = '';
+
+function generateManitas() {
+  const problema = document.getElementById('man-problema').value.trim();
+  if (!problema) {
+    const campo = document.getElementById('man-problema');
+    campo.focus();
+    campo.style.borderColor = '#FF3B30';
+    setTimeout(() => campo.style.borderColor = '', 2000);
+    return;
+  }
+  const tipo = document.querySelector('#man-tipo .opt-btn.selected')?.textContent.replace(/[^\w\sáéíóúñü]/g,'').trim() || 'Fontanería';
+
+  manPrompt = `Eres un experto en ${tipo} del hogar, muy paciente y claro explicando. Te voy a contar lo que me pasa y quiero que me des los pasos para solucionarlo desde el primer momento, sin hacerme preguntas antes de responder.
+
+Tipo de problema: ${tipo}
+Lo que me pasa: ${problema}
+
+Dame ya los pasos claros y ordenados en español muy simple para solucionarlo yo mismo si es posible, o dime claramente si es necesario llamar a un profesional y por qué. Al final, si necesitas saber algo más para ayudarme mejor, pregúntamelo.`;
+
+  document.getElementById('man-prompt-text').textContent = manPrompt;
+  const result = document.getElementById('man-result');
+  result.classList.add('visible');
+  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function manCopy() {
+  navigator.clipboard.writeText(manPrompt).then(() => {
+    const btn = document.querySelector('#man-result .result-btn.copy');
+    btn.textContent = '✓ Copiado';
+    setTimeout(() => btn.textContent = '📋 Copiar', 2000);
+  });
+}
+
+function manOpen(base) {
+  window.open(base + encodeURIComponent(manPrompt), '_blank');
+}
+
+// ===== EL CHEF =====
+let chefPrompt = '';
+
+function generateChef() {
+  const problema = document.getElementById('chef-problema').value.trim();
+  if (!problema) {
+    const campo = document.getElementById('chef-problema');
+    campo.focus();
+    campo.style.borderColor = '#FF3B30';
+    setTimeout(() => campo.style.borderColor = '', 2000);
+    return;
+  }
+  const tipo = document.querySelector('#chef-tipo .opt-btn.selected')?.textContent.replace(/[^\w\sáéíóúñü]/g,'').trim() || 'Casera';
+  const personas = document.querySelector('#chef-personas .opt-btn.selected')?.textContent || '2 personas';
+
+  chefPrompt = `Eres un chef experto en cocina ${tipo.toLowerCase()}, cercano y claro. Te voy a pedir ayuda con una receta y quiero que me la des desde el primer momento, sin hacerme preguntas antes de responder.
+
+Lo que quiero cocinar o los ingredientes que tengo: ${problema}
+Para: ${personas}
+
+Dame ya la receta completa paso a paso en español simple, con los ingredientes exactos y los tiempos de cocción. Al final, si necesitas saber algo más para mejorar la receta, pregúntamelo.`;
+
+  document.getElementById('chef-prompt-text').textContent = chefPrompt;
+  const result = document.getElementById('chef-result');
+  result.classList.add('visible');
+  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function chefCopy() {
+  navigator.clipboard.writeText(chefPrompt).then(() => {
+    const btn = document.querySelector('#chef-result .result-btn.copy');
+    btn.textContent = '✓ Copiado';
+    setTimeout(() => btn.textContent = '📋 Copiar', 2000);
+  });
+}
+
+function chefOpen(base) {
+  window.open(base + encodeURIComponent(chefPrompt), '_blank');
+}
+
+// ===== SALUD =====
+let salPrompt = '';
+function generateSalud() {
+  const problema = document.getElementById('sal-problema').value.trim();
+  if (!problema) { const c = document.getElementById('sal-problema'); c.focus(); c.style.borderColor='#FF3B30'; setTimeout(()=>c.style.borderColor='',2000); return; }
+  const tiempo = document.querySelector('#sal-tiempo .opt-btn.selected')?.textContent || 'Hoy';
+  salPrompt = `Eres un asistente médico amable y claro. Te voy a dar información sobre lo que me pasa y quiero que me des orientación útil desde el primer momento, sin hacerme preguntas antes de responder.\n\nLo que me pasa: ${problema}\nDesde cuándo: ${tiempo}\n\nDame ya una orientación clara en español simple: qué puede ser, qué puedo hacer y si debo ir al médico. Al final, si necesitas algo más, pregúntamelo. Recuérdame que para decisiones importantes debo consultar con mi médico.`;
+  document.getElementById('sal-prompt-text').textContent = salPrompt;
+  const r = document.getElementById('sal-result'); r.classList.add('visible'); r.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function salCopy() { navigator.clipboard.writeText(salPrompt).then(()=>{ const b=document.querySelector('#sal-result .result-btn.copy'); b.textContent='✓ Copiado'; setTimeout(()=>b.textContent='📋 Copiar',2000); }); }
+function salOpen(base) { window.open(base+encodeURIComponent(salPrompt),'_blank'); }
+
+// ===== TRÁMITES 2 (desde tarjeta inicio) =====
+let tra2Prompt = '';
+function generateTramite2() {
+  const problema = document.getElementById('tra2-problema').value.trim();
+  if (!problema) { const c = document.getElementById('tra2-problema'); c.focus(); c.style.borderColor='#FF3B30'; setTimeout(()=>c.style.borderColor='',2000); return; }
+  const tipo = document.querySelector('#tra2-tipo .opt-btn.selected')?.textContent || 'Otro';
+  tra2Prompt = `Eres un experto en trámites y burocracia española, claro y paciente. Te voy a contar lo que necesito y quiero que me expliques los pasos desde el primer momento, sin hacerme preguntas antes de responder.\n\nTipo de trámite: ${tipo}\nLo que necesito: ${problema}\n\nDame ya los pasos claros y ordenados en español simple: qué documentos necesito, dónde ir o entrar online, y en qué orden. Al final, si necesitas saber algo más, pregúntamelo.`;
+  document.getElementById('tra2-prompt-text').textContent = tra2Prompt;
+  const r = document.getElementById('tra2-result'); r.classList.add('visible'); r.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function tra2Copy() { navigator.clipboard.writeText(tra2Prompt).then(()=>{ const b=document.querySelector('#tra2-result .result-btn.copy'); b.textContent='✓ Copiado'; setTimeout(()=>b.textContent='📋 Copiar',2000); }); }
+function tra2Open(base) { window.open(base+encodeURIComponent(tra2Prompt),'_blank'); }
+
+// ===== MÓVIL =====
+let movPrompt = '';
+function generateMovil() {
+  const problema = document.getElementById('mov-problema').value.trim();
+  if (!problema) { const c = document.getElementById('mov-problema'); c.focus(); c.style.borderColor='#FF3B30'; setTimeout(()=>c.style.borderColor='',2000); return; }
+  const tipo = document.querySelector('#mov-tipo .opt-btn.selected')?.textContent || 'Android';
+  movPrompt = `Eres un experto en móviles y tecnología, muy paciente y claro. Te voy a contar lo que necesito y quiero que me expliques cómo hacerlo desde el primer momento, sin hacerme preguntas antes de responder.\n\nMóvil: ${tipo}\nLo que necesito o me pasa: ${problema}\n\nExplícame paso a paso en español muy simple cómo hacerlo, como si se lo explicaras a alguien que no sabe mucho de tecnología. Al final, si necesitas algo más para ayudarme mejor, pregúntamelo.`;
+  document.getElementById('mov-prompt-text').textContent = movPrompt;
+  const r = document.getElementById('mov-result'); r.classList.add('visible'); r.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function movCopy() { navigator.clipboard.writeText(movPrompt).then(()=>{ const b=document.querySelector('#mov-result .result-btn.copy'); b.textContent='✓ Copiado'; setTimeout(()=>b.textContent='📋 Copiar',2000); }); }
+function movOpen(base) { window.open(base+encodeURIComponent(movPrompt),'_blank'); }
 
 
 // ── NO SÉ QUÉ HACER ──

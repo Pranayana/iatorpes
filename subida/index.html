@@ -5415,7 +5415,8 @@ function renderIaDelDia() {
       </div>
       <div style="font-size:1.5rem;margin-bottom:6px">${contenido.emoji}</div>
       <div style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;margin-bottom:8px">${contenido.titulo}</div>
-      <div style="font-size:0.85rem;color:rgba(255,255,255,0.85);line-height:1.5;margin-bottom:14px">Rellena los campos y te preparamos el prompt completo:</div>
+      <div style="font-size:0.88rem;color:rgba(255,255,255,0.92);line-height:1.5;margin-bottom:14px">${contenido.texto.replace(/\[([^\]]+)\]/g, '<strong style="background:rgba(255,255,255,0.25);padding:1px 6px;border-radius:6px">[$1]</strong>')}</div>
+      <div style="font-size:0.8rem;color:rgba(255,255,255,0.75);margin-bottom:12px">👇 Rellena los campos para personalizar el prompt:</div>
       ${camposHTML}
       <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
         <button onclick="enviarPromptDia('${textoEncoded}','${camposJSON}','chatgpt')"

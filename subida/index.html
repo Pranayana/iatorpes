@@ -1730,6 +1730,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
           <input class="search-bar" id="search-input" type="text" placeholder="Ej: crear imagen, traducir texto, enviar WhatsApp..." onkeydown="if(event.key==='Enter') doSearch()">
           <button class="search-submit" onclick="doSearch()">🔍</button>
         </div>
+        <div id="search-noresult"></div>
       </div>
 
       <!-- CTA PRINCIPAL -->
@@ -5164,31 +5165,31 @@ const SEARCH_MAP = [
   // Quiero una imagen
   { keywords: ['imagen','dibujo','arte','crear imagen','diseño','ilustración','pintar','generar imagen','ilustracion','logo','cartel','portada'], id: 'imagen' },
   // Hoy cocino
-  { keywords: ['cocinar','receta','comer','comida','ingredientes','cocina','chef','plato','cenar','almorzar','postre','tarta','bizcocho','ensalada','paella','guiso','cena','almuerzo','desayuno','merienda','dieta','vegetariano','vegano'], id: 'chef' },
+  { keywords: ['cocinar','receta','comer','comida','ingredientes','cocina','chef','plato','cenar','almorzar','postre','tarta','bizcocho','ensalada','paella','guiso','cena','almuerzo','desayuno','merienda','dieta','vegetariano','vegano','qué cocino','que cocino','qué hago de comer','que hago de comer','qué preparo','que preparo'], id: 'chef' },
   // Tengo que arreglar
-  { keywords: ['arreglar','reparar','fontanero','gotera','atasco','grifo','electricista','enchufe','albañil','grieta','azulejo','carpintero','ventana','mueble','jardinero','jardín','jardin','planta','electrodoméstico','electrodomestico','lavadora','nevera','horno','lavavajillas','avería','averia','roto','no funciona','humedades'], id: 'manitas' },
+  { keywords: ['arreglar','reparar','fontanero','gotera','atasco','grifo','electricista','enchufe','albañil','grieta','azulejo','carpintero','ventana','mueble','jardinero','jardín','jardin','planta','electrodoméstico','electrodomestico','lavadora','nevera','horno','lavavajillas','avería','averia','roto','no funciona','humedades','se ha roto','reparación','reparacion','bricolaje','chapuza'], id: 'manitas' },
   // Quiero un vídeo
-  { keywords: ['video','vídeo','pelicula','película','animar','animación','clip','crear vídeo','crear video','grabar','reels','tiktok','youtube','shorts'], id: 'video' },
+  { keywords: ['video','vídeo','pelicula','película','animar','animación','clip','crear vídeo','crear video','grabar','reels','tiktok','youtube','shorts','hacer un video','editar video'], id: 'video' },
   // Resúmeme esto
-  { keywords: ['resumir','resume','resumen','sintetizar','pdf','acortar texto','simplificar texto','documento largo','leer documento'], id: 'resume' },
+  { keywords: ['resumir','resume','resumen','sintetizar','pdf','acortar texto','simplificar texto','documento largo','leer documento','resúmeme','resumeme','hazme un resumen'], id: 'resume' },
   // Necesito una presentación
-  { keywords: ['presentación','presentacion','diapositivas','notebooklm','gamma','canva','slides','powerpoint','presentar','exposicion','exposición'], id: 'presentacion' },
+  { keywords: ['presentación','presentacion','diapositivas','notebooklm','gamma','canva','slides','powerpoint','presentar','exposicion','exposición','power point'], id: 'presentacion' },
   // Léeme esto
-  { keywords: ['escuchar','voz','audio','leer en voz','texto a voz','narrar','mp3','hablar','podcast','audiolibro'], id: 'escucha' },
+  { keywords: ['escuchar','voz','audio','leer en voz','texto a voz','narrar','mp3','hablar','podcast','audiolibro','léeme','leeme','que me lo lea'], id: 'escucha' },
   // Ponme música
-  { keywords: ['música','canción','melodía','musica','componer','cantar','crear música','suno','cancion','banda sonora','instrumental'], id: 'musica' },
+  { keywords: ['música','canción','melodía','musica','componer','cantar','crear música','suno','cancion','banda sonora','instrumental','hacer una canción','componer música'], id: 'musica' },
   // ¿Es esto una estafa?
-  { keywords: ['seguridad','estafa','fraude','contraseña','phishing','virus','hackeo','spam','peligro','sospechoso','mentira','timo','fake','falso','whatsapp sospechoso'], id: 'seguridad' },
+  { keywords: ['seguridad','estafa','fraude','contraseña','phishing','virus','hackeo','spam','peligro','sospechoso','mentira','timo','fake','falso','whatsapp sospechoso','me han estafado','es verdad','es real','me quieren engañar'], id: 'seguridad' },
   // Escribe un mensaje
-  { keywords: ['escribir','escribe','mensaje','email','correo','carta','redactar','redacta','responder correo','contestar','whatsapp','nota','solicitud','reclamación','reclamacion','queja','felicitación','felicitacion','invitación','invitacion'], id: 'escribe' },
+  { keywords: ['escribir','escribe','mensaje','email','correo','carta','redactar','redacta','responder correo','contestar','whatsapp','nota','solicitud','reclamación','reclamacion','queja','felicitación','felicitacion','invitación','invitacion','escribir a','carta para','mensaje para','felicitar','dar el pésame','pesame'], id: 'escribe' },
   // Organiza tu correo (Gmail)
-  { keywords: ['organizar correo','organizar email','organizar gmail','ordenar correo','gmail','bandeja','emails sin leer','organizar emails','limpiar correo','gestionar correo'], id: 'organiza' },
+  { keywords: ['organizar correo','organizar email','organizar gmail','ordenar correo','gmail','bandeja','emails sin leer','organizar emails','limpiar correo','gestionar correo','revisar correo','muchos correos'], id: 'organiza' },
   // Salud y medicamentos
-  { keywords: ['salud','medicamento','prospecto','medicina','pastilla','síntoma','sintoma','enfermedad','consulta médica','consulta medica','médico','medico','doctor','dolor','análisis','analisis','receta médica','tratamiento'], id: 'salud' },
+  { keywords: ['salud','medicamento','prospecto','medicina','pastilla','síntoma','sintoma','enfermedad','consulta médica','consulta medica','médico','medico','doctor','dolor','análisis','analisis','receta médica','tratamiento','me duele','tengo fiebre','estoy malo','estoy mala','me encuentro mal'], id: 'salud' },
   // Trámites y burocracia
-  { keywords: ['trámite','tramite','burocracia','formulario','administración','administracion','renta','hacienda','dni','impuesto','seguridad social','papeleo','gestión','gestion','solicitud oficial','ayuntamiento','subvención','subvencion'], id: 'tramites' },
+  { keywords: ['trámite','tramite','burocracia','formulario','administración','administracion','renta','hacienda','dni','impuesto','seguridad social','papeleo','gestión','gestion','solicitud oficial','ayuntamiento','subvención','subvencion','cita previa','registro civil','pasaporte','rellenar un papel','rellenar formulario'], id: 'tramites' },
   // Usa tu móvil mejor
-  { keywords: ['móvil','movil','smartphone','teléfono','telefono','celular','usar móvil','ajustes móvil','configurar móvil','aplicaciones','apps móvil'], id: 'movil' },
+  { keywords: ['móvil','movil','smartphone','teléfono','telefono','celular','usar móvil','ajustes móvil','configurar móvil','aplicaciones','apps móvil','no sé usar','va lento','liberar espacio','hacer videollamada','el teléfono'], id: 'movil' },
   // Novedades IA
   { keywords: ['noticias','novedades','actualidad','últimas noticias','ultima hora ia','semana ia'], id: 'noticias' },
   // Tengo una duda — AL FINAL porque tiene palabras muy genéricas
@@ -5197,7 +5198,8 @@ const SEARCH_MAP = [
 
 
 function doSearch() {
-  const query = document.getElementById('search-input').value.trim().toLowerCase();
+  const queryRaw = document.getElementById('search-input').value.trim();
+  const query = queryRaw.toLowerCase();
   if (!query) {
     document.getElementById('search-input').focus();
     return;
@@ -5221,8 +5223,24 @@ function doSearch() {
     return;
   }
 
-  // Sin coincidencia — abrir duda
-  openCard('consultas');
+  // Sin coincidencia — ofrecer abrir la IA directamente con lo que escribió
+  mostrarBusquedaSinResultado(queryRaw);
+}
+
+function mostrarBusquedaSinResultado(texto) {
+  const wrap = document.getElementById('search-noresult');
+  if (!wrap) return;
+  const prompt = `Ayúdame con esto, explicándomelo de forma clara y sencilla en español: ${texto}`;
+  wrap.innerHTML = `
+    <div style="background:linear-gradient(145deg,#29B6E8,#4ECDC4);border-radius:18px;padding:18px;margin-top:14px;box-shadow:0 6px 20px rgba(41,182,232,0.25)">
+      <div style="color:#fff;font-weight:700;font-size:0.95rem;margin-bottom:6px">🤔 No encontramos una sección exacta para "${texto}"</div>
+      <div style="color:rgba(255,255,255,0.9);font-size:0.85rem;line-height:1.5;margin-bottom:14px">Pero no te preocupes — la IA puede ayudarte igualmente. Pulsa y le preguntamos por ti:</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button onclick="window.open('https://chat.openai.com/?q=' + encodeURIComponent(decodeURIComponent('${encodeURIComponent(prompt)}')),'_blank')" style="flex:1;min-width:130px;background:rgba(255,255,255,0.25);border:2px solid rgba(255,255,255,0.6);color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.82rem;padding:10px 14px;border-radius:100px;cursor:pointer">🟢 Preguntar a ChatGPT</button>
+        <button onclick="window.open('https://claude.ai/new?q=' + encodeURIComponent(decodeURIComponent('${encodeURIComponent(prompt)}')),'_blank')" style="flex:1;min-width:130px;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.4);color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.82rem;padding:10px 14px;border-radius:100px;cursor:pointer">🤖 Preguntar a Claude</button>
+      </div>
+    </div>`;
+  wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 // ── MODO OSCURO ──

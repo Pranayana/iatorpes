@@ -1769,17 +1769,6 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
       </div>
       <button class="chat-open-btn" onclick="window.open('https://claude.ai','_blank')">🤖 Hablar con la IA</button>
     --> 
-      <div class="no-se-response" id="no-se-response">
-        <div class="no-se-response-title">🤔 ¿Qué te gustaría hacer hoy?</div>
-        <div class="no-se-option" onclick="openCard('imagen')">🎨 Crear una imagen bonita</div>
-        <div class="no-se-option" onclick="openCard('chef')">🍳 Ver qué puedo cocinar con lo que tengo</div>
-        <div class="no-se-option" onclick="openCard('consultas')">💬 Resolver una duda que tengo</div>
-        <div class="no-se-option" onclick="openCard('manitas')">🔧 Arreglar algo en casa</div>
-        <div class="no-se-option" onclick="openCard('musica')">🎵 Crear una canción especial</div>
-        <div class="no-se-option" onclick="openCard('mejora')">📸 Mejorar o restaurar una foto</div>
-        <div class="no-se-option" onclick="openCard('aprende')">🎓 Aprender algo nuevo sobre IA</div>
-      </div>
-
       <!-- GENERADOR DE LOGOS -->
       <div class="generator-section">
         <div class="generator-title">🎨 Crea tu logo en 30 segundos</div>
@@ -1823,7 +1812,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- DUDA -->
     <div class="vista" id="v-duda">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🤔</div><div class="hero-title">Pregunta lo que quieras!</div><div class="hero-subtitle">¿Cómo quieres continuar?</div></div>
       <div class="modo-buttons">
         <button class="modo-btn" onclick="showVista('v-duda-rapido')"><span style="font-size:2rem">⚡</span><div><span style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800">⚡ Consulta rápida</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
@@ -1832,7 +1821,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-duda-rapido">
-      <button class="back-btn" onclick="showVista('v-consultas')">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">⚡</div><div class="hero-title">Consulta rápida</div><div class="hero-subtitle">Pregunta directamente a las mejores IAs</div></div>
       <div class="content">
         <p style="text-align:center;color:var(--mid);margin-bottom:12px;font-size:0.92rem">Todas son gratuitas y te responderán al instante.</p>
@@ -1845,7 +1834,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-duda-aprende">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎓</div><div class="hero-title">Modo Aprende</div><div class="hero-subtitle">Entiende qué son los LLMs y pruébalos</div></div>
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'t-duda-como')">¿Qué es un LLM?</button>
@@ -1910,7 +1899,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- IMAGEN -->
     <div class="vista" id="v-imagen">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎨</div><div class="hero-title">Hazme una imagen</div><div class="hero-subtitle">Crea imágenes increíbles solo describiendo lo que imaginas</div></div>
       <div class="modo-buttons">
         <button class="modo-btn" onclick="showVista('v-imagen-rapido')"><span style="font-size:2rem">⚡</span><div><span style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800">⚡ Consulta rápida</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
@@ -1919,7 +1908,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-imagen-rapido">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🖼️</div><div class="hero-title">Quiero una imagen</div><div class="hero-subtitle">Descríbela y la IA la crea por ti</div></div>
       <div class="content">
         <div class="msg-gen">
@@ -1959,7 +1948,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-imagen-aprende">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎓</div><div class="hero-title">Modo Aprende · Imágenes</div><div class="hero-subtitle">Entiende cómo la IA crea imágenes</div></div>
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'t-img-como')">¿Cómo funciona?</button>
@@ -2030,7 +2019,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- VÍDEO -->
     <div class="vista" id="v-video">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎬</div><div class="hero-title">Crea un vídeo</div><div class="hero-subtitle">Genera vídeos increíbles con inteligencia artificial</div></div>
       <div class="modo-buttons">
         <button class="modo-btn" onclick="showVista('v-video-rapido')"><span style="font-size:2rem">⚡</span><div><span style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800">⚡ Consulta rápida</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
@@ -2039,7 +2028,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-video-rapido">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">⚡</div><div class="hero-title">Vídeo</div><div class="hero-subtitle">Crea tu primer vídeo con IA ahora mismo</div></div>
       <div class="content">
         <div class="ia-buttons">
@@ -2056,7 +2045,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-video-aprende">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎓</div><div class="hero-title">Modo Aprende · Vídeo</div><div class="hero-subtitle">Entiende cómo la IA genera vídeos</div></div>
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'t-vid-como')">¿Cómo funciona?</button>
@@ -2129,7 +2118,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     <!-- RESTO DE TARJETAS (próximamente) -->
     <!-- RESUME UN TEXTO -->
     <div class="vista" id="v-resume">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">📝</div><div class="hero-title">Resume un texto</div><div class="hero-subtitle">La IA lee y te explica cualquier documento en palabras simples</div></div>
       <div class="modo-buttons">
         <button class="modo-btn" onclick="showVista('v-resume-rapido')"><span style="font-size:2rem">⚡</span><div><span style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800">⚡ Consulta rápida</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
@@ -2138,7 +2127,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-resume-rapido">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">⚡</div><div class="hero-title">Resumir</div><div class="hero-subtitle">Pega tu texto o sube tu documento y la IA lo resume</div></div>
       <div class="content">
         <p style="text-align:center;color:var(--mid);margin-bottom:12px;font-size:0.95rem">Copia tu texto, pégalo en la IA y pídele que lo resuma</p>
@@ -2152,7 +2141,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-resume-aprende">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎓</div><div class="hero-title">Modo Aprende · Resumir</div><div class="hero-subtitle">Aprende a usar la IA para entender cualquier documento</div></div>
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'t-res-como')">¿Cómo funciona?</button>
@@ -2197,7 +2186,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
     <!-- ESCRIBE UN MENSAJE -->
     <div class="vista" id="v-escribe">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">✉️</div><div class="hero-title">Escribe un mensaje</div><div class="hero-subtitle">La IA te ayuda a escribir emails, cartas y mensajes perfectos</div></div>
       <div class="modo-buttons">
         <button class="modo-btn" onclick="showVista('v-escribe-rapido')"><span style="font-size:2rem">⚡</span><div><span style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800">⚡ Consulta rápida</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
@@ -2206,7 +2195,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-escribe-rapido">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">⚡</div><div class="hero-title">Mensajes</div><div class="hero-subtitle">La IA redacta el mensaje y tú lo envías</div></div>
       <div class="content">
         <p style="text-align:center;color:var(--mid);margin-bottom:16px;font-size:0.95rem">Rellena estos campos y te preparamos el mensaje perfecto. Solo tienes que copiarlo o enviarlo.</p>
@@ -2266,7 +2255,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-escribe-aprende">
-      <button class="back-btn" onclick="showVista('v-escribe')">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎓</div><div class="hero-title">Modo Aprende · Mensajes</div><div class="hero-subtitle">Aprende a escribir cualquier mensaje con ayuda de la IA</div></div>
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'t-esc-como')">¿Cómo funciona?</button>
@@ -2318,7 +2307,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
     <!-- ORGANIZA MIS TAREAS -->
     <div class="vista" id="v-organiza">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">📧</div><div class="hero-title">Organiza tu correo</div><div class="hero-subtitle">Te conectamos con Claude, que con tu permiso te ordena el Gmail</div></div>
       <div class="modo-buttons">
         <button class="modo-btn" onclick="showVista('v-organiza-rapido')"><span style="font-size:2rem">⚡</span><div><span style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800">⚡ Consulta rápida</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
@@ -2327,7 +2316,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-organiza-rapido">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">📧</div><div class="hero-title">Organiza tu correo</div><div class="hero-subtitle">IAtorpes solo te conecta — es Claude quien, con tu permiso, lee tu Gmail</div></div>
       <div class="content">
         <div class="info-box" style="margin-bottom:20px;background:linear-gradient(145deg,#EEF2FF,#E0E7FF);border-color:rgba(44,94,219,0.2)">
@@ -2349,7 +2338,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-organiza-aprende">
-      <button class="back-btn" onclick="showVista('v-organiza')">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎓</div><div class="hero-title">Modo Aprende · Organizar</div><div class="hero-subtitle">Aprende a usar la IA para gestionar mejor tu tiempo</div></div>
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'t-org-como')">¿Cómo funciona?</button>
@@ -2395,7 +2384,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
     <!-- TRADUCTOR SIMPLE -->
     <div class="vista" id="v-traductor">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🌍</div><div class="hero-title">Traductor simple</div><div class="hero-subtitle">Traduce cualquier texto a cualquier idioma al instante</div></div>
       <div class="modo-buttons">
         <button class="modo-btn" onclick="showVista('v-traductor-rapido')"><span style="font-size:2rem">⚡</span><div><span style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800">⚡ Consulta rápida</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
@@ -2404,7 +2393,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-traductor-rapido">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">⚡</div><div class="hero-title">Traducir</div><div class="hero-subtitle">Traduce al instante a más de 100 idiomas</div></div>
       <div class="content">
         <p style="text-align:center;color:var(--mid);margin-bottom:12px;font-size:0.95rem">Todas gratuitas — elige la que prefieras</p>
@@ -2422,7 +2411,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-traductor-aprende">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎓</div><div class="hero-title">Modo Aprende · Traducir</div><div class="hero-subtitle">Aprende a traducir cualquier cosa con IA</div></div>
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'t-tra-como')">¿Cómo funciona?</button>
@@ -2492,7 +2481,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
     <!-- MEJORA UNA FOTO -->
     <div class="vista" id="v-mejora">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🖼️</div><div class="hero-title">Mejora una foto</div><div class="hero-subtitle">La IA mejora, restaura y transforma tus fotos en segundos</div></div>
       <div class="modo-buttons">
         <button class="modo-btn" onclick="showVista('v-mejora-rapido')"><span style="font-size:2rem">⚡</span><div><span style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800">⚡ Consulta rápida</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
@@ -2501,7 +2490,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-mejora-rapido">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">⚡</div><div class="hero-title">Fotos</div><div class="hero-subtitle">Elige lo que necesitas y ve directo a la herramienta</div></div>
       <div class="content">
         <div class="ia-buttons">
@@ -2518,7 +2507,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-mejora-aprende">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎓</div><div class="hero-title">Modo Aprende · Fotos</div><div class="hero-subtitle">Descubre todo lo que la IA puede hacer con tus fotos</div></div>
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'t-fot-como')">¿Cómo funciona?</button>
@@ -2589,7 +2578,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
     <!-- ESCUCHA UN TEXTO -->
     <div class="vista" id="v-escucha">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🔊</div><div class="hero-title">Escucha un texto</div><div class="hero-subtitle">La IA convierte cualquier texto en voz natural al instante</div></div>
       <div class="modo-buttons">
         <button class="modo-btn" onclick="showVista('v-escucha-rapido')"><span style="font-size:2rem">⚡</span><div><span style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800">⚡ Consulta rápida</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
@@ -2598,7 +2587,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-escucha-rapido">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">⚡</div><div class="hero-title">Escuchar</div><div class="hero-subtitle">Pega tu texto y escúchalo al instante</div></div>
       <div class="content">
         <p style="text-align:center;color:var(--mid);margin-bottom:12px;font-size:0.95rem"><strong>Rápido y gratis</strong> — sin registro</p>
@@ -2617,7 +2606,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-escucha-aprende">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎓</div><div class="hero-title">Modo Aprende · Escuchar</div><div class="hero-subtitle">Aprende a convertir cualquier texto en audio</div></div>
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'t-esc2-como')">¿Cómo funciona?</button>
@@ -2688,7 +2677,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
     <!-- CREA MÚSICA -->
     <div class="vista" id="v-musica">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎵</div><div class="hero-title">Crea música</div><div class="hero-subtitle">La IA compone canciones y melodías solo con tus palabras</div></div>
       <div class="modo-buttons">
         <button class="modo-btn" onclick="showVista('v-musica-rapido')"><span style="font-size:2rem">⚡</span><div><span style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800">⚡ Consulta rápida</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
@@ -2697,7 +2686,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-musica-rapido">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">⚡</div><div class="hero-title">Música</div><div class="hero-subtitle">Crea tu canción ahora mismo — sin saber música</div></div>
       <div class="content">
         <div class="ia-buttons">
@@ -2714,7 +2703,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-musica-aprende">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎓</div><div class="hero-title">Modo Aprende · Música</div><div class="hero-subtitle">Aprende a crear música con IA aunque no sepas nada de música</div></div>
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'t-mus-como')">¿Cómo funciona?</button>
@@ -2763,7 +2752,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- QUÉ ES LA IA -->
     <div class="vista" id="v-que-es">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🧠</div><div class="hero-title">¿Qué es la Inteligencia Artificial?</div><div class="hero-subtitle">Te lo explicamos en palabras simples, sin tecnicismos</div></div>
       <div class="tab-panel active" style="display:block">
         <div class="section-intro">Todo lo que necesitas saber</div>
@@ -2795,7 +2784,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- ES PELIGROSA -->
     <div class="vista" id="v-peligrosa">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">⚠️</div><div class="hero-title">¿Es peligrosa la IA?</div><div class="hero-subtitle">Una respuesta honesta y equilibrada</div></div>
       <div class="tab-panel active" style="display:block">
         <div class="section-intro">Ni todo bueno ni todo malo</div>
@@ -2827,7 +2816,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- ME QUITA EL TRABAJO -->
     <div class="vista" id="v-trabajo">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">💼</div><div class="hero-title">¿Me quita el trabajo la IA?</div><div class="hero-subtitle">La pregunta que todos se hacen — con respuesta honesta</div></div>
       <div class="tab-panel active" style="display:block">
         <div class="section-intro">La realidad sin alarmismos</div>
@@ -2855,7 +2844,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- PARA QUÉ SIRVE -->
     <div class="vista" id="v-para-que">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎯</div><div class="hero-title">¿Para qué sirve la IA?</div><div class="hero-subtitle">Usos prácticos para tu vida diaria</div></div>
       <div class="tab-panel active" style="display:block">
         <div class="section-intro">Más útil de lo que imaginas</div>
@@ -2887,7 +2876,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- CUÁNTO CUESTA -->
     <div class="vista" id="v-cuanto-cuesta">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">💰</div><div class="hero-title">¿Cuánto cuesta usar la IA?</div><div class="hero-subtitle">Mucho menos de lo que crees — y hay opciones gratis</div></div>
       <div class="tab-panel active" style="display:block">
         <div class="section-intro">Gratis para empezar, asequible para más</div>
@@ -2915,7 +2904,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- AYUDA -->
     <div class="vista" id="v-ayuda">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">❓</div><div class="hero-title">Ayuda</div><div class="hero-subtitle">Todo lo que necesitas para empezar con la IA</div></div>
       <div class="tab-panel active" style="display:block">
         <div class="section-intro">Preguntas frecuentes</div>
@@ -2943,7 +2932,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- SALUD Y MEDICAMENTOS -->
     <div class="vista" id="v-salud">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">💊</div><div class="hero-title">Salud y medicamentos</div><div class="hero-subtitle">La IA te ayuda a entender tu salud en palabras simples</div></div>
       <div class="modo-buttons">
         <button class="modo-btn" onclick="showVista('v-salud-rapido')"><span style="font-size:2rem">⚡</span><div><span style="font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:700">⚡ Consulta rápida</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
@@ -2952,7 +2941,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-salud-rapido">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">💊</div><div class="hero-title">Salud y medicamentos</div><div class="hero-subtitle">Cuéntanos qué te pasa y la IA te orientará</div></div>
       <div class="content">
         <div class="msg-gen">
@@ -2989,7 +2978,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-salud-aprende">
-      <button class="back-btn" onclick="showVista('v-salud')">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎓</div><div class="hero-title">Modo Aprende · Salud</div><div class="hero-subtitle">Cómo usar la IA para entender mejor tu salud</div></div>
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'t-sal-como')">¿Cómo funciona?</button>
@@ -3026,7 +3015,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- USA TU MÓVIL MEJOR -->
     <div class="vista" id="v-movil">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">📱</div><div class="hero-title">Usa tu móvil mejor</div><div class="hero-subtitle">La IA te enseña a sacarle partido a tu smartphone</div></div>
       <div class="modo-buttons">
         <button class="modo-btn" onclick="showVista('v-movil-rapido')"><span style="font-size:2rem">⚡</span><div><span style="font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:700">⚡ Consulta rápida</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
@@ -3035,7 +3024,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-movil-rapido">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">📱</div><div class="hero-title">Usa tu móvil mejor</div><div class="hero-subtitle">Cuéntanos qué necesitas y la IA te explica paso a paso</div></div>
       <div class="content">
         <div class="msg-gen">
@@ -3067,7 +3056,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-movil-aprende">
-      <button class="back-btn" onclick="showVista('v-movil')">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎓</div><div class="hero-title">Modo Aprende · Móvil</div><div class="hero-subtitle">Las dudas más comunes sobre el smartphone resueltas</div></div>
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'t-mov-whatsapp')">WhatsApp</button>
@@ -3117,7 +3106,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- SEGURIDAD ONLINE -->
     <div class="vista" id="v-seguridad">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🔒</div><div class="hero-title">Seguridad online</div><div class="hero-subtitle">Protégete de estafas y fraudes en internet</div></div>
       <div class="modo-buttons">
         <button class="modo-btn" onclick="showVista('v-seguridad-rapido')"><span style="font-size:2rem">⚡</span><div><span style="font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:700">⚡ Consulta rápida</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
@@ -3126,7 +3115,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-seguridad-rapido">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">⚡</div><div class="hero-title">Seguridad</div><div class="hero-subtitle">Herramientas para protegerte ahora mismo</div></div>
       <div class="content">
         <div class="ia-buttons">
@@ -3139,7 +3128,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-seguridad-aprende">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎓</div><div class="hero-title">Modo Aprende · Seguridad</div><div class="hero-subtitle">Aprende a protegerte de las estafas más comunes</div></div>
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'t-seg-estafas')">Estafas comunes</button>
@@ -3174,7 +3163,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- TRÁMITES Y BUROCRACIA -->
     <div class="vista" id="v-tramites">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🏦</div><div class="hero-title">Trámites y burocracia</div><div class="hero-subtitle">La IA te ayuda con gestiones, formularios y administración</div></div>
       <div class="modo-buttons">
         <button class="modo-btn" onclick="showVista('v-tramites-rapido')"><span style="font-size:2rem">⚡</span><div><span style="font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:700">⚡ Consulta rápida</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
@@ -3183,7 +3172,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-tramites-rapido">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">📋</div><div class="hero-title">Trámites y burocracia</div><div class="hero-subtitle">Cuéntanos qué necesitas y la IA te explica los pasos</div></div>
       <div class="content">
         <div class="msg-gen">
@@ -3218,7 +3207,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-tramites-aprende">
-      <button class="back-btn" onclick="showVista('v-tramites')">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎓</div><div class="hero-title">Modo Aprende · Trámites</div><div class="hero-subtitle">Los trámites más comunes explicados paso a paso</div></div>
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'t-tra2-tipos')">Trámites comunes</button>
@@ -3253,7 +3242,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- NOTICIAS IA -->
     <div class="vista" id="v-noticias">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero">
         <div class="hero-icon">📰</div>
         <div class="hero-title">Últimas noticias IA</div>
@@ -3261,22 +3250,22 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
       </div>
       <div class="content">
         <div class="news-cards">
-          <a class="news-card" href="https://www.infobae.com/tecno/2026/05/18/wwdc-2026-apple-mostrara-el-futuro-del-iphone-siri-y-su-apuesta-por-la-ia/" target="_blank">
-            <div class="news-source">Infobae · 8 junio 2026 🔥</div>
-            <div class="news-headline">HOY arranca la WWDC 2026 — Apple presenta la nueva Siri con IA y iOS 27</div>
-            <div class="news-desc">Hoy lunes 8 de junio Apple presenta en directo las novedades de iOS 27 con una Siri completamente renovada por IA, integrada con Gemini de Google. La keynote empieza a las 19:00h en España.</div>
+          <a class="news-card" href="https://www.diariolatina.com/nota-la-inteligencia-artificial-ya-no-es-una-promesa-en-2026-se-convirtio-en-infraestructura-invisible-69799" target="_blank">
+            <div class="news-source">Diario Latina · 7 junio 2026 🔥</div>
+            <div class="news-headline">La nueva Siri ya es real: Apple la presentó con el poder de Gemini detrás</div>
+            <div class="news-desc">Apple reveló esta semana cómo será la nueva Siri: más inteligente, integrada en todo el iPhone y funcionando con Gemini de Google. La IA da un salto enorme en los móviles de millones de personas.</div>
             <div class="news-arrow">→</div>
           </a>
-          <a class="news-card" href="https://www.semana.com/tecnologia/articulo/apple-revolucionara-siri-en-2026-asi-sera-el-asistente-con-inteligencia-artificial-que-llegara-junto-a-ios-27/202624/" target="_blank">
-            <div class="news-source">Semana · 29 mayo 2026</div>
-            <div class="news-headline">Apple reinventa Siri con IA — llegará integrada en todo el iPhone con iOS 27</div>
-            <div class="news-desc">La nueva Siri estará en toda la experiencia del iPhone — cámara, fotos, búsqueda — como un asistente real. Usará Gemini de Google como motor y llegará este otoño a todos los iPhones.</div>
+          <a class="news-card" href="https://www.jornada.com.mx/noticia/2026/06/06/economia/eu-pretende-participar-en-las-empresas-de-inteligencia-artificial" target="_blank">
+            <div class="news-source">La Jornada · 6 junio 2026</div>
+            <div class="news-headline">EE.UU. quiere entrar en el capital de las grandes empresas de IA</div>
+            <div class="news-desc">El gobierno de Estados Unidos estudia adquirir participaciones en las principales empresas de inteligencia artificial. Una señal de lo estratégica que se ha vuelto esta tecnología para los países.</div>
             <div class="news-arrow">→</div>
           </a>
-          <a class="news-card" href="https://ecosistemastartup.com/las-mayores-noticias-de-ia-en-2026-hasta-ahora/" target="_blank">
-            <div class="news-source">El Ecosistema Startup · 30 mayo 2026</div>
-            <div class="news-headline">ChatGPT ya tiene 800 millones de usuarios — y la IA que usamos en IAtorpes vale 350.000 millones</div>
-            <div class="news-desc">OpenAI superó los 800 millones de usuarios semanales con GPT-5.4. Anthropic, creadora de Claude, vale ya 350.000 millones y prepara su salida a bolsa para finales de 2026.</div>
+          <a class="news-card" href="https://www.diariolatina.com/nota-la-inteligencia-artificial-ya-no-es-una-promesa-en-2026-se-convirtio-en-infraestructura-invisible-69799" target="_blank">
+            <div class="news-source">Diario Latina · 7 junio 2026</div>
+            <div class="news-headline">La IA ya está en todo, aunque no la veas — por eso conviene aprender a usarla</div>
+            <div class="news-desc">En 2026 la inteligencia artificial organiza servicios y toma decisiones que usamos a diario sin darnos cuenta. Saber manejarla ya no es opcional: es la nueva alfabetización. Justo lo que te enseña IAtorpes.</div>
             <div class="news-arrow">→</div>
           </a>
         </div>
@@ -3290,7 +3279,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     <!-- CONSULTAS GUIADAS -->
     <!-- PROBLEMA TECNOLÓGICO -->
     <div class="vista" id="v-consulta-tecno">
-      <button class="back-btn" onclick="showVista('v-consultas')">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero">
         <div class="hero-icon">📱</div>
         <div class="hero-title">Problema tecnológico</div>
@@ -3330,7 +3319,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- TRÁMITE ADMINISTRATIVO -->
     <div class="vista" id="v-consulta-tramite">
-      <button class="back-btn" onclick="showVista('v-consultas')">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero">
         <div class="hero-icon">🏛️</div>
         <div class="hero-title">Trámite administrativo</div>
@@ -3370,7 +3359,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- CONSULTA LABORAL -->
     <div class="vista" id="v-consulta-laboral">
-      <button class="back-btn" onclick="showVista('v-consultas')">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero">
         <div class="hero-icon">💼</div>
         <div class="hero-title">Consulta laboral</div>
@@ -3414,7 +3403,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- CONSULTA FINANCIERA -->
     <div class="vista" id="v-consulta-financiera">
-      <button class="back-btn" onclick="showVista('v-consultas')">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero">
         <div class="hero-icon">💰</div>
         <div class="hero-title">Consulta financiera</div>
@@ -3458,7 +3447,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- APOYO EMOCIONAL -->
     <div class="vista" id="v-consulta-emocional">
-      <button class="back-btn" onclick="showVista('v-consultas')">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero">
         <div class="hero-icon">🧠</div>
         <div class="hero-title">Apoyo emocional</div>
@@ -3500,7 +3489,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- CONSULTA LEGAL -->
     <div class="vista" id="v-consulta-legal">
-      <button class="back-btn" onclick="showVista('v-consultas')">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero">
         <div class="hero-icon">⚖️</div>
         <div class="hero-title">Consulta legal</div>
@@ -3549,9 +3538,34 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
       </div>
     </div><!-- /v-consulta-legal -->
 
+    <!-- ¿POR DÓNDE EMPIEZO? -->
+    <div class="vista" id="v-empezar">
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
+      <div class="hero">
+        <div class="hero-icon">🚀</div>
+        <div class="hero-title">¿Por dónde empiezo?</div>
+        <div class="hero-subtitle">Dinos qué te apetece y te llevamos de la mano</div>
+      </div>
+      <div class="content">
+        <div class="ia-buttons">
+          <button class="ia-btn" onclick="openCard('imagen')"><span style="font-size:1.6rem">🎨</span><div><span class="ia-label">Crear una imagen bonita</span></div><span style="margin-left:auto;color:#888">→</span></button>
+          <button class="ia-btn" onclick="openCard('chef')"><span style="font-size:1.6rem">🍳</span><div><span class="ia-label">Ver qué cocinar con lo que tengo</span></div><span style="margin-left:auto;color:#888">→</span></button>
+          <button class="ia-btn" onclick="openCard('consultas')"><span style="font-size:1.6rem">💬</span><div><span class="ia-label">Resolver una duda que tengo</span></div><span style="margin-left:auto;color:#888">→</span></button>
+          <button class="ia-btn" onclick="openCard('manitas')"><span style="font-size:1.6rem">🔧</span><div><span class="ia-label">Arreglar algo en casa</span></div><span style="margin-left:auto;color:#888">→</span></button>
+          <button class="ia-btn" onclick="openCard('salud')"><span style="font-size:1.6rem">💊</span><div><span class="ia-label">Entender algo de salud o un medicamento</span></div><span style="margin-left:auto;color:#888">→</span></button>
+          <button class="ia-btn" onclick="openCard('tramites')"><span style="font-size:1.6rem">📋</span><div><span class="ia-label">Ayuda con un trámite o papeleo</span></div><span style="margin-left:auto;color:#888">→</span></button>
+          <button class="ia-btn" onclick="openCard('escribe')"><span style="font-size:1.6rem">✉️</span><div><span class="ia-label">Escribir un mensaje o correo</span></div><span style="margin-left:auto;color:#888">→</span></button>
+          <button class="ia-btn" onclick="openCard('musica')"><span style="font-size:1.6rem">🎵</span><div><span class="ia-label">Crear una canción especial</span></div><span style="margin-left:auto;color:#888">→</span></button>
+          <button class="ia-btn" onclick="openCard('mejora')"><span style="font-size:1.6rem">📸</span><div><span class="ia-label">Mejorar o restaurar una foto</span></div><span style="margin-left:auto;color:#888">→</span></button>
+          <button class="ia-btn" onclick="openCard('aprende')"><span style="font-size:1.6rem">🎓</span><div><span class="ia-label">Aprender algo nuevo sobre IA</span></div><span style="margin-left:auto;color:#888">→</span></button>
+        </div>
+        <div style="height:20px"></div>
+      </div>
+    </div>
+
     <!-- CONSULTA MÉDICA -->
     <div class="vista" id="v-consulta-medica">
-      <button class="back-btn" onclick="showVista('v-consultas')">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero">
         <div class="hero-icon">👨‍⚕️</div>
         <div class="hero-title">Consulta médica</div>
@@ -3600,7 +3614,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div><!-- /v-consulta-medica -->
 
     <div class="vista" id="v-consultas">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero">
         <div class="hero-icon">🎯</div>
         <div class="hero-title">Asesoramiento profesional</div>
@@ -3659,7 +3673,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- CREA UNA PRESENTACIÓN -->
     <div class="vista" id="v-presentacion">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero">
         <div class="hero-icon">📊</div>
         <div class="hero-title">Crea una presentación</div>
@@ -3672,7 +3686,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-presentacion-rapido">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">⚡</div><div class="hero-title">Crea tu presentación</div><div class="hero-subtitle">Elige la herramienta y empieza en segundos</div></div>
       <div class="content">
         <p style="text-align:center;color:var(--mid);margin-bottom:16px;font-size:0.95rem">Todas son gratuitas — elige la que prefieras</p>
@@ -3702,7 +3716,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
     </div>
 
     <div class="vista" id="v-presentacion-aprende">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero"><div class="hero-icon">🎓</div><div class="hero-title">Modo Aprende · Presentación</div><div class="hero-subtitle">Descubre cómo crear presentaciones profesionales con IA</div></div>
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'t-pre-como')">¿Cómo funciona?</button>
@@ -3760,7 +3774,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- EL MANITAS -->
     <div class="vista" id="v-manitas">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero">
         <div class="hero-icon">🔧</div>
         <div class="hero-title">El Manitas</div>
@@ -3800,7 +3814,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- EL CHEF -->
     <div class="vista" id="v-chef">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero">
         <div class="hero-icon">👨‍🍳</div>
         <div class="hero-title">El Chef</div>
@@ -3849,7 +3863,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
     <!-- APRENDE CON LA IA -->
     <div class="vista" id="v-aprende">
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
       <div class="hero">
         <div class="hero-icon">🎓</div>
         <div class="hero-title">Aprende con la IA</div>
@@ -4010,7 +4024,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
       </div>
       <div style="height:120px"></div>
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
     </div><!-- /v-sabias -->
 
     <div class="vista" id="v-videos">
@@ -4028,6 +4042,24 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
           <span class="vmás-arrow">▼</span>
         </div>
         <div class="vmás-cards vmás-hidden">
+          <a class="vmás-card" href="https://youtu.be/2MYLJavzWps" target="_blank">
+            <img class="vmás-card-thumb" src="https://img.youtube.com/vi/2MYLJavzWps/mqdefault.jpg" alt="" onerror="this.style.fontSize='1.6rem';this.textContent='🪄'">
+            <div class="vmás-card-info">
+              <div class="vmás-card-label">Truco IA · YouTube</div>
+              <div class="vmás-card-titulo">Truco IA #12</div>
+              <div class="vmás-card-desc">Aprende un nuevo truco para sacarle partido a la inteligencia artificial</div>
+            </div>
+            <div class="vmás-card-arrow">→</div>
+          </a>
+          <a class="vmás-card" href="https://youtube.com/shorts/yTcEUGousm4" target="_blank">
+            <img class="vmás-card-thumb" src="https://img.youtube.com/vi/yTcEUGousm4/mqdefault.jpg" alt="" onerror="this.style.fontSize='1.6rem';this.textContent='🪄'">
+            <div class="vmás-card-info">
+              <div class="vmás-card-label">Truco IA · YouTube Short</div>
+              <div class="vmás-card-titulo">Truco IA #13</div>
+              <div class="vmás-card-desc">Truco rápido de IA en menos de 1 minuto</div>
+            </div>
+            <div class="vmás-card-arrow">→</div>
+          </a>
           <a class="vmás-card" href="https://youtube.com/shorts/oYkATSlgl2g" target="_blank">
             <img class="vmás-card-thumb" src="https://img.youtube.com/vi/oYkATSlgl2g/mqdefault.jpg" alt="" onerror="this.style.fontSize='1.6rem';this.textContent='🪄'">
             <div class="vmás-card-info">
@@ -4150,6 +4182,42 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
           <span class="vmás-arrow">▼</span>
         </div>
         <div class="vmás-cards vmás-hidden">
+          <a class="vmás-card" href="https://youtu.be/IbZLGOMRNs0" target="_blank">
+            <img class="vmás-card-thumb" src="https://img.youtube.com/vi/IbZLGOMRNs0/mqdefault.jpg" alt="" onerror="this.style.fontSize='1.6rem';this.textContent='📰'">
+            <div class="vmás-card-info">
+              <div class="vmás-card-label">Noticia IA · YouTube</div>
+              <div class="vmás-card-titulo">Noticia IA #8</div>
+              <div class="vmás-card-desc">Lo último del mundo de la inteligencia artificial</div>
+            </div>
+            <div class="vmás-card-arrow">→</div>
+          </a>
+          <a class="vmás-card" href="https://youtu.be/n6oW7Y7io0Y" target="_blank">
+            <img class="vmás-card-thumb" src="https://img.youtube.com/vi/n6oW7Y7io0Y/mqdefault.jpg" alt="" onerror="this.style.fontSize='1.6rem';this.textContent='📰'">
+            <div class="vmás-card-info">
+              <div class="vmás-card-label">Noticia IA · YouTube</div>
+              <div class="vmás-card-titulo">Noticia IA #9</div>
+              <div class="vmás-card-desc">Novedades y actualidad de la inteligencia artificial</div>
+            </div>
+            <div class="vmás-card-arrow">→</div>
+          </a>
+          <a class="vmás-card" href="https://youtu.be/ZG0jmjQjdqE" target="_blank">
+            <img class="vmás-card-thumb" src="https://img.youtube.com/vi/ZG0jmjQjdqE/mqdefault.jpg" alt="" onerror="this.style.fontSize='1.6rem';this.textContent='📰'">
+            <div class="vmás-card-info">
+              <div class="vmás-card-label">Noticia IA · YouTube</div>
+              <div class="vmás-card-titulo">Noticia IA #10</div>
+              <div class="vmás-card-desc">Lo más relevante de la semana en IA</div>
+            </div>
+            <div class="vmás-card-arrow">→</div>
+          </a>
+          <a class="vmás-card" href="https://youtu.be/zo76Dmxaneo" target="_blank">
+            <img class="vmás-card-thumb" src="https://img.youtube.com/vi/zo76Dmxaneo/mqdefault.jpg" alt="" onerror="this.style.fontSize='1.6rem';this.textContent='📰'">
+            <div class="vmás-card-info">
+              <div class="vmás-card-label">Noticia IA · YouTube</div>
+              <div class="vmás-card-titulo">Noticia IA #11</div>
+              <div class="vmás-card-desc">Mantente al día de lo que pasa en el mundo de la IA</div>
+            </div>
+            <div class="vmás-card-arrow">→</div>
+          </a>
           <a class="vmás-card" href="https://youtu.be/kjtGZu67z9E" target="_blank">
             <img class="vmás-card-thumb" src="https://img.youtube.com/vi/kjtGZu67z9E/mqdefault.jpg" alt="" onerror="this.style.fontSize='1.6rem';this.textContent='📰'">
             <div class="vmás-card-info">
@@ -4266,7 +4334,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
         </div>
       </div>
 
-      <button class="back-btn" onclick="goHome()">← Volver</button>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
     </div><!-- /v-videos -->
 
   </div><!-- /inner -->
@@ -4348,6 +4416,8 @@ CARDS.forEach(c => {
   grid.appendChild(el);
 });
 
+let navStack = [];
+
 function openCard(id) {
   document.getElementById('home').classList.add('hidden');
   document.getElementById('inner').classList.add('visible');
@@ -4355,24 +4425,46 @@ function openCard(id) {
   // Go directly to rapido if exists, otherwise go to main vista
   const rapidoVista = document.getElementById('v-' + id + '-rapido');
   const mainVista = document.getElementById('v-' + id);
+  let vistaId;
   if (rapidoVista) {
     rapidoVista.classList.add('active');
+    vistaId = 'v-' + id + '-rapido';
   } else if (mainVista) {
     mainVista.classList.add('active');
+    vistaId = 'v-' + id;
   }
+  navStack = vistaId ? [vistaId] : [];
+  document.getElementById('inner').scrollTop = 0;
   addToHistory(id);
 }
 
 function showVista(id) {
   document.querySelectorAll('.vista').forEach(v => v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  // Apilar para que Volver regrese aquí
+  if (navStack[navStack.length - 1] !== id) navStack.push(id);
+  document.getElementById('inner').scrollTop = 0;
+}
+
+function volverAtras() {
+  // Quitar la vista actual de la pila
+  navStack.pop();
+  if (navStack.length > 0) {
+    // Ir a la vista anterior
+    const anterior = navStack[navStack.length - 1];
+    document.querySelectorAll('.vista').forEach(v => v.classList.remove('active'));
+    document.getElementById(anterior).classList.add('active');
+    document.getElementById('inner').scrollTop = 0;
+  } else {
+    goHome();
+  }
 }
 
 function goHome() {
   document.getElementById('home').classList.remove('hidden');
   document.getElementById('inner').classList.remove('visible');
   document.querySelectorAll('.vista').forEach(v => v.classList.remove('active'));
-
+  navStack = [];
 }
 
 function switchTab(btn, panelId) {
@@ -5000,9 +5092,12 @@ function imgOpen(base) {
 
 // ── NO SÉ QUÉ HACER ──
 function noSeQueHacer() {
-  const el = document.getElementById('no-se-response');
-  el.classList.add('visible');
-  el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  document.getElementById('home').classList.add('hidden');
+  document.getElementById('inner').classList.add('visible');
+  document.querySelectorAll('.vista').forEach(v => v.classList.remove('active'));
+  document.getElementById('v-empezar').classList.add('active');
+  navStack = ['v-empezar'];
+  document.getElementById('inner').scrollTop = 0;
 }
 
 // ── HISTORIAL ──
@@ -5284,64 +5379,64 @@ const IA_DEL_DIA = [
   { dia:3, mes:6, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un experto en marketing y copywriting para ventas online. Quiero vender [describe el producto] de segunda mano en Wallapop o Facebook Marketplace. Escríbeme un anuncio atractivo, con un título que enganche, una descripción honesta pero persuasiva y un precio sugerido. El producto está en estado [describe el estado].', cta:'Crear mi anuncio', link:'https://chatgpt.com' },
   { dia:4, mes:6, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'La IA puede traducir texto en tiempo real a más de 100 idiomas, incluyendo lenguaje coloquial. Mejor que Google Translate en muchos casos.', cta:'Traducir ahora', link:'https://chatgpt.com' },
   { dia:5, mes:6, tipo:'herramienta', emoji:'🎙️', titulo:'Herramienta del día: ElevenLabs', texto:'Convierte cualquier texto en voz humana realista. Elige el acento, el tono y la velocidad. Ideal para audiolibros, vídeos y podcasts.', cta:'Ver ElevenLabs', link:'https://elevenlabs.io' },
-  { dia:6, mes:6, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un asistente ejecutivo experto en comunicación profesional. Voy a pegarte un correo electrónico que he recibido y necesito que me ayudes a responderlo de forma profesional, amable y clara. Ten en cuenta el tono del correo original para adaptar la respuesta. El correo es: [pega aquí el correo].', cta:'Probarlo ahora', link:'https://chatgpt.com' },
-  { dia:7, mes:6, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un profesor de tecnología especializado en enseñar a personas mayores. Quiero aprender a hacer lo siguiente en mi móvil: [describe lo que quieres hacer]. Explícamelo paso a paso, de forma muy sencilla, como si fuera la primera vez que uso un smartphone. Si puedes, dime también qué errores comunes debo evitar.', cta:'Preguntar al profe IA', link:'https://chatgpt.com' },
+  { dia:6, mes:6, tipo:'truco', emoji:'💡', titulo:'Truco del día', intro:'La IA puede escribirte cualquier mensaje profesional. Por ejemplo, un correo a tu jefe, una respuesta a un cliente o una solicitud formal. Cuéntanos qué necesitas:', texto:'Eres un asistente ejecutivo experto en comunicación profesional. Voy a pegarte un correo electrónico que he recibido y necesito que me ayudes a responderlo de forma profesional, amable y clara. Ten en cuenta el tono del correo original para adaptar la respuesta. El correo es: [pega aquí el correo].', cta:'Probarlo ahora', link:'https://chatgpt.com' },
+  { dia:7, mes:6, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', intro:'La IA puede enseñarte a usar la tecnología paso a paso. Por ejemplo, a configurar el WhatsApp, hacer una videollamada o instalar una app. Cuéntanos qué quieres aprender:', texto:'Eres un profesor de tecnología especializado en enseñar a personas mayores. Quiero aprender a hacer lo siguiente en mi móvil: [describe lo que quieres hacer]. Explícamelo paso a paso, de forma muy sencilla, como si fuera la primera vez que uso un smartphone. Si puedes, dime también qué errores comunes debo evitar.', cta:'Preguntar al profe IA', link:'https://chatgpt.com' },
   { dia:8, mes:6, tipo:'herramienta', emoji:'📄', titulo:'Herramienta del día: ChatPDF', texto:'Sube cualquier PDF — contrato, prospecto, informe — y hazle preguntas en español. La IA te explica lo que necesitas sin leerlo entero.', cta:'Ver ChatPDF', link:'https://chatpdf.com' },
   { dia:9, mes:6, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'Puedes hablarle a la IA por voz desde el móvil. Sin escribir nada. Como si fuera una llamada. Muy útil cuando tienes las manos ocupadas.', cta:'Probarlo', link:'https://chatgpt.com' },
-  { dia:10, mes:6, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un asistente experto en búsquedas y recursos en España. Cada vez que te haga una pregunta, quiero que me des siempre información adaptada a España — leyes, organismos, webs oficiales y ejemplos españoles. Mi primera pregunta es: [escribe tu pregunta].', cta:'Probarlo ahora', link:'https://chatgpt.com' },
-  { dia:11, mes:6, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un médico de cabecera amable y paciente. Tengo los siguientes síntomas o dudas de salud: [describe tu situación]. Ayúdame a prepararme para mi próxima consulta médica: dime qué preguntas debería hacerle al médico, qué información debo llevar y qué términos médicos debería conocer. Recuérdame que para cualquier decisión importante debo consultar siempre con mi médico.', cta:'Prepararme para el médico', link:'https://chatgpt.com' },
+  { dia:10, mes:6, tipo:'truco', emoji:'💡', titulo:'Truco del día', intro:'La IA puede encontrarte recursos y sitios útiles en España. Por ejemplo, dónde hacer un trámite, qué ayudas hay disponibles o dónde encontrar algo concreto. Cuéntanos qué buscas:', texto:'Eres un asistente experto en búsquedas y recursos en España. Cada vez que te haga una pregunta, quiero que me des siempre información adaptada a España — leyes, organismos, webs oficiales y ejemplos españoles. Mi primera pregunta es: [escribe tu pregunta].', cta:'Probarlo ahora', link:'https://chatgpt.com' },
+  { dia:11, mes:6, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', intro:'La IA puede orientarte sobre temas de salud. Por ejemplo, entender un síntoma, saber si debes ir al médico o aclarar una duda. Cuéntanos qué te pasa:', texto:'Eres un médico de cabecera amable y paciente. Tengo los siguientes síntomas o dudas de salud: [describe tu situación]. Ayúdame a prepararme para mi próxima consulta médica: dime qué preguntas debería hacerle al médico, qué información debo llevar y qué términos médicos debería conocer. Recuérdame que para cualquier decisión importante debo consultar siempre con mi médico.', cta:'Prepararme para el médico', link:'https://chatgpt.com' },
   { dia:12, mes:6, tipo:'herramienta', emoji:'✏️', titulo:'Herramienta del día: Gamma', texto:'Crea presentaciones profesionales con IA en menos de 2 minutos. Solo describes el tema y Gamma genera las diapositivas automáticamente.', cta:'Ver Gamma', link:'https://gamma.app' },
   { dia:13, mes:6, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'La IA puede ayudarte a preparar una oposición, estudiar para un examen o aprender un idioma. Es como tener un profesor particular gratuito 24 horas.', cta:'Probarlo', link:'https://chatgpt.com' },
-  { dia:14, mes:6, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un coach de toma de decisiones experto en pensamiento crítico. Tengo que tomar una decisión importante sobre: [describe tu situación]. Analiza mi situación y dame los 3 pros y los 3 contras más importantes, teniendo en cuenta mis circunstancias. Al final dame tu recomendación honesta.', cta:'Probarlo ahora', link:'https://chatgpt.com' },
-  { dia:15, mes:6, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un escritor creativo especializado en mensajes emotivos y personales. Necesito que me escribas un mensaje de felicitación original para [describe la ocasión] dirigido a [describe a la persona y tu relación con ella]. Que sea cálido, personal, diferente a los típicos y que realmente venga del corazón.', cta:'Crear mi mensaje', link:'https://chatgpt.com' },
+  { dia:14, mes:6, tipo:'truco', emoji:'💡', titulo:'Truco del día', intro:'La IA puede ayudarte a tomar una decisión difícil. Por ejemplo, cambiar de trabajo, hacer una compra importante o resolver una duda que te ronda. Cuéntanos qué decisión tienes entre manos:', texto:'Eres un coach de toma de decisiones experto en pensamiento crítico. Tengo que tomar una decisión importante sobre: [describe tu situación]. Analiza mi situación y dame los 3 pros y los 3 contras más importantes, teniendo en cuenta mis circunstancias. Al final dame tu recomendación honesta.', cta:'Probarlo ahora', link:'https://chatgpt.com' },
+  { dia:15, mes:6, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', intro:'La IA puede escribirte un mensaje emotivo y personal. Por ejemplo, una felicitación de cumpleaños, una carta de agradecimiento o unas palabras especiales. Cuéntanos para quién y por qué:', texto:'Eres un escritor creativo especializado en mensajes emotivos y personales. Necesito que me escribas un mensaje de felicitación original para [describe la ocasión] dirigido a [describe a la persona y tu relación con ella]. Que sea cálido, personal, diferente a los típicos y que realmente venga del corazón.', cta:'Crear mi mensaje', link:'https://chatgpt.com' },
   { dia:16, mes:6, tipo:'herramienta', emoji:'🔍', titulo:'Herramienta del día: Perplexity', texto:'El buscador con IA que te da respuestas directas con fuentes verificadas. Sin anuncios, sin páginas inútiles. La respuesta que necesitas al momento.', cta:'Ver Perplexity', link:'https://perplexity.ai' },
   { dia:17, mes:6, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'Puedes pedirle a la IA que adopte un papel — médico, abogado, profesor, cocinero — para que sus respuestas sean más especializadas y útiles.', cta:'Probarlo', link:'https://chatgpt.com' },
-  { dia:18, mes:6, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un revisor experto y siempre buscas la precisión. Voy a mostrarte una respuesta que me has dado antes y creo que puede tener un error. Revísala con cuidado, admite si te has equivocado y corrígela explicando qué estaba mal. La respuesta a revisar es: [pega aquí la respuesta].', cta:'Probarlo ahora', link:'https://chatgpt.com' },
-  { dia:19, mes:6, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un entrenador personal certificado especializado en personas que nunca han hecho ejercicio. Tengo [escribe tu edad] años, nunca he hecho deporte de forma regular y quiero empezar desde cero. Diseñame un plan de ejercicio sencillo, realista y progresivo para las próximas 4 semanas, sin necesidad de ir al gimnasio.', cta:'Crear mi plan', link:'https://chatgpt.com' },
+  { dia:18, mes:6, tipo:'truco', emoji:'💡', titulo:'Truco del día', intro:'La IA puede revisar y mejorar cualquier texto que hayas escrito. Por ejemplo, corregir faltas, hacerlo más claro o darle un tono más profesional. Pega aquí tu texto:', texto:'Eres un revisor experto y siempre buscas la precisión. Voy a mostrarte una respuesta que me has dado antes y creo que puede tener un error. Revísala con cuidado, admite si te has equivocado y corrígela explicando qué estaba mal. La respuesta a revisar es: [pega aquí la respuesta].', cta:'Probarlo ahora', link:'https://chatgpt.com' },
+  { dia:19, mes:6, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', intro:'La IA puede crearte un plan de ejercicio a tu medida. Por ejemplo, para empezar a moverte, perder peso o ponerte en forma en casa. Cuéntanos tu situación:', texto:'Eres un entrenador personal certificado especializado en personas que nunca han hecho ejercicio. Tengo [escribe tu edad] años, nunca he hecho deporte de forma regular y quiero empezar desde cero. Diseñame un plan de ejercicio sencillo, realista y progresivo para las próximas 4 semanas, sin necesidad de ir al gimnasio.', cta:'Crear mi plan', link:'https://chatgpt.com' },
   { dia:20, mes:6, tipo:'herramienta', emoji:'🤖', titulo:'Herramienta del día: Claude', texto:'La IA más honesta y segura del momento. Ideal para preguntas complejas, textos largos y cuando necesitas una respuesta bien razonada.', cta:'Hablar con Claude', link:'https://claude.ai' },
   { dia:21, mes:6, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'La IA puede analizar una foto de una planta enferma y decirte qué le pasa y cómo curarla. También identifica insectos, setas y muchas otras cosas.', cta:'Probarlo', link:'https://chatgpt.com' },
-  { dia:22, mes:6, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un médico experto en comunicación con pacientes. Voy a describir una situación de salud y quiero que me expliques exactamente qué preguntar y cómo explicarme con mi médico para que me entienda bien. La situación es: [describe tu edad, síntomas o diagnóstico reciente].', cta:'Probarlo ahora', link:'https://chatgpt.com' },
-  { dia:23, mes:6, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un mediador experto en conflictos interpersonales y comunicación no violenta. Necesito hacer las paces con [describe a la persona y la situación]. Ayúdame a redactar un mensaje sincero que explique cómo me siento, sin sonar agresivo ni dramático, y que abra la puerta a una conversación tranquila.', cta:'Redactar mi mensaje', link:'https://chatgpt.com' },
+  { dia:22, mes:6, tipo:'truco', emoji:'💡', titulo:'Truco del día', intro:'La IA puede ayudarte a preparar tu consulta médica. Por ejemplo, ordenar tus síntomas o saber qué preguntarle al médico. Cuéntanos qué te preocupa:', texto:'Eres un médico experto en comunicación con pacientes. Voy a describir una situación de salud y quiero que me expliques exactamente qué preguntar y cómo explicarme con mi médico para que me entienda bien. La situación es: [describe tu edad, síntomas o diagnóstico reciente].', cta:'Probarlo ahora', link:'https://chatgpt.com' },
+  { dia:23, mes:6, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', intro:'La IA puede ayudarte a resolver un conflicto con alguien. Por ejemplo, una discusión con un familiar, un problema con un vecino o un malentendido. Cuéntanos qué ha pasado:', texto:'Eres un mediador experto en conflictos interpersonales y comunicación no violenta. Necesito hacer las paces con [describe a la persona y la situación]. Ayúdame a redactar un mensaje sincero que explique cómo me siento, sin sonar agresivo ni dramático, y que abra la puerta a una conversación tranquila.', cta:'Redactar mi mensaje', link:'https://chatgpt.com' },
   { dia:24, mes:6, tipo:'herramienta', emoji:'🎨', titulo:'Herramienta del día: Canva IA', texto:'El diseñador que todos conocemos, ahora con IA. Genera imágenes, elimina fondos, crea logos y diseña publicaciones en segundos. Gratis.', cta:'Ver Canva', link:'https://canva.com' },
   { dia:25, mes:6, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'Puedes pedirle a la IA que te ayude a negociar — el precio de un coche, una subida de sueldo, una devolución. Te da los argumentos exactos.', cta:'Probarlo', link:'https://chatgpt.com' },
-  { dia:26, mes:6, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un experto en comunicación y estilo lingüístico. Voy a pegarte un texto que he escrito y quiero que lo reescribas con un tono [elige: más formal / más cercano / más profesional / más divertido]. Mantén el mismo mensaje pero cambia completamente el tono. El texto es: [pega tu texto].', cta:'Probarlo ahora', link:'https://chatgpt.com' },
-  { dia:27, mes:6, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un divulgador científico experto en explicar conceptos complejos a personas sin conocimientos técnicos. Explícame cómo funciona [escribe el concepto o tecnología] usando un ejemplo de la vida cotidiana que cualquier persona pueda entender. Sin tecnicismos, sin jerga, con mucha claridad.', cta:'Preguntar al divulgador', link:'https://chatgpt.com' },
+  { dia:26, mes:6, tipo:'truco', emoji:'💡', titulo:'Truco del día', intro:'La IA puede cambiar el tono de cualquier texto. Por ejemplo, hacerlo más formal, más cercano o más simpático. Pega aquí el texto que quieres adaptar:', texto:'Eres un experto en comunicación y estilo lingüístico. Voy a pegarte un texto que he escrito y quiero que lo reescribas con un tono [elige: más formal / más cercano / más profesional / más divertido]. Mantén el mismo mensaje pero cambia completamente el tono. El texto es: [pega tu texto].', cta:'Probarlo ahora', link:'https://chatgpt.com' },
+  { dia:27, mes:6, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', intro:'La IA puede explicarte cualquier cosa de forma sencilla. Por ejemplo, cómo funciona algo, qué significa una palabra o un tema que nunca entendiste. Cuéntanos qué quieres entender:', texto:'Eres un divulgador científico experto en explicar conceptos complejos a personas sin conocimientos técnicos. Explícame cómo funciona [escribe el concepto o tecnología] usando un ejemplo de la vida cotidiana que cualquier persona pueda entender. Sin tecnicismos, sin jerga, con mucha claridad.', cta:'Preguntar al divulgador', link:'https://chatgpt.com' },
   { dia:28, mes:6, tipo:'herramienta', emoji:'📸', titulo:'Herramienta del día: Remini', texto:'Restaura fotos antiguas y borrosas con IA. Fotos de tus abuelos, recuerdos familiares... las devuelve a la vida con una calidad increíble. Gratis.', cta:'Ver Remini', link:'https://remini.ai' },
   { dia:29, mes:6, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'La IA no duerme, no se cansa y no te juzga. Puedes preguntarle lo que sea a las 3 de la mañana y te responderá igual de bien que a mediodía.', cta:'Probarlo', link:'https://chatgpt.com' },
-  { dia:30, mes:6, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un guía de viajes experto en España y destinos internacionales. Voy a hacer un viaje a [escribe el destino] durante [número de días] días con un presupuesto de [escribe el presupuesto]. Diseñame un itinerario día a día con lo mejor que ver, donde comer bien sin gastar demasiado y los consejos más útiles para aprovechar el viaje al máximo.', cta:'Planificar mi viaje', link:'https://chatgpt.com' },
+  { dia:30, mes:6, tipo:'truco', emoji:'💡', titulo:'Truco del día', intro:'La IA puede planificarte un viaje completo. Por ejemplo, un fin de semana, unas vacaciones o una escapada. Cuéntanos a dónde quieres ir:', texto:'Eres un guía de viajes experto en España y destinos internacionales. Voy a hacer un viaje a [escribe el destino] durante [número de días] días con un presupuesto de [escribe el presupuesto]. Diseñame un itinerario día a día con lo mejor que ver, donde comer bien sin gastar demasiado y los consejos más útiles para aprovechar el viaje al máximo.', cta:'Planificar mi viaje', link:'https://chatgpt.com' },
 
   // ===== JULIO 2026 =====
   { dia:1, mes:7, tipo:'herramienta', emoji:'🎵', titulo:'Herramienta del día: Udio', texto:'Crea música original con IA en segundos. Solo describes el estilo y el tema — Udio genera la canción completa con letra y música. Gratis.', cta:'Crear música', link:'https://udio.com' },
-  { dia:2, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un experto en reclamaciones de consumidores en España. Voy a contarte una situación en la que me han tratado mal o no me han dado lo que corresponde: [describe la situación]. Redáctame una carta de reclamación formal, contundente y educada que pueda enviar a la empresa o al organismo correspondiente.', cta:'Redactar mi reclamación', link:'https://chatgpt.com' },
-  { dia:3, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un experto en ahorro y compras inteligentes. Necesito comprar [describe lo que necesitas comprar] con un presupuesto máximo de [escribe el presupuesto]. Dame los mejores consejos para conseguir la mejor relación calidad-precio, qué marcas o modelos buscar y qué errores comunes evitar al comprarlo.', cta:'Comprar con cabeza', link:'https://chatgpt.com' },
+  { dia:2, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', intro:'La IA puede escribirte una reclamación formal. Por ejemplo, por un producto defectuoso, un servicio que no funcionó o un cobro indebido. Cuéntanos qué te ha pasado:', texto:'Eres un experto en reclamaciones de consumidores en España. Voy a contarte una situación en la que me han tratado mal o no me han dado lo que corresponde: [describe la situación]. Redáctame una carta de reclamación formal, contundente y educada que pueda enviar a la empresa o al organismo correspondiente.', cta:'Redactar mi reclamación', link:'https://chatgpt.com' },
+  { dia:3, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', intro:'La IA puede ayudarte a comprar con cabeza. Por ejemplo, elegir un electrodoméstico, un móvil o cualquier cosa sin que te engañen. Cuéntanos qué quieres comprar:', texto:'Eres un experto en ahorro y compras inteligentes. Necesito comprar [describe lo que necesitas comprar] con un presupuesto máximo de [escribe el presupuesto]. Dame los mejores consejos para conseguir la mejor relación calidad-precio, qué marcas o modelos buscar y qué errores comunes evitar al comprarlo.', cta:'Comprar con cabeza', link:'https://chatgpt.com' },
   { dia:4, mes:7, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'La IA puede leer y analizar una foto de tu nevera y decirte qué recetas puedes hacer con lo que tienes dentro. Sin escribir nada — solo la foto.', cta:'Probarlo', link:'https://chatgpt.com' },
   { dia:5, mes:7, tipo:'herramienta', emoji:'🎬', titulo:'Herramienta del día: Runway', texto:'Crea vídeos con IA a partir de texto o imágenes. Animaciones, efectos cinematográficos y transiciones imposibles. El futuro del vídeo ya está aquí.', cta:'Ver Runway', link:'https://runwayml.com' },
-  { dia:6, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un experto en presentaciones y comunicación oral. Tengo que hacer una presentación sobre [describe el tema] para [describe la audiencia]. Dame un esquema claro con los puntos clave, cómo empezar para captar la atención y cómo terminar para que se recuerde. Que dure aproximadamente [número de minutos] minutos.', cta:'Preparar mi presentación', link:'https://chatgpt.com' },
-  { dia:7, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un experto en búsqueda de empleo y currículos en España. Mi profesión es [escribe tu profesión] y llevo [tiempo buscando empleo] buscando trabajo. Revisa mi situación y dame 5 consejos concretos para mejorar mi búsqueda, qué plataformas usar y cómo destacar frente a otros candidatos.', cta:'Mejorar mi búsqueda', link:'https://chatgpt.com' },
+  { dia:6, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', intro:'La IA puede prepararte una presentación. Por ejemplo, para el trabajo, una reunión o una charla. Cuéntanos sobre qué tienes que hablar:', texto:'Eres un experto en presentaciones y comunicación oral. Tengo que hacer una presentación sobre [describe el tema] para [describe la audiencia]. Dame un esquema claro con los puntos clave, cómo empezar para captar la atención y cómo terminar para que se recuerde. Que dure aproximadamente [número de minutos] minutos.', cta:'Preparar mi presentación', link:'https://chatgpt.com' },
+  { dia:7, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', intro:'La IA puede ayudarte a encontrar trabajo. Por ejemplo, mejorar tu currículo, preparar una entrevista o saber dónde buscar. Cuéntanos tu situación:', texto:'Eres un experto en búsqueda de empleo y currículos en España. Mi profesión es [escribe tu profesión] y llevo [tiempo buscando empleo] buscando trabajo. Revisa mi situación y dame 5 consejos concretos para mejorar mi búsqueda, qué plataformas usar y cómo destacar frente a otros candidatos.', cta:'Mejorar mi búsqueda', link:'https://chatgpt.com' },
   { dia:8, mes:7, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'La IA puede ayudarte a aprender a tocar un instrumento desde cero. Te explica los acordes básicos, te da ejercicios progresivos y responde todas tus dudas con paciencia infinita.', cta:'Probarlo', link:'https://chatgpt.com' },
   { dia:9, mes:7, tipo:'herramienta', emoji:'🖼️', titulo:'Herramienta del día: Adobe Firefly', texto:'El generador de imágenes con IA de Adobe. Integrado en Photoshop y con resultados profesionales. Ideal para diseño, publicidad y redes sociales. Gratis para empezar.', cta:'Ver Adobe Firefly', link:'https://firefly.adobe.com' },
-  { dia:10, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un coach de vida especializado en gestión del tiempo. Mi mayor problema con el tiempo es: [describe tu problema]. Diseñame una rutina diaria realista y práctica para ser más productivo, teniendo en cuenta que trabajo [número de horas] horas al día y que mi mayor distracción es [describe tu mayor distracción].', cta:'Organizar mi tiempo', link:'https://chatgpt.com' },
-  { dia:11, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un escritor creativo experto en historias personales. Quiero escribir una historia o anécdota sobre [describe el tema o experiencia]. Ayúdame a estructurarla de forma que enganche desde el primer momento, con un inicio impactante, un desarrollo interesante y un final memorable. El tono debe ser [elige: emotivo / divertido / reflexivo].', cta:'Escribir mi historia', link:'https://chatgpt.com' },
+  { dia:10, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', intro:'La IA puede ayudarte a organizar tu tiempo. Por ejemplo, ser más productivo, dejar de procrastinar o ordenar tu día a día. Cuéntanos tu mayor problema con el tiempo:', texto:'Eres un coach de vida especializado en gestión del tiempo. Mi mayor problema con el tiempo es: [describe tu problema]. Diseñame una rutina diaria realista y práctica para ser más productivo, teniendo en cuenta que trabajo [número de horas] horas al día y que mi mayor distracción es [describe tu mayor distracción].', cta:'Organizar mi tiempo', link:'https://chatgpt.com' },
+  { dia:11, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', intro:'La IA puede ayudarte a escribir una historia o anécdota. Por ejemplo, un recuerdo, una experiencia o algo que quieras contar bien. Cuéntanos de qué trata:', texto:'Eres un escritor creativo experto en historias personales. Quiero escribir una historia o anécdota sobre [describe el tema o experiencia]. Ayúdame a estructurarla de forma que enganche desde el primer momento, con un inicio impactante, un desarrollo interesante y un final memorable. El tono debe ser [elige: emotivo / divertido / reflexivo].', cta:'Escribir mi historia', link:'https://chatgpt.com' },
   { dia:12, mes:7, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'Puedes pedirle a la IA que simule una entrevista de trabajo contigo. Te hace las preguntas más comunes, evalúa tus respuestas y te dice cómo mejorarlas. Como un entrenador personal para entrevistas.', cta:'Probarlo', link:'https://chatgpt.com' },
   { dia:13, mes:7, tipo:'herramienta', emoji:'🔊', titulo:'Herramienta del día: Whisper (OpenAI)', texto:'Transcribe cualquier audio o vídeo a texto en segundos. Reuniones, entrevistas, clases... todo convertido en texto editable. Gratis y en español.', cta:'Ver Whisper', link:'https://openai.com/research/whisper' },
-  { dia:14, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un experto en contratos y documentos legales en España. Voy a mostrarte un contrato o documento que necesito entender: [pega aquí el texto o describe de qué trata]. Explícame en palabras simples qué dice exactamente, qué cláusulas son importantes, si hay algo que deba preocuparme y qué preguntas debería hacer antes de firmarlo.', cta:'Entender mi contrato', link:'https://chatgpt.com' },
-  { dia:15, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un nutricionista experto en alimentación saludable y práctica. Tengo [escribe tu edad] años y quiero mejorar mi alimentación. Mi mayor problema con la comida es [describe tu problema]. Dame un plan de alimentación sencillo para una semana, con recetas fáciles y rápidas, sin necesidad de contar calorías ni complicarme la vida.', cta:'Mejorar mi alimentación', link:'https://chatgpt.com' },
+  { dia:14, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', intro:'La IA puede explicarte un contrato o documento difícil. Por ejemplo, un alquiler, un seguro o cualquier papel lleno de letra pequeña. Cuéntanos qué necesitas entender:', texto:'Eres un experto en contratos y documentos legales en España. Voy a mostrarte un contrato o documento que necesito entender: [pega aquí el texto o describe de qué trata]. Explícame en palabras simples qué dice exactamente, qué cláusulas son importantes, si hay algo que deba preocuparme y qué preguntas debería hacer antes de firmarlo.', cta:'Entender mi contrato', link:'https://chatgpt.com' },
+  { dia:15, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', intro:'La IA puede crearte un plan de alimentación. Por ejemplo, comer más sano, organizar el menú semanal o mejorar tus hábitos. Cuéntanos tu objetivo:', texto:'Eres un nutricionista experto en alimentación saludable y práctica. Tengo [escribe tu edad] años y quiero mejorar mi alimentación. Mi mayor problema con la comida es [describe tu problema]. Dame un plan de alimentación sencillo para una semana, con recetas fáciles y rápidas, sin necesidad de contar calorías ni complicarme la vida.', cta:'Mejorar mi alimentación', link:'https://chatgpt.com' },
   { dia:16, mes:7, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'La IA puede ayudarte a entender cualquier factura, extracto bancario o documento oficial. Solo le preguntas "¿qué significa esto?" y te lo explica en palabras de toda la vida.', cta:'Probarlo', link:'https://chatgpt.com' },
   { dia:17, mes:7, tipo:'herramienta', emoji:'🤖', titulo:'Herramienta del día: Gemini', texto:'La IA de Google con acceso a información actualizada en tiempo real. Ideal para buscar noticias recientes, comparar productos y preguntas que requieran datos actuales.', cta:'Hablar con Gemini', link:'https://gemini.google.com' },
-  { dia:18, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un experto en redes sociales y contenido viral. Quiero publicar en [elige: Instagram / Facebook / TikTok / LinkedIn] sobre [describe el tema o tu negocio]. Escríbeme 5 ideas de publicaciones que puedan funcionar bien, con el texto listo para copiar y pegar, incluyendo emojis y hashtags adecuados.', cta:'Crear mis publicaciones', link:'https://chatgpt.com' },
-  { dia:19, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un experto en decoración de interiores. Tengo una habitación de [describe el espacio: salón, dormitorio, cocina...] de aproximadamente [metros cuadrados] metros cuadrados. El estilo que me gusta es [describe el estilo] y mi presupuesto para decorarla es [escribe el presupuesto]. Dame ideas concretas, qué muebles o elementos comprar y cómo organizarlo todo.', cta:'Decorar mi espacio', link:'https://chatgpt.com' },
+  { dia:18, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', intro:'La IA puede crearte publicaciones para redes sociales. Por ejemplo, para tu negocio, tu perfil o promocionar algo. Cuéntanos sobre qué quieres publicar:', texto:'Eres un experto en redes sociales y contenido viral. Quiero publicar en [elige: Instagram / Facebook / TikTok / LinkedIn] sobre [describe el tema o tu negocio]. Escríbeme 5 ideas de publicaciones que puedan funcionar bien, con el texto listo para copiar y pegar, incluyendo emojis y hashtags adecuados.', cta:'Crear mis publicaciones', link:'https://chatgpt.com' },
+  { dia:19, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', intro:'La IA puede ayudarte a decorar tu casa. Por ejemplo, un salón, un dormitorio o darle vida a un rincón. Cuéntanos qué espacio quieres mejorar:', texto:'Eres un experto en decoración de interiores. Tengo una habitación de [describe el espacio: salón, dormitorio, cocina...] de aproximadamente [metros cuadrados] metros cuadrados. El estilo que me gusta es [describe el estilo] y mi presupuesto para decorarla es [escribe el presupuesto]. Dame ideas concretas, qué muebles o elementos comprar y cómo organizarlo todo.', cta:'Decorar mi espacio', link:'https://chatgpt.com' },
   { dia:20, mes:7, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'La IA puede ayudarte a preparar un discurso de boda, una despedida de soltera o un homenaje de jubilación en minutos. Le cuentas quién es la persona y ella escribe algo emotivo y personalizado.', cta:'Probarlo', link:'https://chatgpt.com' },
   { dia:21, mes:7, tipo:'herramienta', emoji:'📝', titulo:'Herramienta del día: Notion AI', texto:'El bloc de notas inteligente que resume, organiza y mejora tus textos automáticamente. Ideal para tomar apuntes, gestionar proyectos y no perder ninguna idea.', cta:'Ver Notion AI', link:'https://notion.so' },
-  { dia:22, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un experto en educación y técnicas de estudio. Tengo que aprender o memorizar [describe el tema o materia] en [número de días] días. Diseñame un plan de estudio realista y eficaz, con las mejores técnicas para memorizar, cuánto tiempo dedicar cada día y cómo repasar antes del examen o la fecha importante.', cta:'Crear mi plan de estudio', link:'https://chatgpt.com' },
-  { dia:23, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un experto en mascotas y veterinaria. Tengo un [escribe el animal: perro, gato, pájaro...] de [edad] años que se llama [nombre de la mascota] y últimamente noto que [describe el comportamiento o síntoma que te preocupa]. Dime qué puede estar pasando, si debo ir al veterinario urgentemente y qué puedo hacer mientras tanto.', cta:'Consultar sobre mi mascota', link:'https://chatgpt.com' },
+  { dia:22, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', intro:'La IA puede crearte un plan de estudio. Por ejemplo, preparar un examen, una oposición o aprender algo nuevo. Cuéntanos qué tienes que estudiar:', texto:'Eres un experto en educación y técnicas de estudio. Tengo que aprender o memorizar [describe el tema o materia] en [número de días] días. Diseñame un plan de estudio realista y eficaz, con las mejores técnicas para memorizar, cuánto tiempo dedicar cada día y cómo repasar antes del examen o la fecha importante.', cta:'Crear mi plan de estudio', link:'https://chatgpt.com' },
+  { dia:23, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', intro:'La IA puede orientarte sobre tu mascota. Por ejemplo, un comportamiento raro, su alimentación o un síntoma que te preocupa. Cuéntanos qué le pasa:', texto:'Eres un experto en mascotas y veterinaria. Tengo un [escribe el animal: perro, gato, pájaro...] de [edad] años que se llama [nombre de la mascota] y últimamente noto que [describe el comportamiento o síntoma que te preocupa]. Dime qué puede estar pasando, si debo ir al veterinario urgentemente y qué puedo hacer mientras tanto.', cta:'Consultar sobre mi mascota', link:'https://chatgpt.com' },
   { dia:24, mes:7, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'La IA puede ayudarte a aprender cualquier idioma de forma personalizada. Le dices tu nivel, cuánto tiempo tienes y qué aspectos quieres mejorar, y te crea un plan de aprendizaje a medida.', cta:'Probarlo', link:'https://chatgpt.com' },
   { dia:25, mes:7, tipo:'herramienta', emoji:'🔎', titulo:'Herramienta del día: Consensus', texto:'El buscador de IA que consulta estudios científicos reales para responder tus preguntas de salud, nutrición y bienestar. Sin opiniones — solo ciencia verificada.', cta:'Ver Consensus', link:'https://consensus.app' },
-  { dia:26, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un experto en finanzas personales y presupuestos familiares. Mis ingresos mensuales son aproximadamente [escribe los ingresos] euros y mis gastos principales son [describe tus gastos principales]. Ayúdame a crear un presupuesto mensual realista, dime dónde puedo ahorrar y cómo organizar mejor mi dinero.', cta:'Organizar mis finanzas', link:'https://chatgpt.com' },
-  { dia:27, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un experto en jardinería y plantas de interior. Tengo [describe tus plantas o el espacio donde quieres plantas] y no tengo mucha experiencia cuidándolas. Dame consejos prácticos sobre qué plantas son ideales para [describe la luz y el espacio disponible], cómo regarlas correctamente y qué errores comunes debo evitar para que no se mueran.', cta:'Cuidar mis plantas', link:'https://chatgpt.com' },
+  { dia:26, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', intro:'La IA puede ayudarte a organizar tus finanzas. Por ejemplo, hacer un presupuesto, ahorrar o controlar tus gastos. Cuéntanos tu situación:', texto:'Eres un experto en finanzas personales y presupuestos familiares. Mis ingresos mensuales son aproximadamente [escribe los ingresos] euros y mis gastos principales son [describe tus gastos principales]. Ayúdame a crear un presupuesto mensual realista, dime dónde puedo ahorrar y cómo organizar mejor mi dinero.', cta:'Organizar mis finanzas', link:'https://chatgpt.com' },
+  { dia:27, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', intro:'La IA puede ayudarte con tus plantas. Por ejemplo, cuáles elegir, cómo regarlas o por qué se te mueren. Cuéntanos qué necesitas:', texto:'Eres un experto en jardinería y plantas de interior. Tengo [describe tus plantas o el espacio donde quieres plantas] y no tengo mucha experiencia cuidándolas. Dame consejos prácticos sobre qué plantas son ideales para [describe la luz y el espacio disponible], cómo regarlas correctamente y qué errores comunes debo evitar para que no se mueran.', cta:'Cuidar mis plantas', link:'https://chatgpt.com' },
   { dia:28, mes:7, tipo:'curiosidad', emoji:'🤔', titulo:'¿Lo sabías?', texto:'Puedes pedirle a la IA que sea tu abogado personal para una negociación. Le describes la situación, ella te da los argumentos más sólidos y hasta te ensaya la conversación para que vayas preparado.', cta:'Probarlo', link:'https://chatgpt.com' },
   { dia:29, mes:7, tipo:'herramienta', emoji:'🌐', titulo:'Herramienta del día: DeepL', texto:'El mejor traductor con IA del mundo. Más preciso que Google Translate, con matices naturales y opción de ajustar el tono. Traduce documentos enteros de golpe. Gratis.', cta:'Ver DeepL', link:'https://deepl.com' },
-  { dia:30, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', texto:'Eres un experto en seguridad digital y privacidad online. Quiero saber si estoy protegido en internet. Mis principales dudas son: [describe tus dudas o situaciones: contraseñas, estafas, privacidad en redes...]. Dame consejos prácticos y sencillos para estar más seguro online, explicados para alguien que no es experto en tecnología.', cta:'Protegerme online', link:'https://chatgpt.com' },
-  { dia:31, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', texto:'Eres un coach personal especializado en metas y objetivos. Estamos a finales de julio y quiero hacer balance del mes. Mis objetivos para este mes eran [describe tus objetivos] y lo que he conseguido es [describe lo que has logrado]. Ayúdame a analizar qué ha funcionado, qué no y cómo replantear los objetivos para agosto de forma más realista y motivadora.', cta:'Hacer mi balance', link:'https://chatgpt.com' },
+  { dia:30, mes:7, tipo:'truco', emoji:'💡', titulo:'Truco del día', intro:'La IA puede ayudarte a estar más seguro en internet. Por ejemplo, protegerte de estafas, crear contraseñas seguras o cuidar tu privacidad. Cuéntanos tus dudas:', texto:'Eres un experto en seguridad digital y privacidad online. Quiero saber si estoy protegido en internet. Mis principales dudas son: [describe tus dudas o situaciones: contraseñas, estafas, privacidad en redes...]. Dame consejos prácticos y sencillos para estar más seguro online, explicados para alguien que no es experto en tecnología.', cta:'Protegerme online', link:'https://chatgpt.com' },
+  { dia:31, mes:7, tipo:'prompt', emoji:'🎯', titulo:'Prueba esto hoy', intro:'La IA puede ayudarte a hacer balance y plantear objetivos. Por ejemplo, repasar el mes, fijar metas o motivarte. Cuéntanos qué quieres conseguir:', texto:'Eres un coach personal especializado en metas y objetivos. Estamos a finales de julio y quiero hacer balance del mes. Mis objetivos para este mes eran [describe tus objetivos] y lo que he conseguido es [describe lo que has logrado]. Ayúdame a analizar qué ha funcionado, qué no y cómo replantear los objetivos para agosto de forma más realista y motivadora.', cta:'Hacer mi balance', link:'https://chatgpt.com' },
 ];
 
 const TIPO_COLORES = {
@@ -5415,8 +5510,7 @@ function renderIaDelDia() {
       </div>
       <div style="font-size:1.5rem;margin-bottom:6px">${contenido.emoji}</div>
       <div style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;margin-bottom:8px">${contenido.titulo}</div>
-      <div style="font-size:0.88rem;color:rgba(255,255,255,0.92);line-height:1.5;margin-bottom:14px">${contenido.texto.replace(/\[([^\]]+)\]/g, '<strong style="background:rgba(255,255,255,0.25);padding:1px 6px;border-radius:6px">[$1]</strong>')}</div>
-      <div style="font-size:0.8rem;color:rgba(255,255,255,0.75);margin-bottom:12px">👇 Rellena los campos para personalizar el prompt:</div>
+      <div style="font-size:0.88rem;color:rgba(255,255,255,0.92);line-height:1.5;margin-bottom:14px">${contenido.intro || 'Rellena los campos y te preparamos el mensaje:'}</div>
       ${camposHTML}
       <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
         <button onclick="enviarPromptDia('${textoEncoded}','${camposJSON}','chatgpt')"

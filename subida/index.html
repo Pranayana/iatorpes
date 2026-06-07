@@ -4419,6 +4419,7 @@ CARDS.forEach(c => {
 let navStack = [];
 
 function openCard(id) {
+  const yaEnInner = document.getElementById('inner').classList.contains('visible');
   document.getElementById('home').classList.add('hidden');
   document.getElementById('inner').classList.add('visible');
   document.querySelectorAll('.vista').forEach(v => v.classList.remove('active'));
@@ -4433,7 +4434,13 @@ function openCard(id) {
     mainVista.classList.add('active');
     vistaId = 'v-' + id;
   }
-  navStack = vistaId ? [vistaId] : [];
+  if (yaEnInner && navStack.length > 0) {
+    // Venimos de otra vista (ej: ¿Por dónde empiezo?) — apilar encima
+    if (vistaId) navStack.push(vistaId);
+  } else {
+    // Entrada directa desde el inicio
+    navStack = vistaId ? [vistaId] : [];
+  }
   document.getElementById('inner').scrollTop = 0;
   addToHistory(id);
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v70 · Fix Gemini en generador de imágenes · 8 junio 2026 -->
+<!-- IAtorpes.com · v88 · Sora eliminado (servicio cerrado), Grok primera opción, fixes auditoría · 11 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -2033,8 +2033,7 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
       <div class="hero"><div class="hero-icon">⚡</div><div class="hero-title">Vídeo</div><div class="hero-subtitle">Crea tu primer vídeo con IA ahora mismo</div></div>
       <div class="content">
         <div class="ia-buttons">
-          <button class="ia-btn featured" onclick="window.open('https://sora2.com/es','_blank')"><span style="font-size:1.6rem">✨</span><div><span class="ia-label">Sora 2 · OpenAI</span><span class="featured-badge">⭐ Empieza aquí</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
-          <button class="ia-btn" onclick="window.open('https://grok.com','_blank')"><span style="font-size:1.6rem">⚡</span><div><span class="ia-label">Grok Imagine · xAI</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
+          <button class="ia-btn featured" onclick="window.open('https://grok.com','_blank')"><span style="font-size:1.6rem">⚡</span><div><span class="ia-label">Grok Imagine · xAI</span><span class="featured-badge">⭐ Empieza aquí</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
           <button class="ia-btn" onclick="window.open('https://klingai.com','_blank')"><span style="font-size:1.6rem">🌟</span><div><span class="ia-label">Kling AI</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
           <button class="ia-btn" onclick="window.open('https://www.heygen.com','_blank')"><span style="font-size:1.6rem">🧑‍💼</span><div><span class="ia-label">HeyGen</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
           <button class="ia-btn" onclick="window.open('https://runwayml.com','_blank')"><span style="font-size:1.6rem">🎬</span><div><span class="ia-label">Runway</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
@@ -2099,9 +2098,9 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
             </div>
           </div>
           <div class="acc-item">
-            <div class="acc-header"><span class="acc-icon">✨</span><span class="acc-title">Sora 2 · OpenAI — De pago</span><span class="acc-arrow">▼</span></div>
-            <div class="acc-body">La mejor calidad del mercado. Física real, sonido sincronizado y movimientos precisos. Requiere ChatGPT Plus.
-              <br><br><button onclick="window.open('https://sora2.com/es','_blank')" style="background:#276749;color:white;border:none;padding:8px 18px;border-radius:100px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer">Abrir Sora →</button>
+            <div class="acc-header"><span class="acc-icon">⚡</span><span class="acc-title">Grok Imagine · xAI — Gratis limitado</span><span class="acc-arrow">▼</span></div>
+            <div class="acc-body">Genera vídeos cortos con sonido a partir de texto o imágenes. Rápido, creativo y muy fácil de usar.
+              <br><br><button onclick="window.open('https://grok.com','_blank')" style="background:#276749;color:white;border:none;padding:8px 18px;border-radius:100px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer">Abrir Grok →</button>
             </div>
           </div>
         </div>
@@ -5692,8 +5691,7 @@ function renderIaDelDia() {
       <input id="idd-campo-${i}" type="text" placeholder="Escribe aquí..."
         style="width:100%;box-sizing:border-box;padding:10px 12px;border-radius:12px;border:2px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.15);color:#fff;font-size:0.88rem;font-family:'Sora',sans-serif;outline:none;backdrop-filter:blur(4px)"
         onfocus="this.style.borderColor='rgba(255,255,255,0.9)'"
-        onblur="this.style.borderColor='rgba(255,255,255,0.4)'"
-        placeholder="${c.label}">
+        onblur="this.style.borderColor='rgba(255,255,255,0.4)'">
     </div>`).join('');
 
   const textoEncoded = encodeURIComponent(contenido.texto);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v88 · Sora eliminado (servicio cerrado), Grok primera opción, fixes auditoría · 11 junio 2026 -->
+<!-- IAtorpes.com · v88 · Sora eliminado, Grok primera opción, botón WhatsApp compartir · 11 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -1742,6 +1742,18 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
             <div class="empieza-aqui-sub">Pulsa aquí y te guiamos nosotros</div>
           </div>
           <span class="empieza-aqui-arrow">→</span>
+        </button>
+      </div>
+
+      <!-- BOTÓN WHATSAPP COMPARTIR -->
+      <div style="padding:0 16px 12px">
+        <button onclick="compartirWhatsApp()" style="width:100%;display:flex;align-items:center;gap:12px;background:linear-gradient(145deg,#25D366,#128C7E);border:none;border-radius:16px;padding:14px 18px;cursor:pointer;box-shadow:0 4px 16px rgba(37,211,102,0.3)">
+          <span style="font-size:1.5rem">💬</span>
+          <div style="text-align:left;flex:1">
+            <div style="color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.9rem">¿Te ha sido útil? Mándaselo a alguien</div>
+            <div style="color:rgba(255,255,255,0.85);font-size:0.78rem">Comparte IAtorpes por WhatsApp — es gratis</div>
+          </div>
+          <span style="color:#fff;font-size:1.1rem">→</span>
         </button>
       </div>
       <div class="history-section" id="history-section" style="display:none">
@@ -4626,6 +4638,11 @@ function openChatGPT(text) {
 
 
 // ── COMPARTIR ──
+function compartirWhatsApp() {
+  const mensaje = '¡Mira esta web para usar la inteligencia artificial de forma fácil y gratis! 🤖 iatorpes.com — La IA para gente normal, en español y sin complicaciones 😊';
+  window.open('https://wa.me/?text=' + encodeURIComponent(mensaje), '_blank');
+}
+
 function shareApp() {
   const url = 'https://iatorpes.com';
   const text = '¡Descubre IAtorpes! La IA explicada fácil y gratis para todos.';

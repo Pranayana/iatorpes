@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v90 · Banner instalación PWA móvil · 11 junio 2026 -->
+<!-- IAtorpes.com · v91 · Botón WhatsApp inicio más pequeño · 11 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -1759,13 +1759,12 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
 
       <!-- BOTÓN WHATSAPP COMPARTIR -->
       <div style="padding:0 16px 12px">
-        <button onclick="compartirWhatsApp()" style="width:100%;display:flex;align-items:center;gap:12px;background:linear-gradient(145deg,#25D366,#128C7E);border:none;border-radius:16px;padding:14px 18px;cursor:pointer;box-shadow:0 4px 16px rgba(37,211,102,0.3)">
-          <span style="font-size:1.5rem">💬</span>
+        <button onclick="compartirWhatsApp()" style="width:100%;display:flex;align-items:center;gap:10px;background:linear-gradient(145deg,#25D366,#128C7E);border:none;border-radius:14px;padding:10px 14px;cursor:pointer;box-shadow:0 3px 12px rgba(37,211,102,0.25)">
+          <span style="font-size:1.2rem">💬</span>
           <div style="text-align:left;flex:1">
-            <div style="color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.9rem">¿Te ha sido útil? Mándaselo a alguien</div>
-            <div style="color:rgba(255,255,255,0.85);font-size:0.78rem">Comparte IAtorpes por WhatsApp — es gratis</div>
+            <div style="color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.82rem">💬 Compartir</div>
           </div>
-          <span style="color:#fff;font-size:1.1rem">→</span>
+          <span style="color:#fff;font-size:1rem">→</span>
         </button>
       </div>
       <div class="history-section" id="history-section" style="display:none">
@@ -5846,7 +5845,7 @@ function yaInstalada() {
 function mostrarBannerPWA() {
   if (!esMobil()) return;
   if (yaInstalada()) return;
-  if (localStorage.getItem(PWA_KEY)) return;
+  if (yaVistoDemasiado()) return;
 
   const banner = document.getElementById('pwa-banner');
   if (!banner) return;
@@ -5871,7 +5870,7 @@ function instalarPWA() {
   deferredPrompt.userChoice.then(result => {
     if (result.outcome === 'accepted') {
       cerrarBannerPWA();
-      localStorage.setItem(PWA_KEY, '1');
+      localStorage.setItem(PWA_KEY, 'done');
     }
     deferredPrompt = null;
   });
@@ -5880,7 +5879,16 @@ function instalarPWA() {
 function cerrarBannerPWA() {
   const banner = document.getElementById('pwa-banner');
   if (banner) banner.classList.remove('visible');
-  localStorage.setItem(PWA_KEY, '1');
+  const veces = parseInt(localStorage.getItem(PWA_KEY) || '0') + 1;
+  if (veces >= 2) {
+    localStorage.setItem(PWA_KEY, 'done');
+  } else {
+    localStorage.setItem(PWA_KEY, String(veces));
+  }
+}
+
+function yaVistoDemasiado() {
+  return localStorage.getItem(PWA_KEY) === 'done';
 }
 
 // Capturar el evento de Chrome Android

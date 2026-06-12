@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v89 · Compartir WhatsApp (duplicados corregidos) · 11 junio 2026 -->
+<!-- IAtorpes.com · v90 · Banner instalación PWA móvil · 11 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -1662,6 +1662,18 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
   ]
 }
 </script>
+<style>
+/* ===== BANNER PWA INSTALACIÓN =====*/
+#pwa-banner{display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#1a1a2e,#16213e);border-top:2px solid rgba(41,182,232,0.4);padding:14px 16px;box-shadow:0 -8px 30px rgba(0,0,0,0.3)}
+#pwa-banner.visible{display:flex;align-items:center;gap:12px}
+.pwa-icon{font-size:2rem;flex-shrink:0}
+.pwa-text{flex:1}
+.pwa-title{color:#fff;font-family:"Sora",sans-serif;font-weight:700;font-size:0.88rem;margin-bottom:2px}
+.pwa-sub{color:rgba(255,255,255,0.65);font-size:0.75rem}
+.pwa-btns{display:flex;flex-direction:column;gap:6px;flex-shrink:0}
+.pwa-btn-install{background:linear-gradient(135deg,#29B6E8,#4ECDC4);color:#fff;border:none;border-radius:100px;padding:8px 14px;font-family:"Sora",sans-serif;font-weight:700;font-size:0.78rem;cursor:pointer;white-space:nowrap}
+.pwa-btn-close{background:none;border:none;color:rgba(255,255,255,0.4);font-size:0.75rem;cursor:pointer;text-align:center;font-family:"Sora",sans-serif}
+</style>
 </head>
 <body>
 
@@ -5800,6 +5812,90 @@ renderIaDelDia();
 </div>
 
 
+<!-- BANNER PWA INSTALACIÓN -->
+<div id="pwa-banner">
+  <div class="pwa-icon">📲</div>
+  <div class="pwa-text">
+    <div class="pwa-title">¡Añade IAtorpes a tu móvil!</div>
+    <div class="pwa-sub" id="pwa-sub-text">Úsala como una app — gratis y sin tiendas</div>
   </div>
+  <div class="pwa-btns">
+    <button class="pwa-btn-install" id="pwa-btn-install" onclick="instalarPWA()">📲 Instalar</button>
+    <button class="pwa-btn-close" onclick="cerrarBannerPWA()">Ahora no</button>
+  </div>
+</div>
+
+<script>
+// ===== BANNER PWA INSTALACIÓN =====
+let deferredPrompt = null;
+const PWA_KEY = 'iatorpes_pwa_dismissed';
+
+function esMobil() {
+  return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+function esIOS() {
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+function yaInstalada() {
+  return window.matchMedia('(display-mode: standalone)').matches
+    || window.navigator.standalone === true;
+}
+
+function mostrarBannerPWA() {
+  if (!esMobil()) return;
+  if (yaInstalada()) return;
+  if (localStorage.getItem(PWA_KEY)) return;
+
+  const banner = document.getElementById('pwa-banner');
+  if (!banner) return;
+
+  if (esIOS()) {
+    // Safari iOS: no tiene beforeinstallprompt, mostramos instrucciones
+    document.getElementById('pwa-sub-text').textContent = 'Pulsa Compartir → "Añadir a pantalla de inicio"';
+    document.getElementById('pwa-btn-install').textContent = '📖 Ver cómo';
+    document.getElementById('pwa-btn-install').onclick = function() {
+      alert('Para instalar IAtorpes en tu iPhone:\n\n1. Pulsa el botón de Compartir (□↑) en Safari\n2. Desplázate y toca "Añadir a pantalla de inicio"\n3. Pulsa "Añadir"\n\n¡Listo! IAtorpes quedará como una app en tu móvil.');
+    };
+    setTimeout(() => banner.classList.add('visible'), 3000);
+  } else if (deferredPrompt) {
+    // Chrome Android: tenemos el prompt listo
+    setTimeout(() => banner.classList.add('visible'), 3000);
+  }
+}
+
+function instalarPWA() {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(result => {
+    if (result.outcome === 'accepted') {
+      cerrarBannerPWA();
+      localStorage.setItem(PWA_KEY, '1');
+    }
+    deferredPrompt = null;
+  });
+}
+
+function cerrarBannerPWA() {
+  const banner = document.getElementById('pwa-banner');
+  if (banner) banner.classList.remove('visible');
+  localStorage.setItem(PWA_KEY, '1');
+}
+
+// Capturar el evento de Chrome Android
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  mostrarBannerPWA();
+});
+
+// Lanzar verificación al cargar
+window.addEventListener('load', () => {
+  if (esIOS()) mostrarBannerPWA();
+});
+</script>
+
+</div>
 </body>
 </html>

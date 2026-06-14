@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v96 · Jerarquía de encabezados SEO (un h1 único + h2 de sección) · 13 junio 2026 -->
+<!-- IAtorpes.com · v98 · Botón ATRÁS del teléfono vuelve a la vista anterior (no sale de la web) · 14 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -183,6 +183,20 @@ html, body { height: 100%; font-family: 'Inter', sans-serif; background: var(--b
 .card::before { content:''; position:absolute; inset:0; background:linear-gradient(160deg,rgba(255,255,255,0.42) 0%,transparent 55%); border-radius:inherit; pointer-events:none; }
 .card:hover { transform: translateY(-4px) scale(1.025); box-shadow: var(--csh); }
 .card:active { transform: scale(0.97); }
+
+/* ── Efecto onda (ripple) al pulsar ── */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.55);
+  transform: scale(0);
+  animation: rippleAnim 0.6s ease-out;
+  pointer-events: none;
+  z-index: 5;
+}
+@keyframes rippleAnim {
+  to { transform: scale(2.6); opacity: 0; }
+}
 .card-icon { font-size: clamp(2.8rem,4vw,4.5rem); filter: drop-shadow(0 3px 8px rgba(0,0,0,0.14)); flex-shrink: 0; line-height: 1; }
 .card-label { font-family: 'Sora', sans-serif; font-size: clamp(1.15rem,1.6vw,1.5rem); font-weight: 700; color: #272727; text-align: center; line-height: 1.3; text-shadow: 0 1px 2px rgba(255,255,255,0.55); white-space: pre-line; }
 
@@ -4663,7 +4677,21 @@ CARDS.forEach(c => {
     el.className = 'card';
     el.innerHTML = `<div class="card-icon">${c.emoji}</div><div class="card-label">${c.label}</div>`;
   }
-  el.onclick = () => openCard(c.id);
+  el.onclick = (e) => {
+    // Onda (ripple) en el punto del toque
+    const rect = el.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = ((e.clientX || rect.left + rect.width/2) - rect.left - size/2) + 'px';
+    ripple.style.top = ((e.clientY || rect.top + rect.height/2) - rect.top - size/2) + 'px';
+    el.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+    // Vibración táctil (si el móvil lo soporta)
+    if (navigator.vibrate) navigator.vibrate(15);
+    openCard(c.id);
+  };
   grid.appendChild(el);
 });
 
@@ -4724,6 +4752,33 @@ function goHome() {
   document.querySelectorAll('.vista').forEach(v => v.classList.remove('active'));
   navStack = [];
 }
+
+/* ── Integración con el botón ATRÁS del teléfono ── */
+// Cada vez que se entra en una vista, registramos un paso en el historial.
+// Al pulsar atrás en el teléfono, se dispara popstate y hacemos "Volver".
+const _openCardOrig = openCard;
+openCard = function(id) {
+  _openCardOrig(id);
+  history.pushState({ iatorpes: true }, '');
+};
+const _showVistaOrig = showVista;
+showVista = function(id) {
+  _showVistaOrig(id);
+  history.pushState({ iatorpes: true }, '');
+};
+
+window.addEventListener('popstate', function() {
+  const dentro = document.getElementById('inner').classList.contains('visible');
+  if (dentro) {
+    // Estamos en un submenú: en vez de salir, retrocedemos una vista
+    volverAtras();
+    // Si todavía quedan vistas abiertas, reponemos un estado
+    // para seguir capturando el botón atrás en el siguiente toque
+    if (document.getElementById('inner').classList.contains('visible')) {
+      history.pushState({ iatorpes: true }, '');
+    }
+  }
+});
 
 function switchTab(btn, panelId) {
   const vista = btn.closest('.vista');

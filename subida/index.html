@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v98 · Botón ATRÁS del teléfono vuelve a la vista anterior (no sale de la web) · 14 junio 2026 -->
+<!-- IAtorpes.com · v99 · Botón ATRÁS del teléfono sincronizado con navStack (corrige cierre de app al retroceder en subvistas) · 14 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -4754,8 +4754,11 @@ function goHome() {
 }
 
 /* ── Integración con el botón ATRÁS del teléfono ── */
-// Cada vez que se entra en una vista, registramos un paso en el historial.
-// Al pulsar atrás en el teléfono, se dispara popstate y hacemos "Volver".
+// Mantenemos el historial del navegador sincronizado con navStack:
+// un estado de historial por cada vista abierta. Al pulsar atrás en el
+// teléfono se dispara popstate y replicamos el "Volver".
+let _navProg = false; // evita bucles cuando nosotros mismos llamamos a history.back()
+
 const _openCardOrig = openCard;
 openCard = function(id) {
   _openCardOrig(id);
@@ -4767,17 +4770,30 @@ showVista = function(id) {
   history.pushState({ iatorpes: true }, '');
 };
 
+// Cuando el usuario pulsa el botón "Volver" de pantalla, retrocedemos
+// también en el historial del navegador para mantener la cuenta cuadrada.
+const _volverAtrasOrig = volverAtras;
+volverAtras = function() {
+  _navProg = true;
+  history.back(); // esto dispara popstate, que hará el retroceso real
+};
+
+// "¿Por dónde empiezo?" también abre una vista: la enganchamos al historial
+if (typeof noSeQueHacer === 'function') {
+  const _noSeQueHacerOrig = noSeQueHacer;
+  noSeQueHacer = function() {
+    _noSeQueHacerOrig();
+    history.pushState({ iatorpes: true }, '');
+  };
+}
+
 window.addEventListener('popstate', function() {
   const dentro = document.getElementById('inner').classList.contains('visible');
   if (dentro) {
-    // Estamos en un submenú: en vez de salir, retrocedemos una vista
-    volverAtras();
-    // Si todavía quedan vistas abiertas, reponemos un estado
-    // para seguir capturando el botón atrás en el siguiente toque
-    if (document.getElementById('inner').classList.contains('visible')) {
-      history.pushState({ iatorpes: true }, '');
-    }
+    // Retrocede una vista (sin volver a tocar el historial)
+    _volverAtrasOrig();
   }
+  _navProg = false;
 });
 
 function switchTab(btn, panelId) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v99 · Botón ATRÁS del teléfono sincronizado con navStack (corrige cierre de app al retroceder en subvistas) · 14 junio 2026 -->
+<!-- IAtorpes.com · v100 · Botón Volver de pantalla oculto en Android (mantiene en iPhone) · 14 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -223,6 +223,7 @@ html, body { height: 100%; font-family: 'Inter', sans-serif; background: var(--b
 #inner.visible { display: flex; }
 .vista { display: none; flex-direction: column; min-height: 100%; padding-bottom: 80px; }
 .vista.active { display: flex; }
+body.es-android .back-btn { display: none !important; }
 .back-btn { 
   position: fixed;
   bottom: 24px;
@@ -1784,6 +1785,13 @@ body.dark .card:not(.card-wide) .card-label { color: #EAF4FA; }
 </style>
 </head>
 <body>
+<script>
+  // Oculta el botón "Volver" de pantalla en Android (tienen botón atrás físico).
+  // En iPhone/iPad se mantiene, porque no tienen botón atrás del sistema.
+  if (/android/i.test(navigator.userAgent)) {
+    document.body.classList.add('es-android');
+  }
+</script>
 
 <!-- WELCOME PAGE -->
 <div id="welcome">

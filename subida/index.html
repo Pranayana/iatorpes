@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v93 · Tarjetas azules + modo oscuro + noticias actualizadas (13 junio) · 13 junio 2026 -->
+<!-- IAtorpes.com · v94 · Tarjetas azules unificadas + modo oscuro + noticias actualizadas + prompts en azul · 13 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -208,11 +208,11 @@ html, body { height: 100%; font-family: 'Inter', sans-serif; background: var(--b
 .llm-desc { font-size: 1rem; color: var(--mid); line-height: 1.65; margin-bottom: 10px; }
 .llm-tags { display: flex; gap: 6px; flex-wrap: wrap; }
 .tag { background: rgba(255,255,255,0.6); color: #444; font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.8); }
-.prompt-card { background: linear-gradient(145deg,#EDEAE2,#DAD6CD); border: 1px solid rgba(255,255,255,0.68); border-radius: 14px; padding: 12px 14px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: var(--cs); display: flex; align-items: center; gap: 10px; position: relative; overflow: hidden; margin-bottom: 8px; }
+.prompt-card { background: linear-gradient(145deg,#2C8FBF,#1E73A6); border: 1px solid rgba(255,255,255,0.25); border-radius: 14px; padding: 12px 14px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: var(--cs); display: flex; align-items: center; gap: 10px; position: relative; overflow: hidden; margin-bottom: 8px; }
 .prompt-card::before { content:""; position:absolute; inset:0; background:linear-gradient(160deg,rgba(255,255,255,0.42) 0%,transparent 55%); border-radius:inherit; pointer-events:none; }
 .prompt-card:hover { transform: translateY(-2px); box-shadow: var(--csh); }
-.prompt-text { font-size: 0.86rem; color: var(--mid); line-height: 1.5; flex: 1; }
-.prompt-copy { flex-shrink: 0; background: var(--accent); color: white; font-size: 0.74rem; font-weight: 700; padding: 6px 12px; border-radius: 100px; white-space: nowrap; }
+.prompt-text { font-size: 0.86rem; color: #FFFFFF; line-height: 1.5; flex: 1; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+.prompt-copy { flex-shrink: 0; background: rgba(255,255,255,0.95); color: #1E73A6; font-size: 0.74rem; font-weight: 700; padding: 6px 12px; border-radius: 100px; white-space: nowrap; }
 .info-box { margin-top: 10px; padding: 12px; background: linear-gradient(145deg,#EDEAE2,#DAD6CD); border-radius: 14px; border: 1px solid rgba(255,255,255,0.68); box-shadow: var(--cs); font-size: 0.85rem; }
 
 /* ── MOBILE RESPONSIVE ── */
@@ -793,8 +793,8 @@ body.dark .llm-card { background: linear-gradient(145deg,#1e1e32,#16162a); borde
 body.dark .llm-name { color: #E0E0E0; }
 body.dark .llm-desc { color: #888; }
 body.dark .tag { background: rgba(255,255,255,0.08); color: #aaa; border-color: rgba(255,255,255,0.1); }
-body.dark .prompt-card { background: linear-gradient(145deg,#1e1e32,#16162a); border-color: rgba(255,255,255,0.1); }
-body.dark .prompt-text { color: #999; }
+body.dark .prompt-card { background: linear-gradient(145deg,#236F94,#185A7E); border-color: rgba(255,255,255,0.15); }
+body.dark .prompt-text { color: #EAF4FA; }
 body.dark .info-box { background: linear-gradient(145deg,#1e1e32,#16162a); border-color: rgba(255,255,255,0.1); }
 body.dark .acc-item { background: linear-gradient(145deg,#1e1e32,#16162a); border-color: rgba(255,255,255,0.1); }
 body.dark .acc-title { color: #E0E0E0; }
@@ -968,10 +968,10 @@ body.dark .search-bar::placeholder { color: #555; }
   width: 100%;
   max-width: 720px;
   margin: 40px auto 24px;
-  background: linear-gradient(145deg, #1a6fd4, #29B6E8);
+  background: linear-gradient(145deg, #2C8FBF, #1E73A6);
   border-radius: 22px;
   border: 1px solid rgba(255,255,255,0.2);
-  box-shadow: 0 8px 32px rgba(41,182,232,0.3);
+  box-shadow: 0 8px 32px rgba(30,115,166,0.3);
   padding: 20px 28px;
   position: relative;
   overflow: hidden;
@@ -1155,7 +1155,7 @@ body.dark .search-bar::placeholder { color: #555; }
 .result-btn.gemini { background: linear-gradient(135deg, #4285F4, #29B6E8); color: white; }
 .result-btn.chatgpt { background: linear-gradient(135deg, #10a37f, #059669); color: white; }
 
-body.dark .generator-section { background: linear-gradient(145deg, #1a5fa8, #1e90c8); }
+body.dark .generator-section { background: linear-gradient(145deg, #236F94, #185A7E); }
 body.dark .generator-input { background: #1a1a2e; border-color: rgba(255,255,255,0.1); color: #E0E0E0; }
 body.dark .generator-result { background: #1a1a2e; border-color: rgba(255,255,255,0.08); }
 body.dark .result-prompt { background: #0f0f1a; color: #E0E0E0; }

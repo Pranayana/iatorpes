@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v92 · Botón WhatsApp inicio más pequeño · 11 junio 2026 -->
+<!-- IAtorpes.com · v93 · Tarjetas azules + modo oscuro + noticias actualizadas (13 junio) · 13 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -145,11 +145,11 @@ html, body { height: 100%; font-family: 'Inter', sans-serif; background: var(--b
   z-index: 200;
   font-size: 0.95rem; 
   font-weight: 700; 
-  color: var(--text); 
+  color: #FFFFFF; 
   cursor: pointer; 
   padding: 12px 28px;
-  background: linear-gradient(145deg,#EDEAE2,#DAD6CD); 
-  border: 1px solid rgba(255,255,255,0.68); 
+  background: linear-gradient(145deg,#2C8FBF,#1E73A6); 
+  border: 1px solid rgba(255,255,255,0.3); 
   border-radius: 100px; 
   box-shadow: 0 4px 16px rgba(0,0,0,0.15); 
   transition: box-shadow 0.18s;
@@ -776,7 +776,7 @@ body.dark .footer-tagline { color: #555; }
 body.dark .footer-links a { color: #444; }
 body.dark #inner { background: #0f0f1a; }
 body.dark .vista { background: #0f0f1a; }
-body.dark .back-btn { background: linear-gradient(145deg,#1e1e32,#16162a); border-color: rgba(255,255,255,0.1); color: #aaa; }
+body.dark .back-btn { background: linear-gradient(145deg,#236F94,#185A7E); border-color: rgba(255,255,255,0.2); color: #EAF4FA; }
 body.dark .hero-title { color: #F0F0F0; }
 body.dark .hero-subtitle { color: #aaa; }
 body.dark .modo-btn { background: linear-gradient(145deg,#1e1e32,#16162a); border-color: rgba(255,255,255,0.1); color: #E0E0E0; }
@@ -1625,6 +1625,28 @@ body.dark .card.card-wide:hover { background: linear-gradient(145deg, #252540, #
 
 body.dark .card.card-wide.card-aprende .card-badge { background: rgba(16,185,129,0.2); color: #34D399; }
 body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e1e32, #16162a); }
+
+/* ── COLORES TARJETAS WIDE (degradado de azules) ── */
+.card.card-wide.w-noticias { background: linear-gradient(145deg,#1E5A8A,#164A73); border-left: 4px solid rgba(255,255,255,0.4); }
+.card.card-wide.w-aprende  { background: linear-gradient(145deg,#2C8FBF,#1E73A6); border-left: 4px solid rgba(255,255,255,0.4); }
+.card.card-wide.w-sabias   { background: linear-gradient(145deg,#29B6E8,#1E9FD4); border-left: 4px solid rgba(255,255,255,0.4); }
+.card.card-wide.w-videos   { background: linear-gradient(145deg,#5CC9ED,#34B4E0); border-left: 4px solid rgba(255,255,255,0.4); }
+
+/* Modo oscuro: azules más apagados para que no deslumbren */
+body.dark .card.card-wide.w-noticias { background: linear-gradient(145deg,#16384F,#11283A); }
+body.dark .card.card-wide.w-aprende  { background: linear-gradient(145deg,#1B536E,#143E54); }
+body.dark .card.card-wide.w-sabias   { background: linear-gradient(145deg,#1E6E8C,#155571); }
+body.dark .card.card-wide.w-videos   { background: linear-gradient(145deg,#26788F,#1B5E73); }
+body.dark .card.card-wide.w-noticias:hover,
+body.dark .card.card-wide.w-aprende:hover,
+body.dark .card.card-wide.w-sabias:hover,
+body.dark .card.card-wide.w-videos:hover { filter: brightness(1.15); }
+
+/* ── TARJETAS PEQUEÑAS: azul tipo "Aprende" (ambos modos) ── */
+.card:not(.card-wide) { background: linear-gradient(145deg,#2C8FBF,#1E73A6); border-color: rgba(255,255,255,0.18); }
+.card:not(.card-wide) .card-label { color: #FFFFFF; text-shadow: 0 1px 3px rgba(0,0,0,0.35); }
+body.dark .card:not(.card-wide) { background: linear-gradient(145deg,#236F94,#185A7E); border-color: rgba(255,255,255,0.12); }
+body.dark .card:not(.card-wide) .card-label { color: #EAF4FA; }
 </style>
 <!-- Datos estructurados para Google -->
 <script type="application/ld+json">
@@ -3296,22 +3318,22 @@ body.dark .card.card-wide.card-aprende { background: linear-gradient(145deg, #1e
       </div>
       <div class="content">
         <div class="news-cards">
-          <a class="news-card" href="https://www.diariolatina.com/nota-la-inteligencia-artificial-ya-no-es-una-promesa-en-2026-se-convirtio-en-infraestructura-invisible-69799" target="_blank">
-            <div class="news-source">Diario Latina · 7 junio 2026 🔥</div>
-            <div class="news-headline">La nueva Siri ya es real: Apple la presentó con el poder de Gemini detrás</div>
-            <div class="news-desc">Apple reveló esta semana cómo será la nueva Siri: más inteligente, integrada en todo el iPhone y funcionando con Gemini de Google. La IA da un salto enorme en los móviles de millones de personas.</div>
-            <div class="news-arrow">→</div>
-          </a>
-          <a class="news-card" href="https://www.jornada.com.mx/noticia/2026/06/06/economia/eu-pretende-participar-en-las-empresas-de-inteligencia-artificial" target="_blank">
-            <div class="news-source">La Jornada · 6 junio 2026</div>
-            <div class="news-headline">EE.UU. quiere entrar en el capital de las grandes empresas de IA</div>
-            <div class="news-desc">El gobierno de Estados Unidos estudia adquirir participaciones en las principales empresas de inteligencia artificial. Una señal de lo estratégica que se ha vuelto esta tecnología para los países.</div>
+          <a class="news-card" href="https://www.lamoncloa.gob.es/consejodeministros/resumenes/Paginas/2026/260526-rueda-prensa-ministros.aspx" target="_blank">
+            <div class="news-source">La Moncloa · Gobierno de España 🔥</div>
+            <div class="news-headline">España aprueba su primera ley para usar la IA de forma segura</div>
+            <div class="news-desc">El Gobierno ha dado luz verde a una ley que regula cómo se usa la inteligencia artificial en España: busca que sea fiable, ética y que proteja a las personas. Una buena señal de que la IA ya forma parte de nuestro día a día.</div>
             <div class="news-arrow">→</div>
           </a>
           <a class="news-card" href="https://www.diariolatina.com/nota-la-inteligencia-artificial-ya-no-es-una-promesa-en-2026-se-convirtio-en-infraestructura-invisible-69799" target="_blank">
-            <div class="news-source">Diario Latina · 7 junio 2026</div>
-            <div class="news-headline">La IA ya está en todo, aunque no la veas — por eso conviene aprender a usarla</div>
-            <div class="news-desc">En 2026 la inteligencia artificial organiza servicios y toma decisiones que usamos a diario sin darnos cuenta. Saber manejarla ya no es opcional: es la nueva alfabetización. Justo lo que te enseña IAtorpes.</div>
+            <div class="news-source">Diario Latina · junio 2026</div>
+            <div class="news-headline">La nueva Siri ya es real: Apple la presenta con Gemini detrás</div>
+            <div class="news-desc">Apple ha mostrado cómo será la nueva Siri: más lista, integrada en todo el iPhone y funcionando con la IA Gemini de Google. La inteligencia artificial da un gran salto en los móviles de millones de personas.</div>
+            <div class="news-arrow">→</div>
+          </a>
+          <a class="news-card" href="https://www.elespanol.com/invertia/disruptores/grandes-actores/empresas/20260611/des-despliegue-forzoso-inteligencia-artificial-acusa-calor-adopcion-acelerada/1003744281060_0.html" target="_blank">
+            <div class="news-source">El Español · 11 junio 2026</div>
+            <div class="news-headline">La IA ya no es un experimento: en Málaga piden usarla de verdad</div>
+            <div class="news-desc">En el congreso DES 2026 de Málaga, expertas como Randi Zuckerberg defendieron dejar atrás las pruebas y empezar a usar la IA en cosas útiles del día a día. La idea es clara: la IA ya está aquí y conviene aprender a sacarle partido.</div>
             <div class="news-arrow">→</div>
           </a>
         </div>
@@ -4535,9 +4557,7 @@ const grid = document.getElementById('grid');
 CARDS.forEach(c => {
   const el = document.createElement('div');
   if (c.wide && c.id === 'aprende') {
-    el.className = 'card card-wide';
-    el.style.background = 'linear-gradient(145deg,#29B6E8,#4ECDC4)';
-    el.style.borderLeft = '4px solid rgba(255,255,255,0.4)';
+    el.className = 'card card-wide w-aprende';
     el.innerHTML = `
       <div style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.25);color:#fff;font-size:0.6rem;font-weight:900;padding:3px 8px;border-radius:100px">🎓 APRENDE</div>
       <div class="card-icon">${c.emoji}</div>
@@ -4545,18 +4565,15 @@ CARDS.forEach(c => {
         <div class="card-label" style="color:#fff!important">${c.label}</div>
       </div>`;
   } else if (c.wide && c.id === 'sabias') {
-    el.className = 'card card-wide';
-    el.style.background = 'linear-gradient(145deg,#29B6E8,#4ECDC4)';
-    el.style.borderLeft = '4px solid rgba(255,255,255,0.4)';
+    el.className = 'card card-wide w-sabias';
     el.innerHTML = `
+      <div style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.25);color:#fff;font-size:0.6rem;font-weight:900;padding:3px 8px;border-radius:100px">💡 CURIOSIDAD</div>
       <div class="card-icon">${c.emoji}</div>
       <div>
         <div class="card-label" style="color:#fff!important">${c.label}</div>
       </div>`;
   } else if (c.wide && c.id === 'videos') {
-    el.className = 'card card-wide';
-    el.style.background = 'linear-gradient(145deg,#29B6E8,#4ECDC4)';
-    el.style.borderLeft = '4px solid rgba(255,255,255,0.4)';
+    el.className = 'card card-wide w-videos';
     el.innerHTML = `
       <div style="position:absolute;top:12px;right:12px;background:#FF3B30;color:#fff;font-size:0.6rem;font-weight:900;padding:3px 8px;border-radius:100px;animation:hoyPulse 2s ease-in-out infinite">✨ ACTUALIZADO</div>
       <div class="card-icon">${c.emoji}</div>
@@ -4564,9 +4581,7 @@ CARDS.forEach(c => {
         <div class="card-label" style="color:#fff!important">${c.label}</div>
       </div>`;
   } else if (c.wide) {
-    el.className = 'card card-wide';
-    el.style.background = 'linear-gradient(145deg,#29B6E8,#4ECDC4)';
-    el.style.borderLeft = '4px solid rgba(255,255,255,0.4)';
+    el.className = 'card card-wide w-noticias';
     el.innerHTML = `
       <div style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.25);color:#fff;font-size:0.6rem;font-weight:900;padding:3px 8px;border-radius:100px">🔥 NOTICIAS</div>
       <div class="card-icon">${c.emoji}</div>
@@ -5823,6 +5838,13 @@ renderIaDelDia();
 </div>
 
 <script>
+// ===== SERVICE WORKER =====
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
+
 // ===== BANNER PWA INSTALACIÓN =====
 let deferredPrompt = null;
 const PWA_KEY = 'iatorpes_pwa_dismissed';

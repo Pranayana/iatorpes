@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v114 · Bloques "¿Qué puedo hacer con la IA?" en azul + acordeones "¿Sabías que...?" con cabecera azul y cuerpo blanco · 14 junio 2026 -->
+<!-- IAtorpes.com · v115 · Trucos del día (carrusel) con estilo Duolingo: borde 3D, Nunito y botones rediseñados, manteniendo colores por tipo · 14 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -6015,13 +6015,13 @@ function _construirTarjetaDia(contenido, idx, esHoy) {
       ? `openChatGPT(decodeURIComponent('${encodeURIComponent(contenido.texto)}'))`
       : `window.open('${contenido.link}','_blank')`;
     return `
-      <div style="background:${color.bg};border-radius:20px;padding:20px;box-shadow:0 8px 24px rgba(0,0,0,0.15);position:relative;overflow:hidden">
+      <div style="background:${color.bg};border-radius:22px;border-bottom:6px solid rgba(0,0,0,0.22);padding:20px;box-shadow:none;position:relative;overflow:hidden">
         <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(160deg,rgba(255,255,255,0.2) 0%,transparent 60%);pointer-events:none"></div>
         <div style="display:flex;justify-content:flex-end;margin-bottom:12px">${etiqueta}</div>
         <div style="font-size:1.5rem;margin-bottom:6px">${contenido.emoji}</div>
-        <div style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;margin-bottom:8px">${contenido.titulo}</div>
+        <div style="font-family:'Nunito',sans-serif;font-size:1.2rem;font-weight:900;color:#fff;margin-bottom:8px">${contenido.titulo}</div>
         <div style="font-size:0.88rem;color:rgba(255,255,255,0.92);line-height:1.5;margin-bottom:14px">${contenido.texto}</div>
-        <button onclick="${btnOnclick}" style="background:rgba(255,255,255,0.25);border:2px solid rgba(255,255,255,0.6);color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.85rem;padding:10px 20px;border-radius:100px;cursor:pointer;backdrop-filter:blur(4px)">
+        <button onclick="${btnOnclick}" style="background:#fff;border:none;border-bottom:4px solid rgba(0,0,0,0.18);color:#1B8FBF;font-family:'Nunito',sans-serif;font-weight:900;font-size:0.9rem;padding:12px 22px;border-radius:14px;cursor:pointer">
           ${contenido.cta} →
         </button>
       </div>`;
@@ -6031,7 +6031,7 @@ function _construirTarjetaDia(contenido, idx, esHoy) {
     <div style="margin-bottom:10px">
       <label style="display:block;font-size:0.8rem;font-weight:700;color:rgba(255,255,255,0.9);margin-bottom:4px">✏️ ${c.label}</label>
       <input id="idd-${idx}-campo-${i}" type="text" placeholder="Escribe aquí..."
-        style="width:100%;box-sizing:border-box;padding:10px 12px;border-radius:12px;border:2px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.15);color:#fff;font-size:0.88rem;font-family:'Sora',sans-serif;outline:none;backdrop-filter:blur(4px)"
+        style="width:100%;box-sizing:border-box;padding:12px 14px;border-radius:14px;border:2px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.18);color:#fff;font-size:0.9rem;font-family:'Nunito',sans-serif;font-weight:700;outline:none"
         onfocus="this.style.borderColor='rgba(255,255,255,0.9)'"
         onblur="this.style.borderColor='rgba(255,255,255,0.4)'">
     </div>`).join('');
@@ -6040,21 +6040,21 @@ function _construirTarjetaDia(contenido, idx, esHoy) {
   const camposJSON = encodeURIComponent(JSON.stringify(campos));
 
   return `
-    <div style="background:${color.bg};border-radius:20px;padding:20px;box-shadow:0 8px 24px rgba(0,0,0,0.15);position:relative;overflow:hidden">
+    <div style="background:${color.bg};border-radius:22px;border-bottom:6px solid rgba(0,0,0,0.22);padding:20px;box-shadow:none;position:relative;overflow:hidden">
       <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(160deg,rgba(255,255,255,0.2) 0%,transparent 60%);pointer-events:none"></div>
       <div style="display:flex;justify-content:flex-end;margin-bottom:12px">${etiqueta}</div>
       <div style="font-size:1.5rem;margin-bottom:6px">${contenido.emoji}</div>
-      <div style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;margin-bottom:8px">${contenido.titulo}</div>
+      <div style="font-family:'Nunito',sans-serif;font-size:1.2rem;font-weight:900;color:#fff;margin-bottom:8px">${contenido.titulo}</div>
       <div style="font-size:0.88rem;color:rgba(255,255,255,0.92);line-height:1.5;margin-bottom:14px">${contenido.intro || 'Rellena los campos y te preparamos el mensaje:'}</div>
       ${camposHTML}
       <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
         <button onclick="enviarPromptDia('${textoEncoded}','${camposJSON}','chatgpt',${idx})"
-          style="flex:1;min-width:120px;background:rgba(255,255,255,0.25);border:2px solid rgba(255,255,255,0.6);color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.82rem;padding:10px 14px;border-radius:100px;cursor:pointer;backdrop-filter:blur(4px)">
-          🟢 Abrir en ChatGPT →
+          style="flex:1;min-width:120px;background:#fff;border:none;border-bottom:4px solid rgba(0,0,0,0.18);color:#1B8FBF;font-family:'Nunito',sans-serif;font-weight:900;font-size:0.85rem;padding:12px 14px;border-radius:14px;cursor:pointer">
+          🟢 ChatGPT →
         </button>
         <button onclick="enviarPromptDia('${textoEncoded}','${camposJSON}','claude',${idx})"
-          style="flex:1;min-width:120px;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.4);color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.82rem;padding:10px 14px;border-radius:100px;cursor:pointer;backdrop-filter:blur(4px)">
-          🤖 Abrir en Claude →
+          style="flex:1;min-width:120px;background:rgba(255,255,255,0.2);border:none;border-bottom:4px solid rgba(0,0,0,0.15);color:#fff;font-family:'Nunito',sans-serif;font-weight:900;font-size:0.85rem;padding:12px 14px;border-radius:14px;cursor:pointer">
+          🤖 Claude →
         </button>
       </div>
     </div>`;

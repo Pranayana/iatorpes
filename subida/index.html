@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v115 · Trucos del día (carrusel) con estilo Duolingo: borde 3D, Nunito y botones rediseñados, manteniendo colores por tipo · 14 junio 2026 -->
+<!-- IAtorpes.com · v117 · Revisión modo oscuro: elementos que deslumbraban apagados + fondo del welcome y de la pantalla de inicio respetando la variable · 14 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -145,9 +145,9 @@ html, body { height: 100%; font-family: 'Inter', sans-serif; background: var(--b
 .nav-icon:hover { background: #E8E8E8; }
 
 /* ── HOME PAGE ── */
-#home { display: flex; flex-direction: column; flex: 1; overflow: hidden; min-height: 0; }
+#home { display: flex; flex-direction: column; flex: 1; overflow: hidden; min-height: 0; background: var(--bg); }
 #home.hidden { display: none; }
-.home-inner { display: flex; flex-direction: column; align-items: center; padding: 20px clamp(16px,3vw,48px) 40px; width: 100%; }
+.home-inner { display: flex; flex-direction: column; align-items: center; padding: 20px clamp(16px,3vw,48px) 40px; width: 100%; background: var(--bg); }
 .main-title { font-family: 'Sora', sans-serif; font-size: clamp(1.6rem,3vw,2.8rem); font-weight: 800; color: var(--text); margin-bottom: clamp(16px,2.5vh,32px); letter-spacing: -0.5px; text-align: center; flex-shrink: 0; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: clamp(18px,2vw,32px); width: 100%; max-width: 1200px; }
 .card { background: linear-gradient(145deg,#EDEAE2,#DAD6CD); border-radius: 22px; border: 1px solid rgba(255,255,255,0.68); box-shadow: var(--cs); cursor: pointer; transition: transform 0.1s, border-bottom-width 0.1s; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: clamp(8px,1.2vh,16px) clamp(6px,0.9vw,12px); position: relative; overflow: hidden; gap: clamp(5px,0.8vh,10px); }
@@ -337,12 +337,13 @@ body.es-android .back-btn { display: none !important; }
 .llm-desc { font-size: 1rem; color: var(--mid); line-height: 1.65; margin-bottom: 10px; }
 .llm-tags { display: flex; gap: 6px; flex-wrap: wrap; }
 .tag { background: rgba(255,255,255,0.6); color: #444; font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.8); }
-.prompt-card { background: linear-gradient(145deg,#2C8FBF,#1E73A6); border: 1px solid rgba(255,255,255,0.25); border-radius: 14px; padding: 12px 14px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: var(--cs); display: flex; align-items: center; gap: 10px; position: relative; overflow: hidden; margin-bottom: 8px; }
-.prompt-card::before { content:""; position:absolute; inset:0; background:linear-gradient(160deg,rgba(255,255,255,0.42) 0%,transparent 55%); border-radius:inherit; pointer-events:none; }
-.prompt-card:hover { transform: translateY(-2px); box-shadow: var(--csh); }
-.prompt-text { font-size: 0.86rem; color: #FFFFFF; line-height: 1.5; flex: 1; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
-.prompt-copy { flex-shrink: 0; background: rgba(255,255,255,0.95); color: #1E73A6; font-size: 0.74rem; font-weight: 700; padding: 6px 12px; border-radius: 100px; white-space: nowrap; }
-.info-box { margin-top: 10px; padding: 12px; background: linear-gradient(145deg,#EDEAE2,#DAD6CD); border-radius: 14px; border: 1px solid rgba(255,255,255,0.68); box-shadow: var(--cs); font-size: 0.85rem; }
+.prompt-card { background: var(--accent); border: none; border-bottom: 5px solid #1B8FBF; border-radius: 16px; padding: 14px 16px; cursor: pointer; transition: transform 0.1s, border-bottom-width 0.1s; box-shadow: none; display: flex; align-items: center; gap: 10px; position: relative; overflow: hidden; margin-bottom: 10px; }
+.prompt-card::before { content:""; position:absolute; inset:0; background:linear-gradient(160deg,rgba(255,255,255,0.18) 0%,transparent 55%); border-radius:inherit; pointer-events:none; }
+.prompt-card:hover { transform: translateY(-2px); }
+.prompt-card:active { transform: translateY(3px); border-bottom-width: 2px; }
+.prompt-text { font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 700; color: #FFFFFF; line-height: 1.45; flex: 1; text-shadow: none; }
+.prompt-copy { flex-shrink: 0; background: #fff; color: #1B8FBF; font-family: 'Nunito', sans-serif; font-size: 0.74rem; font-weight: 900; padding: 7px 13px; border-radius: 100px; white-space: nowrap; border-bottom: 3px solid rgba(0,0,0,0.15); }
+.info-box { margin-top: 10px; padding: 14px 16px; background: #FFF8E6; border-radius: 16px; border: none; border-bottom: 4px solid #F0E0B0; box-shadow: none; font-size: 0.85rem; }
 
 /* ── MOBILE RESPONSIVE ── */
 @media (max-width: 768px) {
@@ -472,7 +473,7 @@ body.es-android .back-btn { display: none !important; }
   border: none;
   border-bottom: 6px solid #1B8FBF;
 }
-body.dark .vmás-bloque { border-color: rgba(255,255,255,0.08); }
+body.dark .vmás-bloque { background: linear-gradient(145deg,#1B536E,#143E54); border-color: rgba(255,255,255,0.08); }
 .vmás-bloque-header {
   display: flex;
   align-items: center;
@@ -735,6 +736,10 @@ body.dark .vmás-card { background: linear-gradient(145deg, #1e1e32, #16162a); b
   text-align: center;
 }
 #welcome.hidden { display: none; }
+body.dark #welcome { background: linear-gradient(160deg, #14141F 0%, #0f0f1a 50%, #14141F 100%); }
+body.dark .welcome-logo { color: #F0F0F0; }
+body.dark .welcome-tagline { color: #B0B0B8; }
+body.dark .welcome-footer { color: rgba(255,255,255,0.35); }
 
 .welcome-badge {
   background: rgba(41,182,232,0.15);
@@ -932,8 +937,9 @@ body.dark .llm-desc { color: #888; }
 body.dark .tag { background: rgba(255,255,255,0.08); color: #aaa; border-color: rgba(255,255,255,0.1); }
 body.dark .prompt-card { background: linear-gradient(145deg,#236F94,#185A7E); border-color: rgba(255,255,255,0.15); }
 body.dark .prompt-text { color: #EAF4FA; }
-body.dark .info-box { background: linear-gradient(145deg,#1e1e32,#16162a); border-color: rgba(255,255,255,0.1); }
+body.dark .info-box { background: #2E2A1C; border-color: rgba(240,224,176,0.25); border-bottom: 4px solid rgba(240,224,176,0.3); }
 body.dark .acc-item { background: linear-gradient(145deg,#1e1e32,#16162a); border-color: rgba(255,255,255,0.1); }
+body.dark .acc-header { background: linear-gradient(145deg,#1B536E,#143E54); border-bottom-color: rgba(0,0,0,0.35); }
 body.dark .acc-title { color: #E0E0E0; }
 body.dark .acc-body { color: #999; }
 body.dark .section-intro { color: #E0E0F0; }
@@ -1331,25 +1337,27 @@ body.dark .opt-btn { background: #1a1a2e; border-color: rgba(255,255,255,0.1); c
   flex-wrap: wrap;
 }
 .history-item {
-  background: linear-gradient(145deg, #EDEAE2, #DAD6CD);
-  border: 1px solid rgba(255,255,255,0.68);
+  background: #FFFFFF;
+  border: none;
+  border-bottom: 3px solid #D6E4EC;
   border-radius: 100px;
-  padding: 8px 16px;
-  font-family: 'Sora', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--mid);
+  padding: 9px 16px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--text);
   cursor: pointer;
-  transition: transform 0.18s, box-shadow 0.18s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  transition: transform 0.1s, border-bottom-width 0.1s;
+  box-shadow: none;
   display: flex;
   align-items: center;
   gap: 6px;
   position: relative;
   overflow: hidden;
 }
-.history-item::before { content: ""; position: absolute; inset: 0; background: linear-gradient(160deg, rgba(255,255,255,0.42) 0%, transparent 55%); pointer-events: none; }
-.history-item:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.12); color: var(--accent); }
+.history-item::before { content: ""; position: absolute; inset: 0; background: none; pointer-events: none; }
+.history-item:hover { transform: translateY(-2px); color: var(--accent); }
+.history-item:active { transform: translateY(2px); border-bottom-width: 1px; }
 .history-clear {
   font-size: 0.75rem;
   color: #ccc;
@@ -1362,7 +1370,7 @@ body.dark .opt-btn { background: #1a1a2e; border-color: rgba(255,255,255,0.1); c
 }
 .history-clear:hover { color: #999; }
 
-body.dark .history-item { background: linear-gradient(145deg, #1e1e32, #16162a); border-color: rgba(255,255,255,0.1); color: #aaa; }
+body.dark .history-item { background: linear-gradient(145deg, #1e1e32, #16162a); border-color: rgba(255,255,255,0.1); border-bottom: 3px solid rgba(0,0,0,0.35); color: #DDD; }
 
 /* ── HERO PRINCIPAL ── */
 .home-hero {

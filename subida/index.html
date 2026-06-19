@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v118 · Añadidos vídeos nuevos al principio de Trucos IA (2), Últimas noticias (3) y Podcasts (1) · 14 junio 2026 -->
+<!-- IAtorpes.com · v119 · Tarjeta "Protégete de estafas" (antes "¿Es esto una estafa?") + pantalla interior rediseñada con botones blancos 3D y título+explicación · 14 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -299,7 +299,9 @@ body.es-android .back-btn { display: none !important; }
 .hero-title { font-family: 'Sora',sans-serif; font-size: clamp(1.8rem,3.5vw,3rem); font-weight: 800; color: var(--text); margin: 0 0 10px; }
 .hero-subtitle { font-size: clamp(1.1rem,1.6vw,1.4rem); color: var(--mid); margin-bottom: 12px; }
 .modo-buttons { display: flex; flex-direction: column; gap: 24px; padding: 24px 40px 40px; max-width: 820px; margin: 0 auto; width: 100%; flex: 1; justify-content: center; }
-.modo-btn { background: linear-gradient(145deg,#EDEAE2,#DAD6CD); border: 1px solid rgba(255,255,255,0.68); border-radius: 24px; padding: 36px 40px; font-weight: 700; color: var(--text); cursor: pointer; transition: transform 0.22s, box-shadow 0.22s, background 0.22s; box-shadow: var(--cs); text-align: left; display: flex; align-items: center; gap: 24px; position: relative; overflow: hidden; }
+.modo-btn { background: #FFFFFF; border: none; border-bottom: 5px solid #D6E4EC; border-radius: 24px; padding: 28px 28px; font-weight: 700; color: var(--text); cursor: pointer; transition: transform 0.1s, border-bottom-width 0.1s; box-shadow: 0 4px 14px rgba(41,143,191,0.10); text-align: left; display: flex; align-items: center; gap: 20px; position: relative; overflow: hidden; }
+.modo-btn-titulo { display: block; font-family: 'Nunito', sans-serif; font-size: 1.25rem; font-weight: 900; color: var(--text); margin-bottom: 3px; }
+.modo-btn-sub { display: block; font-size: 0.85rem; font-weight: 600; color: var(--mid); line-height: 1.3; }
 .modo-btn::before { content:""; position:absolute; inset:0; background:linear-gradient(160deg,rgba(255,255,255,0.42) 0%,transparent 55%); border-radius:inherit; pointer-events:none; }
 .modo-btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: var(--csh); background: linear-gradient(145deg, #29B6E8, #4ECDC4); color: white; }
 .content { padding: 20px 40px; flex: 1; overflow-y: auto; }
@@ -922,6 +924,8 @@ body.dark .back-btn { background: linear-gradient(145deg,#236F94,#185A7E); borde
 body.dark .hero-title { color: #F0F0F0; }
 body.dark .hero-subtitle { color: #aaa; }
 body.dark .modo-btn { background: linear-gradient(145deg,#1e1e32,#16162a); border-color: rgba(255,255,255,0.1); color: #E0E0E0; }
+body.dark .modo-btn-titulo { color: #F0F0F0; }
+body.dark .modo-btn-sub { color: #aaa; }
 body.dark .ia-btn { background: linear-gradient(145deg,#1e1e32,#16162a); border-color: rgba(255,255,255,0.1); color: #E0E0E0; }
 body.dark .ia-btn.featured { background: linear-gradient(145deg,#29B6E8,#0099CC) !important; color: #ffffff !important; border-color: #29B6E8 !important; }
 body.dark .ia-btn.featured .ia-label { color: #ffffff !important; }
@@ -3414,10 +3418,10 @@ body.dark .llm-card { border-bottom-color: rgba(0,0,0,0.4) !important; }
     <!-- SEGURIDAD ONLINE -->
     <div class="vista" id="v-seguridad">
       <button class="back-btn" onclick="volverAtras()">← Volver</button>
-      <div class="hero"><div class="hero-icon">🔒</div><h2 class="hero-title">Seguridad online</h2><div class="hero-subtitle">Protégete de estafas y fraudes en internet</div></div>
+      <div class="hero"><div class="hero-icon">🛡️</div><h2 class="hero-title">Protégete de estafas</h2><div class="hero-subtitle">La IA te ayuda a detectar timos y fraudes antes de caer</div></div>
       <div class="modo-buttons">
-        <button class="modo-btn" onclick="showVista('v-seguridad-rapido')"><span style="font-size:2rem">⚡</span><div><span style="font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:700">⚡ Consulta rápida</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
-        <button class="modo-btn" onclick="showVista('v-seguridad-aprende')"><span style="font-size:2rem">🎓</span><div><span style="font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:700">🎓 Modo Aprende</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
+        <button class="modo-btn" onclick="showVista('v-seguridad-rapido')"><span style="font-size:2rem">⚡</span><div><span class="modo-btn-titulo">Comprobar ahora</span><span class="modo-btn-sub">¿Es real este mensaje o es una estafa?</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
+        <button class="modo-btn" onclick="showVista('v-seguridad-aprende')"><span style="font-size:2rem">🎓</span><div><span class="modo-btn-titulo">Aprende a protegerte</span><span class="modo-btn-sub">Conoce los timos más comunes y cómo evitarlos</span></div><span style="margin-left:auto;color:#aaa">→</span></button>
       </div>
     </div>
 
@@ -4840,7 +4844,7 @@ const CARDS = [
   { id:'escribe',  emoji:'✉️', label:'Escribe un\nmensaje' },
   { id:'movil',    emoji:'📱', label:'Usa tu\nmóvil mejor' },
   { id:'organiza', emoji:'📧', label:'Organiza\ntu correo' },
-  { id:'seguridad', emoji:'🔒', label:'¿Es esto\nuna estafa?' },
+  { id:'seguridad', emoji:'🛡️', label:'Protégete\nde estafas' },
   { id:'noticias',  emoji:'📰', label:'<strong>Últimas noticias IA</strong>', wide: true },
   { id:'aprende',   emoji:'🎓', label:'<strong>Aprende con la IA</strong>', wide: true },
   { id:'sabias',    emoji:'💡', label:'<strong>¿Sabías que...?<br>Curiosidades de la IA</strong>', wide: true },

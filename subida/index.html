@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v121 · Enlazado el manifest.json en el HTML para que la web sea instalable como app (PWA) · 24 junio 2026 -->
+<!-- IAtorpes.com · v122 · Botón flotante "Instalar app" (PWA): aparece solo si es instalable, lanza la instalación, desaparece al instalar y no se muestra si ya está en modo app · 24 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -6314,5 +6314,60 @@ window.addEventListener('load', () => {
 </script>
 
 </div>
+<!-- Botón instalar app (PWA) -->
+<div id="install-banner" style="display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:2000;width:calc(100% - 32px);max-width:440px">
+  <div style="background:#29B6E8;border-radius:18px;border-bottom:5px solid #1B8FBF;box-shadow:0 8px 28px rgba(41,143,191,0.35);padding:14px 16px;display:flex;align-items:center;gap:12px">
+    <span style="font-size:1.8rem;flex-shrink:0">📲</span>
+    <div style="flex:1;min-width:0">
+      <div style="font-family:'Nunito',sans-serif;font-weight:900;color:#fff;font-size:1rem;line-height:1.2">Instala IAtorpes</div>
+      <div style="color:rgba(255,255,255,0.92);font-size:0.8rem;font-weight:600">Tenla en tu móvil como una app</div>
+    </div>
+    <button id="install-btn" style="flex-shrink:0;background:#fff;color:#1B8FBF;border:none;border-bottom:3px solid rgba(0,0,0,0.15);font-family:'Nunito',sans-serif;font-weight:900;font-size:0.85rem;padding:10px 16px;border-radius:12px;cursor:pointer">Instalar</button>
+    <button id="install-close" aria-label="Cerrar" style="flex-shrink:0;background:transparent;border:none;color:rgba(255,255,255,0.8);font-size:1.3rem;cursor:pointer;padding:0 4px;line-height:1">×</button>
+  </div>
+</div>
+<script>
+// ===== BOTÓN INSTALAR APP (PWA) =====
+(function() {
+  let promptEvent = null;
+  const banner = document.getElementById('install-banner');
+  const btn = document.getElementById('install-btn');
+  const closeBtn = document.getElementById('install-close');
+
+  // ¿Ya está corriendo como app instalada? Entonces nunca mostrar el banner.
+  const yaInstalada = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+  // Android/Chrome: capturamos el evento de instalación disponible
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    promptEvent = e;
+    // Solo mostramos si no está instalada y el usuario no lo cerró antes
+    if (!yaInstalada && sessionStorage.getItem('installCerrado') !== '1') {
+      banner.style.display = 'block';
+    }
+  });
+
+  // Al pulsar Instalar: lanzamos la instalación nativa
+  btn.addEventListener('click', async () => {
+    if (!promptEvent) return;
+    promptEvent.prompt();
+    await promptEvent.userChoice;
+    promptEvent = null;
+    banner.style.display = 'none';
+  });
+
+  // Al pulsar la X: ocultar durante esta sesión
+  closeBtn.addEventListener('click', () => {
+    banner.style.display = 'none';
+    sessionStorage.setItem('installCerrado', '1');
+  });
+
+  // Cuando se instala: ocultar el banner para siempre
+  window.addEventListener('appinstalled', () => {
+    banner.style.display = 'none';
+    promptEvent = null;
+  });
+})();
+</script>
 </body>
 </html>

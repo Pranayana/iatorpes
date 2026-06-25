@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v122 · Botón flotante "Instalar app" (PWA): aparece solo si es instalable, lanza la instalación, desaparece al instalar y no se muestra si ya está en modo app · 24 junio 2026 -->
+<!-- IAtorpes.com · v123 · Eventos en Google Analytics: 'pwa_install' al instalar la app y 'pwa_abierta' al abrirla en modo app instalada · 24 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -6337,6 +6337,14 @@ window.addEventListener('load', () => {
   // ¿Ya está corriendo como app instalada? Entonces nunca mostrar el banner.
   const yaInstalada = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 
+  // Si se abre como app instalada, registrarlo en Analytics
+  if (yaInstalada && typeof gtag === 'function') {
+    gtag('event', 'pwa_abierta', {
+      'event_category': 'engagement',
+      'event_label': 'Abierta como app instalada'
+    });
+  }
+
   // Android/Chrome: capturamos el evento de instalación disponible
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
@@ -6366,6 +6374,13 @@ window.addEventListener('load', () => {
   window.addEventListener('appinstalled', () => {
     banner.style.display = 'none';
     promptEvent = null;
+    // Registrar la instalación en Google Analytics
+    if (typeof gtag === 'function') {
+      gtag('event', 'pwa_install', {
+        'event_category': 'engagement',
+        'event_label': 'App instalada (PWA)'
+      });
+    }
   });
 })();
 </script>

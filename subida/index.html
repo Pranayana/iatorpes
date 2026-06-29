@@ -5127,6 +5127,16 @@ if (typeof noSeQueHacer === 'function') {
   };
 }
 
+// Las pestañas Descubre/Aprende también se enganchan al historial,
+// para que el botón atrás del teléfono regrese al Inicio en vez de salir.
+const _irTabOrig = irTab;
+irTab = function(tab) {
+  _irTabOrig(tab);
+  if (tab === 'descubre' || tab === 'aprende') {
+    history.pushState({ iatorpes: true }, '');
+  }
+};
+
 window.addEventListener('popstate', function() {
   const dentro = document.getElementById('inner').classList.contains('visible');
   if (dentro) {

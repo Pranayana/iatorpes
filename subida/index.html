@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v124 · Noticias actualizadas: Atajos por voz en iOS 27, foto al ticket del restaurante, y Siri AI no llega a Europa de momento · 28 junio 2026 -->
+<!-- IAtorpes.com · v125 · Barra inferior de pestañas (Inicio/Descubre/Aprende) estilo Duolingo azul; secciones agrupadas, tarjetas wide quitadas del inicio, capas de cookies y botón instalar reordenadas · 29 junio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -663,7 +663,7 @@ body.dark .vmás-card { background: linear-gradient(145deg, #1e1e32, #16162a); b
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
-  z-index: 1000;
+  z-index: 2200;
   box-shadow: 0 -4px 24px rgba(0,0,0,0.3);
   font-size: 0.88rem;
   line-height: 1.5;
@@ -1886,6 +1886,60 @@ body.dark .ia-btn,
 body.dark .tab,
 body.dark .llm-card { border-bottom-color: rgba(0,0,0,0.4) !important; }
 /* ═══════════ FIN DUOLINGO RESTO ═══════════ */
+
+/* ═══════════ BARRA INFERIOR DE PESTAÑAS ═══════════ */
+.tabbar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--accent);
+  display: flex;
+  box-shadow: 0 -2px 16px rgba(0,0,0,0.15);
+  padding: 8px 0 max(12px, env(safe-area-inset-bottom));
+  z-index: 1500;
+  border-top: 3px solid #1B8FBF;
+}
+body.dark .tabbar { background: linear-gradient(145deg,#236F94,#185A7E); border-top-color: rgba(0,0,0,0.4); box-shadow: 0 -2px 16px rgba(0,0,0,0.4); }
+.tabbar-btn {
+  flex: 1; background: none; border: none;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  cursor: pointer; padding: 6px 0; color: rgba(255,255,255,0.7);
+  font-family: 'Nunito', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.15s;
+}
+.tabbar-btn .tabbar-icono { font-size: 1.5rem; transition: transform 0.15s; line-height: 1; }
+.tabbar-btn .tabbar-label { font-size: 0.72rem; font-weight: 800; }
+.tabbar-btn.activo { color: #fff; }
+.tabbar-btn.activo .tabbar-icono { transform: translateY(-2px) scale(1.15); }
+.tabbar-btn.activo .tabbar-label { font-weight: 900; }
+.tabbar-btn .tabbar-icono { background: transparent; border-radius: 14px; padding: 3px 14px; transition: transform 0.15s, background 0.15s; }
+.tabbar-btn.activo .tabbar-icono { background: rgba(255,255,255,0.22); }
+
+/* Espacio para que el contenido no quede tapado por la barra */
+body.con-tabbar #home, body.con-tabbar #inner { padding-bottom: 76px; }
+
+/* Pantallas Descubre y Aprende (agrupadores) */
+.tab-pantalla { padding: 20px clamp(16px,3vw,48px) 90px; max-width: 640px; margin: 0 auto; }
+.tab-pantalla-titulo { font-family: 'Nunito',sans-serif; font-size: 1.6rem; font-weight: 900; color: var(--text); margin-bottom: 4px; }
+.tab-pantalla-sub { color: var(--mid); font-weight: 700; font-size: 0.95rem; margin-bottom: 20px; }
+.tab-acceso {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--accent); border: none; border-bottom: 5px solid #1B8FBF;
+  border-radius: 18px; padding: 18px 20px; margin-bottom: 14px;
+  width: 100%; cursor: pointer; text-align: left;
+  box-shadow: none;
+  transition: transform 0.1s, border-bottom-width 0.1s;
+  -webkit-tap-highlight-color: transparent;
+  position: relative; overflow: hidden;
+}
+.tab-acceso::before { content:""; position:absolute; inset:0; background:linear-gradient(160deg,rgba(255,255,255,0.18) 0%,transparent 55%); pointer-events:none; }
+.tab-acceso:active { transform: translateY(3px); border-bottom-width: 2px; }
+body.dark .tab-acceso { background: linear-gradient(145deg,#236F94,#185A7E); border-bottom-color: rgba(0,0,0,0.4); }
+.tab-acceso-emoji { font-size: 2rem; flex-shrink: 0; }
+.tab-acceso-tit { font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 1.1rem; color: #fff; margin-bottom: 2px; }
+.tab-acceso-sub { font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.9); }
+.tab-acceso-arrow { margin-left: auto; color: #fff; font-size: 1.3rem; font-weight: 900; }
+/* ═══════════ FIN BARRA INFERIOR ═══════════ */
 </style>
 <!-- Datos estructurados para Google -->
 <script type="application/ld+json">
@@ -1943,6 +1997,8 @@ body.dark .llm-card { border-bottom-color: rgba(0,0,0,0.4) !important; }
   if (/android/i.test(navigator.userAgent)) {
     document.body.classList.add('es-android');
   }
+  // Activa el espacio inferior para la barra de pestañas
+  document.body.classList.add('con-tabbar');
 </script>
 
 <!-- WELCOME PAGE -->
@@ -4823,7 +4879,51 @@ body.dark .llm-card { border-bottom-color: rgba(0,0,0,0.4) !important; }
       <button class="back-btn" onclick="volverAtras()">← Volver</button>
     </div><!-- /v-videos -->
 
+    <!-- PANTALLA DESCUBRE (agrupador) -->
+    <div class="vista" id="v-descubre">
+      <div class="tab-pantalla">
+        <div class="tab-pantalla-titulo">🧭 Descubre</div>
+        <div class="tab-pantalla-sub">Noticias y vídeos del mundo de la IA, en español</div>
+        <button class="tab-acceso" onclick="openCard('noticias')">
+          <span class="tab-acceso-emoji">📰</span>
+          <div><div class="tab-acceso-tit">Últimas noticias IA</div><div class="tab-acceso-sub">Lo más importante de la semana</div></div>
+          <span class="tab-acceso-arrow">→</span>
+        </button>
+        <button class="tab-acceso" onclick="openCard('videos')">
+          <span class="tab-acceso-emoji">▶️</span>
+          <div><div class="tab-acceso-tit">Vídeos y trucos</div><div class="tab-acceso-sub">Aprende viendo, paso a paso</div></div>
+          <span class="tab-acceso-arrow">→</span>
+        </button>
+      </div>
+    </div><!-- /v-descubre -->
+
+    <!-- PANTALLA APRENDE (agrupador) -->
+    <div class="vista" id="v-aprende-tab">
+      <div class="tab-pantalla">
+        <div class="tab-pantalla-titulo">🎓 Aprende</div>
+        <div class="tab-pantalla-sub">Entiende la inteligencia artificial sin complicarte</div>
+        <button class="tab-acceso" onclick="openCard('aprende')">
+          <span class="tab-acceso-emoji">🎓</span>
+          <div><div class="tab-acceso-tit">Aprende con la IA</div><div class="tab-acceso-sub">Lecciones fáciles para empezar</div></div>
+          <span class="tab-acceso-arrow">→</span>
+        </button>
+        <button class="tab-acceso" onclick="openCard('sabias')">
+          <span class="tab-acceso-emoji">🤔</span>
+          <div><div class="tab-acceso-tit">¿Sabías que...?</div><div class="tab-acceso-sub">Curiosidades sorprendentes de la IA</div></div>
+          <span class="tab-acceso-arrow">→</span>
+        </button>
+      </div>
+    </div><!-- /v-aprende-tab -->
+
   </div><!-- /inner -->
+
+  <!-- BARRA INFERIOR DE PESTAÑAS -->
+  <nav class="tabbar" id="tabbar">
+    <button class="tabbar-btn activo" id="tab-inicio" onclick="irTab('inicio')"><span class="tabbar-icono">🏠</span><span class="tabbar-label">Inicio</span></button>
+    <button class="tabbar-btn" id="tab-descubre" onclick="irTab('descubre')"><span class="tabbar-icono">🧭</span><span class="tabbar-label">Descubre</span></button>
+    <button class="tabbar-btn" id="tab-aprende" onclick="irTab('aprende')"><span class="tabbar-icono">🎓</span><span class="tabbar-label">Aprende</span></button>
+  </nav>
+
 
 </div><!-- /page -->
 
@@ -4846,10 +4946,6 @@ const CARDS = [
   { id:'movil',    emoji:'📱', label:'Usa tu\nmóvil mejor' },
   { id:'organiza', emoji:'📧', label:'Organiza\ntu correo' },
   { id:'seguridad', emoji:'🛡️', label:'Protégete\nde estafas' },
-  { id:'noticias',  emoji:'📰', label:'<strong>Últimas noticias IA</strong>', wide: true },
-  { id:'aprende',   emoji:'🎓', label:'<strong>Aprende con la IA</strong>', wide: true },
-  { id:'sabias',    emoji:'💡', label:'<strong>¿Sabías que...?<br>Curiosidades de la IA</strong>', wide: true },
-  { id:'videos',    emoji:'▶️', label:'<strong>¿Qué puedo hacer con la IA?<br>y mucho más</strong>', wide: true },
 ];
 
 const grid = document.getElementById('grid');
@@ -4965,6 +5061,36 @@ function goHome() {
   document.getElementById('inner').classList.remove('visible');
   document.querySelectorAll('.vista').forEach(v => v.classList.remove('active'));
   navStack = [];
+  if (typeof marcarTab === 'function') marcarTab('inicio');
+}
+
+/* ── Barra inferior de pestañas (Inicio / Descubre / Aprende) ── */
+function marcarTab(tab) {
+  ['inicio','descubre','aprende'].forEach(t => {
+    const b = document.getElementById('tab-' + t);
+    if (b) b.classList.toggle('activo', t === tab);
+  });
+}
+function irTab(tab) {
+  if (navigator.vibrate) navigator.vibrate(12);
+  if (tab === 'inicio') {
+    goHome();
+  } else if (tab === 'descubre') {
+    document.getElementById('home').classList.add('hidden');
+    document.getElementById('inner').classList.add('visible');
+    document.querySelectorAll('.vista').forEach(v => v.classList.remove('active'));
+    document.getElementById('v-descubre').classList.add('active');
+    navStack = ['v-descubre'];
+    document.getElementById('inner').scrollTop = 0;
+  } else if (tab === 'aprende') {
+    document.getElementById('home').classList.add('hidden');
+    document.getElementById('inner').classList.add('visible');
+    document.querySelectorAll('.vista').forEach(v => v.classList.remove('active'));
+    document.getElementById('v-aprende-tab').classList.add('active');
+    navStack = ['v-aprende-tab'];
+    document.getElementById('inner').scrollTop = 0;
+  }
+  marcarTab(tab);
 }
 
 /* ── Integración con el botón ATRÁS del teléfono ── */
@@ -6315,7 +6441,7 @@ window.addEventListener('load', () => {
 
 </div>
 <!-- Botón instalar app (PWA) -->
-<div id="install-banner" style="display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:2000;width:calc(100% - 32px);max-width:440px">
+<div id="install-banner" style="display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:84px;z-index:1800;width:calc(100% - 32px);max-width:440px">
   <div style="background:#29B6E8;border-radius:18px;border-bottom:5px solid #1B8FBF;box-shadow:0 8px 28px rgba(41,143,191,0.35);padding:14px 16px;display:flex;align-items:center;gap:12px">
     <span style="font-size:1.8rem;flex-shrink:0">📲</span>
     <div style="flex:1;min-width:0">

@@ -6350,18 +6350,6 @@ renderIaDelDia();
 
 
 <!-- BANNER PWA INSTALACIÓN -->
-<div id="pwa-banner">
-  <div class="pwa-icon">📲</div>
-  <div class="pwa-text">
-    <div class="pwa-title">¡Añade IAtorpes a tu móvil!</div>
-    <div class="pwa-sub" id="pwa-sub-text">Úsala como una app — gratis y sin tiendas</div>
-  </div>
-  <div class="pwa-btns">
-    <button class="pwa-btn-install" id="pwa-btn-install" onclick="instalarPWA()">📲 Instalar</button>
-    <button class="pwa-btn-close" onclick="cerrarBannerPWA()">Ahora no</button>
-  </div>
-</div>
-
 <script>
 // ===== SERVICE WORKER =====
 if ('serviceWorker' in navigator) {
@@ -6371,82 +6359,6 @@ if ('serviceWorker' in navigator) {
 }
 
 // ===== BANNER PWA INSTALACIÓN =====
-let deferredPrompt = null;
-const PWA_KEY = 'iatorpes_pwa_dismissed';
-
-function esMobil() {
-  return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-}
-
-function esIOS() {
-  return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-}
-
-function yaInstalada() {
-  return window.matchMedia('(display-mode: standalone)').matches
-    || window.navigator.standalone === true;
-}
-
-function mostrarBannerPWA() {
-  if (!esMobil()) return;
-  if (yaInstalada()) return;
-  if (yaVistoDemasiado()) return;
-
-  const banner = document.getElementById('pwa-banner');
-  if (!banner) return;
-
-  if (esIOS()) {
-    // Safari iOS: no tiene beforeinstallprompt, mostramos instrucciones
-    document.getElementById('pwa-sub-text').textContent = 'Pulsa Compartir → "Añadir a pantalla de inicio"';
-    document.getElementById('pwa-btn-install').textContent = '📖 Ver cómo';
-    document.getElementById('pwa-btn-install').onclick = function() {
-      alert('Para instalar IAtorpes en tu iPhone:\n\n1. Pulsa el botón de Compartir (□↑) en Safari\n2. Desplázate y toca "Añadir a pantalla de inicio"\n3. Pulsa "Añadir"\n\n¡Listo! IAtorpes quedará como una app en tu móvil.');
-    };
-    setTimeout(() => banner.classList.add('visible'), 3000);
-  } else if (deferredPrompt) {
-    // Chrome Android: tenemos el prompt listo
-    setTimeout(() => banner.classList.add('visible'), 3000);
-  }
-}
-
-function instalarPWA() {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  deferredPrompt.userChoice.then(result => {
-    if (result.outcome === 'accepted') {
-      cerrarBannerPWA();
-      localStorage.setItem(PWA_KEY, 'done');
-    }
-    deferredPrompt = null;
-  });
-}
-
-function cerrarBannerPWA() {
-  const banner = document.getElementById('pwa-banner');
-  if (banner) banner.classList.remove('visible');
-  const veces = parseInt(localStorage.getItem(PWA_KEY) || '0') + 1;
-  if (veces >= 2) {
-    localStorage.setItem(PWA_KEY, 'done');
-  } else {
-    localStorage.setItem(PWA_KEY, String(veces));
-  }
-}
-
-function yaVistoDemasiado() {
-  return localStorage.getItem(PWA_KEY) === 'done';
-}
-
-// Capturar el evento de Chrome Android
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredPrompt = e;
-  mostrarBannerPWA();
-});
-
-// Lanzar verificación al cargar
-window.addEventListener('load', () => {
-  if (esIOS()) mostrarBannerPWA();
-});
 </script>
 
 </div>
@@ -6456,7 +6368,7 @@ window.addEventListener('load', () => {
     <span style="font-size:1.8rem;flex-shrink:0">📲</span>
     <div style="flex:1;min-width:0">
       <div style="font-family:'Nunito',sans-serif;font-weight:900;color:#fff;font-size:1rem;line-height:1.2">Instala IAtorpes</div>
-      <div style="color:rgba(255,255,255,0.92);font-size:0.8rem;font-weight:600">Tenla en tu móvil como una app</div>
+      <div id="install-sub" style="color:rgba(255,255,255,0.92);font-size:0.8rem;font-weight:600">Tenla en tu móvil como una app</div>
     </div>
     <button id="install-btn" style="flex-shrink:0;background:#fff;color:#1B8FBF;border:none;border-bottom:3px solid rgba(0,0,0,0.15);font-family:'Nunito',sans-serif;font-weight:900;font-size:0.85rem;padding:10px 16px;border-radius:12px;cursor:pointer">Instalar</button>
     <button id="install-close" aria-label="Cerrar" style="flex-shrink:0;background:transparent;border:none;color:rgba(255,255,255,0.8);font-size:1.3rem;cursor:pointer;padding:0 4px;line-height:1">×</button>
@@ -6469,9 +6381,11 @@ window.addEventListener('load', () => {
   const banner = document.getElementById('install-banner');
   const btn = document.getElementById('install-btn');
   const closeBtn = document.getElementById('install-close');
+  const subtexto = document.getElementById('install-sub');
 
   // ¿Ya está corriendo como app instalada? Entonces nunca mostrar el banner.
   const yaInstalada = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  const esIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   // Si se abre como app instalada, registrarlo en Analytics
   if (yaInstalada && typeof gtag === 'function') {
@@ -6479,6 +6393,16 @@ window.addEventListener('load', () => {
       'event_category': 'engagement',
       'event_label': 'Abierta como app instalada'
     });
+  }
+
+  // iPhone (Safari): no hay instalación automática. Mostramos instrucciones.
+  if (esIOS && !yaInstalada && sessionStorage.getItem('installCerrado') !== '1') {
+    if (subtexto) subtexto.textContent = 'Pulsa Compartir y "Añadir a pantalla de inicio"';
+    btn.textContent = 'Ver cómo';
+    btn.addEventListener('click', () => {
+      alert('Para instalar IAtorpes en tu iPhone:\n\n1. Pulsa el botón Compartir (el cuadro con la flecha ↑) abajo en Safari.\n2. Baja y toca "Añadir a pantalla de inicio".\n3. Pulsa "Añadir".\n\n¡Listo! IAtorpes quedará en tu móvil como una app.');
+    });
+    setTimeout(() => { banner.style.display = 'block'; }, 2500);
   }
 
   // Android/Chrome: capturamos el evento de instalación disponible
@@ -6491,7 +6415,7 @@ window.addEventListener('load', () => {
     }
   });
 
-  // Al pulsar Instalar: lanzamos la instalación nativa
+  // Al pulsar Instalar (Android): lanzamos la instalación nativa
   btn.addEventListener('click', async () => {
     if (!promptEvent) return;
     promptEvent.prompt();

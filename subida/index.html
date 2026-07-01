@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v125 · Barra inferior de pestañas (Inicio/Descubre/Aprende) estilo Duolingo azul; secciones agrupadas, tarjetas wide quitadas del inicio, capas de cookies y botón instalar reordenadas · 29 junio 2026 -->
+<!-- IAtorpes.com · v126 · Botón de instalar unificado (se eliminó el banner viejo pwa-banner que duplicaba); ahora un solo banner Duolingo que maneja Android (instalación nativa) e iPhone (instrucciones "Compartir → Añadir a pantalla de inicio") · 1 julio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -2044,6 +2044,7 @@ body.dark .tab-acceso { background: linear-gradient(145deg,#236F94,#185A7E); bor
       <button class="nav-link active" onclick="goHome()">Inicio</button>
       <button class="nav-link" onclick="shareApp()" title="Compartir IAtorpes">🔗 Compartir</button>
       <button class="nav-link" onclick="openCard('ayuda')">Ayuda</button>
+      <button class="dark-toggle" id="btn-instalar-header" onclick="instalarDesdeHeader()" title="Instalar app" style="display:none">📲</button>
       <button class="dark-toggle" id="dark-toggle" onclick="toggleDark()" title="Modo oscuro">🌙</button>
     </nav>
   </header>
@@ -6376,19 +6377,44 @@ if ('serviceWorker' in navigator) {
 </div>
 <script>
 // ===== BOTÓN INSTALAR APP (PWA) =====
+let promptEvent = null;
+const esIOS_pwa = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+const yaInstalada_pwa = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+function mostrarInstruccionesIOS() {
+  alert('Para instalar IAtorpes en tu iPhone:\n\n1. Pulsa el botón Compartir (el cuadro con la flecha ↑) abajo en Safari.\n2. Baja y toca "Añadir a pantalla de inicio".\n3. Pulsa "Añadir".\n\n¡Listo! IAtorpes quedará en tu móvil como una app.');
+}
+
+// El botón del header (📲): instala en Android, muestra instrucciones en iPhone
+function instalarDesdeHeader() {
+  if (esIOS_pwa) {
+    mostrarInstruccionesIOS();
+  } else if (promptEvent) {
+    promptEvent.prompt();
+    promptEvent.userChoice.then(() => { promptEvent = null; });
+  } else {
+    alert('Para instalar IAtorpes:\n\nAbre el menú de tu navegador (los tres puntos ⋮ arriba) y elige "Instalar aplicación" o "Añadir a pantalla de inicio".');
+  }
+}
+
+// Muestra el botón del header si la app aún no está instalada
+function actualizarBotonHeader() {
+  const b = document.getElementById('btn-instalar-header');
+  if (!b) return;
+  b.style.display = yaInstalada_pwa ? 'none' : '';
+}
+
 (function() {
-  let promptEvent = null;
   const banner = document.getElementById('install-banner');
   const btn = document.getElementById('install-btn');
   const closeBtn = document.getElementById('install-close');
   const subtexto = document.getElementById('install-sub');
 
-  // ¿Ya está corriendo como app instalada? Entonces nunca mostrar el banner.
-  const yaInstalada = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-  const esIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  // Mostrar el botón del header (si no está instalada)
+  actualizarBotonHeader();
 
   // Si se abre como app instalada, registrarlo en Analytics
-  if (yaInstalada && typeof gtag === 'function') {
+  if (yaInstalada_pwa && typeof gtag === 'function') {
     gtag('event', 'pwa_abierta', {
       'event_category': 'engagement',
       'event_label': 'Abierta como app instalada'
@@ -6396,12 +6422,10 @@ if ('serviceWorker' in navigator) {
   }
 
   // iPhone (Safari): no hay instalación automática. Mostramos instrucciones.
-  if (esIOS && !yaInstalada && sessionStorage.getItem('installCerrado') !== '1') {
+  if (esIOS_pwa && !yaInstalada_pwa && sessionStorage.getItem('installCerrado') !== '1') {
     if (subtexto) subtexto.textContent = 'Pulsa Compartir y "Añadir a pantalla de inicio"';
     btn.textContent = 'Ver cómo';
-    btn.addEventListener('click', () => {
-      alert('Para instalar IAtorpes en tu iPhone:\n\n1. Pulsa el botón Compartir (el cuadro con la flecha ↑) abajo en Safari.\n2. Baja y toca "Añadir a pantalla de inicio".\n3. Pulsa "Añadir".\n\n¡Listo! IAtorpes quedará en tu móvil como una app.');
-    });
+    btn.addEventListener('click', mostrarInstruccionesIOS);
     setTimeout(() => { banner.style.display = 'block'; }, 2500);
   }
 
@@ -6409,8 +6433,7 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     promptEvent = e;
-    // Solo mostramos si no está instalada y el usuario no lo cerró antes
-    if (!yaInstalada && sessionStorage.getItem('installCerrado') !== '1') {
+    if (!yaInstalada_pwa && sessionStorage.getItem('installCerrado') !== '1') {
       banner.style.display = 'block';
     }
   });
@@ -6430,11 +6453,12 @@ if ('serviceWorker' in navigator) {
     sessionStorage.setItem('installCerrado', '1');
   });
 
-  // Cuando se instala: ocultar el banner para siempre
+  // Cuando se instala: ocultar el banner y el botón del header para siempre
   window.addEventListener('appinstalled', () => {
     banner.style.display = 'none';
     promptEvent = null;
-    // Registrar la instalación en Google Analytics
+    const b = document.getElementById('btn-instalar-header');
+    if (b) b.style.display = 'none';
     if (typeof gtag === 'function') {
       gtag('event', 'pwa_install', {
         'event_category': 'engagement',

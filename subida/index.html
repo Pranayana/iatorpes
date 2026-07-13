@@ -293,6 +293,22 @@ body.es-android .back-btn { display: none !important; }
 .idd-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
 .idd-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(150,150,150,0.4); transition: all 0.2s; }
 .idd-dot.active { background: var(--accent); width: 18px; border-radius: 4px; }
+
+/* Pista "desliza para ver más" bajo la IA del día */
+.scroll-hint {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  margin: 6px auto 2px; color: var(--accent);
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.82rem;
+  animation: hintBounce 1.6s ease-in-out infinite;
+  transition: opacity 0.4s;
+}
+.scroll-hint .hint-arrow { font-size: 1.3rem; line-height: 1; }
+.scroll-hint.oculto { opacity: 0; pointer-events: none; }
+@keyframes hintBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+@media (prefers-reduced-motion: reduce) { .scroll-hint { animation: none; } }
 .back-btn::before { content: ""; position: absolute; inset: 0; background: linear-gradient(160deg,rgba(255,255,255,0.42) 0%,transparent 55%); border-radius: inherit; pointer-events: none; }
 .back-btn:hover { transform: translateX(-50%) translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
 .hero { text-align: center; padding: 40px 24px 24px; flex-shrink: 0; }
@@ -2058,7 +2074,13 @@ body.dark .tab-acceso { background: linear-gradient(145deg,#236F94,#185A7E); bor
       </div>
 
       <!-- IA DEL DÍA — primero que ve el usuario -->
-      <div id="ia-del-dia-wrap" style="margin-bottom:16px"></div>
+      <div id="ia-del-dia-wrap" style="margin-bottom:6px"></div>
+
+      <!-- Pista visual: hay más contenido abajo -->
+      <div class="scroll-hint" id="scroll-hint">
+        <span>Desliza para ver más</span>
+        <span class="hint-arrow">⌄</span>
+      </div>
 
       <div class="search-wrap">
         <div class="search-label">🔍 ¿Qué quieres hacer?</div>
@@ -5880,6 +5902,26 @@ function clearHistory() {
 
 // Load history on start
 window.addEventListener('load', renderHistory);
+
+// ── Ocultar la pista "desliza para ver más" cuando el usuario baja ──
+(function() {
+  const hint = document.getElementById('scroll-hint');
+  if (!hint) return;
+  const scroller = document.querySelector('.home-inner');
+  let oculto = false;
+  function ocultar() {
+    if (oculto) return;
+    hint.classList.add('oculto');
+    oculto = true;
+  }
+  function comprobar() {
+    const y = (scroller ? scroller.scrollTop : 0) || window.scrollY || document.documentElement.scrollTop || 0;
+    if (y > 40) ocultar();
+  }
+  // Escuchar scroll en el contenedor real y en la ventana (por si acaso)
+  if (scroller) scroller.addEventListener('scroll', comprobar, { passive: true });
+  window.addEventListener('scroll', comprobar, { passive: true });
+})();
 
 // ── BUSCADOR ──
 const SEARCH_MAP = [

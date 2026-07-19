@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v130 · Noticias actualizadas: Google Fotos Video Remix (vídeos en obras de arte), OpenAI GPT-Live (IA que habla y escucha a la vez), y la ONU en Ginebra sobre gobernanza de la IA · 12 julio 2026 -->
+<!-- IAtorpes.com · v132 · Noticias actualizadas: OpenAI prepara altavoz inteligente para el hogar, Google Fotos edición por voz, y móviles que traducen llamadas en directo · 17 julio 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -3642,22 +3642,22 @@ body.dark .tab-acceso { background: linear-gradient(145deg,#236F94,#185A7E); bor
       </div>
       <div class="content">
         <div class="news-cards">
-          <a class="news-card" href="https://www.infobae.com/tecno/2026/07/09/google-fotos-estrena-funcion-que-transforma-tus-videos-en-obras-de-arte/" target="_blank" rel="noopener noreferrer">
-            <div class="news-source">Infobae · 9 julio 2026 🔥</div>
-            <div class="news-headline">Google Fotos convierte tus vídeos en obras de arte</div>
-            <div class="news-desc">Una nueva función llamada Video Remix permite transformar cualquier vídeo tuyo en algo con aspecto de película, pintura o dibujo, con solo escribir lo que quieres. Sin saber editar ni usar programas complicados: la IA hace el trabajo en segundos.</div>
+          <a class="news-card" href="https://rriostrujillo.substack.com/p/digitalia-noticias-tecnologia-e-ia" target="_blank" rel="noopener noreferrer">
+            <div class="news-source">Digitalia · 15 julio 2026 🔥</div>
+            <div class="news-headline">OpenAI prepara un altavoz inteligente para tu casa</div>
+            <div class="news-desc">Los creadores de ChatGPT están desarrollando su primer aparato: un altavoz inteligente, sin pantalla, que funcionará como asistente del hogar. Le hablas y te responde con naturalidad, para ayudarte en el día a día con solo la voz.</div>
             <div class="news-arrow">→</div>
           </a>
-          <a class="news-card" href="https://hipertextual.com/inteligencia-artificial/" target="_blank" rel="noopener noreferrer">
-            <div class="news-source">Hipertextual · 8 julio 2026</div>
-            <div class="news-headline">Llega la IA que habla y escucha a la vez, como una persona</div>
-            <div class="news-desc">OpenAI ha presentado una nueva voz de inteligencia artificial que puede escuchar y responder al mismo tiempo, sin esperar turnos. Esto la hace ideal para traducir una conversación en directo o charlar con ella de forma mucho más natural.</div>
+          <a class="news-card" href="https://www.infobae.com/tecno/2026/07/16/edita-tus-fotos-con-la-voz-gracias-a-la-nueva-funcion-de-ia-de-google-fotos/" target="_blank" rel="noopener noreferrer">
+            <div class="news-source">Infobae · 16 julio 2026</div>
+            <div class="news-headline">Ahora editas tus fotos hablándole al móvil</div>
+            <div class="news-desc">Google Fotos permite cambiar datos de tus fotos con solo decirlo: "cambia la fecha de esta foto" o "añade que esto fue en el cumpleaños de Ana". La IA entiende lo que le pides y lo hace sola, sin menús complicados. Comodísimo.</div>
             <div class="news-arrow">→</div>
           </a>
-          <a class="news-card" href="https://news.un.org/es/story/2026/07/1541630" target="_blank" rel="noopener noreferrer">
-            <div class="news-source">Noticias ONU · julio 2026</div>
-            <div class="news-headline">La ONU se reúne para poner orden en el mundo de la IA</div>
-            <div class="news-desc">Los países del mundo se han reunido en Ginebra para acordar cómo usar la inteligencia artificial de forma segura y que beneficie a todos. Una señal de que la IA ya es tan importante que hasta los gobiernos se ponen de acuerdo sobre ella.</div>
+          <a class="news-card" href="https://www.vodafone.es/c/conectate/dispositivos/mejores-moviles-con-ia/" target="_blank" rel="noopener noreferrer">
+            <div class="news-source">Vodafone · julio 2026</div>
+            <div class="news-headline">Los móviles ya traducen tus llamadas en directo</div>
+            <div class="news-desc">Los teléfonos más nuevos pueden traducir una llamada o un chat en tiempo real, mientras hablas. Así puedes entenderte con alguien de otro país sin saber su idioma. La IA hace de intérprete en tu propio bolsillo.</div>
             <div class="news-arrow">→</div>
           </a>
         </div>
@@ -6310,14 +6310,24 @@ function renderIaDelDia() {
   const wrap = document.getElementById('ia-del-dia-wrap');
   if (!wrap) return;
 
-  // Últimos 5 días: hoy y los 4 anteriores (solo pasados)
+  // ── Sistema CÍCLICO: el contenido rota en bucle y nunca se queda vacío ──
+  // Se cuentan los días transcurridos desde una fecha de referencia y se
+  // recorre el array con módulo, de modo que al llegar al final vuelve a empezar.
+  const total = IA_DEL_DIA.length;
+  const inicio = new Date(2026, 4, 21); // 21 mayo 2026 (mes 0-indexado: 4 = mayo)
   const hoy = new Date();
+  // Días completos transcurridos desde la fecha de inicio
+  const msPorDia = 24 * 60 * 60 * 1000;
+  const diasTranscurridos = Math.floor((hoy.setHours(0,0,0,0) - inicio.setHours(0,0,0,0)) / msPorDia);
+
+  // Índice de HOY en el ciclo (módulo siempre positivo)
+  const idxHoyCiclo = ((diasTranscurridos % total) + total) % total;
+
+  // Hoy y los 4 días anteriores, recorriendo el array de forma cíclica
   let dias = [];
   for (let d = 0; d < 5; d++) {
-    const f = new Date(hoy);
-    f.setDate(hoy.getDate() - d);
-    const entrada = IA_DEL_DIA.find(c => c.dia === f.getDate() && c.mes === (f.getMonth() + 1));
-    if (entrada) dias.push({ contenido: entrada, esHoy: d === 0 });
+    const idx = ((idxHoyCiclo - d) % total + total) % total;
+    dias.push({ contenido: IA_DEL_DIA[idx], esHoy: d === 0 });
   }
   if (dias.length === 0) return;
 

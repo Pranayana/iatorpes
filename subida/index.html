@@ -6268,7 +6268,7 @@ function _construirTarjetaDia(contenido, idx, esHoy) {
         <div style="display:flex;justify-content:flex-end;margin-bottom:6px">${etiqueta}</div>
         <div style="font-size:1.3rem;margin-bottom:4px">${contenido.emoji}</div>
         <div style="font-family:'Nunito',sans-serif;font-size:1.1rem;font-weight:900;color:#fff;margin-bottom:6px">${contenido.titulo}</div>
-        <div style="font-size:0.85rem;color:rgba(255,255,255,0.92);line-height:1.4;margin-bottom:10px">${contenido.texto}</div>
+        <div style="font-size:0.85rem;color:rgba(255,255,255,0.92);line-height:1.4;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">${contenido.texto}</div>
         <button onclick="${btnOnclick}" style="background:#fff;border:none;border-bottom:4px solid rgba(0,0,0,0.18);color:#1B8FBF;font-family:'Nunito',sans-serif;font-weight:900;font-size:0.9rem;padding:10px 20px;border-radius:14px;cursor:pointer">
           ${contenido.cta} →
         </button>

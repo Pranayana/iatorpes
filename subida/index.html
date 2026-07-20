@@ -6310,20 +6310,16 @@ function renderIaDelDia() {
   const wrap = document.getElementById('ia-del-dia-wrap');
   if (!wrap) return;
 
-  // ── Sistema CÍCLICO: el contenido rota en bucle y nunca se queda vacío ──
-  // Se cuentan los días transcurridos desde una fecha de referencia y se
-  // recorre el array con módulo, de modo que al llegar al final vuelve a empezar.
+  // Últimos 5 días de forma CÍCLICA: hoy y los 4 anteriores, rotando en bucle.
+  // Se cuentan los días desde el 21 mayo 2026 y se recorre el array con módulo,
+  // así nunca se queda vacío al pasar del 31 julio.
   const total = IA_DEL_DIA.length;
-  const inicio = new Date(2026, 4, 21); // 21 mayo 2026 (mes 0-indexado: 4 = mayo)
-  const hoy = new Date();
-  // Días completos transcurridos desde la fecha de inicio
+  const inicio = new Date(2026, 4, 21);
+  const ahora = new Date();
   const msPorDia = 24 * 60 * 60 * 1000;
-  const diasTranscurridos = Math.floor((hoy.setHours(0,0,0,0) - inicio.setHours(0,0,0,0)) / msPorDia);
+  const diasTrans = Math.floor((ahora.setHours(0,0,0,0) - inicio.setHours(0,0,0,0)) / msPorDia);
+  const idxHoyCiclo = ((diasTrans % total) + total) % total;
 
-  // Índice de HOY en el ciclo (módulo siempre positivo)
-  const idxHoyCiclo = ((diasTranscurridos % total) + total) % total;
-
-  // Hoy y los 4 días anteriores, recorriendo el array de forma cíclica
   let dias = [];
   for (let d = 0; d < 5; d++) {
     const idx = ((idxHoyCiclo - d) % total + total) % total;

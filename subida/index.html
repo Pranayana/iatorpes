@@ -6275,7 +6275,13 @@ function _construirTarjetaDia(contenido, idx, esHoy) {
       </div>`;
   }
 
-  const camposHTML = campos.map((c, i) => `
+  // Mostrar máximo 2 campos en la tarjeta para que no sea demasiado alta.
+  // El resto se rellenan igualmente (se envían vacíos o se completan al abrir la IA).
+  const MAX_CAMPOS_VISIBLES = 2;
+  const camposMostrar = campos.slice(0, MAX_CAMPOS_VISIBLES);
+  const hayMasCampos = campos.length > MAX_CAMPOS_VISIBLES;
+
+  const camposHTML = camposMostrar.map((c, i) => `
     <div style="margin-bottom:6px">
       <label style="display:block;font-size:0.8rem;font-weight:700;color:rgba(255,255,255,0.9);margin-bottom:4px">✏️ ${c.label}</label>
       <input id="idd-${idx}-campo-${i}" type="text" placeholder="Escribe aquí..."

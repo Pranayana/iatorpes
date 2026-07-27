@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "iatorpes",
+  "name": "iatorpes2",
   "compatibility_date": "2026-05-25",
   "observability": {
     "enabled": true

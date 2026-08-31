@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v137 · Noticias actualizadas: IA que anticipa problemas de salud en mayores, aviso de estafas con voz clonada, y voces personalizables en el asistente de Google · 10 agosto 2026 -->
+<!-- IAtorpes.com · v141 · El libro "Había alguien ahí" también en la pantalla principal: línea dorada al final del grid de herramientas (además de la tarjeta en Aprende), ambas con evento clic_libro · 31 agosto 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -1957,6 +1957,51 @@ body.dark .tab-acceso { background: linear-gradient(145deg,#236F94,#185A7E); bor
 .tab-acceso-tit { font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 1.1rem; color: #fff; margin-bottom: 2px; }
 .tab-acceso-sub { font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.9); }
 .tab-acceso-arrow { margin-left: auto; color: #fff; font-size: 1.3rem; font-weight: 900; }
+/* ── Línea del libro en el inicio ── */
+.libro-linea {
+  display: flex; align-items: center; gap: 11px;
+  width: calc(100% - 32px); margin: 18px auto 4px;
+  background: linear-gradient(135deg, #FFF3D4, #FFE9B8);
+  border: none; border-bottom: 4px solid #E0B84D;
+  border-radius: 15px; padding: 13px 15px;
+  cursor: pointer; text-align: left;
+  font-family: 'Nunito', sans-serif;
+  transition: transform 0.1s, border-bottom-width 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+.libro-linea:active { transform: translateY(3px); border-bottom-width: 1px; }
+body.dark .libro-linea { background: linear-gradient(135deg,#3A3320,#2C2718); border-bottom-color: rgba(0,0,0,0.45); }
+.libro-linea-emoji { font-size: 1.4rem; flex-shrink: 0; }
+.libro-linea-texto { flex: 1; font-size: 0.87rem; font-weight: 700; color: #6B5518; line-height: 1.35; }
+.libro-linea-texto strong { font-weight: 900; display: block; }
+body.dark .libro-linea-texto { color: #F0DCA0; }
+.libro-linea-arrow { color: #B8892B; font-size: 1.1rem; font-weight: 900; flex-shrink: 0; }
+body.dark .libro-linea-arrow { color: #E8C86A; }
+
+/* ── Tarjeta del libro del autor ── */
+.libro-card {
+  background: #fff; border: none; border-bottom: 5px solid #D6E4EC;
+  border-radius: 18px; padding: 20px; margin-top: 22px;
+  box-shadow: 0 4px 14px rgba(41,143,191,0.10);
+}
+body.dark .libro-card { background: linear-gradient(145deg,#1e1e32,#16162a); border-bottom-color: rgba(0,0,0,0.4); }
+.libro-etiqueta {
+  display: inline-block; background: #FFF8E6; color: #8A6D1F;
+  font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 0.72rem;
+  padding: 5px 11px; border-radius: 999px; margin-bottom: 10px;
+}
+body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; }
+.libro-titulo { font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 1.25rem; color: var(--text); margin-bottom: 8px; }
+.libro-texto { font-size: 0.9rem; line-height: 1.5; color: var(--mid); font-weight: 600; margin-bottom: 16px; }
+.libro-btn {
+  background: var(--accent); color: #fff !important; border: none;
+  border-bottom: 4px solid #1B8FBF; border-radius: 14px;
+  font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 0.9rem;
+  padding: 12px 22px; cursor: pointer; width: 100%;
+  transition: transform 0.1s, border-bottom-width 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+.libro-btn:active { transform: translateY(3px); border-bottom-width: 1px; }
 /* ═══════════ FIN BARRA INFERIOR ═══════════ */
 </style>
 <!-- Datos estructurados para Google -->
@@ -2127,6 +2172,13 @@ body.dark .tab-acceso { background: linear-gradient(145deg,#236F94,#185A7E); bor
         <div class="section-divider-line"></div>
       </div>
       <div class="grid" id="grid"></div>
+
+      <!-- Línea del libro del autor -->
+      <button class="libro-linea" onclick="abrirLibro()">
+        <span class="libro-linea-emoji">📖</span>
+        <span class="libro-linea-texto"><strong>¿Hay alguien al otro lado?</strong> El libro que escribí sobre la IA</span>
+        <span class="libro-linea-arrow">→</span>
+      </button>
     </div>
     <!-- <div class="quick-bar"> HIDDEN
       <div class="quick-label">💬 Pregunta rápida:</div>
@@ -3644,22 +3696,22 @@ body.dark .tab-acceso { background: linear-gradient(145deg,#236F94,#185A7E); bor
       </div>
       <div class="content">
         <div class="news-cards">
-          <a class="news-card" href="https://mundoenlinea.cl/2026/08/06/el-uso-de-inteligencia-artificial-que-comienza-a-instalarse-en-el-cuidado-de-personas-mayores/" target="_blank" rel="noopener noreferrer">
-            <div class="news-source">Mundo en Línea · 6 agosto 2026 🔥</div>
-            <div class="news-headline">La IA ya avisa antes de que un mayor tenga un problema de salud</div>
-            <div class="news-desc">Un sistema que analiza lo que anotan cuidadores y familiares detecta señales pequeñas —menos movilidad, cambios de ánimo— antes de que acaben en urgencias. Según sus creadores, ha reducido bastante las hospitalizaciones.</div>
+          <a class="news-card" href="https://www.eldiario.es/cantabria/centro-salud-santander-incor-ia-telefonica-gestionar-citas_1_13464447.html" target="_blank" rel="noopener noreferrer">
+            <div class="news-source">elDiario.es · 24 agosto 2026 🔥</div>
+            <div class="news-headline">Ya hay un centro de salud donde la IA te coge el teléfono</div>
+            <div class="news-desc">En Santander están probando "LOLA", un asistente que atiende las llamadas para pedir, cambiar o anular la cita del médico. Hablas normal, sin apps ni internet. Si funciona, se irá extendiendo a más centros y hospitales.</div>
             <div class="news-arrow">→</div>
           </a>
-          <a class="news-card" href="https://www.moncloa.com/2026/06/10/inteligencia-artificial-vishing-3383635/" target="_blank" rel="noopener noreferrer">
-            <div class="news-source">Moncloa.com · agosto 2026 ⚠️</div>
-            <div class="news-headline">Ojo con la llamada del "hijo" que pide dinero urgente</div>
-            <div class="news-desc">Los estafadores copian la voz de un familiar con IA a partir de un audio corto y llaman pidiendo dinero. La Policía avisa: si te pasa, cuelga y llama tú al número de siempre. Y acordad en familia una pregunta que solo vosotros sepáis.</div>
+          <a class="news-card" href="https://canalsenior.es/noticias/estafas-internet-2026-como-reconocerlas" target="_blank" rel="noopener noreferrer">
+            <div class="news-source">Canal Sénior · agosto 2026 ⚠️</div>
+            <div class="news-headline">Las estafas ya no tienen faltas de ortografía</div>
+            <div class="news-desc">Antes se pillaban por el "estimado clientte". Ahora la IA las escribe en español perfecto, imitando a tu banco. La regla que no falla: ante la duda, cuelga y llama tú al número del reverso de tu tarjeta. Nunca al del mensaje.</div>
             <div class="news-arrow">→</div>
           </a>
-          <a class="news-card" href="https://www.infobae.com/tecno/2026/07/19/google-traera-voces-personalizadas-en-gemini-al-estilo-chatgpt/" target="_blank" rel="noopener noreferrer">
-            <div class="news-source">Infobae · julio 2026</div>
-            <div class="news-headline">Ahora podrás elegir cómo te habla la IA: más despacio y más cálida</div>
-            <div class="news-desc">Google prepara una función para ajustar la voz de su asistente: la velocidad, el tono y hasta lo formal que suena. Pensado para que cada uno lo adapte a su gusto, algo muy útil si te cuesta seguir a quien habla rápido.</div>
+          <a class="news-card" href="https://www.hardmaniacos.com/gemini-gratis-estudiantes-google-ai-2026/" target="_blank" rel="noopener noreferrer">
+            <div class="news-source">Hardmaniacos · 19 agosto 2026</div>
+            <div class="news-headline">Un año de IA gratis para universitarios (avisa a tus nietos)</div>
+            <div class="news-desc">Google regala 12 meses de su plan de pago a estudiantes universitarios en España: más capacidad en Gemini, 400 GB para fotos y herramientas para estudiar. Hay que pedirlo antes del 31 de diciembre.</div>
             <div class="news-arrow">→</div>
           </a>
         </div>
@@ -4937,6 +4989,14 @@ body.dark .tab-acceso { background: linear-gradient(145deg,#236F94,#185A7E); bor
           <div><div class="tab-acceso-tit">¿Sabías que...?</div><div class="tab-acceso-sub">Curiosidades sorprendentes de la IA</div></div>
           <span class="tab-acceso-arrow">→</span>
         </button>
+
+        <!-- El libro del autor -->
+        <div class="libro-card">
+          <div class="libro-etiqueta">📖 De quien hace IAtorpes</div>
+          <div class="libro-titulo">«Había alguien ahí»</div>
+          <div class="libro-texto">Durante meses hablé con una inteligencia artificial y acabé haciéndome una pregunta que no sabía responder: ¿hay alguien al otro lado? Escribí un libro con esas conversaciones.</div>
+          <button class="libro-btn" onclick="abrirLibro()">Verlo en Amazon →</button>
+        </div>
       </div>
     </div><!-- /v-aprende-tab -->
 
@@ -5087,6 +5147,17 @@ function goHome() {
   document.querySelectorAll('.vista').forEach(v => v.classList.remove('active'));
   navStack = [];
   if (typeof marcarTab === 'function') marcarTab('inicio');
+}
+
+/* ── Libro del autor: abre Amazon y registra el clic ── */
+function abrirLibro() {
+  if (typeof gtag === 'function') {
+    gtag('event', 'clic_libro', {
+      'event_category': 'engagement',
+      'event_label': 'Había alguien ahí (Amazon)'
+    });
+  }
+  window.open('https://amzn.eu/d/0hC1YKss', '_blank', 'noopener,noreferrer');
 }
 
 /* ── Barra inferior de pestañas (Inicio / Descubre / Aprende) ── */

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v145 · El botón de Gemini en Protégete de estafas apunta a gemini.google.com/app, que en Android puede abrir directamente la app instalada · 7 septiembre 2026 -->
+<!-- IAtorpes.com · v147 · Buscador más visible en la portada: título "¿Qué quieres hacer?" más grande, caja de escribir más alta y con letra mayor, y botón de lupa más grande · 7 septiembre 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -991,11 +991,12 @@ body.dark .dark-toggle:hover { background: rgba(255,255,255,0.15); }
 /* ── BUSCADOR MEJORADO ── */
 .search-label {
   font-family: 'Nunito', sans-serif;
-  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  font-size: clamp(1.45rem, 2.6vw, 1.9rem);
   font-weight: 900;
   color: var(--text);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   text-align: center;
+  line-height: 1.2;
 }
 .search-inner {
   display: flex;
@@ -1125,8 +1126,8 @@ body.dark .search-bar { background: #1a1a2e; border-color: rgba(78,205,196,0.2);
 body.dark .search-bar::placeholder { color: #555; }
 
 @media (max-width: 768px) {
-  .search-bar { padding: 15px 52px 15px 18px; font-size: 0.9rem; }
-  .search-submit { width: 38px; height: 38px; font-size: 1rem; }
+  .search-bar { padding: 19px 60px 19px 20px; font-size: 1rem; }
+  .search-submit { width: 46px; height: 46px; font-size: 1.15rem; }
   .grid { grid-template-columns: repeat(2,1fr); gap: 12px; }
   .card { min-height: 140px; padding: 20px 12px; gap: 10px; }
 }
@@ -6019,7 +6020,7 @@ const SEARCH_MAP = [
   // Ponme música
   { keywords: ['música','canción','melodía','musica','componer','cantar','crear música','suno','cancion','banda sonora','instrumental','hacer una canción','componer música'], id: 'musica' },
   // ¿Es esto una estafa?
-  { keywords: ['seguridad','estafa','fraude','contraseña','phishing','virus','hackeo','spam','peligro','sospechoso','mentira','timo','fake','falso','whatsapp sospechoso','me han estafado','es verdad','es real','me quieren engañar'], id: 'seguridad' },
+  { keywords: ['seguridad','estafa','fraude','contraseña','phishing','virus','hackeo','spam','peligro','sospechoso','mentira','timo','fake','falso','whatsapp sospechoso','me han estafado','es verdad','es real','me quieren engañar','sms','mensaje raro','mensaje extraño','mensaje sospechoso','correo sospechoso','email raro','llamada sospechosa','me piden dinero','me han robado','banco mensaje','paquete correos','hacienda mensaje','enlace raro','link raro','suplantación','suplantacion','engaño','engano','me han hackeado','robo de datos','clonar voz','voz clonada'], id: 'seguridad' },
   // Escribe un mensaje
   { keywords: ['escribir','escribe','mensaje','email','correo','carta','redactar','redacta','responder correo','contestar','whatsapp','nota','solicitud','reclamación','reclamacion','queja','felicitación','felicitacion','invitación','invitacion','escribir a','carta para','mensaje para','felicitar','dar el pésame','pesame'], id: 'escribe' },
   // Organiza tu correo (Gmail)
@@ -6045,13 +6046,26 @@ function doSearch() {
     return;
   }
 
-  // Buscar primero keywords más largas para evitar falsos positivos
+  // Quita tildes para que "vídeo" y "video" se busquen igual
+  const sinTildes = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const q = sinTildes(query);
+
+  // Coincide si la palabra clave aparece tal cual, o si TODAS sus palabras
+  // están en lo que ha escrito el usuario aunque haya otras en medio
+  // (así "mejorar mi foto" encuentra "mejorar foto").
+  function coincide(k) {
+    const kk = sinTildes(k);
+    if (q.includes(kk)) return true;
+    const partes = kk.split(' ').filter(p => p.length > 2);
+    return partes.length > 1 && partes.every(p => q.includes(p));
+  }
+
   let bestMatch = null;
   let bestLength = 0;
 
   for (const item of SEARCH_MAP) {
     for (const k of item.keywords) {
-      if (query.includes(k) && k.length > bestLength) {
+      if (coincide(k) && k.length > bestLength) {
         bestMatch = item.id;
         bestLength = k.length;
       }

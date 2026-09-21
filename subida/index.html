@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v148 · Noticias actualizadas: los creadores de la IA piden frenar el ritmo, asistentes de IA para trámites administrativos, y el editor de fotos con IA de WhatsApp · 14 septiembre 2026 -->
+<!-- IAtorpes.com · v154 · Listas de IA para preguntar: ChatGPT, Gemini y Claude por igual (sin "Recomendado"), ChatGPT primero; todos los enlaces a Gemini abren la app (/app) · 21 septiembre 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -1937,6 +1937,85 @@ body.dark .tabbar { background: linear-gradient(145deg,#236F94,#185A7E); border-
 body.con-tabbar #home, body.con-tabbar #inner { padding-bottom: 76px; }
 body.con-tabbar .home-inner { padding-bottom: 96px; }
 
+
+
+/* ── Bloque final del inicio: ¿Y ahora qué te apetece? ── */
+.fin-bloque { margin: 22px 16px 4px; background: #fff; border-radius: 20px; border-bottom: 5px solid #D6E4EC; padding: 18px 16px 16px; box-shadow: 0 4px 14px rgba(41,143,191,0.10); opacity: 0; transform: translateY(24px); transition: opacity .5s, transform .5s; }
+.fin-bloque.visto { opacity: 1; transform: none; animation: finSalto .6s .45s; }
+@keyframes finSalto { 0%,100% { transform: none; } 40% { transform: translateY(-10px); } 70% { transform: translateY(2px); } }
+body.dark .fin-bloque { background: linear-gradient(145deg,#1e1e32,#16162a); border-bottom-color: rgba(0,0,0,0.4); }
+.fin-bloque { position: relative; }
+.fin-bloque.cerrado { display: none; }
+.fin-cerrar { position: absolute; top: 8px; right: 8px; width: 40px; height: 40px; border: none; border-radius: 50%; background: #EAF6FC; color: #555; font-size: 1.2rem; font-weight: 900; cursor: pointer; line-height: 1; -webkit-tap-highlight-color: transparent; }
+body.dark .fin-cerrar { background: rgba(255,255,255,0.1); color: #ccc; }
+.fin-titulo { padding: 4px 38px 0; font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 1.25rem; line-height: 1.3; color: var(--text); text-align: center; margin-bottom: 14px; }
+.fin-mano { display: inline-block; transform-origin: 70% 70%; }
+.fin-bloque.visto .fin-mano { animation: finSaludo 1.2s .6s 2; }
+@keyframes finSaludo { 0%,100% { transform: rotate(0); } 20%,60% { transform: rotate(18deg); } 40%,80% { transform: rotate(-10deg); } }
+.fin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.fin-btn { border: none; border-radius: 16px; padding: 16px 8px 14px; cursor: pointer; color: #fff; font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 1rem; line-height: 1.2; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: transform .1s, border-bottom-width .1s; -webkit-tap-highlight-color: transparent; }
+.fin-btn span { font-size: 2rem; }
+.fin-btn:active { transform: translateY(3px); border-bottom-width: 2px; }
+.fin-btn.jugar { background: #FF9600; border-bottom: 5px solid #CC7800; }
+.fin-btn.noticias { background: var(--accent); border-bottom: 5px solid #1B8FBF; }
+.fin-btn.videos { background: #FF5A5F; border-bottom: 5px solid #C93B40; }
+.fin-btn.preguntar { background: #58CC02; border-bottom: 5px solid #3F9A00; }
+@media (prefers-reduced-motion: reduce) { .fin-bloque, .fin-bloque.visto, .fin-bloque.visto .fin-mano { transition: none; animation: none; opacity: 1; transform: none; } }
+
+/* ═══════════ JUEGOS ═══════════ */
+.jg-wrap { padding: 20px clamp(16px,3vw,48px) 110px; max-width: 640px; margin: 0 auto; }
+.jg-titulo { font-family: 'Nunito',sans-serif; font-size: 1.5rem; font-weight: 900; color: var(--text); margin-bottom: 4px; }
+.jg-sub { color: var(--mid); font-weight: 700; font-size: 0.95rem; margin-bottom: 16px; }
+.jg-marcador { display: flex; justify-content: space-between; align-items: center; font-family: 'Nunito',sans-serif; font-weight: 900; color: #1B8FBF; font-size: 1rem; margin-bottom: 12px; }
+.jg-card {
+  background: #fff; border-radius: 18px; border-bottom: 5px solid #D6E4EC;
+  padding: 20px; box-shadow: 0 4px 14px rgba(41,143,191,0.10); margin-bottom: 16px;
+}
+body.dark .jg-card { background: linear-gradient(145deg,#1e1e32,#16162a); border-bottom-color: rgba(0,0,0,0.4); }
+.jg-canal { display: inline-block; background: #EAF6FC; color: #1B8FBF; font-weight: 900; font-size: 0.85rem; border-radius: 100px; padding: 4px 12px; margin-bottom: 12px; }
+body.dark .jg-canal { background: rgba(78,205,196,0.15); color: #4ECDC4; }
+.jg-mensaje { font-size: 1.12rem; line-height: 1.5; font-weight: 700; color: var(--text); }
+.jg-mensaje.burbuja { background: #DCF8C6; color: #1C1C1E; border-radius: 4px 16px 16px 16px; padding: 14px 16px; }
+.jg-mensaje.sms { background: #EFEFF4; color: #1C1C1E; border-radius: 16px 16px 16px 4px; padding: 14px 16px; }
+.jg-pregunta { font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 1.15rem; color: var(--text); text-align: center; margin: 4px 0 12px; }
+.jg-botones { display: flex; gap: 12px; }
+.jg-botones.columna { flex-direction: column; }
+.jg-btn {
+  flex: 1; border: none; border-radius: 16px; padding: 18px 12px;
+  font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 1.15rem; color: #fff; cursor: pointer;
+  background: var(--accent); border-bottom: 5px solid #1B8FBF;
+  transition: transform 0.1s, border-bottom-width 0.1s; -webkit-tap-highlight-color: transparent;
+}
+.jg-btn:active { transform: translateY(3px); border-bottom-width: 2px; }
+.jg-btn.rojo { background: #FF5A5F; border-bottom-color: #C93B40; }
+.jg-btn.verde { background: #58CC02; border-bottom-color: #3F9A00; }
+.jg-btn.blanco { background: #fff; color: #1C1C1E; border: 2px solid #D6E4EC; border-bottom: 5px solid #D6E4EC; text-align: left; font-size: 1.05rem; }
+body.dark .jg-btn.blanco { background: #22223a; color: #F0F0F0; border-color: rgba(255,255,255,0.12); }
+.jg-btn.blanco.ok { background: #D7FFB8; border-color: #58CC02; color: #1C1C1E; }
+.jg-btn.blanco.mal { background: #FFDFE0; border-color: #FF5A5F; color: #1C1C1E; }
+.jg-btn:disabled { cursor: default; }
+.jg-feedback { display: none; border-radius: 16px; padding: 16px; margin-bottom: 14px; font-size: 1.02rem; line-height: 1.5; font-weight: 700; }
+.jg-feedback.visible { display: block; }
+.jg-feedback.bien { background: #D7FFB8; color: #2B5A00; }
+.jg-feedback.fallo { background: #FFDFE0; color: #8A1C20; }
+.jg-feedback strong { display: block; font-size: 1.2rem; font-weight: 900; margin-bottom: 4px; font-family: 'Nunito',sans-serif; }
+.jg-final { text-align: center; }
+.jg-final-emoji { font-size: 3.5rem; margin-bottom: 6px; }
+.jg-final-num { font-family: 'Nunito',sans-serif; font-size: 2rem; font-weight: 900; color: #1B8FBF; }
+.jg-final-txt { font-size: 1.05rem; font-weight: 700; color: var(--text); margin: 8px 0 18px; line-height: 1.5; }
+.jg-racha { text-align: center; font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 1.1rem; color: #FF9600; margin-bottom: 14px; }
+.jg-tablero { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; max-width: 330px; margin: 0 auto 16px; }
+.jg-casilla {
+  aspect-ratio: 1; border: none; border-radius: 16px; background: #fff; border-bottom: 5px solid #D6E4EC;
+  font-family: 'Nunito',sans-serif; font-size: 2.8rem; font-weight: 900; cursor: pointer; color: #1B8FBF;
+  -webkit-tap-highlight-color: transparent; display: flex; align-items: center; justify-content: center;
+}
+body.dark .jg-casilla { background: #22223a; border-bottom-color: rgba(0,0,0,0.4); }
+.jg-casilla.o { color: #FF9600; }
+.jg-casilla.gana { background: #D7FFB8; }
+.jg-estado { text-align: center; font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 1.2rem; color: var(--text); margin-bottom: 14px; min-height: 1.6em; }
+.jg-nota { font-size: 0.9rem; color: var(--mid); font-weight: 600; line-height: 1.5; text-align: center; margin-top: 10px; }
+
 /* Pantallas Descubre y Aprende (agrupadores) */
 .tab-pantalla { padding: 20px clamp(16px,3vw,48px) 90px; max-width: 640px; margin: 0 auto; }
 .tab-pantalla-titulo { font-family: 'Nunito',sans-serif; font-size: 1.6rem; font-weight: 900; color: var(--text); margin-bottom: 4px; }
@@ -2174,6 +2253,18 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       </div>
       <div class="grid" id="grid"></div>
 
+      <!-- Bloque final: ¿Y ahora qué te apetece? -->
+      <div class="fin-bloque" id="fin-bloque">
+        <button class="fin-cerrar" onclick="finCerrar()" aria-label="Cerrar">✕</button>
+        <div class="fin-titulo"><span class="fin-mano">👋</span> ¿Y ahora qué te apetece?</div>
+        <div class="fin-grid">
+          <button class="fin-btn jugar" onclick="finIr('juegos')"><span>🎮</span>Jugar un rato</button>
+          <button class="fin-btn noticias" onclick="finIr('noticias')"><span>📰</span>Últimas noticias</button>
+          <button class="fin-btn videos" onclick="finIr('videos')"><span>▶️</span>Ver vídeos</button>
+          <button class="fin-btn preguntar" onclick="finIr('consultas')"><span>💬</span>Preguntar algo</button>
+        </div>
+      </div>
+
       <!-- Línea del libro del autor -->
       <button class="libro-linea" onclick="abrirLibro()">
         <span class="libro-linea-emoji">📖</span>
@@ -2249,9 +2340,9 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       <div class="content">
         <p style="text-align:center;color:var(--mid);margin-bottom:12px;font-size:0.92rem">Todas son gratuitas y te responderán al instante.</p>
         <div class="ia-buttons">
-          <button class="ia-btn featured" onclick="window.open('https://claude.ai','_blank')"><span style="font-size:1.6rem">🤖</span><div><span class="ia-label">Claude</span><span class="featured-badge">⭐ Recomendado</span></div><span style="margin-left:auto;color:#888;font-size:0.9rem">Abrir →</span></button>
           <button class="ia-btn" onclick="window.open('https://chatgpt.com','_blank')"><span style="font-size:1.6rem">🟢</span><div><span class="ia-label">ChatGPT</span></div><span style="margin-left:auto;color:#888;font-size:0.9rem">Abrir →</span></button>
-          <button class="ia-btn" onclick="window.open('https://gemini.google.com','_blank')"><span style="font-size:1.6rem">✨</span><div><span class="ia-label">Gemini</span></div><span style="margin-left:auto;color:#888;font-size:0.9rem">Abrir →</span></button>
+          <button class="ia-btn" onclick="window.open('https://gemini.google.com/app','_blank')"><span style="font-size:1.6rem">✨</span><div><span class="ia-label">Gemini</span></div><span style="margin-left:auto;color:#888;font-size:0.9rem">Abrir →</span></button>
+          <button class="ia-btn" onclick="window.open('https://claude.ai','_blank')"><span style="font-size:1.6rem">🤖</span><div><span class="ia-label">Claude</span></div><span style="margin-left:auto;color:#888;font-size:0.9rem">Abrir →</span></button>
         </div>
       </div>
     </div>
@@ -2305,7 +2396,7 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
           <div class="acc-item">
             <div class="acc-header"><span class="acc-icon">✨</span><span class="acc-title">Gemini — Google</span><span class="acc-arrow">▼</span></div>
             <div class="acc-body">El más conectado a Google. Perfecto si usas Gmail o Google Docs. Muy bueno buscando información actualizada.
-              <br><br><button onclick="window.open('https://gemini.google.com','_blank')" style="background:#4285F4;color:white;border:none;padding:8px 18px;border-radius:100px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;margin-top:4px">Abrir Gemini →</button>
+              <br><br><button onclick="window.open('https://gemini.google.com/app','_blank')" style="background:#4285F4;color:white;border:none;padding:8px 18px;border-radius:100px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;margin-top:4px">Abrir Gemini →</button>
             </div>
           </div>
         </div>
@@ -2313,9 +2404,9 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       <div class="tab-panel" id="t-duda-prueba">
         <p style="margin-bottom:12px;color:var(--mid);font-size:0.92rem">¿Quieres probar una de estas IAs ahora mismo? Pulsa en el botón para abrirla en una nueva pestaña.</p>
         <div class="ia-buttons">
-          <button class="ia-btn featured" onclick="window.open('https://claude.ai','_blank')"><span style="font-size:1.6rem">🤖</span><div><span class="ia-label">Claude</span><span class="featured-badge">⭐ Recomendado</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
           <button class="ia-btn" onclick="window.open('https://chatgpt.com','_blank')"><span style="font-size:1.6rem">🟢</span><div><span class="ia-label">ChatGPT</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
-          <button class="ia-btn" onclick="window.open('https://gemini.google.com','_blank')"><span style="font-size:1.6rem">✨</span><div><span class="ia-label">Gemini</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
+          <button class="ia-btn" onclick="window.open('https://gemini.google.com/app','_blank')"><span style="font-size:1.6rem">✨</span><div><span class="ia-label">Gemini</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
+          <button class="ia-btn" onclick="window.open('https://claude.ai','_blank')"><span style="font-size:1.6rem">🤖</span><div><span class="ia-label">Claude</span></div><span style="margin-left:auto;color:#888">Abrir →</span></button>
         </div>
       </div>
     </div>
@@ -2408,7 +2499,7 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
           <div class="acc-item open">
             <div class="acc-header"><span class="acc-icon">✨</span><span class="acc-title">Nano Banana · Gemini — Gratis</span><span class="acc-arrow">▼</span></div>
             <div class="acc-body">La opción más fácil. Entra en Gemini, pídele una imagen y la crea al momento. Sin registro extra.
-              <br><br><button onclick="window.open('https://gemini.google.com','_blank')" style="background:#4285F4;color:white;border:none;padding:8px 18px;border-radius:100px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer">Abrir Gemini →</button>
+              <br><br><button onclick="window.open('https://gemini.google.com/app','_blank')" style="background:#4285F4;color:white;border:none;padding:8px 18px;border-radius:100px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer">Abrir Gemini →</button>
             </div>
           </div>
           <div class="acc-item">
@@ -2617,7 +2708,7 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       <div class="tab-panel" id="t-res-compara">
         <div class="llm-card" style="border-left-color:#D97706" onclick="window.open('https://claude.ai','_blank')"><div class="llm-logo">🤖</div><div style="flex:1"><div class="llm-name">Claude <span class="llm-badge" style="background:#FEF3C7;color:#D97706">Recomendado</span></div><div class="llm-desc">El mejor para resumir textos largos y complejos. Entiende contratos, documentos legales y textos técnicos mejor que ninguno.</div><div class="llm-tags"><span class="tag">📄 Textos largos</span><span class="tag">⚖️ Documentos legales</span><span class="tag">🎯 Muy preciso</span></div></div><span style="margin-left:10px;color:#D97706;font-weight:700;font-size:1.1rem;align-self:center">→</span></div>
         <div class="llm-card" style="border-left-color:#10a37f" onclick="window.open('https://chatgpt.com','_blank')"><div class="llm-logo">🟢</div><div style="flex:1"><div class="llm-name">ChatGPT <span class="llm-badge" style="background:#D1FAE5;color:#065F46">Gratis</span></div><div class="llm-desc">Muy bueno resumiendo y acepta subir archivos PDF directamente. Puedes hacerle preguntas sobre el documento.</div><div class="llm-tags"><span class="tag">📎 Sube PDFs</span><span class="tag">❓ Preguntas</span><span class="tag">🌐 Versátil</span></div></div><span style="margin-left:10px;color:#10a37f;font-weight:700;font-size:1.1rem;align-self:center">→</span></div>
-        <div class="llm-card" style="border-left-color:#4285F4" onclick="window.open('https://gemini.google.com','_blank')"><div class="llm-logo">✨</div><div style="flex:1"><div class="llm-name">Gemini <span class="llm-badge" style="background:#DBEAFE;color:#1D4ED8">Gratis</span></div><div class="llm-desc">Perfecto si tienes el documento en Google Drive o Gmail. Lo resume directamente sin tener que copiar nada.</div><div class="llm-tags"><span class="tag">☁️ Google Drive</span><span class="tag">📧 Gmail</span><span class="tag">🔗 Sin copiar</span></div></div><span style="margin-left:10px;color:#4285F4;font-weight:700;font-size:1.1rem;align-self:center">→</span></div>
+        <div class="llm-card" style="border-left-color:#4285F4" onclick="window.open('https://gemini.google.com/app','_blank')"><div class="llm-logo">✨</div><div style="flex:1"><div class="llm-name">Gemini <span class="llm-badge" style="background:#DBEAFE;color:#1D4ED8">Gratis</span></div><div class="llm-desc">Perfecto si tienes el documento en Google Drive o Gmail. Lo resume directamente sin tener que copiar nada.</div><div class="llm-tags"><span class="tag">☁️ Google Drive</span><span class="tag">📧 Gmail</span><span class="tag">🔗 Sin copiar</span></div></div><span style="margin-left:10px;color:#4285F4;font-weight:700;font-size:1.1rem;align-self:center">→</span></div>
       </div>
       <div class="tab-panel" id="t-res-ejemplos">
         <p style="margin-bottom:10px;color:var(--mid);font-size:0.9rem">Copia este texto en la IA junto con tu documento:</p>
@@ -3697,22 +3788,22 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       </div>
       <div class="content">
         <div class="news-cards">
-          <a class="news-card" href="https://www.euronews.com/next/2026/09/14/ai-makers-step-up-calls-for-a-slowdown-as-fears-of-a-rogue-takeover-grow" target="_blank" rel="noopener noreferrer">
-            <div class="news-source">Euronews · 14 septiembre 2026 🔥</div>
-            <div class="news-headline">Los que fabrican la IA piden ir más despacio</div>
-            <div class="news-desc">El jefe de una de las grandes empresas de inteligencia artificial ha pedido frenar el ritmo para poder controlar mejor los riesgos, y otros se han sumado. El debate ha llegado a los gobiernos y hasta ha movido las bolsas. Cuando avisan los que la hacen, conviene escuchar.</div>
+          <a class="news-card" href="https://cadenalaser.com/nota/grecia-desarticula-una-red-criminal-que-clonaba-voces-de-familiares-con-ia-para-estafas" target="_blank" rel="noopener noreferrer">
+            <div class="news-source">Cadena Láser · 20 sept 2026 🔥</div>
+            <div class="news-headline">Llamaban con la voz de tu hijo… pero era una máquina</div>
+            <div class="news-desc">La policía de Grecia ha detenido a una banda que copiaba con IA la voz de familiares para pedir dinero urgente por teléfono. Robaron más de un millón de euros. Consejo: si un familiar te llama pidiendo dinero con prisas, cuelga y llámale tú a su número de siempre.</div>
             <div class="news-arrow">→</div>
           </a>
-          <a class="news-card" href="https://www.moncloa.com/2026/09/12/comunidad-madrid-30-agentes-ia-tramites-3430475/" target="_blank" rel="noopener noreferrer">
-            <div class="news-source">Moncloa.com · 12 septiembre 2026</div>
-            <div class="news-headline">Papeleos que se resolverán en un minuto con ayuda de la IA</div>
-            <div class="news-desc">Madrid pone en marcha asistentes de inteligencia artificial que te guían paso a paso en los trámites y te avisan de qué papeles hacen falta. La idea es que no tengas que saber qué oficina lleva cada cosa. Poco a poco irá llegando al resto de España.</div>
+          <a class="news-card" href="https://www.infobae.com/tecno/2026/09/15/el-iphone-se-vuelve-mas-inteligente-con-el-nuevo-ios-en-espanol-a-partir-de-octubre-de-2026/" target="_blank" rel="noopener noreferrer">
+            <div class="news-source">Infobae · 15 sept 2026</div>
+            <div class="news-headline">Siri se vuelve lista y hablará español en octubre</div>
+            <div class="news-desc">Apple ha sacado la nueva actualización del iPhone, y en octubre llegará en español una Siri con inteligencia artificial a la que podrás preguntar como si fuera ChatGPT. Funcionará incluso en iPhone de hace unos años, desde el iPhone 11.</div>
             <div class="news-arrow">→</div>
           </a>
-          <a class="news-card" href="https://www.infobae.com/tecno/2026/08/22/whatsapp-prepara-un-editor-de-fotos-con-ia-para-transformar-tus-imagenes-antes-de-compartirlas/" target="_blank" rel="noopener noreferrer">
-            <div class="news-source">Infobae · septiembre 2026</div>
-            <div class="news-headline">WhatsApp podrá quitar de tus fotos lo que estorba</div>
-            <div class="news-desc">Prepara un editor con IA para arreglar las fotos antes de enviarlas: borrar a ese señor que se cuela al fondo, ampliar la imagen para que no se corte nada o cambiarle el aspecto. Todo desde el propio WhatsApp, sin instalar nada más.</div>
+          <a class="news-card" href="https://www.eldestapeweb.com/tecnologia/revolucion-whatsapp-nueva-funcion-ia-haga-tareas-vos-dentro-app-202699144315" target="_blank" rel="noopener noreferrer">
+            <div class="news-source">El Destape · 9 sept 2026</div>
+            <div class="news-headline">WhatsApp prueba “contactos” que son inteligencias artificiales</div>
+            <div class="news-desc">WhatsApp está probando que puedas añadir hasta cinco asistentes de IA que aparecen como un contacto más, para preguntarles cosas o encargarles tareas. Ojo: esas conversaciones no son privadas como las de tu familia, así que no les cuentes datos personales ni del banco.</div>
             <div class="news-arrow">→</div>
           </a>
         </div>
@@ -4342,7 +4433,7 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
           <div class="acc-item">
             <div class="acc-header"><span class="acc-icon">🎨</span><span class="acc-title">¿Cómo crear tu primera imagen con IA?</span><span class="acc-arrow">▼</span></div>
             <div class="acc-body">Crear imágenes con IA es como describir lo que imaginas — y la IA lo dibuja por ti.<br><br>
-            <strong>Paso 1</strong> — Entra en <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Gemini de Google</a> (gratis)<br>
+            <strong>Paso 1</strong> — Entra en <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Gemini de Google</a> (gratis)<br>
             <strong>Paso 2</strong> — Escribe lo que quieres ver. Por ejemplo: "Un paisaje de montaña al atardecer con un río"<br>
             <strong>Paso 3</strong> — Pulsa enviar y en segundos tendrás tu imagen<br><br>
             <em>Cuanto más detallada sea tu descripción, mejor quedará la imagen.</em></div>
@@ -5001,6 +5092,116 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       </div>
     </div><!-- /v-aprende-tab -->
 
+    <!-- PANTALLA JUEGOS (agrupador) -->
+    <div class="vista" id="v-juegos-tab">
+      <div class="tab-pantalla">
+        <div class="tab-pantalla-titulo">🎮 Juegos</div>
+        <div class="tab-pantalla-sub">Juega un rato y aprende sin darte cuenta</div>
+        <button class="tab-acceso" onclick="abrirJuego('estafa')">
+          <span class="tab-acceso-emoji">🚨</span>
+          <div><div class="tab-acceso-tit">¿Estafa o no?</div><div class="tab-acceso-sub">¿Sabrías descubrir un timo en el móvil?</div></div>
+          <span class="tab-acceso-arrow">→</span>
+        </button>
+        <button class="tab-acceso" onclick="abrirJuego('pregunta')">
+          <span class="tab-acceso-emoji">🔥</span>
+          <div><div class="tab-acceso-tit">La pregunta del día</div><div class="tab-acceso-sub">Una pregunta cada día. ¡No rompas la racha!</div></div>
+          <span class="tab-acceso-arrow">→</span>
+        </button>
+        <button class="tab-acceso" onclick="abrirJuego('mito')">
+          <span class="tab-acceso-emoji">🤔</span>
+          <div><div class="tab-acceso-tit">¿Verdad o mito?</div><div class="tab-acceso-sub">Lo que se dice de la IA… ¿es cierto?</div></div>
+          <span class="tab-acceso-arrow">→</span>
+        </button>
+        <button class="tab-acceso" onclick="abrirJuego('raya')">
+          <span class="tab-acceso-emoji">⭕</span>
+          <div><div class="tab-acceso-tit">Tres en raya contra la IA</div><div class="tab-acceso-sub">¿Eres capaz de ganar a la máquina?</div></div>
+          <span class="tab-acceso-arrow">→</span>
+        </button>
+      </div>
+    </div><!-- /v-juegos-tab -->
+
+    <!-- JUEGO: ¿ESTAFA O NO? -->
+    <div class="vista" id="v-juego-estafa">
+      <div class="jg-wrap">
+        <div class="jg-titulo">🚨 ¿Estafa o no?</div>
+        <div class="jg-sub">Lee el mensaje y decide: ¿es un timo o es de fiar?</div>
+        <div id="est-juego">
+          <div class="jg-marcador"><span id="est-num">Mensaje 1 de 6</span><span id="est-puntos">⭐ 0</span></div>
+          <div class="jg-card">
+            <div class="jg-canal" id="est-canal"></div>
+            <div class="jg-mensaje" id="est-texto"></div>
+          </div>
+          <div class="jg-feedback" id="est-feedback"></div>
+          <div class="jg-botones" id="est-botones">
+            <button class="jg-btn rojo" onclick="estResponder(true)">🚨 Estafa</button>
+            <button class="jg-btn verde" onclick="estResponder(false)">✅ De fiar</button>
+          </div>
+          <div class="jg-botones" id="est-siguiente" style="display:none">
+            <button class="jg-btn" onclick="estSiguiente()">Siguiente →</button>
+          </div>
+        </div>
+        <div class="jg-card jg-final" id="est-final" style="display:none"></div>
+      </div>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
+    </div>
+
+    <!-- JUEGO: PREGUNTA DEL DÍA -->
+    <div class="vista" id="v-juego-pregunta">
+      <div class="jg-wrap">
+        <div class="jg-titulo">🔥 La pregunta del día</div>
+        <div class="jg-sub">Una sola pregunta cada día. Vuelve mañana para seguir tu racha.</div>
+        <div class="jg-racha" id="pd-racha"></div>
+        <div class="jg-card">
+          <div class="jg-pregunta" id="pd-texto"></div>
+        </div>
+        <div class="jg-botones columna" id="pd-opciones"></div>
+        <div class="jg-feedback" id="pd-feedback" style="margin-top:14px"></div>
+        <div class="jg-botones" id="pd-mas" style="display:none">
+          <button class="jg-btn" onclick="abrirJuego('mito')">¿Quieres más? Juega a Verdad o mito →</button>
+        </div>
+      </div>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
+    </div>
+
+    <!-- JUEGO: ¿VERDAD O MITO? -->
+    <div class="vista" id="v-juego-mito">
+      <div class="jg-wrap">
+        <div class="jg-titulo">🤔 ¿Verdad o mito?</div>
+        <div class="jg-sub">Se dicen muchas cosas de la inteligencia artificial. ¿Cuáles son ciertas?</div>
+        <div id="mit-juego">
+          <div class="jg-marcador"><span id="mit-num">Frase 1 de 6</span><span id="mit-puntos">⭐ 0</span></div>
+          <div class="jg-card">
+            <div class="jg-pregunta" id="mit-texto" style="margin:8px 0"></div>
+          </div>
+          <div class="jg-feedback" id="mit-feedback"></div>
+          <div class="jg-botones" id="mit-botones">
+            <button class="jg-btn verde" onclick="mitResponder(true)">👍 Verdad</button>
+            <button class="jg-btn rojo" onclick="mitResponder(false)">👎 Mito</button>
+          </div>
+          <div class="jg-botones" id="mit-siguiente" style="display:none">
+            <button class="jg-btn" onclick="mitSiguiente()">Siguiente →</button>
+          </div>
+        </div>
+        <div class="jg-card jg-final" id="mit-final" style="display:none"></div>
+      </div>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
+    </div>
+
+    <!-- JUEGO: TRES EN RAYA CONTRA LA IA -->
+    <div class="vista" id="v-juego-raya">
+      <div class="jg-wrap">
+        <div class="jg-titulo">⭕ Tres en raya contra la IA</div>
+        <div class="jg-sub">Tú eres la ❌. Toca una casilla para empezar.</div>
+        <div class="jg-marcador"><span id="ray-tu">Tú: 0</span><span id="ray-emp">Empates: 0</span><span id="ray-ia">IA: 0</span></div>
+        <div class="jg-estado" id="ray-estado">Te toca 👆</div>
+        <div class="jg-tablero" id="ray-tablero"></div>
+        <div class="jg-botones"><button class="jg-btn" onclick="rayNueva()">🔄 Otra partida</button></div>
+        <div class="jg-nota">💡 Así "piensa" una IA sencilla: imagina todas las jugadas posibles y elige la mejor. Esta la hemos dejado despistarse de vez en cuando… ¡para que puedas ganarle!</div>
+      </div>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
+    </div>
+
+
   </div><!-- /inner -->
 
   <!-- BARRA INFERIOR DE PESTAÑAS -->
@@ -5008,6 +5209,7 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
     <button class="tabbar-btn activo" id="tab-inicio" onclick="irTab('inicio')"><span class="tabbar-icono">🏠</span><span class="tabbar-label">Inicio</span></button>
     <button class="tabbar-btn" id="tab-descubre" onclick="irTab('descubre')"><span class="tabbar-icono">🧭</span><span class="tabbar-label">Descubre</span></button>
     <button class="tabbar-btn" id="tab-aprende" onclick="irTab('aprende')"><span class="tabbar-icono">🎓</span><span class="tabbar-label">Aprende</span></button>
+    <button class="tabbar-btn" id="tab-juegos" onclick="irTab('juegos')"><span class="tabbar-icono">🎮</span><span class="tabbar-label">Juegos</span></button>
   </nav>
 
 
@@ -5163,7 +5365,7 @@ function abrirLibro() {
 
 /* ── Barra inferior de pestañas (Inicio / Descubre / Aprende) ── */
 function marcarTab(tab) {
-  ['inicio','descubre','aprende'].forEach(t => {
+  ['inicio','descubre','aprende','juegos'].forEach(t => {
     const b = document.getElementById('tab-' + t);
     if (b) b.classList.toggle('activo', t === tab);
   });
@@ -5185,6 +5387,13 @@ function irTab(tab) {
     document.querySelectorAll('.vista').forEach(v => v.classList.remove('active'));
     document.getElementById('v-aprende-tab').classList.add('active');
     navStack = ['v-aprende-tab'];
+    document.getElementById('inner').scrollTop = 0;
+  } else if (tab === 'juegos') {
+    document.getElementById('home').classList.add('hidden');
+    document.getElementById('inner').classList.add('visible');
+    document.querySelectorAll('.vista').forEach(v => v.classList.remove('active'));
+    document.getElementById('v-juegos-tab').classList.add('active');
+    navStack = ['v-juegos-tab'];
     document.getElementById('inner').scrollTop = 0;
   }
   marcarTab(tab);
@@ -5229,7 +5438,7 @@ if (typeof noSeQueHacer === 'function') {
 const _irTabOrig = irTab;
 irTab = function(tab) {
   _irTabOrig(tab);
-  if (tab === 'descubre' || tab === 'aprende') {
+  if (tab === 'descubre' || tab === 'aprende' || tab === 'juegos') {
     history.pushState({ iatorpes: true }, '');
   }
 };
@@ -5882,7 +6091,7 @@ Crea la imagen directamente con los mejores parámetros técnicos: composición,
 
   const urls = {
     'ChatGPT': 'https://chatgpt.com/?q=',
-    'Gemini': 'https://gemini.google.com/',
+    'Gemini': 'https://gemini.google.com/app',
     'Adobe Firefly': 'https://firefly.adobe.com/',
     'Ideogram': 'https://ideogram.ai/'
   };
@@ -6295,11 +6504,11 @@ const IA_DEL_DIA = [
   {"dia":10,"mes":7,"tipo":"truco","emoji":"💡","titulo":"Truco del día","intro":"La IA puede ayudarte a organizar tu tiempo. Por ejemplo, ser más productivo, dejar de procrastinar o ordenar tu día a día.","texto":"Eres un coach de vida especializado en gestión del tiempo. Mi mayor problema con el tiempo es: [describe tu problema]. Diseñame una rutina diaria realista y práctica para ser más productivo, teniendo en cuenta que trabajo [número de horas] horas al día y que mi mayor distracción es [describe tu mayor distracción].","cta":"Organizar mi tiempo","link":"https://chatgpt.com","seccion":"consultas"},
   {"dia":11,"mes":7,"tipo":"prompt","emoji":"🎯","titulo":"Prueba esto hoy","intro":"La IA puede ayudarte a escribir una historia o anécdota. Por ejemplo, un recuerdo, una experiencia o algo que quieras contar bien.","texto":"Eres un escritor creativo experto en historias personales. Quiero escribir una historia o anécdota sobre [describe el tema o experiencia]. Ayúdame a estructurarla de forma que enganche desde el primer momento, con un inicio impactante, un desarrollo interesante y un final memorable. El tono debe ser [elige: emotivo / divertido / reflexivo].","cta":"Escribir mi historia","link":"https://chatgpt.com","seccion":"escribe"},
   {"dia":12,"mes":7,"tipo":"curiosidad","emoji":"🤔","titulo":"¿Lo sabías?","texto":"La IA puede simular una entrevista de trabajo contigo: te hace las preguntas típicas y te dice cómo mejorar tus respuestas.","cta":"Probarlo","link":"https://chatgpt.com","seccion":"consultas"},
-  {"dia":13,"mes":7,"tipo":"herramienta","emoji":"🔊","titulo":"Herramienta del día: pasar audios a texto","texto":"¿Un audio de WhatsApp muy largo o una grabación que no te apetece escuchar? Súbelo a Gemini y pídele que te lo pase a texto o que te lo resuma. Gratis y en español.","cta":"Abrir Gemini","link":"https://gemini.google.com"},
+  {"dia":13,"mes":7,"tipo":"herramienta","emoji":"🔊","titulo":"Herramienta del día: pasar audios a texto","texto":"¿Un audio de WhatsApp muy largo o una grabación que no te apetece escuchar? Súbelo a Gemini y pídele que te lo pase a texto o que te lo resuma. Gratis y en español.","cta":"Abrir Gemini","link":"https://gemini.google.com/app"},
   {"dia":14,"mes":7,"tipo":"truco","emoji":"💡","titulo":"Truco del día","intro":"La IA puede explicarte un contrato o documento difícil. Por ejemplo, un alquiler, un seguro o cualquier papel lleno de letra pequeña.","texto":"Eres un experto en contratos y documentos legales en España. Voy a mostrarte un contrato o documento que necesito entender: [pega aquí el texto o describe de qué trata]. Explícame en palabras simples qué dice exactamente, qué cláusulas son importantes, si hay algo que deba preocuparme y qué preguntas debería hacer antes de firmarlo.","cta":"Entender mi contrato","link":"https://chatgpt.com","seccion":"tramites"},
   {"dia":15,"mes":7,"tipo":"prompt","emoji":"🎯","titulo":"Prueba esto hoy","intro":"La IA puede crearte un plan de alimentación. Por ejemplo, comer más sano, organizar el menú semanal o mejorar tus hábitos.","texto":"Eres un nutricionista experto en alimentación saludable y práctica. Tengo [escribe tu edad] años y quiero mejorar mi alimentación. Mi mayor problema con la comida es [describe tu problema]. Dame un plan de alimentación sencillo para una semana, con recetas fáciles y rápidas, sin necesidad de contar calorías ni complicarme la vida.","cta":"Mejorar mi alimentación","link":"https://chatgpt.com","seccion":"salud"},
   {"dia":16,"mes":7,"tipo":"curiosidad","emoji":"🤔","titulo":"¿Lo sabías?","texto":"La IA puede explicarte cualquier factura, extracto o papel oficial. Le preguntas \"¿qué significa esto?\" y te lo cuenta en palabras normales.","cta":"Probarlo","link":"https://chatgpt.com","seccion":"tramites"},
-  {"dia":17,"mes":7,"tipo":"herramienta","emoji":"🤖","titulo":"Herramienta del día: Gemini","texto":"La IA de Google, con información actualizada al momento. Ideal para noticias recientes, comparar productos y datos de hoy mismo.","cta":"Hablar con Gemini","link":"https://gemini.google.com"},
+  {"dia":17,"mes":7,"tipo":"herramienta","emoji":"🤖","titulo":"Herramienta del día: Gemini","texto":"La IA de Google, con información actualizada al momento. Ideal para noticias recientes, comparar productos y datos de hoy mismo.","cta":"Hablar con Gemini","link":"https://gemini.google.com/app"},
   {"dia":18,"mes":7,"tipo":"truco","emoji":"💡","titulo":"Truco del día","intro":"La IA puede crearte publicaciones para redes sociales. Por ejemplo, para tu negocio, tu perfil o promocionar algo.","texto":"Eres un experto en redes sociales y contenido viral. Quiero publicar en [elige: Instagram / Facebook / TikTok / LinkedIn] sobre [describe el tema o tu negocio]. Escríbeme 5 ideas de publicaciones que puedan funcionar bien, con el texto listo para copiar y pegar, incluyendo emojis y hashtags adecuados.","cta":"Crear mis publicaciones","link":"https://chatgpt.com","seccion":"escribe"},
   {"dia":19,"mes":7,"tipo":"prompt","emoji":"🎯","titulo":"Prueba esto hoy","intro":"La IA puede ayudarte a decorar tu casa. Por ejemplo, un salón, un dormitorio o darle vida a un rincón.","texto":"Eres un experto en decoración de interiores. Tengo una habitación de [describe el espacio: salón, dormitorio, cocina...] de aproximadamente [metros cuadrados] metros cuadrados. El estilo que me gusta es [describe el estilo] y mi presupuesto para decorarla es [escribe el presupuesto]. Dame ideas concretas, qué muebles o elementos comprar y cómo organizarlo todo.","cta":"Decorar mi espacio","link":"https://chatgpt.com","seccion":"consultas"},
   {"dia":20,"mes":7,"tipo":"curiosidad","emoji":"🤔","titulo":"¿Lo sabías?","texto":"La IA puede prepararte un discurso de boda o un homenaje en minutos. Le cuentas cómo es la persona y escribe algo emotivo y personal.","cta":"Probarlo","link":"https://chatgpt.com","seccion":"escribe"},
@@ -6625,6 +6834,403 @@ function actualizarBotonHeader() {
     }
   });
 })();
+</script>
+<script>
+
+
+/* Abre ChatGPT con el mismo enlace que "Pregunta lo que quieras" (que sí abre la app) */
+function abrirChatGPTApp() {
+  window.open('https://chatgpt.com','_blank');
+}
+/* ── Bloque final del inicio ── */
+function finIr(dest) {
+  if (typeof gtag === 'function') gtag('event', 'fin_inicio', { event_category: 'navegacion', event_label: dest });
+  if (dest === 'juegos') irTab('juegos');
+  else if (dest === 'chatgpt') abrirChatGPTApp();
+  else openCard(dest);
+}
+function finCerrar() {
+  const el = document.getElementById('fin-bloque');
+  el.style.transition = 'opacity .3s'; el.style.opacity = '0';
+  setTimeout(function () { el.classList.add('cerrado'); }, 300);
+  try { sessionStorage.setItem('iatorpes_fin_cerrado', '1'); } catch (e) {}
+  if (typeof gtag === 'function') gtag('event', 'fin_inicio', { event_category: 'navegacion', event_label: 'cerrar' });
+}
+(function () {
+  const el = document.getElementById('fin-bloque');
+  if (!el) return;
+  try { if (sessionStorage.getItem('iatorpes_fin_cerrado') === '1') { el.classList.add('cerrado'); return; } } catch (e) {}
+  if (!('IntersectionObserver' in window)) { el.classList.add('visto'); return; }
+  const obs = new IntersectionObserver(function (entradas) {
+    entradas.forEach(function (e) {
+      if (e.isIntersecting) { el.classList.add('visto'); obs.disconnect(); }
+    });
+  }, { threshold: 0.35 });
+  obs.observe(el);
+})();
+
+/* ═══════════ JUEGOS ═══════════ */
+function jgMezclar(a) {
+  const b = a.slice();
+  for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; }
+  return b;
+}
+function jgEvento(nombre) {
+  if (typeof gtag === 'function') gtag('event', 'juego', { event_category: 'juegos', event_label: nombre });
+}
+function jgVibrar(ms) { try { if (navigator.vibrate) navigator.vibrate(ms); } catch (e) {} }
+
+function abrirJuego(id) {
+  showVista('v-juego-' + id);
+  jgEvento(id);
+  if (id === 'estafa') estEmpezar();
+  else if (id === 'mito') mitEmpezar();
+  else if (id === 'pregunta') pdMostrar();
+  else if (id === 'raya') rayNueva();
+}
+
+/* ── ¿ESTAFA O NO? ── */
+const EST_MENSAJES = [
+  { c: '📩 SMS', t: 'sms', m: 'Correos: tu paquete está retenido en aduanas. Paga 1,99 € para recibirlo aquí: correos-envios-es.info', e: true,
+    x: 'Correos no te pide pagos por SMS con un enlace. Fíjate en la dirección: no es la web oficial. Pagar poco dinero es el cebo para robarte los datos de la tarjeta.' },
+  { c: '💬 WhatsApp · número desconocido', t: 'burbuja', m: 'Hola mamá, se me ha caído el móvil al agua y este es mi número nuevo. ¿Me puedes hacer un Bizum urgente? Luego te explico.', e: true,
+    x: 'Es el timo del "hijo en apuros". Antes de mandar nada, llama a tu hijo o hija a su número de siempre. Casi siempre te contestará tan tranquilo.' },
+  { c: '📩 SMS', t: 'sms', m: 'Tu banco: hemos bloqueado tu cuenta por un acceso sospechoso. Verifica tus datos en el siguiente enlace para desbloquearla.', e: true,
+    x: 'Los bancos no te mandan enlaces para "verificar datos". Si te preocupa, entra tú en la app de tu banco o llama al número que viene detrás de tu tarjeta.' },
+  { c: '📩 SMS · centro de salud', t: 'sms', m: 'Le recordamos su cita en el centro de salud el martes a las 10:30. Si no puede acudir, llame al teléfono de siempre. No responda a este mensaje.', e: false,
+    x: 'Es un recordatorio normal: no lleva enlaces, no te pide dinero ni datos, y te dice que llames al teléfono que ya conoces.' },
+  { c: '📞 Llamada', t: 'sms', m: '(Voz de tu nieto, llorando) "Abuela, he tenido un accidente con el coche. No se lo digas a mamá, necesito 3.000 euros ya."', e: true,
+    x: 'Hoy la IA puede copiar la voz de alguien con unos segundos de audio. Las prisas y el "no se lo digas a nadie" son señales claras de timo. Cuelga y llama tú a tu nieto o a sus padres.' },
+  { c: '📩 SMS', t: 'sms', m: 'DGT: tiene una multa de tráfico pendiente de 50 €. Pague en 48 horas para evitar recargos: dgt-multas-pago.com', e: true,
+    x: 'La DGT no avisa de multas por SMS con enlaces. Las notifica por carta o por su dirección electrónica oficial.' },
+  { c: '📧 Correo', t: 'sms', m: '¡Enhorabuena! Has sido elegido para ganar un iPhone nuevo. Solo tienes que pagar 2 € de gastos de envío.', e: true,
+    x: 'Nadie regala móviles a cambio de "gastos de envío". Lo que buscan son los datos de tu tarjeta.' },
+  { c: '📞 Llamada', t: 'sms', m: '"Le llamamos del servicio técnico de Microsoft. Su ordenador tiene un virus. Instale este programa y se lo arreglamos desde aquí."', e: true,
+    x: 'Microsoft no llama a nadie. Si instalas ese programa, los estafadores pueden manejar tu ordenador y entrar en tu banco.' },
+  { c: '📩 SMS · justo después de comprar', t: 'sms', m: 'Tu código para confirmar la compra es 482913. No lo compartas con nadie. Si no has sido tú, llama a tu banco.', e: false,
+    x: 'Si acabas de comprar algo tú, esto es normal: el banco te manda un código para confirmar que eres tú. La regla de oro: ese código no se lo dictas nunca a nadie.' },
+  { c: '💬 WhatsApp · número desconocido', t: 'burbuja', m: 'Oferta de trabajo desde casa: gana 300 € al día solo dando "me gusta" a vídeos de YouTube. ¡Plazas limitadas!', e: true,
+    x: 'Nadie paga 300 € al día por dar "me gusta". Al final te piden que pongas tú dinero "para seguir ganando" y lo pierdes.' },
+  { c: '📞 Llamada', t: 'sms', m: '"Le llamamos de su banco. Para anular un cargo sospechoso, díganos el código que le acaba de llegar por SMS."', e: true,
+    x: 'El banco NUNCA te pide ese código por teléfono. Con él, el estafador puede sacar tu dinero. Cuelga y llama tú a tu banco.' },
+  { c: '📺 Anuncio en Facebook', t: 'sms', m: 'Vídeo de un presentador famoso de la tele: "Yo me he hecho rico con esta inversión. Mete 250 € y en un mes tendrás 5.000."', e: true,
+    x: 'Con la IA se hacen vídeos falsos de famosos diciendo cosas que nunca dijeron. Las inversiones "milagro" siempre son timo.' },
+  { c: '💬 WhatsApp · tu hija, de su número de siempre', t: 'burbuja', m: '¿Te recojo a las 6 para ir al médico? Así de paso tomamos un café 😊', e: false,
+    x: 'Viene del número de siempre, no pide dinero ni datos y no mete prisas. Un mensaje normal de la familia.' },
+  { c: '📩 SMS', t: 'sms', m: 'Tu compañía de la luz: te hemos cobrado dos veces este mes. Para devolverte 85 €, introduce los datos de tu tarjeta aquí.', e: true,
+    x: 'Si te deben dinero, te lo devuelven en la misma cuenta del recibo. Nunca te piden la tarjeta por un enlace.' },
+  { c: '💬 WhatsApp · tu nieto, de su número de siempre', t: 'burbuja', m: 'Te he mandado las fotos de la comunión, abuelo. ¡Mira qué guapos salimos todos!', e: false,
+    x: 'Viene de alguien conocido y de su número de siempre, y no te pide nada. Si algún día un conocido te manda algo raro o te pide dinero, llámale antes.' },
+  { c: '💬 WhatsApp · número desconocido', t: 'burbuja', m: 'Hola, te he enviado un código de 6 cifras por error. ¿Me lo puedes reenviar, por favor?', e: true,
+    x: '¡Cuidado! Ese código es para robarte tu cuenta de WhatsApp. No se lo mandes nunca a nadie.' }
+];
+let estRonda = [], estI = 0, estPuntos = 0;
+function estEmpezar() {
+  estRonda = jgMezclar(EST_MENSAJES).slice(0, 6);
+  estI = 0; estPuntos = 0;
+  document.getElementById('est-juego').style.display = '';
+  document.getElementById('est-final').style.display = 'none';
+  estPintar();
+}
+function estPintar() {
+  const q = estRonda[estI];
+  document.getElementById('est-num').textContent = 'Mensaje ' + (estI + 1) + ' de ' + estRonda.length;
+  document.getElementById('est-puntos').textContent = '⭐ ' + estPuntos;
+  document.getElementById('est-canal').textContent = q.c;
+  const t = document.getElementById('est-texto');
+  t.textContent = q.m;
+  t.className = 'jg-mensaje ' + q.t;
+  const f = document.getElementById('est-feedback');
+  f.className = 'jg-feedback';
+  document.getElementById('est-botones').style.display = '';
+  document.getElementById('est-siguiente').style.display = 'none';
+}
+function estResponder(diceEstafa) {
+  const q = estRonda[estI];
+  const bien = diceEstafa === q.e;
+  if (bien) estPuntos++;
+  jgVibrar(bien ? 15 : [30, 40, 30]);
+  const f = document.getElementById('est-feedback');
+  f.innerHTML = '<strong>' + (bien ? '¡Muy bien! 🎉' : '¡Uy! No era eso 😅') + '</strong>' +
+    (q.e ? '🚨 Esto ES una estafa. ' : '✅ Este mensaje es de fiar. ') + q.x;
+  f.className = 'jg-feedback visible ' + (bien ? 'bien' : 'fallo');
+  document.getElementById('est-puntos').textContent = '⭐ ' + estPuntos;
+  document.getElementById('est-botones').style.display = 'none';
+  document.getElementById('est-siguiente').style.display = '';
+  document.getElementById('est-siguiente').querySelector('button').textContent =
+    estI === estRonda.length - 1 ? 'Ver mi resultado 🏁' : 'Siguiente →';
+}
+function estSiguiente() {
+  estI++;
+  if (estI < estRonda.length) { estPintar(); document.getElementById('inner').scrollTop = 0; return; }
+  const n = estRonda.length;
+  let emoji, txt;
+  if (estPuntos === n) { emoji = '🏆'; txt = '¡Perfecto! Eres un detective de estafas. A ti no te la cuelan.'; }
+  else if (estPuntos >= n - 2) { emoji = '👏'; txt = '¡Muy bien! Tienes buen olfato. Repasa los que fallaste y serás imbatible.'; }
+  else { emoji = '💪'; txt = 'Los timadores cada vez lo hacen mejor. Juega otra vez: cada partida te hace más difícil de engañar.'; }
+  document.getElementById('est-juego').style.display = 'none';
+  const fin = document.getElementById('est-final');
+  fin.innerHTML = '<div class="jg-final-emoji">' + emoji + '</div>' +
+    '<div class="jg-final-num">' + estPuntos + ' de ' + n + '</div>' +
+    '<div class="jg-final-txt">' + txt + '<br><br>🛡️ La regla de oro: si hay <b>prisas</b>, <b>dinero</b> o <b>códigos</b> por medio, para y llama tú a la persona o al banco.</div>' +
+    '<div class="jg-botones columna"><button class="jg-btn" onclick="estEmpezar()">🔄 Jugar otra vez</button>' +
+    '<button class="jg-btn verde" onclick="compartirJuego(\'¿Estafa o no?\',' + estPuntos + ',' + n + ')">📲 Retar a alguien por WhatsApp</button></div>';
+  fin.style.display = '';
+  document.getElementById('inner').scrollTop = 0;
+}
+
+/* ── ¿VERDAD O MITO? ── */
+const MIT_FRASES = [
+  { f: 'La IA puede imitar la voz de un familiar con solo unos segundos de audio.', v: true,
+    x: 'Es verdad, y por eso hay timos por teléfono con voces copiadas. Si alguien "de la familia" te pide dinero con prisas, cuelga y llámale tú.' },
+  { f: 'ChatGPT y Gemini siempre dicen la verdad.', v: false,
+    x: 'Es un mito. A veces se equivocan o se inventan cosas con mucha seguridad. Para temas importantes (salud, dinero, papeles), compruébalo siempre.' },
+  { f: 'Para usar la IA hay que saber inglés.', v: false,
+    x: 'Es un mito. Puedes escribirle o hablarle en español, como a una persona, y te contesta en español.' },
+  { f: 'Se puede usar la IA gratis desde el móvil.', v: true,
+    x: 'Es verdad. Gemini, ChatGPT y otras tienen versión gratuita. Solo necesitas el móvil e internet.' },
+  { f: 'Si una foto parece real, es que es real.', v: false,
+    x: 'Es un mito. Hoy la IA hace fotos falsas que parecen de verdad. Si una foto es demasiado increíble, desconfía antes de compartirla.' },
+  { f: 'La IA te puede ayudar a entender una carta complicada del banco o de Hacienda.', v: true,
+    x: 'Es verdad. Le haces una foto o copias el texto y le pides que te lo explique fácil. Eso sí, para decidir algo importante, consulta a quien corresponda.' },
+  { f: 'No pasa nada por darle a la IA el número de tu tarjeta o tus contraseñas.', v: false,
+    x: 'Es un mito. Nunca le des a una IA datos del banco, contraseñas ni tu DNI. No los necesita para ayudarte.' },
+  { f: 'Puedes hablarle a la IA con la voz en vez de escribir.', v: true,
+    x: 'Es verdad. Casi todas tienen un botón de micrófono 🎤: hablas y te entiende.' },
+  { f: 'La IA sustituye al médico.', v: false,
+    x: 'Es un mito. Te puede ayudar a preparar preguntas para la consulta o a entender un informe, pero quien diagnostica es tu médico.' },
+  { f: 'Con IA se puede hacer un vídeo falso de un famoso diciendo algo que nunca dijo.', v: true,
+    x: 'Es verdad. Se llaman "deepfakes". Por eso hay anuncios falsos de famosos recomendando inversiones. ¡No te fíes!' },
+  { f: 'Si le preguntas dos veces lo mismo, la IA puede contestarte distinto.', v: true,
+    x: 'Es verdad. No tiene una respuesta guardada: la escribe cada vez. Si no te gusta, pídele que lo intente de nuevo.' },
+  { f: 'Hay que ser joven o saber mucho de ordenadores para usar la IA.', v: false,
+    x: 'Es un mito. Si sabes mandar un WhatsApp, ya sabes usar la IA: se le escribe igual que a una persona.' },
+  { f: 'La IA puede crear una receta con lo que tienes en la nevera.', v: true,
+    x: 'Es verdad. Dile lo que tienes ("dos huevos, un calabacín y queso") y te propone un plato paso a paso.' },
+  { f: 'La IA lo sabe todo sobre lo que ha pasado esta misma mañana.', v: false,
+    x: 'Es un mito. Muchas IA no están al día o se equivocan con noticias recientes. Para lo de hoy, mejor un periódico.' }
+];
+let mitRonda = [], mitI = 0, mitPuntos = 0;
+function mitEmpezar() {
+  mitRonda = jgMezclar(MIT_FRASES).slice(0, 6);
+  mitI = 0; mitPuntos = 0;
+  document.getElementById('mit-juego').style.display = '';
+  document.getElementById('mit-final').style.display = 'none';
+  mitPintar();
+}
+function mitPintar() {
+  document.getElementById('mit-num').textContent = 'Frase ' + (mitI + 1) + ' de ' + mitRonda.length;
+  document.getElementById('mit-puntos').textContent = '⭐ ' + mitPuntos;
+  document.getElementById('mit-texto').textContent = '"' + mitRonda[mitI].f + '"';
+  document.getElementById('mit-feedback').className = 'jg-feedback';
+  document.getElementById('mit-botones').style.display = '';
+  document.getElementById('mit-siguiente').style.display = 'none';
+}
+function mitResponder(diceVerdad) {
+  const q = mitRonda[mitI];
+  const bien = diceVerdad === q.v;
+  if (bien) mitPuntos++;
+  jgVibrar(bien ? 15 : [30, 40, 30]);
+  const f = document.getElementById('mit-feedback');
+  f.innerHTML = '<strong>' + (bien ? '¡Correcto! 🎉' : '¡Casi! 😅') + '</strong>' + q.x;
+  f.className = 'jg-feedback visible ' + (bien ? 'bien' : 'fallo');
+  document.getElementById('mit-puntos').textContent = '⭐ ' + mitPuntos;
+  document.getElementById('mit-botones').style.display = 'none';
+  document.getElementById('mit-siguiente').style.display = '';
+  document.getElementById('mit-siguiente').querySelector('button').textContent =
+    mitI === mitRonda.length - 1 ? 'Ver mi resultado 🏁' : 'Siguiente →';
+}
+function mitSiguiente() {
+  mitI++;
+  if (mitI < mitRonda.length) { mitPintar(); document.getElementById('inner').scrollTop = 0; return; }
+  const n = mitRonda.length;
+  const emoji = mitPuntos === n ? '🏆' : (mitPuntos >= n - 2 ? '👏' : '💪');
+  const txt = mitPuntos === n ? '¡Todas bien! Sabes más de IA que mucha gente joven.'
+    : (mitPuntos >= n - 2 ? '¡Muy bien! Ya distingues lo que es cierto de lo que no.' : 'Cada partida aprendes algo nuevo. ¡Juega otra vez!');
+  document.getElementById('mit-juego').style.display = 'none';
+  const fin = document.getElementById('mit-final');
+  fin.innerHTML = '<div class="jg-final-emoji">' + emoji + '</div>' +
+    '<div class="jg-final-num">' + mitPuntos + ' de ' + n + '</div>' +
+    '<div class="jg-final-txt">' + txt + '</div>' +
+    '<div class="jg-botones columna"><button class="jg-btn" onclick="mitEmpezar()">🔄 Jugar otra vez</button>' +
+    '<button class="jg-btn verde" onclick="compartirJuego(\'¿Verdad o mito?\',' + mitPuntos + ',' + n + ')">📲 Retar a alguien por WhatsApp</button></div>';
+  fin.style.display = '';
+  document.getElementById('inner').scrollTop = 0;
+}
+
+function compartirJuego(nombre, p, n) {
+  jgEvento('compartir_' + nombre);
+  const msg = '🎮 He sacado ' + p + ' de ' + n + ' en el juego "' + nombre + '" de IAtorpes. ¿A que no me ganas? 😄\n👉 iatorpes.com';
+  window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+}
+
+/* ── PREGUNTA DEL DÍA ── */
+const PD_PREGUNTAS = [
+  { p: 'Te llega un SMS del banco con un enlace. ¿Qué es lo más seguro?', o: ['Entrar yo en la app del banco, sin tocar el enlace', 'Pulsar el enlace para ver qué pasa', 'Contestar al SMS con mis datos'], x: 'Nunca pulses enlaces de SMS "del banco". Si tienes dudas, entra tú en la app o llama al número de tu tarjeta.' },
+  { p: '¿Cuál de estas es una inteligencia artificial a la que puedes preguntar cosas?', o: ['Gemini', 'Bizum', 'Wallapop'], x: 'Gemini es la IA de Google. Bizum sirve para mandar dinero y Wallapop para comprar y vender cosas.' },
+  { p: 'La IA te da un consejo de salud. ¿Qué haces?', o: ['Lo consulto con mi médico', 'Lo sigo sin más', 'Lo reenvío al grupo de la familia'], x: 'La IA puede ayudarte a entender cosas, pero la última palabra la tiene siempre tu médico.' },
+  { p: '¿Qué significa "IA"?', o: ['Inteligencia Artificial', 'Internet Avanzado', 'Información Automática'], x: 'IA es Inteligencia Artificial: programas que entienden lo que les dices y te contestan.' },
+  { p: 'Te llaman con la voz de tu nieto pidiendo dinero urgente. ¿Qué haces?', o: ['Cuelgo y le llamo yo a su número de siempre', 'Mando el dinero rápido', 'Doy los datos de mi tarjeta'], x: 'La IA puede copiar voces. Cuelga y llama tú: así sabrás si de verdad es él.' },
+  { p: '¿Se puede hablar con Gemini con la voz, sin escribir?', o: ['Sí, con el botón del micrófono', 'No, solo escribiendo', 'Solo si hablas en inglés'], x: 'Pulsa el micrófono 🎤 y habla con normalidad. Te entiende en español.' },
+  { p: '¿Qué es un "deepfake"?', o: ['Un vídeo o audio falso hecho con IA', 'Un virus del ordenador', 'Una red social nueva'], x: 'Son vídeos o audios falsos que parecen reales. Por eso no hay que creerse todo lo que se ve en internet.' },
+  { p: '¿Qué dato NO debes darle nunca a una IA?', o: ['El PIN de mi tarjeta', 'Lo que tengo en la nevera', 'El nombre de mi pueblo'], x: 'Contraseñas, PIN, datos del banco o del DNI: nunca. La IA no los necesita para ayudarte.' },
+  { p: '¿En qué te puede ayudar la IA en la cocina?', o: ['A darme una receta con lo que tengo en casa', 'A cocinar ella sola', 'En nada'], x: 'Dile qué tienes en la nevera y te propone un plato paso a paso.' },
+  { p: 'Cuando la IA se inventa algo que no es verdad, se dice que...', o: ['"Alucina"', '"Duerme"', '"Se congela"'], x: 'Se dice que "alucina": se inventa algo con mucha seguridad. Por eso conviene comprobar lo importante.' },
+  { p: '¿Qué es ChatGPT?', o: ['Un programa de IA con el que puedes conversar', 'Un banco por internet', 'Un canal de televisión'], x: 'ChatGPT es una IA con la que charlas escribiendo o hablando, como en un WhatsApp.' },
+  { p: 'Ves en Facebook una foto increíble que parece demasiado bonita...', o: ['Puede estar hecha con IA', 'Seguro que es real', 'La comparto rápido'], x: 'Hoy la IA hace fotos falsas muy realistas. Antes de compartir, desconfía un poco.' },
+  { p: '¿Cuánto cuesta la versión básica de Gemini o ChatGPT?', o: ['Es gratis', '50 euros al mes', 'Hay que comprarla en una tienda'], x: 'La versión básica es gratis. Solo necesitas el móvil e internet.' },
+  { p: '¿Qué puede hacer la IA con una foto antigua estropeada?', o: ['Mejorarla y hasta darle color', 'Nada', 'Borrarla del móvil'], x: 'La IA puede quitar arañazos, darle nitidez y hasta color a las fotos de toda la vida.' },
+  { p: 'Te llaman "del banco" y te piden el código que te ha llegado por SMS...', o: ['Cuelgo: el banco nunca lo pide', 'Se lo digo para que lo arreglen', 'Se lo leo despacito'], x: 'Ese código es la llave de tu dinero. El banco jamás te lo pide por teléfono.' },
+  { p: '¿Puede la IA ayudarte a hablar con alguien de otro idioma?', o: ['Sí, puede traducir al momento', 'No, eso es imposible', 'Solo escribiendo cartas'], x: 'Con Google Traductor o Gemini puedes hablar y que te lo traduzca al momento.' },
+  { p: 'Para que la IA te responda mejor, conviene...', o: ['Explicarle bien lo que quieres', 'Escribir una sola palabra', 'Escribir todo en mayúsculas'], x: 'Cuantos más detalles le des, mejor te ayuda. Háblale como a una persona.' },
+  { p: '¿Qué es un "prompt"?', o: ['Lo que tú le escribes o dices a la IA', 'Un tipo de móvil', 'Una contraseña'], x: 'El "prompt" es tu pregunta o tu petición. ¡Así de sencillo!' },
+  { p: 'Alguien te escribe por WhatsApp pidiéndote un código de 6 cifras que "te mandó por error"...', o: ['No se lo mando: quieren robarme el WhatsApp', 'Se lo reenvío, por educación', 'Le mando también mi PIN'], x: 'Con ese código pueden quitarte tu cuenta de WhatsApp. No lo compartas nunca.' },
+  { p: 'La IA te hace un resumen de un documento largo. ¿Qué haces?', o: ['Lo uso, pero reviso lo importante', 'Me lo creo todo sin mirar', 'No sirve para nada'], x: 'Los resúmenes ahorran mucho tiempo, pero lo importante (fechas, cantidades) conviene comprobarlo.' }
+];
+function pdHoy() {
+  const d = new Date();
+  return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+}
+function pdIndice() {
+  const base = new Date(2026, 8, 21);
+  const hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+  const dias = Math.round((hoy - base) / 86400000);
+  return ((dias % PD_PREGUNTAS.length) + PD_PREGUNTAS.length) % PD_PREGUNTAS.length;
+}
+function pdLeer() {
+  try { return JSON.parse(localStorage.getItem('iatorpes_pdia') || '{}'); } catch (e) { return {}; }
+}
+function pdGuardar(o) { try { localStorage.setItem('iatorpes_pdia', JSON.stringify(o)); } catch (e) {} }
+function pdAyer() {
+  const d = new Date(); d.setDate(d.getDate() - 1);
+  return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+}
+let pdOrden = [];
+function pdMostrar() {
+  const q = PD_PREGUNTAS[pdIndice()];
+  const est = pdLeer();
+  let racha = est.racha || 0;
+  if (est.ultimo !== pdHoy() && est.ultimo !== pdAyer()) racha = 0;
+  document.getElementById('pd-racha').textContent = racha > 0 ? '🔥 Llevas ' + racha + (racha === 1 ? ' día' : ' días seguidos') : '🔥 ¡Empieza hoy tu racha!';
+  document.getElementById('pd-texto').textContent = q.p;
+  const cont = document.getElementById('pd-opciones');
+  cont.innerHTML = '';
+  pdOrden = jgMezclar([0, 1, 2]);
+  pdOrden.forEach(idx => {
+    const b = document.createElement('button');
+    b.className = 'jg-btn blanco';
+    b.textContent = q.o[idx];
+    b.dataset.idx = idx;
+    b.onclick = function () { pdResponder(idx); };
+    cont.appendChild(b);
+  });
+  document.getElementById('pd-feedback').className = 'jg-feedback';
+  document.getElementById('pd-mas').style.display = 'none';
+  if (est.ultimo === pdHoy() && typeof est.elegida === 'number') pdResponder(est.elegida, true);
+}
+function pdResponder(idx, yaRespondida) {
+  const q = PD_PREGUNTAS[pdIndice()];
+  const bien = idx === 0;
+  document.querySelectorAll('#pd-opciones .jg-btn').forEach(b => {
+    b.disabled = true;
+    const i = Number(b.dataset.idx);
+    if (i === 0) b.classList.add('ok');
+    else if (i === idx) b.classList.add('mal');
+  });
+  if (!yaRespondida) {
+    jgVibrar(bien ? 15 : [30, 40, 30]);
+    const est = pdLeer();
+    let racha = (est.ultimo === pdAyer()) ? (est.racha || 0) + 1 : 1;
+    pdGuardar({ ultimo: pdHoy(), racha: racha, elegida: idx });
+    document.getElementById('pd-racha').textContent = '🔥 Llevas ' + racha + (racha === 1 ? ' día' : ' días seguidos') + (racha > 1 ? ' ¡Sigue así!' : '');
+  }
+  const f = document.getElementById('pd-feedback');
+  f.innerHTML = '<strong>' + (bien ? '¡Correcto! 🎉' : 'La buena era la verde 👆') + '</strong>' + q.x +
+    '<br><br>📅 Mañana, otra pregunta nueva.';
+  f.className = 'jg-feedback visible ' + (bien ? 'bien' : 'fallo');
+  document.getElementById('pd-mas').style.display = '';
+}
+
+/* ── TRES EN RAYA CONTRA LA IA ── */
+let rayT = [], rayFin = false, rayTurnoIA = false;
+const rayCont = { tu: 0, ia: 0, emp: 0 };
+const RAY_LINEAS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+function rayGanador(t) {
+  for (const l of RAY_LINEAS) if (t[l[0]] && t[l[0]] === t[l[1]] && t[l[0]] === t[l[2]]) return { j: t[l[0]], l: l };
+  return t.every(c => c) ? { j: 'empate' } : null;
+}
+function rayMinimax(t, esIA) {
+  const g = rayGanador(t);
+  if (g) return g.j === 'O' ? 1 : (g.j === 'X' ? -1 : 0);
+  let mejor = esIA ? -2 : 2;
+  for (let i = 0; i < 9; i++) if (!t[i]) {
+    t[i] = esIA ? 'O' : 'X';
+    const v = rayMinimax(t, !esIA);
+    t[i] = null;
+    mejor = esIA ? Math.max(mejor, v) : Math.min(mejor, v);
+  }
+  return mejor;
+}
+function rayJugadaIA() {
+  const libres = [];
+  for (let i = 0; i < 9; i++) if (!rayT[i]) libres.push(i);
+  if (Math.random() < 0.3) return libres[Math.floor(Math.random() * libres.length)]; // se despista a veces
+  let mejor = -2, opciones = [];
+  libres.forEach(i => {
+    rayT[i] = 'O';
+    const v = rayMinimax(rayT, false);
+    rayT[i] = null;
+    if (v > mejor) { mejor = v; opciones = [i]; } else if (v === mejor) opciones.push(i);
+  });
+  return opciones[Math.floor(Math.random() * opciones.length)];
+}
+function rayNueva() {
+  rayT = Array(9).fill(null); rayFin = false; rayTurnoIA = false;
+  document.getElementById('ray-estado').textContent = 'Te toca 👆';
+  rayPintar();
+}
+function rayPintar(linea) {
+  const tab = document.getElementById('ray-tablero');
+  tab.innerHTML = '';
+  rayT.forEach((c, i) => {
+    const b = document.createElement('button');
+    b.className = 'jg-casilla' + (c === 'O' ? ' o' : '') + (linea && linea.indexOf(i) >= 0 ? ' gana' : '');
+    b.textContent = c === 'X' ? '❌' : (c === 'O' ? '⭕' : '');
+    b.setAttribute('aria-label', 'Casilla ' + (i + 1));
+    b.onclick = function () { rayTocar(i); };
+    tab.appendChild(b);
+  });
+  document.getElementById('ray-tu').textContent = 'Tú: ' + rayCont.tu;
+  document.getElementById('ray-ia').textContent = 'IA: ' + rayCont.ia;
+  document.getElementById('ray-emp').textContent = 'Empates: ' + rayCont.emp;
+}
+function rayComprobar() {
+  const g = rayGanador(rayT);
+  if (!g) return false;
+  rayFin = true;
+  const est = document.getElementById('ray-estado');
+  if (g.j === 'X') { rayCont.tu++; est.textContent = '🎉 ¡Has ganado a la máquina!'; jgVibrar([20, 40, 20]); }
+  else if (g.j === 'O') { rayCont.ia++; est.textContent = '🤖 Esta vez ha ganado la IA'; }
+  else { rayCont.emp++; est.textContent = '🤝 ¡Empate!'; }
+  rayPintar(g.l);
+  return true;
+}
+function rayTocar(i) {
+  if (rayFin || rayTurnoIA || rayT[i]) return;
+  jgVibrar(10);
+  rayT[i] = 'X';
+  rayPintar();
+  if (rayComprobar()) return;
+  rayTurnoIA = true;
+  document.getElementById('ray-estado').textContent = '🤖 La IA está pensando...';
+  setTimeout(function () {
+    rayT[rayJugadaIA()] = 'O';
+    rayTurnoIA = false;
+    rayPintar();
+    if (!rayComprobar()) document.getElementById('ray-estado').textContent = 'Te toca 👆';
+  }, 700);
+}
+
 </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v154 · Listas de IA para preguntar: ChatGPT, Gemini y Claude por igual (sin "Recomendado"), ChatGPT primero; todos los enlaces a Gemini abren la app (/app) · 21 septiembre 2026 -->
+<!-- IAtorpes.com · v155 · Tres juegos nuevos en la pestaña Juegos: Parejas (memoria), Cuatro en raya contra la IA y Adivina el número (7 juegos en total) · 22 septiembre 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -2014,6 +2014,35 @@ body.dark .jg-casilla { background: #22223a; border-bottom-color: rgba(0,0,0,0.4
 .jg-casilla.o { color: #FF9600; }
 .jg-casilla.gana { background: #D7FFB8; }
 .jg-estado { text-align: center; font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 1.2rem; color: var(--text); margin-bottom: 14px; min-height: 1.6em; }
+/* ── Parejas ── */
+.par-tablero { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; max-width: 400px; margin: 0 auto 14px; }
+.par-carta { aspect-ratio: 1 / 1.2; border: none; border-radius: 16px; cursor: pointer; perspective: 600px; background: transparent; padding: 0; -webkit-tap-highlight-color: transparent; }
+.par-inner { position: relative; width: 100%; height: 100%; transition: transform .4s; transform-style: preserve-3d; }
+.par-carta.girada .par-inner, .par-carta.hecha .par-inner { transform: rotateY(180deg); }
+.par-cara { position: absolute; inset: 0; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; backface-visibility: hidden; -webkit-backface-visibility: hidden; font-family: 'Nunito',sans-serif; font-weight: 900; }
+.par-dorso { background: var(--accent); border-bottom: 5px solid #1B8FBF; color: #fff; font-size: 2rem; }
+body.dark .par-dorso { background: linear-gradient(145deg,#236F94,#185A7E); border-bottom-color: rgba(0,0,0,0.4); }
+.par-frente { background: #fff; border-bottom: 5px solid #D6E4EC; transform: rotateY(180deg); color: #1C1C1E; }
+body.dark .par-frente { background: #22223a; color: #F0F0F0; border-bottom-color: rgba(0,0,0,0.4); }
+.par-carta.hecha .par-frente { background: #D7FFB8; border-bottom-color: #58CC02; color: #1C1C1E; }
+.par-emoji { font-size: 2rem; line-height: 1.1; }
+.par-nombre { font-size: 0.78rem; margin-top: 4px; }
+.par-dato { min-height: 3.2em; text-align: center; font-weight: 800; font-size: 1rem; color: #2B5A00; background: #D7FFB8; border-radius: 14px; padding: 10px 12px; margin-bottom: 14px; visibility: hidden; }
+.par-dato.visible { visibility: visible; }
+/* ── Cuatro en raya ── */
+.c4-tablero { display: grid; grid-template-columns: repeat(7,1fr); gap: 5px; background: var(--accent); border-bottom: 6px solid #1B8FBF; border-radius: 18px; padding: 8px; max-width: 380px; margin: 0 auto 14px; }
+body.dark .c4-tablero { background: linear-gradient(145deg,#236F94,#185A7E); border-bottom-color: rgba(0,0,0,0.4); }
+.c4-celda { aspect-ratio: 1; border-radius: 50%; background: #EAF6FC; border: none; padding: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; box-shadow: inset 0 3px 5px rgba(0,0,0,0.18); }
+body.dark .c4-celda { background: #0f0f1a; }
+.c4-celda.r { background: #FF5A5F; }
+.c4-celda.a { background: #FFC800; }
+.c4-celda.cae { animation: c4Cae .35s ease-in; }
+@keyframes c4Cae { from { transform: translateY(-260%); } to { transform: none; } }
+.c4-celda.gana { box-shadow: 0 0 0 4px #fff, inset 0 3px 5px rgba(0,0,0,0.18); }
+.c4-flechas { display: grid; grid-template-columns: repeat(7,1fr); gap: 5px; max-width: 380px; margin: 0 auto 4px; padding: 0 8px; }
+.c4-flecha { border: none; background: none; font-size: 1.25rem; color: #1B8FBF; cursor: pointer; padding: 4px 0; font-weight: 900; -webkit-tap-highlight-color: transparent; }
+body.dark .c4-flecha { color: #4ECDC4; }
+
 .jg-nota { font-size: 0.9rem; color: var(--mid); font-weight: 600; line-height: 1.5; text-align: center; margin-top: 10px; }
 
 /* Pantallas Descubre y Aprende (agrupadores) */
@@ -5117,8 +5146,93 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
           <div><div class="tab-acceso-tit">Tres en raya contra la IA</div><div class="tab-acceso-sub">¿Eres capaz de ganar a la máquina?</div></div>
           <span class="tab-acceso-arrow">→</span>
         </button>
+        <button class="tab-acceso" onclick="abrirJuego('cuatro')">
+          <span class="tab-acceso-emoji">🔴</span>
+          <div><div class="tab-acceso-tit">Cuatro en raya contra la IA</div><div class="tab-acceso-sub">Más largo y con más emoción</div></div>
+          <span class="tab-acceso-arrow">→</span>
+        </button>
+        <button class="tab-acceso" onclick="abrirJuego('parejas')">
+          <span class="tab-acceso-emoji">🧠</span>
+          <div><div class="tab-acceso-tit">Parejas</div><div class="tab-acceso-sub">Ejercita la memoria dando la vuelta a las cartas</div></div>
+          <span class="tab-acceso-arrow">→</span>
+        </button>
+        <button class="tab-acceso" onclick="abrirJuego('numero')">
+          <span class="tab-acceso-emoji">🔢</span>
+          <div><div class="tab-acceso-tit">Adivina el número</div><div class="tab-acceso-sub">Tú contra la IA: ¿quién adivina antes?</div></div>
+          <span class="tab-acceso-arrow">→</span>
+        </button>
       </div>
     </div><!-- /v-juegos-tab -->
+    <!-- JUEGO: ADIVINA EL NÚMERO -->
+    <div class="vista" id="v-juego-numero">
+      <div class="jg-wrap">
+        <div class="jg-titulo">🔢 Adivina el número</div>
+        <div class="jg-sub">Un número del 1 al 100. ¿Quién adivina a quién?</div>
+        <div class="jg-botones" style="margin-bottom:16px">
+          <button class="jg-btn" id="num-modo-tu" onclick="numModo('tu')" style="text-align:center">🙋 Adivino yo</button>
+          <button class="jg-btn blanco" id="num-modo-ia" onclick="numModo('ia')" style="text-align:center">🤖 Adivina la IA</button>
+        </div>
+        <!-- Modo: adivino yo -->
+        <div id="num-panel-tu">
+          <div class="jg-card">
+            <div class="jg-pregunta" id="num-tu-msg">🤖 He pensado un número del 1 al 100. ¿Cuál es?</div>
+            <input id="num-tu-input" type="number" inputmode="numeric" min="1" max="100" placeholder="Escribe un número"
+              onkeydown="if(event.key==='Enter') numProbar()"
+              style="width:100%;font-size:1.6rem;font-weight:900;text-align:center;padding:14px;border-radius:14px;border:2px solid #D6E4EC;font-family:'Nunito',sans-serif;box-sizing:border-box;background:var(--bg);color:var(--text)">
+          </div>
+          <div class="jg-botones columna">
+            <button class="jg-btn verde" id="num-tu-btn" onclick="numProbar()">¡Probar!</button>
+          </div>
+          <div class="jg-nota" id="num-tu-intentos"></div>
+        </div>
+        <!-- Modo: adivina la IA -->
+        <div id="num-panel-ia" style="display:none">
+          <div class="jg-card">
+            <div class="jg-pregunta" id="num-ia-msg"></div>
+          </div>
+          <div class="jg-botones columna" id="num-ia-botones">
+            <button class="jg-btn" onclick="numIaResp('alto')">⬆️ Mi número es MÁS ALTO</button>
+            <button class="jg-btn" onclick="numIaResp('bajo')">⬇️ Mi número es MÁS BAJO</button>
+            <button class="jg-btn verde" onclick="numIaResp('si')">✅ ¡Has acertado!</button>
+          </div>
+          <div class="jg-botones columna" id="num-ia-otra" style="display:none">
+            <button class="jg-btn" onclick="numIaEmpezar()">🔄 Otra vez</button>
+          </div>
+          <div class="jg-feedback" id="num-ia-fb" style="margin-top:14px"></div>
+        </div>
+      </div>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
+    </div>
+
+    <!-- JUEGO: PAREJAS -->
+    <div class="vista" id="v-juego-parejas">
+      <div class="jg-wrap">
+        <div class="jg-titulo">🧠 Parejas</div>
+        <div class="jg-sub">Da la vuelta a dos cartas. Si son iguales, ¡pareja! Buen ejercicio para la memoria.</div>
+        <div class="jg-marcador"><span id="par-intentos">Intentos: 0</span><span id="par-hechas">Parejas: 0 de 6</span></div>
+        <div class="par-dato" id="par-dato">&nbsp;</div>
+        <div class="par-tablero" id="par-tablero"></div>
+        <div class="jg-card jg-final" id="par-final" style="display:none"></div>
+        <div class="jg-botones"><button class="jg-btn" onclick="parNueva()">🔄 Empezar de nuevo</button></div>
+      </div>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
+    </div>
+
+    <!-- JUEGO: CUATRO EN RAYA CONTRA LA IA -->
+    <div class="vista" id="v-juego-cuatro">
+      <div class="jg-wrap">
+        <div class="jg-titulo">🔴 Cuatro en raya contra la IA</div>
+        <div class="jg-sub">Tú eres 🔴 y la IA es 🟡. Toca una columna para echar tu ficha. Gana quien junte 4 en línea.</div>
+        <div class="jg-marcador"><span id="c4-tu">Tú: 0</span><span id="c4-emp">Empates: 0</span><span id="c4-ia">IA: 0</span></div>
+        <div class="jg-estado" id="c4-estado">Te toca 👇</div>
+        <div class="c4-flechas" id="c4-flechas"></div>
+        <div class="c4-tablero" id="c4-tablero"></div>
+        <div class="jg-botones"><button class="jg-btn" onclick="c4Nueva()">🔄 Otra partida</button></div>
+        <div class="jg-nota">💡 La IA prueba en su "cabeza" las siguientes jugadas antes de mover. De vez en cuando se despista… ¡aprovéchalo!</div>
+      </div>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
+    </div>
+
 
     <!-- JUEGO: ¿ESTAFA O NO? -->
     <div class="vista" id="v-juego-estafa">
@@ -6887,6 +7001,9 @@ function abrirJuego(id) {
   else if (id === 'mito') mitEmpezar();
   else if (id === 'pregunta') pdMostrar();
   else if (id === 'raya') rayNueva();
+  else if (id === 'parejas') parNueva();
+  else if (id === 'cuatro') c4Nueva();
+  else if (id === 'numero') numModo('tu');
 }
 
 /* ── ¿ESTAFA O NO? ── */
@@ -7149,6 +7266,310 @@ function pdResponder(idx, yaRespondida) {
     '<br><br>📅 Mañana, otra pregunta nueva.';
   f.className = 'jg-feedback visible ' + (bien ? 'bien' : 'fallo');
   document.getElementById('pd-mas').style.display = '';
+}
+
+
+/* ── PAREJAS ── */
+const PAR_CARTAS = [
+  { e: '📸', n: 'Fotos', d: 'La IA puede arreglar y dar color a tus fotos antiguas.' },
+  { e: '🍳', n: 'Recetas', d: 'Dile lo que tienes en la nevera y te propone una receta.' },
+  { e: '🌍', n: 'Traducir', d: 'La IA puede traducir una conversación al momento.' },
+  { e: '✉️', n: 'Escribir', d: 'Te ayuda a escribir un mensaje o una carta difícil.' },
+  { e: '🩺', n: 'Médico', d: 'Te ayuda a preparar las preguntas para tu médico.' },
+  { e: '🎵', n: 'Música', d: 'Puede crear una canción con la letra que tú quieras.' },
+  { e: '📄', n: 'Papeles', d: 'Te explica fácil una carta del banco o de Hacienda.' },
+  { e: '🛡️', n: 'Estafas', d: 'Te ayuda a saber si un mensaje es un timo.' },
+  { e: '🎤', n: 'Hablar', d: 'Puedes hablarle con la voz, sin necesidad de escribir.' },
+  { e: '🎂', n: 'Felicitar', d: 'Te escribe una felicitación bonita en un momento.' }
+];
+let parMazo = [], parAbiertas = [], parIntentos = 0, parHechas = 0, parBloqueo = false;
+function parNueva() {
+  const elegidas = jgMezclar(PAR_CARTAS).slice(0, 6);
+  parMazo = jgMezclar(elegidas.concat(elegidas)).map((c, i) => ({ c: c, id: i, hecha: false }));
+  parAbiertas = []; parIntentos = 0; parHechas = 0; parBloqueo = false;
+  document.getElementById('par-final').style.display = 'none';
+  document.getElementById('par-tablero').style.display = '';
+  const dato = document.getElementById('par-dato');
+  dato.className = 'par-dato'; dato.innerHTML = '&nbsp;';
+  const tab = document.getElementById('par-tablero');
+  tab.innerHTML = '';
+  parMazo.forEach((k, i) => {
+    const b = document.createElement('button');
+    b.className = 'par-carta';
+    b.setAttribute('aria-label', 'Carta ' + (i + 1));
+    b.innerHTML = '<div class="par-inner"><div class="par-cara par-dorso">❓</div>' +
+      '<div class="par-cara par-frente"><span class="par-emoji">' + k.c.e + '</span><span class="par-nombre">' + k.c.n + '</span></div></div>';
+    b.onclick = function () { parTocar(i, b); };
+    tab.appendChild(b);
+  });
+  parMarcador();
+}
+function parMarcador() {
+  document.getElementById('par-intentos').textContent = 'Intentos: ' + parIntentos;
+  document.getElementById('par-hechas').textContent = 'Parejas: ' + parHechas + ' de 6';
+}
+function parTocar(i, b) {
+  const k = parMazo[i];
+  if (parBloqueo || k.hecha || b.classList.contains('girada')) return;
+  jgVibrar(10);
+  b.classList.add('girada');
+  parAbiertas.push({ i: i, b: b });
+  if (parAbiertas.length < 2) return;
+  parIntentos++;
+  const [x, y] = parAbiertas;
+  parAbiertas = [];
+  if (parMazo[x.i].c === parMazo[y.i].c) {
+    parMazo[x.i].hecha = parMazo[y.i].hecha = true;
+    x.b.classList.add('hecha'); y.b.classList.add('hecha');
+    parHechas++;
+    jgVibrar(20);
+    const dato = document.getElementById('par-dato');
+    dato.textContent = parMazo[x.i].c.e + ' ' + parMazo[x.i].c.d;
+    dato.className = 'par-dato visible';
+    parMarcador();
+    if (parHechas === 6) setTimeout(parFin, 900);
+  } else {
+    parBloqueo = true;
+    parMarcador();
+    setTimeout(function () {
+      x.b.classList.remove('girada'); y.b.classList.remove('girada');
+      parBloqueo = false;
+    }, 1100);
+  }
+}
+function parFin() {
+  let emoji, txt;
+  if (parIntentos <= 9) { emoji = '🏆'; txt = '¡Memoria de elefante! Casi sin fallos.'; }
+  else if (parIntentos <= 14) { emoji = '👏'; txt = '¡Muy bien! Buena memoria.'; }
+  else { emoji = '💪'; txt = '¡Conseguido! Cuanto más juegues, menos intentos necesitarás.'; }
+  document.getElementById('par-tablero').style.display = 'none';
+  const fin = document.getElementById('par-final');
+  fin.innerHTML = '<div class="jg-final-emoji">' + emoji + '</div>' +
+    '<div class="jg-final-num">' + parIntentos + ' intentos</div>' +
+    '<div class="jg-final-txt">' + txt + '</div>' +
+    '<div class="jg-botones columna"><button class="jg-btn verde" onclick="compartirParejas()">📲 Retar a alguien por WhatsApp</button></div>';
+  fin.style.display = '';
+}
+function compartirParejas() {
+  jgEvento('compartir_parejas');
+  const msg = '🧠 He hecho las parejas de IAtorpes en ' + parIntentos + ' intentos. ¿A que no lo mejoras? 😄\n👉 iatorpes.com';
+  window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+}
+
+/* ── CUATRO EN RAYA CONTRA LA IA ── */
+const C4F = 6, C4C = 7;
+let c4T = [], c4Fin = false, c4TurnoIA = false;
+const c4Cont = { tu: 0, ia: 0, emp: 0 };
+function c4Nueva() {
+  c4T = []; for (let f = 0; f < C4F; f++) c4T.push(Array(C4C).fill(0));
+  c4Fin = false; c4TurnoIA = false;
+  document.getElementById('c4-estado').textContent = 'Te toca 👇';
+  const fl = document.getElementById('c4-flechas');
+  fl.innerHTML = '';
+  for (let c = 0; c < C4C; c++) {
+    const b = document.createElement('button');
+    b.className = 'c4-flecha'; b.textContent = '▼';
+    b.setAttribute('aria-label', 'Columna ' + (c + 1));
+    b.onclick = function () { c4Tocar(c); };
+    fl.appendChild(b);
+  }
+  c4Pintar();
+}
+function c4Fila(t, c) { for (let f = C4F - 1; f >= 0; f--) if (!t[f][c]) return f; return -1; }
+function c4Linea(t) {
+  const dirs = [[0,1],[1,0],[1,1],[1,-1]];
+  for (let f = 0; f < C4F; f++) for (let c = 0; c < C4C; c++) {
+    const v = t[f][c]; if (!v) continue;
+    for (const [df, dc] of dirs) {
+      const celdas = [[f, c]];
+      for (let k = 1; k < 4; k++) {
+        const ff = f + df * k, cc = c + dc * k;
+        if (ff < 0 || ff >= C4F || cc < 0 || cc >= C4C || t[ff][cc] !== v) break;
+        celdas.push([ff, cc]);
+      }
+      if (celdas.length === 4) return { j: v, celdas: celdas };
+    }
+  }
+  return null;
+}
+function c4Lleno(t) { return t[0].every(v => v); }
+function c4Puntuar(t) {
+  // Valora el tablero para la IA (2) frente al jugador (1)
+  let s = 0;
+  for (let f = 0; f < C4F; f++) if (t[f][3] === 2) s += 3; else if (t[f][3] === 1) s -= 3;
+  const dirs = [[0,1],[1,0],[1,1],[1,-1]];
+  for (let f = 0; f < C4F; f++) for (let c = 0; c < C4C; c++) for (const [df, dc] of dirs) {
+    const ef = f + df * 3, ec = c + dc * 3;
+    if (ef < 0 || ef >= C4F || ec < 0 || ec >= C4C) continue;
+    let ia = 0, tu = 0;
+    for (let k = 0; k < 4; k++) { const v = t[f + df * k][c + dc * k]; if (v === 2) ia++; else if (v === 1) tu++; }
+    if (ia && tu) continue;
+    if (ia === 3) s += 8; else if (ia === 2) s += 2;
+    if (tu === 3) s -= 10; else if (tu === 2) s -= 2;
+  }
+  return s;
+}
+function c4Minimax(t, prof, alfa, beta, esIA) {
+  const g = c4Linea(t);
+  if (g) return g.j === 2 ? 100000 + prof : -100000 - prof;
+  if (c4Lleno(t) || prof === 0) return c4Puntuar(t);
+  const orden = [3, 2, 4, 1, 5, 0, 6];
+  if (esIA) {
+    let v = -Infinity;
+    for (const c of orden) { const f = c4Fila(t, c); if (f < 0) continue;
+      t[f][c] = 2; v = Math.max(v, c4Minimax(t, prof - 1, alfa, beta, false)); t[f][c] = 0;
+      alfa = Math.max(alfa, v); if (alfa >= beta) break; }
+    return v;
+  } else {
+    let v = Infinity;
+    for (const c of orden) { const f = c4Fila(t, c); if (f < 0) continue;
+      t[f][c] = 1; v = Math.min(v, c4Minimax(t, prof - 1, alfa, beta, true)); t[f][c] = 0;
+      beta = Math.min(beta, v); if (alfa >= beta) break; }
+    return v;
+  }
+}
+function c4JugadaIA() {
+  const libres = []; for (let c = 0; c < C4C; c++) if (c4Fila(c4T, c) >= 0) libres.push(c);
+  // Siempre gana si puede
+  for (const c of libres) { const f = c4Fila(c4T, c); c4T[f][c] = 2; const g = c4Linea(c4T); c4T[f][c] = 0; if (g) return c; }
+  // Se despista a veces (para que se le pueda ganar)
+  if (Math.random() < 0.3) return libres[Math.floor(Math.random() * libres.length)];
+  let mejor = -Infinity, opciones = [];
+  for (const c of libres) {
+    const f = c4Fila(c4T, c); c4T[f][c] = 2;
+    const v = c4Minimax(c4T, 3, -Infinity, Infinity, false);
+    c4T[f][c] = 0;
+    if (v > mejor) { mejor = v; opciones = [c]; } else if (v === mejor) opciones.push(c);
+  }
+  return opciones[Math.floor(Math.random() * opciones.length)];
+}
+function c4Pintar(nueva, ganadoras) {
+  const tab = document.getElementById('c4-tablero');
+  tab.innerHTML = '';
+  for (let f = 0; f < C4F; f++) for (let c = 0; c < C4C; c++) {
+    const b = document.createElement('button');
+    const v = c4T[f][c];
+    let cls = 'c4-celda' + (v === 1 ? ' r' : v === 2 ? ' a' : '');
+    if (nueva && nueva[0] === f && nueva[1] === c) cls += ' cae';
+    if (ganadoras && ganadoras.some(p => p[0] === f && p[1] === c)) cls += ' gana';
+    b.className = cls;
+    b.setAttribute('aria-label', 'Columna ' + (c + 1));
+    b.onclick = function () { c4Tocar(c); };
+    tab.appendChild(b);
+  }
+  document.getElementById('c4-tu').textContent = 'Tú: ' + c4Cont.tu;
+  document.getElementById('c4-ia').textContent = 'IA: ' + c4Cont.ia;
+  document.getElementById('c4-emp').textContent = 'Empates: ' + c4Cont.emp;
+}
+function c4Comprobar(ultima) {
+  const g = c4Linea(c4T);
+  const est = document.getElementById('c4-estado');
+  if (g) {
+    c4Fin = true;
+    if (g.j === 1) { c4Cont.tu++; est.textContent = '🎉 ¡Has ganado a la máquina!'; jgVibrar([20, 40, 20]); }
+    else { c4Cont.ia++; est.textContent = '🤖 Esta vez ha ganado la IA'; }
+    c4Pintar(ultima, g.celdas);
+    return true;
+  }
+  if (c4Lleno(c4T)) { c4Fin = true; c4Cont.emp++; est.textContent = '🤝 ¡Empate!'; c4Pintar(ultima); return true; }
+  return false;
+}
+function c4Tocar(c) {
+  if (c4Fin || c4TurnoIA) return;
+  const f = c4Fila(c4T, c);
+  if (f < 0) return;
+  jgVibrar(10);
+  c4T[f][c] = 1;
+  c4Pintar([f, c]);
+  if (c4Comprobar([f, c])) return;
+  c4TurnoIA = true;
+  document.getElementById('c4-estado').textContent = '🤖 La IA está pensando...';
+  setTimeout(function () {
+    const ci = c4JugadaIA();
+    const fi = c4Fila(c4T, ci);
+    c4T[fi][ci] = 2;
+    c4TurnoIA = false;
+    c4Pintar([fi, ci]);
+    if (!c4Comprobar([fi, ci])) document.getElementById('c4-estado').textContent = 'Te toca 👇';
+  }, 650);
+}
+
+
+/* ── ADIVINA EL NÚMERO ── */
+let numSecreto = 0, numIntentos = 0, numAcertado = false;
+let numLo = 1, numHi = 100, numProp = 50, numIaInt = 0;
+function numModo(m) {
+  const tu = m === 'tu';
+  document.getElementById('num-panel-tu').style.display = tu ? '' : 'none';
+  document.getElementById('num-panel-ia').style.display = tu ? 'none' : '';
+  document.getElementById('num-modo-tu').className = 'jg-btn' + (tu ? '' : ' blanco');
+  document.getElementById('num-modo-ia').className = 'jg-btn' + (tu ? ' blanco' : '');
+  if (tu) numEmpezar(); else numIaEmpezar();
+}
+function numEmpezar() {
+  numSecreto = 1 + Math.floor(Math.random() * 100);
+  numIntentos = 0; numAcertado = false;
+  document.getElementById('num-tu-msg').textContent = '🤖 He pensado un número del 1 al 100. ¿Cuál es?';
+  const inp = document.getElementById('num-tu-input');
+  inp.value = ''; inp.style.display = '';
+  document.getElementById('num-tu-btn').textContent = '¡Probar!';
+  document.getElementById('num-tu-intentos').textContent = '';
+}
+function numProbar() {
+  if (numAcertado) { numEmpezar(); return; }
+  const inp = document.getElementById('num-tu-input');
+  const n = parseInt(inp.value, 10);
+  const msg = document.getElementById('num-tu-msg');
+  if (isNaN(n) || n < 1 || n > 100) { msg.textContent = '✋ Escribe un número del 1 al 100.'; return; }
+  numIntentos++;
+  jgVibrar(10);
+  if (n === numSecreto) {
+    numAcertado = true;
+    jgVibrar([20, 40, 20]);
+    msg.innerHTML = '🎉 ¡Sí! Era el <b>' + n + '</b>. Lo has adivinado en ' + numIntentos + (numIntentos === 1 ? ' intento' : ' intentos') + '.' +
+      (numIntentos <= 7 ? '<br>¡Igual de bien que una máquina!' : '<br>Truco: di siempre el número de en medio y lo sacarás en 7 como mucho.');
+    inp.style.display = 'none';
+    document.getElementById('num-tu-btn').textContent = '🔄 Jugar otra vez';
+  } else {
+    msg.textContent = n < numSecreto ? '⬆️ Mi número es MÁS ALTO que ' + n : '⬇️ Mi número es MÁS BAJO que ' + n;
+    inp.value = '';
+  }
+  document.getElementById('num-tu-intentos').textContent = 'Intentos: ' + numIntentos;
+}
+function numIaEmpezar() {
+  numLo = 1; numHi = 100; numIaInt = 0;
+  document.getElementById('num-ia-botones').style.display = 'none';
+  document.getElementById('num-ia-otra').style.display = 'none';
+  document.getElementById('num-ia-fb').className = 'jg-feedback';
+  const msg = document.getElementById('num-ia-msg');
+  msg.innerHTML = '🙋 Piensa un número del 1 al 100 y no me lo digas.<br><br>' +
+    '<button class="jg-btn verde" style="width:100%" onclick="numIaPreguntar()">Ya lo tengo pensado</button>';
+}
+function numIaPreguntar() {
+  if (numLo > numHi) {
+    document.getElementById('num-ia-msg').textContent = '🤔 Mmm… creo que te has liado con alguna respuesta. ¡No pasa nada, empezamos otra vez!';
+    document.getElementById('num-ia-botones').style.display = 'none';
+    document.getElementById('num-ia-otra').style.display = '';
+    return;
+  }
+  numProp = Math.floor((numLo + numHi) / 2);
+  numIaInt++;
+  document.getElementById('num-ia-msg').innerHTML = '🤖 ¿Es el <b style="font-size:1.6rem">' + numProp + '</b>?';
+  document.getElementById('num-ia-botones').style.display = '';
+}
+function numIaResp(r) {
+  jgVibrar(10);
+  if (r === 'si') {
+    document.getElementById('num-ia-msg').innerHTML = '🤖 ¡Lo sabía! Era el <b>' + numProp + '</b>. Lo he sacado en ' + numIaInt + (numIaInt === 1 ? ' intento' : ' intentos') + '.';
+    document.getElementById('num-ia-botones').style.display = 'none';
+    document.getElementById('num-ia-otra').style.display = '';
+    const fb = document.getElementById('num-ia-fb');
+    fb.innerHTML = '<strong>💡 Mi truco</strong>Siempre digo el número de en medio. Con cada respuesta tuya descarto la mitad de los números que quedan. Así, del 1 al 100 lo saco en 7 intentos como mucho. Las máquinas "piensan" así: ordenando y descartando muy deprisa.';
+    fb.className = 'jg-feedback visible bien';
+    return;
+  }
+  if (r === 'alto') numLo = numProp + 1; else numHi = numProp - 1;
+  numIaPreguntar();
 }
 
 /* ── TRES EN RAYA CONTRA LA IA ── */

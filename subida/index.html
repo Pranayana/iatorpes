@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v155 · Tres juegos nuevos en la pestaña Juegos: Parejas (memoria), Cuatro en raya contra la IA y Adivina el número (7 juegos en total) · 22 septiembre 2026 -->
+<!-- IAtorpes.com · v156 · Analytics: nuevos eventos "video" y "noticia" que registran el título del vídeo (con su código de YouTube) y el titular de la noticia que se abre · 23 septiembre 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -7651,6 +7651,38 @@ function rayTocar(i) {
     if (!rayComprobar()) document.getElementById('ray-estado').textContent = 'Te toca 👆';
   }, 700);
 }
+
+
+/* ── Medir qué vídeos y qué noticias se abren (Analytics) ── */
+(function () {
+  function texto(el, clase) {
+    const n = el.querySelector('.' + clase);
+    return n ? n.textContent.trim() : '';
+  }
+  function idVideo(url) {
+    const m = String(url).match(/(?:shorts\/|youtu\.be\/|v=)([A-Za-z0-9_-]{6,})/);
+    return m ? m[1] : url;
+  }
+  document.addEventListener('click', function (e) {
+    const v = e.target.closest ? e.target.closest('a.vm\u00e1s-card') : null;
+    if (v) {
+      const titulo = texto(v, 'vm\u00e1s-card-titulo') || 'sin título';
+      if (typeof gtag === 'function') gtag('event', 'video', {
+        event_category: 'contenido',
+        event_label: titulo + ' · ' + idVideo(v.getAttribute('href'))
+      });
+      return;
+    }
+    const n = e.target.closest ? e.target.closest('a.news-card') : null;
+    if (n) {
+      const titular = texto(n, 'news-headline') || 'sin titular';
+      if (typeof gtag === 'function') gtag('event', 'noticia', {
+        event_category: 'contenido',
+        event_label: titular
+      });
+    }
+  }, true);
+})();
 
 </script>
 </body>

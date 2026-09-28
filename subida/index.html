@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v158 · Noticias actualizadas (bloqueo de SMS falsos del banco, Gemini describe lo que ve la cámara, estafas con famosos falsos), 5 vídeos nuevos y juegos ampliados: 3 mensajes en ¿Estafa o no?, 2 frases en ¿Verdad o mito? y 2 preguntas del día · 28 septiembre 2026 -->
+<!-- IAtorpes.com · v159 · La barra inferior destaca: azul oscuro sobre el fondo claro, iconos y textos en blanco pleno y algo más grandes, borde y sombra marcados, y la pestaña activa con fondo blanco · 28 septiembre 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -1909,29 +1909,29 @@ body.dark .llm-card { border-bottom-color: rgba(0,0,0,0.4) !important; }
 .tabbar {
   position: fixed;
   bottom: 0; left: 0; right: 0;
-  background: var(--accent);
+  background: linear-gradient(145deg,#1B8FBF,#116A91);
   display: flex;
-  box-shadow: 0 -2px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.22);
   padding: 8px 0 max(12px, env(safe-area-inset-bottom));
   z-index: 1500;
-  border-top: 3px solid #1B8FBF;
+  border-top: 4px solid #0E5876;
 }
 body.dark .tabbar { background: linear-gradient(145deg,#236F94,#185A7E); border-top-color: rgba(0,0,0,0.4); box-shadow: 0 -2px 16px rgba(0,0,0,0.4); }
 .tabbar-btn {
   flex: 1; background: none; border: none;
   display: flex; flex-direction: column; align-items: center; gap: 3px;
-  cursor: pointer; padding: 6px 0; color: rgba(255,255,255,0.7);
+  cursor: pointer; padding: 6px 0; color: #fff;
   font-family: 'Nunito', sans-serif;
   -webkit-tap-highlight-color: transparent;
   transition: color 0.15s;
 }
-.tabbar-btn .tabbar-icono { font-size: 1.5rem; transition: transform 0.15s; line-height: 1; }
-.tabbar-btn .tabbar-label { font-size: 0.72rem; font-weight: 800; }
+.tabbar-btn .tabbar-icono { font-size: 1.65rem; transition: transform 0.15s; line-height: 1; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25)); }
+.tabbar-btn .tabbar-label { font-size: 0.76rem; font-weight: 900; text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
 .tabbar-btn.activo { color: #fff; }
 .tabbar-btn.activo .tabbar-icono { transform: translateY(-2px) scale(1.15); }
 .tabbar-btn.activo .tabbar-label { font-weight: 900; }
 .tabbar-btn .tabbar-icono { background: transparent; border-radius: 14px; padding: 3px 14px; transition: transform 0.15s, background 0.15s; }
-.tabbar-btn.activo .tabbar-icono { background: rgba(255,255,255,0.22); }
+.tabbar-btn.activo .tabbar-icono { background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.2); filter: none; }
 
 /* Espacio para que el contenido no quede tapado por la barra */
 body.con-tabbar #home, body.con-tabbar #inner { padding-bottom: 76px; }

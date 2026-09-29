@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v159 · La barra inferior destaca: azul oscuro sobre el fondo claro, iconos y textos en blanco pleno y algo más grandes, borde y sombra marcados, y la pestaña activa con fondo blanco · 28 septiembre 2026 -->
+<!-- IAtorpes.com · v161 · Portada reorganizada en 4 grupos con título (El día a día, Textos y papeles, Crear cosas, Móvil y seguridad) y un botón ancho en cada uno; nuevo "Explícame esta carta"; el generador de logos pasa a ser "Crea una felicitación"; bloque final fijo sin X; pie de página visible; nuevos eventos de Analytics (seccion, carta, felicitacion) · 29 septiembre 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -151,6 +151,15 @@ html, body { height: 100%; font-family: 'Inter', sans-serif; background: var(--b
 .home-inner { display: flex; flex-direction: column; align-items: center; padding: 20px clamp(16px,3vw,48px) 40px; width: 100%; background: var(--bg); }
 .main-title { font-family: 'Sora', sans-serif; font-size: clamp(1.6rem,3vw,2.8rem); font-weight: 800; color: var(--text); margin-bottom: clamp(16px,2.5vh,32px); letter-spacing: -0.5px; text-align: center; flex-shrink: 0; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: clamp(18px,2vw,32px); width: 100%; max-width: 1200px; }
+.home-inner .grid { grid-template-rows: none; grid-auto-rows: auto; }
+.card.card-wide.w-duda { background: linear-gradient(145deg,#29B6E8,#1B8FBF) !important; border-bottom: 6px solid #126A8F !important; min-height: 0 !important; padding: 16px 18px !important; }
+body.dark .card.card-wide.w-duda { background: linear-gradient(145deg,#236F94,#185A7E) !important; border-bottom-color: rgba(0,0,0,0.45) !important; }
+.card.card-wide.w-duda .card-label { font-size: 1.25rem !important; text-align: left !important; }
+.card.card-wide.w-duda .card-icon { font-size: 2rem !important; }
+.grid-grupo { grid-column: 1 / -1; font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 1.15rem; color: #0E5876;
+  margin: 26px 0 4px; padding: 11px 14px; background: #D6ECF7; border-left: 6px solid #1B8FBF; border-radius: 12px; letter-spacing: .2px; }
+.grid-grupo:first-child { margin-top: 6px; }
+body.dark .grid-grupo { color: #BFEFF6; background: rgba(78,205,196,0.12); border-left-color: #4ECDC4; }
 .card { background: linear-gradient(145deg,#EDEAE2,#DAD6CD); border-radius: 22px; border: 1px solid rgba(255,255,255,0.68); box-shadow: var(--cs); cursor: pointer; transition: transform 0.1s, border-bottom-width 0.1s; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: clamp(8px,1.2vh,16px) clamp(6px,0.9vw,12px); position: relative; overflow: hidden; gap: clamp(5px,0.8vh,10px); }
 .card.card-wide {
   grid-column: span 2;
@@ -1136,7 +1145,7 @@ body.dark .search-bar::placeholder { color: #555; }
 .generator-section {
   width: 100%;
   max-width: 720px;
-  margin: 40px auto 24px;
+  margin: 22px auto 6px;
   background: linear-gradient(145deg, #2C8FBF, #1E73A6);
   border-radius: 22px;
   border: 1px solid rgba(255,255,255,0.2);
@@ -1936,6 +1945,7 @@ body.dark .tabbar { background: linear-gradient(145deg,#236F94,#185A7E); border-
 /* Espacio para que el contenido no quede tapado por la barra */
 body.con-tabbar #home, body.con-tabbar #inner { padding-bottom: 76px; }
 body.con-tabbar .home-inner { padding-bottom: 96px; }
+body.con-tabbar .footer { padding-bottom: 96px; }
 
 
 
@@ -1946,9 +1956,7 @@ body.con-tabbar .home-inner { padding-bottom: 96px; }
 body.dark .fin-bloque { background: linear-gradient(145deg,#1e1e32,#16162a); border-bottom-color: rgba(0,0,0,0.4); }
 .fin-bloque { position: relative; }
 .fin-bloque.cerrado { display: none; }
-.fin-cerrar { position: absolute; top: 8px; right: 8px; width: 40px; height: 40px; border: none; border-radius: 50%; background: #EAF6FC; color: #555; font-size: 1.2rem; font-weight: 900; cursor: pointer; line-height: 1; -webkit-tap-highlight-color: transparent; }
-body.dark .fin-cerrar { background: rgba(255,255,255,0.1); color: #ccc; }
-.fin-titulo { padding: 4px 38px 0; font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 1.25rem; line-height: 1.3; color: var(--text); text-align: center; margin-bottom: 14px; }
+.fin-titulo { padding: 4px 10px 0; font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 1.25rem; line-height: 1.3; color: var(--text); text-align: center; margin-bottom: 14px; }
 .fin-mano { display: inline-block; transform-origin: 70% 70%; }
 .fin-bloque.visto .fin-mano { animation: finSaludo 1.2s .6s 2; }
 @keyframes finSaludo { 0%,100% { transform: rotate(0); } 20%,60% { transform: rotate(18deg); } 40%,80% { transform: rotate(-10deg); } }
@@ -2282,9 +2290,41 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       </div>
       <div class="grid" id="grid"></div>
 
+      <!-- GENERADOR DE FELICITACIONES -->
+      <div class="generator-section">
+        <div class="generator-title">🎂 Crea una felicitación en 30 segundos</div>
+        <input class="generator-input" id="gen-input" type="text" placeholder="¿Para quién es? Ej: mi nieta María, que cumple 8 años">
+        <div class="generator-options">
+          <div class="opt-group">
+            <div class="opt-label">Ocasión</div>
+            <div class="opt-btns">
+              <button class="opt-btn selected" onclick="selectOpt(this,'ocasion')">Cumpleaños</button>
+              <button class="opt-btn" onclick="selectOpt(this,'ocasion')">Santo</button>
+              <button class="opt-btn" onclick="selectOpt(this,'ocasion')">Boda</button>
+              <button class="opt-btn" onclick="selectOpt(this,'ocasion')">Dar ánimo</button>
+            </div>
+          </div>
+          <div class="opt-group">
+            <div class="opt-label">Tono</div>
+            <div class="opt-btns">
+              <button class="opt-btn selected" onclick="selectOpt(this,'tono')">Cariñoso</button>
+              <button class="opt-btn" onclick="selectOpt(this,'tono')">Divertido</button>
+              <button class="opt-btn" onclick="selectOpt(this,'tono')">Formal</button>
+            </div>
+          </div>
+        </div>
+        <button class="generator-btn" onclick="generatePrompt()">Crear felicitación</button>
+        <div class="generator-result" id="gen-result">
+          <div class="result-label">📋 Esto es lo que le vas a pedir a la IA</div>
+          <div class="result-prompt" id="gen-prompt-text"></div>
+          <div class="result-btns">
+            <button class="result-btn chatgpt" id="btn-chatgpt" onclick="">🟢 Escribirla con ChatGPT</button>
+          </div>
+        </div>
+      </div>
+
       <!-- Bloque final: ¿Y ahora qué te apetece? -->
       <div class="fin-bloque" id="fin-bloque">
-        <button class="fin-cerrar" onclick="finCerrar()" aria-label="Cerrar">✕</button>
         <div class="fin-titulo"><span class="fin-mano">👋</span> ¿Y ahora qué te apetece?</div>
         <div class="fin-grid">
           <button class="fin-btn jugar" onclick="finIr('juegos')"><span>🎮</span>Jugar un rato</button>
@@ -2300,6 +2340,9 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
         <span class="libro-linea-texto"><strong>¿Hay alguien al otro lado?</strong> El libro que escribí sobre la IA</span>
         <span class="libro-linea-arrow">→</span>
       </button>
+
+      <!-- Número de versión visible (para saber si la web está actualizada) -->
+      <div style="text-align:center;font-size:0.72rem;color:var(--light);font-weight:700;margin:14px 0 2px">versión 161</div>
     </div>
     <!-- <div class="quick-bar"> HIDDEN
       <div class="quick-label">💬 Pregunta rápida:</div>
@@ -2312,37 +2355,6 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       </div>
       <button class="chat-open-btn" onclick="window.open('https://claude.ai','_blank')">🤖 Hablar con la IA</button>
     --> 
-      <!-- GENERADOR DE LOGOS -->
-      <div class="generator-section">
-        <div class="generator-title">🎨 Crea tu logo en 30 segundos</div>
-        <input class="generator-input" id="gen-input" type="text" placeholder="Ej: carpintería moderna, bar de tapas, tienda de ropa...">
-        <div class="generator-options">
-          <div class="opt-group">
-            <div class="opt-label">Estilo</div>
-            <div class="opt-btns">
-              <button class="opt-btn selected" onclick="selectOpt(this,'estilo')">Moderno</button>
-              <button class="opt-btn" onclick="selectOpt(this,'estilo')">Elegante</button>
-              <button class="opt-btn" onclick="selectOpt(this,'estilo')">Divertido</button>
-            </div>
-          </div>
-          <div class="opt-group">
-            <div class="opt-label">Color</div>
-            <div class="opt-btns">
-              <button class="opt-btn selected" onclick="selectOpt(this,'color')">Azul</button>
-              <button class="opt-btn" onclick="selectOpt(this,'color')">Negro</button>
-              <button class="opt-btn" onclick="selectOpt(this,'color')">Libre</button>
-            </div>
-          </div>
-        </div>
-        <button class="generator-btn" onclick="generatePrompt()">Generar</button>
-        <div class="generator-result" id="gen-result">
-          <div class="result-label">📋 Tu prompt listo para usar</div>
-          <div class="result-prompt" id="gen-prompt-text"></div>
-          <div class="result-btns">
-            <button class="result-btn chatgpt" id="btn-chatgpt" onclick="">🟢 Crear logo en ChatGPT</button>
-          </div>
-        </div>
-      </div>
 
     <footer class="footer">
       <div class="footer-tagline">IAtorpes.com · Porque la IA es para todos 🤖❤️</div>
@@ -5166,6 +5178,38 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       </div>
     </div><!-- /v-aprende-tab -->
 
+    <!-- EXPLÍCAME ESTA CARTA -->
+    <div class="vista" id="v-carta">
+      <div class="hero"><div class="hero-icon">📄</div><h2 class="hero-title">Explícame esta carta</h2><div class="hero-subtitle">Del banco, de Hacienda, del médico, del seguro... en palabras que se entiendan</div></div>
+      <div class="content">
+        <div class="jg-card" style="text-align:center">
+          <div style="font-size:1.05rem;font-weight:800;color:var(--text);line-height:1.5;margin-bottom:14px">Le haces una foto a la carta y la inteligencia artificial te dice qué pone, qué te piden y para cuándo.</div>
+          <button class="jg-btn verde" style="width:100%;font-size:1.15rem" onclick="abrirCarta()">📷 Abrir ChatGPT para hacer la foto</button>
+        </div>
+
+        <div class="jg-card">
+          <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;color:var(--text);margin-bottom:10px">Cómo se hace, paso a paso</div>
+          <div style="font-size:1rem;font-weight:700;color:var(--text);line-height:1.6">
+            <p style="margin-bottom:10px"><b>1.</b> Pulsa el botón verde de arriba. Se abre ChatGPT con la pregunta ya escrita: no tienes que escribir nada.</p>
+            <p style="margin-bottom:10px"><b>2.</b> Dentro de ChatGPT, toca el <b>clip 📎</b> o el <b>➕</b> que hay junto a donde se escribe y elige <b>Cámara</b>.</p>
+            <p style="margin-bottom:10px"><b>3.</b> Haz la foto de la carta, de frente y con buena luz. Si es larga, haz una foto por hoja.</p>
+            <p><b>4.</b> Envía. En unos segundos te lo explica en cristiano, y puedes seguir preguntándole lo que no entiendas.</p>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <p style="font-size:0.9rem;font-weight:800;margin-bottom:4px">🔒 Un consejo</p>
+          <p style="font-size:0.88rem;color:var(--mid);line-height:1.5">Si la carta lleva tu DNI o el número de cuenta completo, tapa esa parte con el dedo al hacer la foto. Para entender lo que pone no hace falta.</p>
+        </div>
+
+        <div class="info-box" style="margin-top:12px">
+          <p style="font-size:0.9rem;font-weight:800;margin-bottom:4px">⚠️ Ojo con esto</p>
+          <p style="font-size:0.88rem;color:var(--mid);line-height:1.5">La IA te ayuda a entender la carta, pero se puede equivocar. Para plazos, multas o dinero, confirma siempre con la persona o el organismo que la envía.</p>
+        </div>
+      </div>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
+    </div>
+
     <!-- PANTALLA JUEGOS (agrupador) -->
     <div class="vista" id="v-juegos-tab">
       <div class="tab-pantalla">
@@ -5376,27 +5420,40 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
 
 <script>
 const CARDS = [
-  { id:'imagen',   emoji:'🎨', label:'Quiero una\nimagen' },
-  { id:'consultas', emoji:'🎯', label:'Tengo una\nduda' },
-  { id:'manitas',   emoji:'🔧', label:'Tengo que\narreglar...' },
-  { id:'chef',      emoji:'👨‍🍳', label:'Hoy\ncocino...' },
+  { grupo:'📱 El día a día' },
   { id:'salud',    emoji:'💊', label:'Salud y\nmedicamentos' },
   { id:'tramites', emoji:'📋', label:'Trámites y\nburocracia' },
-  { id:'mejora',   emoji:'🖼️', label:'Mejora\nmi foto' },
-  { id:'video',    emoji:'🎬', label:'Quiero un\nvídeo' },
+  { id:'consultas', emoji:'🎯', label:'Tengo una duda', wide:true, sub:'Pregúntanos lo que sea y te guiamos' },
+  { id:'chef',      emoji:'👨‍🍳', label:'Hoy\ncocino...' },
+  { id:'manitas',   emoji:'🔧', label:'Tengo que\narreglar...' },
+  { grupo:'✍️ Textos y papeles' },
   { id:'resume',   emoji:'📝', label:'Resúmeme\nesto' },
-  { id:'presentacion', emoji:'📊', label:'Necesito una\npresentación' },
   { id:'traductor',emoji:'🌍', label:'Tradúceme\nesto' },
-  { id:'escucha',  emoji:'🔊', label:'Léeme un\ntexto' },
-  { id:'musica',   emoji:'🎵', label:'Crea\nmúsica' },
+  { id:'carta',    emoji:'📄', label:'Explícame esta carta', wide:true, sub:'Hazle una foto y te la explica en fácil' },
   { id:'escribe',  emoji:'✉️', label:'Escribe un\nmensaje' },
+  { id:'escucha',  emoji:'🔊', label:'Léeme un\ntexto' },
+  { grupo:'🎨 Crear cosas' },
+  { id:'imagen',   emoji:'🎨', label:'Quiero una\nimagen' },
+  { id:'video',    emoji:'🎬', label:'Quiero un\nvídeo' },
+  { id:'mejora',   emoji:'🖼️', label:'Mejora mi foto', wide:true, sub:'Arregla y da color a las fotos antiguas' },
+  { id:'musica',   emoji:'🎵', label:'Crea\nmúsica' },
+  { id:'presentacion', emoji:'📊', label:'Necesito una\npresentación' },
+  { grupo:'🛡️ Móvil y seguridad' },
+  { id:'seguridad', emoji:'🛡️', label:'Protégete de estafas', wide:true, sub:'Aprende a reconocer los timos del móvil' },
   { id:'movil',    emoji:'📱', label:'Usa tu\nmóvil mejor' },
   { id:'organiza', emoji:'📧', label:'Organiza\ntu correo' },
-  { id:'seguridad', emoji:'🛡️', label:'Protégete\nde estafas' },
 ];
 
 const grid = document.getElementById('grid');
 CARDS.forEach(c => {
+  // Título de grupo (ocupa toda la fila)
+  if (c.grupo) {
+    const t = document.createElement('div');
+    t.className = 'grid-grupo';
+    t.textContent = c.grupo;
+    grid.appendChild(t);
+    return;
+  }
   const el = document.createElement('div');
   if (c.wide && c.id === 'aprende') {
     el.className = 'card card-wide w-aprende';
@@ -5413,6 +5470,14 @@ CARDS.forEach(c => {
       <div class="card-icon">${c.emoji}</div>
       <div>
         <div class="card-label" style="color:#fff!important">${c.label}</div>
+      </div>`;
+  } else if (c.wide && c.sub) {
+    el.className = 'card card-wide w-duda';
+    el.innerHTML = `
+      <div class="card-icon">${c.emoji}</div>
+      <div>
+        <div class="card-label" style="color:#fff!important">${c.label}</div>
+        <div style="color:rgba(255,255,255,0.92);font-size:0.85rem;font-weight:700;margin-top:2px">${c.sub}</div>
       </div>`;
   } else if (c.wide && c.id === 'videos') {
     el.className = 'card card-wide w-videos';
@@ -5455,6 +5520,7 @@ CARDS.forEach(c => {
 let navStack = [];
 
 function openCard(id) {
+  if (typeof gtag === 'function') gtag('event', 'seccion', { event_category: 'navegacion', event_label: id });
   const yaEnInner = document.getElementById('inner').classList.contains('visible');
   document.getElementById('home').classList.add('hidden');
   document.getElementById('inner').classList.add('visible');
@@ -5679,46 +5745,50 @@ function openWhatsAppShare(url) {
 
 
 // ── GENERADOR ──
-let selectedEstilo = 'Moderno';
-let selectedColor = 'Azul';
+let selectedOcasion = 'Cumpleaños';
+let selectedTono = 'Cariñoso';
 let currentPrompt = '';
 
 function selectOpt(btn, group) {
   btn.closest('.opt-btns').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
-  if (group === 'estilo') selectedEstilo = btn.textContent;
-  if (group === 'color') selectedColor = btn.textContent;
+  if (group === 'ocasion') selectedOcasion = btn.textContent;
+  if (group === 'tono') selectedTono = btn.textContent;
 }
 
 function generatePrompt() {
-  const negocio = document.getElementById('gen-input').value.trim();
-  if (!negocio) {
+  const persona = document.getElementById('gen-input').value.trim();
+  if (!persona) {
     document.getElementById('gen-input').focus();
     document.getElementById('gen-input').style.borderColor = 'var(--accent)';
     setTimeout(() => document.getElementById('gen-input').style.borderColor = '', 2000);
     return;
   }
-  
-  const colorText = selectedColor === 'Libre' ? 'colores que mejor representen el negocio' : `tonos ${selectedColor.toLowerCase()}`;
-  
-  currentPrompt = `Crea un logo profesional con estas características:
 
-- Tipo de negocio: ${negocio}
-- Estilo: ${selectedEstilo}
-- Colores: ${colorText}
+  const ocasionTexto = {
+    'Cumpleaños': 'felicitarle el cumpleaños',
+    'Santo': 'felicitarle el santo',
+    'Boda': 'felicitarle por su boda',
+    'Dar ánimo': 'darle ánimo y mandarle fuerza'
+  }[selectedOcasion] || 'felicitarle';
 
-El logo debe ser limpio, moderno y minimalista.
-Fondo blanco o transparente.
-Que sea memorable y fácil de reconocer.
-Incluye el nombre del negocio de forma elegante.`;
+  currentPrompt = `Escríbeme una felicitación para ${persona}.
+
+- Motivo: ${ocasionTexto}
+- Tono: ${selectedTono.toLowerCase()}
+- En español de España, con palabras sencillas y naturales
+
+Que sea corta, para mandarla por WhatsApp, y que suene a escrita por una persona, no por una máquina. Dame tres versiones para que pueda elegir.`;
 
   document.getElementById('gen-prompt-text').textContent = currentPrompt;
-  
+
   const encoded = encodeURIComponent(currentPrompt);
 
-  document.getElementById('btn-chatgpt').onclick = () => window.open('https://chatgpt.com/?q=' + encoded, '_blank');
-  
-  
+  document.getElementById('btn-chatgpt').onclick = () => {
+    if (typeof gtag === 'function') gtag('event', 'felicitacion', { event_category: 'herramienta', event_label: selectedOcasion + ' · ' + selectedTono });
+    window.open('https://chatgpt.com/?q=' + encoded, '_blank');
+  };
+
   const result = document.getElementById('gen-result');
   result.classList.add('visible');
   result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -6997,6 +7067,13 @@ function actualizarBotonHeader() {
 <script>
 
 
+/* "Explícame esta carta": abre ChatGPT con la pregunta ya escrita */
+function abrirCarta() {
+  const pregunta = 'Te voy a enseñar la foto de una carta o de un documento oficial. Explícamelo con palabras sencillas, como si se lo contaras a una persona mayor que no entiende el lenguaje de los papeles: qué es, quién lo manda, qué me piden, si tengo que hacer algo y antes de qué fecha, y cuánto dinero supone. Avísame si hay algo urgente o importante. Ahora te mando la foto.';
+  if (typeof gtag === 'function') gtag('event', 'carta', { event_category: 'herramienta', event_label: 'abrir ChatGPT' });
+  window.open('https://chatgpt.com/?q=' + encodeURIComponent(pregunta), '_blank');
+}
+
 /* Abre ChatGPT con el mismo enlace que "Pregunta lo que quieras" (que sí abre la app) */
 function abrirChatGPTApp() {
   window.open('https://chatgpt.com','_blank');
@@ -7008,17 +7085,9 @@ function finIr(dest) {
   else if (dest === 'chatgpt') abrirChatGPTApp();
   else openCard(dest);
 }
-function finCerrar() {
-  const el = document.getElementById('fin-bloque');
-  el.style.transition = 'opacity .3s'; el.style.opacity = '0';
-  setTimeout(function () { el.classList.add('cerrado'); }, 300);
-  try { sessionStorage.setItem('iatorpes_fin_cerrado', '1'); } catch (e) {}
-  if (typeof gtag === 'function') gtag('event', 'fin_inicio', { event_category: 'navegacion', event_label: 'cerrar' });
-}
 (function () {
   const el = document.getElementById('fin-bloque');
   if (!el) return;
-  try { if (sessionStorage.getItem('iatorpes_fin_cerrado') === '1') { el.classList.add('cerrado'); return; } } catch (e) {}
   if (!('IntersectionObserver' in window)) { el.classList.add('visto'); return; }
   const obs = new IntersectionObserver(function (entradas) {
     entradas.forEach(function (e) {

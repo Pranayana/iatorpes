@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v165 · Para crear imágenes se recomienda ahora ChatGPT (gratis) en lugar de Gemini, por el recorte de Google del 9 de octubre; Gemini pasa a segundo lugar con su aviso · 5 octubre 2026 -->
+<!-- IAtorpes.com · v166 · Se quita el generador "Crea una felicitación en 30 segundos" de la portada: lo que hacía ya está en "Escribe un mensaje" · 6 octubre 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -2290,39 +2290,6 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       </div>
       <div class="grid" id="grid"></div>
 
-      <!-- GENERADOR DE FELICITACIONES -->
-      <div class="generator-section">
-        <div class="generator-title">🎂 Crea una felicitación en 30 segundos</div>
-        <input class="generator-input" id="gen-input" type="text" placeholder="¿Para quién es? Ej: mi nieta María, que cumple 8 años">
-        <div class="generator-options">
-          <div class="opt-group">
-            <div class="opt-label">Ocasión</div>
-            <div class="opt-btns">
-              <button class="opt-btn selected" onclick="selectOpt(this,'ocasion')">Cumpleaños</button>
-              <button class="opt-btn" onclick="selectOpt(this,'ocasion')">Santo</button>
-              <button class="opt-btn" onclick="selectOpt(this,'ocasion')">Boda</button>
-              <button class="opt-btn" onclick="selectOpt(this,'ocasion')">Dar ánimo</button>
-            </div>
-          </div>
-          <div class="opt-group">
-            <div class="opt-label">Tono</div>
-            <div class="opt-btns">
-              <button class="opt-btn selected" onclick="selectOpt(this,'tono')">Cariñoso</button>
-              <button class="opt-btn" onclick="selectOpt(this,'tono')">Divertido</button>
-              <button class="opt-btn" onclick="selectOpt(this,'tono')">Formal</button>
-            </div>
-          </div>
-        </div>
-        <button class="generator-btn" onclick="generatePrompt()">Crear felicitación</button>
-        <div class="generator-result" id="gen-result">
-          <div class="result-label">📋 Esto es lo que le vas a pedir a la IA</div>
-          <div class="result-prompt" id="gen-prompt-text"></div>
-          <div class="result-btns">
-            <button class="result-btn chatgpt" id="btn-chatgpt" onclick="">🟢 Escribirla con ChatGPT</button>
-          </div>
-        </div>
-      </div>
-
       <!-- Bloque final: ¿Y ahora qué te apetece? -->
       <div class="fin-bloque" id="fin-bloque">
         <div class="fin-titulo"><span class="fin-mano">👋</span> ¿Y ahora qué te apetece?</div>
@@ -2342,7 +2309,7 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       </button>
 
       <!-- Número de versión visible (para saber si la web está actualizada) -->
-      <div style="text-align:center;font-size:0.72rem;color:var(--light);font-weight:700;margin:14px 0 2px">versión 165</div>
+      <div style="text-align:center;font-size:0.72rem;color:var(--light);font-weight:700;margin:14px 0 2px">versión 166</div>
     </div>
     <!-- <div class="quick-bar"> HIDDEN
       <div class="quick-label">💬 Pregunta rápida:</div>
@@ -5745,55 +5712,6 @@ function openWhatsAppShare(url) {
 
 
 // ── GENERADOR ──
-let selectedOcasion = 'Cumpleaños';
-let selectedTono = 'Cariñoso';
-let currentPrompt = '';
-
-function selectOpt(btn, group) {
-  btn.closest('.opt-btns').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  if (group === 'ocasion') selectedOcasion = btn.textContent;
-  if (group === 'tono') selectedTono = btn.textContent;
-}
-
-function generatePrompt() {
-  const persona = document.getElementById('gen-input').value.trim();
-  if (!persona) {
-    document.getElementById('gen-input').focus();
-    document.getElementById('gen-input').style.borderColor = 'var(--accent)';
-    setTimeout(() => document.getElementById('gen-input').style.borderColor = '', 2000);
-    return;
-  }
-
-  const ocasionTexto = {
-    'Cumpleaños': 'felicitarle el cumpleaños',
-    'Santo': 'felicitarle el santo',
-    'Boda': 'felicitarle por su boda',
-    'Dar ánimo': 'darle ánimo y mandarle fuerza'
-  }[selectedOcasion] || 'felicitarle';
-
-  currentPrompt = `Escríbeme una felicitación para ${persona}.
-
-- Motivo: ${ocasionTexto}
-- Tono: ${selectedTono.toLowerCase()}
-- En español de España, con palabras sencillas y naturales
-
-Que sea corta, para mandarla por WhatsApp, y que suene a escrita por una persona, no por una máquina. Dame tres versiones para que pueda elegir.`;
-
-  document.getElementById('gen-prompt-text').textContent = currentPrompt;
-
-  const encoded = encodeURIComponent(currentPrompt);
-
-  document.getElementById('btn-chatgpt').onclick = () => {
-    if (typeof gtag === 'function') gtag('event', 'felicitacion', { event_category: 'herramienta', event_label: selectedOcasion + ' · ' + selectedTono });
-    window.open('https://chatgpt.com/?q=' + encoded, '_blank');
-  };
-
-  const result = document.getElementById('gen-result');
-  result.classList.add('visible');
-  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
 function copyGeneratedPrompt() {
   navigator.clipboard.writeText(currentPrompt).then(() => {
     const btn = document.querySelector('.result-btn.copy');

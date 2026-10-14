@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v167 · Noticias actualizadas (falsa multa de la DGT por SMS, ChatGPT mejora también en la versión gratuita y el bulo de que WhatsApp cobra) y juegos ampliados: 3 mensajes en ¿Estafa o no?, 2 frases en ¿Verdad o mito? y 2 preguntas del día · 13 octubre 2026 -->
+<!-- IAtorpes.com · v169 · Micrófono para buscar hablando, botón A+ de letra grande, botón Escuchar la pantalla en voz alta y nueva ficha "Me han estafado, ¿qué hago?" · 14 octubre 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -190,6 +190,15 @@ body.dark .grid-grupo { color: #BFEFF6; background: rgba(78,205,196,0.12); borde
   .card.card-wide { grid-column: span 2; flex-direction: row; padding: 16px; gap: 14px; }
   .card.card-wide .card-label { font-size: 18px !important; white-space: nowrap; }
 }
+/* Que el texto pueda encogerse dentro de la tarjeta en vez de salirse y cortarse */
+.card.card-wide > div { min-width: 0; flex: 1; }
+.card.card-wide .card-icon { flex-shrink: 0; }
+.card.card-wide.w-duda .card-label { white-space: normal !important; overflow-wrap: break-word; line-height: 1.2; }
+/* En móviles estrechos, con A+ las palabras largas no caben en las tarjetas pequeñas */
+@media (max-width: 370px) {
+  html.letra-grande .card:not(.card-wide) .card-label { font-size: 0.95rem; }
+}
+.card.card-wide.w-duda > div > div { overflow-wrap: break-word; }
 .card::before { content:''; position:absolute; inset:0; background:linear-gradient(160deg,rgba(255,255,255,0.42) 0%,transparent 55%); border-radius:inherit; pointer-events:none; }
 .card:hover { transform: translateY(-3px); }
 .card:active { transform: translateY(3px); }
@@ -1970,6 +1979,61 @@ body.dark .fin-bloque { background: linear-gradient(145deg,#1e1e32,#16162a); bor
 .fin-btn.preguntar { background: #58CC02; border-bottom: 5px solid #3F9A00; }
 @media (prefers-reduced-motion: reduce) { .fin-bloque, .fin-bloque.visto, .fin-bloque.visto .fin-mano { transition: none; animation: none; opacity: 1; transform: none; } }
 
+
+/* ── Micrófono del buscador ── */
+.search-mic {
+  position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+  width: 46px; height: 46px; border-radius: 14px; background: #fff;
+  border: 2px solid #D6E4EC; border-bottom: 4px solid #D6E4EC;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  -webkit-tap-highlight-color: transparent; color: #1B8FBF; padding: 0;
+}
+.search-mic .mic-icono { width: 25px; height: 25px; fill: currentColor; display: block; }
+body.dark .search-mic { background: #22223a; border-color: rgba(255,255,255,0.14); color: #4ECDC4; }
+.search-mic.escuchando { background: #FF5A5F; border-color: #C93B40; color: #fff; animation: micLatido 1s infinite; }
+body.dark .search-mic.escuchando { color: #fff; }
+@keyframes micLatido { 0%,100% { transform: translateY(-50%) scale(1); } 50% { transform: translateY(-50%) scale(1.12); } }
+body.con-mic .search-bar { padding-right: 118px !important; }
+.mic-aviso { text-align: center; font-weight: 800; color: #1B8FBF; font-size: 0.95rem; }
+.mic-aviso:not(:empty) { margin-top: 10px; margin-bottom: 2px; line-height: 1.45; }
+.mic-diag { display: inline-block; margin-top: 6px; font-size: 0.78rem; font-weight: 700; color: #8A7B4F; background: #FFF6DC; border-radius: 8px; padding: 4px 9px; }
+body.dark .mic-diag { background: rgba(255,214,102,0.12); color: #E6C87A; }
+body.dark .mic-aviso { color: #4ECDC4; }
+
+/* ── Cabecera que sube con el dedo (fichas largas) ── */
+.ficha-cabecera { text-align: center; padding: 10px 0 2px; }
+.ficha-cabecera-icono { font-size: 3.2rem; line-height: 1; margin-bottom: 2px; }
+.ficha-cabecera-titulo { margin: 2px 0 8px !important; }
+.ficha-cabecera-sub { margin-bottom: 14px !important; }
+
+/* ── Letra grande ── */
+.btn-letra { font-family: 'Nunito',sans-serif !important; font-weight: 900 !important; font-size: 1rem !important; letter-spacing: -0.5px; }
+html.letra-grande .btn-letra { background: #29B6E8; color: #fff; }
+html.letra-grande { font-size: 118%; }
+/* La cabecera y la barra de abajo NO crecen: si no, se salen de la pantalla */
+html.letra-grande .header { gap: 10px; padding: 0 12px; }
+html.letra-grande .header-nav { gap: 6px; }
+html.letra-grande .logo-icon { width: 34px; height: 34px; font-size: 16px; }
+html.letra-grande .logo-text { font-size: 17px; }
+html.letra-grande .nav-link { font-size: 13px; padding: 6px 8px; }
+html.letra-grande .nav-icon,
+html.letra-grande .dark-toggle { width: 32px; height: 32px; font-size: 16px; }
+html.letra-grande .tabbar-btn .tabbar-icono { font-size: 26px; }
+html.letra-grande .tabbar-btn .tabbar-label { font-size: 12px; }
+
+/* ── Botón de escuchar la página ── */
+.btn-leer {
+  position: fixed; left: 16px; bottom: 92px; z-index: 1400;
+  display: none; align-items: center; gap: 8px;
+  background: #fff; color: #1B8FBF; border: none; border-bottom: 4px solid #D6E4EC;
+  border-radius: 100px; padding: 11px 16px; font-family: 'Nunito',sans-serif;
+  font-weight: 900; font-size: 0.92rem; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15); -webkit-tap-highlight-color: transparent;
+}
+body.dark .btn-leer { background: #22223a; color: #4ECDC4; border-bottom-color: rgba(0,0,0,0.4); }
+body.leyendo .btn-leer { background: #FF5A5F; color: #fff; border-bottom-color: #C93B40; }
+.btn-leer.visible { display: flex; }
+
 /* ═══════════ JUEGOS ═══════════ */
 .jg-wrap { padding: 20px clamp(16px,3vw,48px) 110px; max-width: 640px; margin: 0 auto; }
 .jg-titulo { font-family: 'Nunito',sans-serif; font-size: 1.5rem; font-weight: 900; color: var(--text); margin-bottom: 4px; }
@@ -2225,6 +2289,7 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       <button class="nav-link" onclick="shareApp()" title="Compartir IAtorpes">🔗 Compartir</button>
       <button class="nav-link" onclick="openCard('ayuda')">Ayuda</button>
       <button class="dark-toggle" id="btn-instalar-header" onclick="instalarDesdeHeader()" title="Instalar app" style="display:none">📲</button>
+      <button class="dark-toggle btn-letra" id="btn-letra" onclick="toggleLetra()" title="Letra más grande" aria-label="Letra más grande">A+</button>
       <button class="dark-toggle" id="dark-toggle" onclick="toggleDark()" title="Modo oscuro">🌙</button>
     </nav>
   </header>
@@ -2250,8 +2315,10 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
         <div class="search-label">🔍 ¿Qué quieres hacer?</div>
         <div class="search-inner">
           <input class="search-bar" id="search-input" type="text" placeholder="Ej: crear imagen, traducir texto, enviar WhatsApp..." onkeydown="if(event.key==='Enter') doSearch()">
+          <button class="search-mic" id="search-mic" onclick="dictarBusqueda()" title="Hablar en vez de escribir" aria-label="Hablar en vez de escribir" style="display:none"><svg class="mic-icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 14.5a3.25 3.25 0 0 0 3.25-3.25v-6a3.25 3.25 0 0 0-6.5 0v6A3.25 3.25 0 0 0 12 14.5z"/><path d="M17.75 11.25a.9.9 0 0 0-1.8 0 3.95 3.95 0 0 1-7.9 0 .9.9 0 0 0-1.8 0 5.76 5.76 0 0 0 4.85 5.68v2.32h-2.1a.9.9 0 0 0 0 1.8h6a.9.9 0 0 0 0-1.8h-2.1v-2.32a5.76 5.76 0 0 0 4.85-5.68z"/></svg></button>
           <button class="search-submit" onclick="doSearch()">🔍</button>
         </div>
+        <div class="mic-aviso" id="mic-aviso"></div>
         <div id="search-noresult"></div>
       </div>
 
@@ -2309,7 +2376,7 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       </button>
 
       <!-- Número de versión visible (para saber si la web está actualizada) -->
-      <div style="text-align:center;font-size:0.72rem;color:var(--light);font-weight:700;margin:14px 0 2px">versión 167</div>
+      <div style="text-align:center;font-size:0.72rem;color:var(--light);font-weight:700;margin:14px 0 2px">versión 169</div>
     </div>
     <!-- <div class="quick-bar"> HIDDEN
       <div class="quick-label">💬 Pregunta rápida:</div>
@@ -5177,6 +5244,69 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       <button class="back-btn" onclick="volverAtras()">← Volver</button>
     </div>
 
+    <!-- ME HAN ESTAFADO: QUÉ HAGO AHORA -->
+    <div class="vista" id="v-estafado">
+      <div class="content">
+        <div class="ficha-cabecera">
+          <div class="ficha-cabecera-icono">🚨</div>
+          <h2 class="hero-title ficha-cabecera-titulo">Me han estafado, ¿qué hago?</h2>
+          <div class="hero-subtitle ficha-cabecera-sub">Tranquilo. Estos son los pasos, por orden y sin perder tiempo</div>
+        </div>
+        <div class="info-box" style="background:#FFDFE0;border-color:#FF5A5F">
+          <p style="font-size:1rem;font-weight:800;color:#8A1C20;line-height:1.5;margin:0">Lo primero y más importante: <b>no te avergüences y no lo escondas</b>. Estas estafas engañan a gente de todas las edades, incluidos policías y abogados. Lo que importa ahora es ir rápido.</p>
+        </div>
+
+        <div class="jg-card" style="margin-top:16px">
+          <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.15rem;color:var(--text);margin-bottom:12px">1. Llama a tu banco ahora mismo</div>
+          <div style="font-size:1rem;font-weight:700;color:var(--text);line-height:1.6">
+            Si has dado datos de tu tarjeta o han sacado dinero, llama al teléfono que viene <b>detrás de tu tarjeta</b> y pide que la bloqueen. Se puede hacer a cualquier hora, también de noche y en festivo. Diles que ha sido una estafa y pregunta si se puede parar o devolver el pago.
+          </div>
+        </div>
+
+        <div class="jg-card">
+          <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.15rem;color:var(--text);margin-bottom:12px">2. Llama al 017, que es gratis</div>
+          <div style="font-size:1rem;font-weight:700;color:var(--text);line-height:1.6">
+            Es la línea de ayuda del INCIBE, el organismo público de ciberseguridad. Es <b>gratuita, confidencial y atienden todos los días</b>. Te dicen qué hacer en tu caso concreto, con paciencia y sin tecnicismos.
+            <br><br>
+            <a href="tel:017" style="display:inline-block;background:#58CC02;color:#fff;text-decoration:none;padding:12px 22px;border-radius:100px;font-family:'Nunito',sans-serif;font-weight:900;font-size:1.05rem">📞 Llamar al 017</a>
+          </div>
+        </div>
+
+        <div class="jg-card">
+          <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.15rem;color:var(--text);margin-bottom:12px">3. Guarda las pruebas</div>
+          <div style="font-size:1rem;font-weight:700;color:var(--text);line-height:1.6">
+            Antes de borrar nada, haz fotos de la pantalla: el mensaje, el número que te escribió, la página donde pusiste los datos y los movimientos del banco. Te las pedirán para denunciar.
+          </div>
+        </div>
+
+        <div class="jg-card">
+          <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.15rem;color:var(--text);margin-bottom:12px">4. Denuncia</div>
+          <div style="font-size:1rem;font-weight:700;color:var(--text);line-height:1.6">
+            En el cuartel de la Guardia Civil o en la comisaría de Policía más cercana. Lleva las fotos que has guardado. <b>Denunciar es importante aunque te parezca que no va a servir</b>: sin denuncia, el banco casi nunca devuelve el dinero.
+          </div>
+        </div>
+
+        <div class="jg-card">
+          <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.15rem;color:var(--text);margin-bottom:12px">5. Cambia las contraseñas</div>
+          <div style="font-size:1rem;font-weight:700;color:var(--text);line-height:1.6">
+            Si diste alguna clave, cámbiala en esa cuenta y en cualquier otra donde usaras la misma. Empieza por el correo y por el banco.
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:4px">
+          <p style="font-size:0.95rem;font-weight:800;margin-bottom:6px">🤝 Y cuéntaselo a alguien de confianza</p>
+          <p style="font-size:0.92rem;color:var(--mid);line-height:1.55">A un hijo, a un vecino o en el centro de mayores. Dos cabezas van más rápido con los trámites, y además avisas a los demás de lo que está circulando.</p>
+        </div>
+
+        <div class="info-box" style="margin-top:12px">
+          <p style="font-size:0.95rem;font-weight:800;margin-bottom:6px">⚠️ Cuidado con la segunda estafa</p>
+          <p style="font-size:0.92rem;color:var(--mid);line-height:1.55">Es muy habitual que, días después, te llamen diciendo que son del banco, de la policía o de un bufete y que pueden "recuperar tu dinero" pagando algo por adelantado. Es otra estafa. Nadie recupera dinero cobrándote por anticipado.</p>
+        </div>
+        <div style="height:70px"></div>
+      </div>
+      <button class="back-btn" onclick="volverAtras()">← Volver</button>
+    </div>
+
     <!-- PANTALLA JUEGOS (agrupador) -->
     <div class="vista" id="v-juegos-tab">
       <div class="tab-pantalla">
@@ -5374,6 +5504,8 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
 
   </div><!-- /inner -->
 
+  <button class="btn-leer" id="btn-leer" onclick="leerPantalla()">🔊 <span id="btn-leer-txt">Escuchar</span></button>
+
   <!-- BARRA INFERIOR DE PESTAÑAS -->
   <nav class="tabbar" id="tabbar">
     <button class="tabbar-btn activo" id="tab-inicio" onclick="irTab('inicio')"><span class="tabbar-icono">🏠</span><span class="tabbar-label">Inicio</span></button>
@@ -5409,6 +5541,7 @@ const CARDS = [
   { id:'seguridad', emoji:'🛡️', label:'Protégete de estafas', wide:true, sub:'Aprende a reconocer los timos del móvil' },
   { id:'movil',    emoji:'📱', label:'Usa tu\nmóvil mejor' },
   { id:'organiza', emoji:'📧', label:'Organiza\ntu correo' },
+  { id:'estafado', emoji:'🚨', label:'Me han estafado', wide:true, sub:'¿Qué hago ahora? Los pasos, por orden' },
 ];
 
 const grid = document.getElementById('grid');
@@ -6299,6 +6432,7 @@ const CARD_NAMES = {
   escucha: '🔊 Léeme un texto',
   musica: '🎵 Crea música',
   carta: '📄 Explícame esta carta',
+  estafado: '🚨 Me han estafado, ¿qué hago?',
   seguridad: '🔒 ¿Es esto una estafa?',
   noticias: '📰 Últimas noticias IA',
   aprende: '🎓 Aprende con la IA',
@@ -6377,6 +6511,7 @@ const SEARCH_MAP = [
   // Ponme música
   { keywords: ['música','canción','melodía','musica','componer','cantar','crear música','suno','cancion','banda sonora','instrumental','hacer una canción','componer música'], id: 'musica' },
   // ¿Es esto una estafa?
+  { keywords: ['me han estafado','me han robado','me robaron','he caido en una estafa','he caído en una estafa','he picado','pulse el enlace','pulsé el enlace','di mis datos','he dado mis datos','han sacado dinero','me han sacado dinero','cargo que no reconozco','bloquear la tarjeta','bloquear tarjeta','denunciar estafa','que hago si me han estafado','qué hago si me han estafado','recuperar mi dinero','017','me han quitado el whatsapp','me han robado la cuenta'], id: 'estafado' },
   { keywords: ['seguridad','estafa','fraude','contraseña','phishing','virus','hackeo','spam','peligro','sospechoso','mentira','timo','fake','falso','whatsapp sospechoso','me han estafado','es verdad','es real','me quieren engañar','sms','mensaje raro','mensaje extraño','mensaje sospechoso','correo sospechoso','email raro','llamada sospechosa','me piden dinero','me han robado','banco mensaje','paquete correos','hacienda mensaje','enlace raro','link raro','suplantación','suplantacion','engaño','engano','me han hackeado','robo de datos','clonar voz','voz clonada'], id: 'seguridad' },
   // Escribe un mensaje
   { keywords: ['escribir','escribe','mensaje','email','correo','carta','redactar','redacta','responder correo','contestar','whatsapp','nota','solicitud','reclamación','reclamacion','queja','felicitación','felicitacion','invitación','invitacion','escribir a','carta para','mensaje para','felicitar','dar el pésame','pesame'], id: 'escribe' },
@@ -6432,9 +6567,18 @@ function doSearch() {
   }
 
   if (bestMatch) {
+    // Medimos solo a qué sección fue a parar, no lo que escribió
+    if (typeof gtag === 'function') gtag('event', 'busqueda', {
+      event_category: 'buscador', event_label: 'encontrada · ' + bestMatch
+    });
     openCard(bestMatch);
     return;
   }
+
+  // Sin coincidencia — aquí sí guardamos lo que escribió, para poder taparlo
+  if (typeof gtag === 'function') gtag('event', 'busqueda_sin_resultado', {
+    event_category: 'buscador', event_label: queryRaw.slice(0, 80)
+  });
 
   // Sin coincidencia — ofrecer abrir la IA directamente con lo que escribió
   mostrarBusquedaSinResultado(queryRaw);
@@ -6872,7 +7016,10 @@ renderIaDelDia();
 // ===== SERVICE WORKER =====
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(() => {});
+    navigator.serviceWorker.register('/sw.js').then(function (reg) {
+      // Comprobar si hay una versión más nueva, en vez de servir la guardada sin mirar
+      if (reg && reg.update) { reg.update(); }
+    }).catch(() => {});
   });
 }
 
@@ -7758,6 +7905,191 @@ function rayTocar(i) {
     }
   }, true);
 })();
+
+
+/* ── Hablar en vez de escribir en el buscador ── */
+let recono = null;
+async function dictarBusqueda() {
+  const Reco = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const aviso = document.getElementById('mic-aviso');
+  const boton = document.getElementById('search-mic');
+
+  // 1) Sin https el navegador NI SIQUIERA pregunta por el micrófono
+  if (!window.isSecureContext) {
+    aviso.innerHTML = '🔒 El micrófono solo funciona entrando en <b>iatorpes.com</b>. Si has abierto el archivo directamente desde el móvil, el navegador no te lo va a pedir nunca.' + diagChip();
+    return;
+  }
+  if (!Reco) {
+    aviso.innerHTML = 'Este navegador no sabe escuchar. Prueba a abrir iatorpes.com con <b>Chrome</b> (Android) o <b>Safari</b> (iPhone).' + diagChip();
+    return;
+  }
+  if (recono) { recono.stop(); return; }
+
+  // 2) Pedimos el micrófono a pelo: así el aviso de permiso sale seguro
+  aviso.textContent = 'Pidiendo permiso para el micrófono…';
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream.getTracks().forEach(function (t) { t.stop(); });
+    } catch (err) {
+      const n = (err && err.name) || 'Error';
+      if (n === 'NotAllowedError' || n === 'SecurityError') {
+        aviso.innerHTML = '🚫 El micrófono está bloqueado para esta página. Pulsa el <b>candado</b> (o los tres puntos → Información del sitio) y activa el micrófono.' + diagChip();
+      } else if (n === 'NotFoundError') {
+        aviso.innerHTML = 'No encuentro ningún micrófono en este aparato.' + diagChip();
+      } else {
+        aviso.innerHTML = 'No he podido abrir el micrófono.' + diagChip(n);
+      }
+      return;
+    }
+  }
+
+  // 3) Ya con permiso, a escuchar
+  recono = new Reco();
+  recono.lang = 'es-ES';
+  recono.interimResults = false;
+  recono.maxAlternatives = 1;
+  boton.classList.add('escuchando');
+  aviso.textContent = '🎤 Te escucho… habla ahora';
+  if (navigator.vibrate) navigator.vibrate(15);
+  if (typeof gtag === 'function') gtag('event', 'microfono', { event_category: 'buscador', event_label: 'usar micro' });
+  recono.onresult = function (e) {
+    const texto = e.results[0][0].transcript;
+    document.getElementById('search-input').value = texto;
+    aviso.textContent = '👂 He entendido: "' + texto + '"';
+    setTimeout(function () { aviso.textContent = ''; doSearch(); }, 900);
+  };
+  recono.onerror = function (e) {
+    const er = (e && e.error) || '';
+    if (er === 'not-allowed' || er === 'service-not-allowed') {
+      aviso.innerHTML = '🚫 El navegador no deja usar el dictado aquí. Mira el <b>candado</b> de la barra de direcciones y activa el micrófono.' + diagChip(er);
+    } else if (er === 'no-speech') {
+      aviso.textContent = 'No he oído nada. Pulsa otra vez y habla cerca del móvil.';
+    } else if (er === 'network') {
+      aviso.textContent = 'El dictado necesita internet y ahora mismo no llega.';
+    } else {
+      aviso.innerHTML = 'No te he entendido. Prueba otra vez o escríbelo.' + diagChip(er);
+    }
+  };
+  recono.onend = function () { boton.classList.remove('escuchando'); recono = null; };
+  try { recono.start(); } catch (err) {
+    boton.classList.remove('escuchando'); recono = null;
+    aviso.innerHTML = 'No he podido arrancar el dictado.' + diagChip(((err && err.name) || ''));
+  }
+}
+
+/* Chapa técnica: solo se ve entrando en iatorpes.com/?diag=1 */
+function diagChip(extra) {
+  if (location.search.indexOf('diag=1') === -1) return '';
+  return '<br><span class="mic-diag">' + (extra ? extra + ' · ' : '') + diagMicro() + '</span>';
+}
+
+/* Línea de diagnóstico: me dices qué pone y sé exactamente qué pasa */
+function diagMicro() {
+  const u = navigator.userAgent;
+  const nav = /CriOS/.test(u) ? 'Chrome-iPhone'
+            : /FxiOS/.test(u) ? 'Firefox-iPhone'
+            : /EdgiOS/.test(u) ? 'Edge-iPhone'
+            : /SamsungBrowser/.test(u) ? 'Samsung'
+            : /Chrome/.test(u) ? 'Chrome'
+            : /Firefox/.test(u) ? 'Firefox'
+            : /Safari/.test(u) ? 'Safari' : 'otro';
+  const so = /Android/.test(u) ? 'Android' : /iPhone|iPad/.test(u) ? 'iOS' : 'PC';
+  const pwa = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone ? 'app' : 'web';
+  return nav + ' · ' + so + ' · ' + pwa
+       + ' · https:' + (window.isSecureContext ? 'sí' : 'NO')
+       + ' · api:' + ((window.SpeechRecognition || window.webkitSpeechRecognition) ? 'sí' : 'NO')
+       + ' · getUserMedia:' + ((navigator.mediaDevices && navigator.mediaDevices.getUserMedia) ? 'sí' : 'NO');
+}
+
+/* El micrófono solo aparece si el móvil sabe dictar (con ?diag=1 se ve siempre) */
+(function () {
+  const puede = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+  if (!puede && location.search.indexOf('diag=1') === -1) return;
+  const b = document.getElementById('search-mic');
+  if (b) { b.style.display = 'flex'; document.body.classList.add('con-mic'); }
+})();
+
+/* ── Letra más grande ── */
+function toggleLetra() {
+  const html = document.documentElement;
+  const grande = html.classList.toggle('letra-grande');
+  try { localStorage.setItem('iatorpes_letra', grande ? '1' : '0'); } catch (e) {}
+  const b = document.getElementById('btn-letra');
+  if (b) { b.title = grande ? 'Volver a letra normal' : 'Letra más grande'; b.textContent = grande ? 'A−' : 'A+'; }
+  if (navigator.vibrate) navigator.vibrate(12);
+  if (typeof gtag === 'function') gtag('event', 'letra_grande', { event_category: 'accesibilidad', event_label: grande ? 'activada' : 'desactivada' });
+}
+(function () {
+  try {
+    if (localStorage.getItem('iatorpes_letra') === '1') {
+      document.documentElement.classList.add('letra-grande');
+      const b = document.getElementById('btn-letra');
+      if (b) { b.textContent = 'A\u2212'; b.title = 'Volver a letra normal'; }
+    }
+  } catch (e) {}
+})();
+
+/* ── Escuchar la pantalla en voz alta ── */
+function textoDeLaPantalla() {
+  const v = document.querySelector('.vista.active');
+  if (!v) return '';
+  const trozos = [];
+  v.querySelectorAll('.hero-title, .hero-subtitle, .content p, .content div, .content li').forEach(function (el) {
+    if (el.querySelector('p, div, li')) return; // solo los de dentro del todo
+    const t = (el.textContent || '').trim();
+    if (t.length > 2) trozos.push(t);
+  });
+  let texto = trozos.join('. ');
+  // Quitar emojis, que si no los lee en voz alta
+  texto = texto.replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{2190}-\u{21FF}]/gu, ' ');
+  return texto.replace(/\s+/g, ' ').slice(0, 4000);
+}
+function leerPantalla() {
+  if (!('speechSynthesis' in window)) return;
+  const btn = document.getElementById('btn-leer-txt');
+  if (speechSynthesis.speaking) {
+    speechSynthesis.cancel();
+    document.body.classList.remove('leyendo');
+    if (btn) btn.textContent = 'Escuchar';
+    vistaLeida = null;
+    return;
+  }
+  const texto = textoDeLaPantalla();
+  if (!texto) return;
+  const u = new SpeechSynthesisUtterance(texto);
+  u.lang = 'es-ES';
+  u.rate = 0.95;
+  u.onend = function () { document.body.classList.remove('leyendo'); if (btn) btn.textContent = 'Escuchar'; vistaLeida = null; };
+  u.onerror = u.onend;
+  speechSynthesis.speak(u);
+  const va = document.querySelector('.vista.active');
+  vistaLeida = va ? va.id : null;
+  document.body.classList.add('leyendo');
+  if (btn) btn.textContent = 'Parar';
+  if (typeof gtag === 'function') gtag('event', 'escuchar', { event_category: 'accesibilidad', event_label: (document.querySelector('.vista.active') || {}).id || '' });
+}
+/* El botón de escuchar solo se ve dentro de una ficha con texto.
+   Si el usuario cambia de pantalla mientras lee, se corta la voz. */
+let vistaLeida = null;
+function actualizarBotonLeer() {
+  const b = document.getElementById('btn-leer');
+  if (!b || !('speechSynthesis' in window)) return;
+  const inner = document.getElementById('inner');
+  const dentro = !!inner && inner.classList.contains('visible');
+  const activa = document.querySelector('.vista.active');
+  const hayTexto = !!(activa && activa.querySelector('.content'));
+  b.classList.toggle('visible', dentro && hayTexto);
+  const idAhora = dentro && activa ? activa.id : null;
+  if (vistaLeida !== null && idAhora !== vistaLeida && speechSynthesis.speaking) {
+    speechSynthesis.cancel();
+    document.body.classList.remove('leyendo');
+    const t = document.getElementById('btn-leer-txt');
+    if (t) t.textContent = 'Escuchar';
+    vistaLeida = null;
+  }
+}
+setInterval(actualizarBotonLeer, 600);
 
 </script>
 </body>

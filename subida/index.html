@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v175 · El buscador pasa a ser "Pregúntame lo que necesites" (la gente le preguntaba a la IA, no buscaba secciones), el cuadro de "sin resultado" deja de disculparse, entran 30 palabras de salud y aparece el aviso de estafa de la semana en la portada · Actualización semanal: tres noticias nuevas (el nombre del banco falseado en la pantalla, los alojamientos inventados con IA y el filtro de llamadas de WhatsApp) y juegos ampliados: +3 mensajes en ¿Estafa o no? (dos de fiar), +2 frases en ¿Verdad o mito? y +2 preguntas del día · 26 octubre 2026 -->
+<!-- IAtorpes.com · v176 · Fuera la pestaña Descubre: la barra de abajo pasa a tres botones (Inicio, Aprende, Juegos) y cada uno se hace más grande. Los vídeos se mudan a Aprende y la sección de noticias se retira, porque la abrían 4 personas al mes y solo una pulsaba una noticia; su sitio lo ocupa el aviso de estafa de la portada · 26 octubre 2026 · ANTES ERA v175 · El buscador pasa a ser "Pregúntame lo que necesites" (la gente le preguntaba a la IA, no buscaba secciones), el cuadro de "sin resultado" deja de disculparse, entran 30 palabras de salud y aparece el aviso de estafa de la semana en la portada · Actualización semanal: tres noticias nuevas (el nombre del banco falseado en la pantalla, los alojamientos inventados con IA y el filtro de llamadas de WhatsApp) y juegos ampliados: +3 mensajes en ¿Estafa o no? (dos de fiar), +2 frases en ¿Verdad o mito? y +2 preguntas del día · 26 octubre 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -2424,7 +2424,7 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
         <div class="fin-titulo"><span class="fin-mano">👋</span> ¿Y ahora qué te apetece?</div>
         <div class="fin-grid">
           <button class="fin-btn jugar" onclick="finIr('juegos')"><span>🎮</span>Jugar un rato</button>
-          <button class="fin-btn noticias" onclick="finIr('noticias')"><span>📰</span>Últimas noticias</button>
+          <button class="fin-btn noticias" onclick="finIr('salud')"><span>💊</span>Salud y medicinas</button>
           <button class="fin-btn videos" onclick="finIr('videos')"><span>▶️</span>Ver vídeos</button>
           <button class="fin-btn preguntar" onclick="finIr('consultas')"><span>💬</span>Preguntar algo</button>
         </div>
@@ -2445,7 +2445,7 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       </button>
 
       <!-- Número de versión visible (para saber si la web está actualizada) -->
-      <div style="text-align:center;font-size:0.72rem;color:var(--light);font-weight:700;margin:14px 0 2px">versión 175</div>
+      <div style="text-align:center;font-size:0.72rem;color:var(--light);font-weight:700;margin:14px 0 2px">versión 176</div>
     </div>
     <!-- <div class="quick-bar"> HIDDEN
       <div class="quick-label">💬 Pregunta rápida:</div>
@@ -5307,29 +5307,16 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       <button class="back-btn" onclick="volverAtras()">← Volver</button>
     </div><!-- /v-videos -->
 
-    <!-- PANTALLA DESCUBRE (agrupador) -->
-    <div class="vista" id="v-descubre">
-      <div class="tab-pantalla">
-        <div class="tab-pantalla-titulo">🧭 Descubre</div>
-        <div class="tab-pantalla-sub">Noticias y vídeos del mundo de la IA, en español</div>
-        <button class="tab-acceso" onclick="openCard('noticias')">
-          <span class="tab-acceso-emoji">📰</span>
-          <div><div class="tab-acceso-tit">Últimas noticias IA</div><div class="tab-acceso-sub">Lo más importante de la semana</div></div>
-          <span class="tab-acceso-arrow">→</span>
-        </button>
-        <button class="tab-acceso" onclick="openCard('videos')">
-          <span class="tab-acceso-emoji">▶️</span>
-          <div><div class="tab-acceso-tit">Vídeos y trucos</div><div class="tab-acceso-sub">Aprende viendo, paso a paso</div></div>
-          <span class="tab-acceso-arrow">→</span>
-        </button>
-      </div>
-    </div><!-- /v-descubre -->
-
     <!-- PANTALLA APRENDE (agrupador) -->
     <div class="vista" id="v-aprende-tab">
       <div class="tab-pantalla">
         <div class="tab-pantalla-titulo">🎓 Aprende</div>
-        <div class="tab-pantalla-sub">Entiende la inteligencia artificial sin complicarte</div>
+        <div class="tab-pantalla-sub">Lecciones, curiosidades y vídeos para entender la IA sin complicarte</div>
+        <button class="tab-acceso" onclick="openCard('videos')">
+          <span class="tab-acceso-emoji">▶️</span>
+          <div><div class="tab-acceso-tit">Vídeos y trucos</div><div class="tab-acceso-sub">Aprende viéndolo, paso a paso</div></div>
+          <span class="tab-acceso-arrow">→</span>
+        </button>
         <button class="tab-acceso" onclick="openCard('aprende')">
           <span class="tab-acceso-emoji">🎓</span>
           <div><div class="tab-acceso-tit">Aprende con la IA</div><div class="tab-acceso-sub">Lecciones fáciles para empezar</div></div>
@@ -5646,7 +5633,6 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
   <!-- BARRA INFERIOR DE PESTAÑAS -->
   <nav class="tabbar" id="tabbar">
     <button class="tabbar-btn activo" id="tab-inicio" onclick="irTab('inicio')"><span class="tabbar-icono">🏠</span><span class="tabbar-label">Inicio</span></button>
-    <button class="tabbar-btn" id="tab-descubre" onclick="irTab('descubre')"><span class="tabbar-icono">🧭</span><span class="tabbar-label">Descubre</span></button>
     <button class="tabbar-btn" id="tab-aprende" onclick="irTab('aprende')"><span class="tabbar-icono">🎓</span><span class="tabbar-label">Aprende</span></button>
     <button class="tabbar-btn" id="tab-juegos" onclick="irTab('juegos')"><span class="tabbar-icono">🎮</span><span class="tabbar-label">Juegos</span></button>
   </nav>
@@ -5827,7 +5813,7 @@ function abrirLibro() {
 
 /* ── Barra inferior de pestañas (Inicio / Descubre / Aprende) ── */
 function marcarTab(tab) {
-  ['inicio','descubre','aprende','juegos'].forEach(t => {
+  ['inicio','aprende','juegos'].forEach(t => {
     const b = document.getElementById('tab-' + t);
     if (b) b.classList.toggle('activo', t === tab);
   });
@@ -5836,14 +5822,9 @@ function irTab(tab) {
   if (navigator.vibrate) navigator.vibrate(12);
   if (tab === 'inicio') {
     goHome();
-  } else if (tab === 'descubre') {
-    document.getElementById('home').classList.add('hidden');
-    document.getElementById('inner').classList.add('visible');
-    document.querySelectorAll('.vista').forEach(v => v.classList.remove('active'));
-    document.getElementById('v-descubre').classList.add('active');
-    navStack = ['v-descubre'];
-    document.getElementById('inner').scrollTop = 0;
-  } else if (tab === 'aprende') {
+  } else if (tab === 'descubre' || tab === 'aprende') {
+    /* "Descubre" ya no existe (v176): si algo antiguo la pide, va a Aprende */
+    tab = 'aprende';
     document.getElementById('home').classList.add('hidden');
     document.getElementById('inner').classList.add('visible');
     document.querySelectorAll('.vista').forEach(v => v.classList.remove('active'));
@@ -6663,7 +6644,6 @@ const SEARCH_MAP = [
   // Usa tu móvil mejor
   { keywords: ['móvil','movil','smartphone','teléfono','telefono','celular','usar móvil','ajustes móvil','configurar móvil','aplicaciones','apps móvil','no sé usar','va lento','liberar espacio','hacer videollamada','el teléfono'], id: 'movil' },
   // Novedades IA
-  { keywords: ['noticias','novedades','actualidad','últimas noticias','ultima hora ia','semana ia'], id: 'noticias' },
   // Explícame esta carta — antes que "duda" y que "resume", porque son palabras genéricas
   { keywords: ['carta','explicame esta carta','explicar carta','entender una carta','entender carta','carta del banco','carta de hacienda','carta del ayuntamiento','carta del medico','carta del médico','carta del seguro','documento','papel','papeles','papeleo','burofax','notificacion','notificación','requerimiento','contrato','factura','recibo','multa','informe medico','informe médico','analitica','analítica','seguro','hipoteca','nomina','nómina','no entiendo esta carta','no entiendo este papel','que dice esta carta','qué dice esta carta','leer una carta','foto de una carta'], id: 'carta' },
   // Tengo una duda — AL FINAL porque tiene palabras muy genéricas

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v174 · Actualización semanal: tres noticias nuevas (el nombre del banco falseado en la pantalla, los alojamientos inventados con IA y el filtro de llamadas de WhatsApp) y juegos ampliados: +3 mensajes en ¿Estafa o no? (dos de fiar), +2 frases en ¿Verdad o mito? y +2 preguntas del día · 26 octubre 2026 -->
+<!-- IAtorpes.com · v175 · El buscador pasa a ser "Pregúntame lo que necesites" (la gente le preguntaba a la IA, no buscaba secciones), el cuadro de "sin resultado" deja de disculparse, entran 30 palabras de salud y aparece el aviso de estafa de la semana en la portada · Actualización semanal: tres noticias nuevas (el nombre del banco falseado en la pantalla, los alojamientos inventados con IA y el filtro de llamadas de WhatsApp) y juegos ampliados: +3 mensajes en ¿Estafa o no? (dos de fiar), +2 frases en ¿Verdad o mito? y +2 preguntas del día · 26 octubre 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -341,6 +341,27 @@ body.es-android .back-btn { display: none !important; }
 .modo-btn::before { content:""; position:absolute; inset:0; background:linear-gradient(160deg,rgba(255,255,255,0.42) 0%,transparent 55%); border-radius:inherit; pointer-events:none; }
 .modo-btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: var(--csh); background: linear-gradient(145deg, #29B6E8, #4ECDC4); color: white; }
 .content { padding: 20px 40px; flex: 1; overflow-y: auto; }
+
+/* ── AVISO DE ESTAFA DE LA SEMANA (prueba) ── */
+.aviso-semana {
+  width: calc(100% - 32px); margin: 16px auto 0;
+  background: linear-gradient(135deg, #FFF0E6, #FFE0CC);
+  border: none; border-bottom: 4px solid #E8A06A;
+  border-radius: 15px; padding: 14px 16px; text-align: left;
+}
+.aviso-semana-tit { font-family: 'Sora', sans-serif; font-size: 0.78rem; font-weight: 900; color: #B8541A; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 6px; }
+.aviso-semana-txt { font-size: 0.92rem; line-height: 1.55; color: #5A3A22; margin: 0; }
+.aviso-semana-txt strong { color: #3D2410; font-weight: 800; }
+.aviso-semana-btn {
+  display: inline-block; margin-top: 11px; background: #E8701A; border: none;
+  color: #fff; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 0.8rem;
+  padding: 9px 16px; border-radius: 100px; cursor: pointer;
+}
+.aviso-semana-btn:active { transform: translateY(2px); }
+body.dark .aviso-semana { background: linear-gradient(135deg,#3A2A1C,#2C2016); border-bottom-color: rgba(0,0,0,0.45); }
+body.dark .aviso-semana-tit { color: #F0A868; }
+body.dark .aviso-semana-txt { color: #E0C8B0; }
+body.dark .aviso-semana-txt strong { color: #FFF0E0; }
 
 /* ── QUIÉN ESTÁ DETRÁS (v172) ── */
 .quien-bloque { background: #fff; border-radius: 18px; padding: 18px 20px; box-shadow: var(--cs); margin-bottom: 14px; }
@@ -2346,14 +2367,21 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       </div>
 
       <div class="search-wrap">
-        <div class="search-label">🔍 ¿Qué quieres hacer?</div>
+        <div class="search-label">🔍 Pregúntame lo que necesites</div>
         <div class="search-inner">
-          <input class="search-bar" id="search-input" type="text" placeholder="Ej: crear imagen, traducir texto, enviar WhatsApp..." onkeydown="if(event.key==='Enter') doSearch()">
+          <input class="search-bar" id="search-input" type="text" placeholder="Ej: un cuento para mis nietos, qué es el cáncer de tiroides, cómo termino una cortina de ganchillo..." onkeydown="if(event.key==='Enter') doSearch()">
           <button class="search-mic" id="search-mic" onclick="dictarBusqueda()" title="Hablar en vez de escribir" aria-label="Hablar en vez de escribir" style="display:none"><svg class="mic-icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 14.5a3.25 3.25 0 0 0 3.25-3.25v-6a3.25 3.25 0 0 0-6.5 0v6A3.25 3.25 0 0 0 12 14.5z"/><path d="M17.75 11.25a.9.9 0 0 0-1.8 0 3.95 3.95 0 0 1-7.9 0 .9.9 0 0 0-1.8 0 5.76 5.76 0 0 0 4.85 5.68v2.32h-2.1a.9.9 0 0 0 0 1.8h6a.9.9 0 0 0 0-1.8h-2.1v-2.32a5.76 5.76 0 0 0 4.85-5.68z"/></svg></button>
           <button class="search-submit" onclick="doSearch()">🔍</button>
         </div>
         <div class="mic-aviso" id="mic-aviso"></div>
         <div id="search-noresult"></div>
+      </div>
+
+      <!-- AVISO DE ESTAFA DE LA SEMANA (prueba) -->
+      <div class="aviso-semana">
+        <div class="aviso-semana-tit">🚨 El aviso de esta semana</div>
+        <p class="aviso-semana-txt"><strong>Que en la pantalla salga el nombre de tu banco no quiere decir que te llame tu banco.</strong> La Policía avisa de que los timadores pueden falsear lo que aparece en el móvil. Si te dicen que hay un cargo sospechoso, cuelga y llama tú al número de tu tarjeta.</p>
+        <button class="aviso-semana-btn" onclick="avisoAlJuego()">🎮 Practica con el juego ¿Estafa o no?</button>
       </div>
 
       <!-- CTA PRINCIPAL -->
@@ -2417,7 +2445,7 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       </button>
 
       <!-- Número de versión visible (para saber si la web está actualizada) -->
-      <div style="text-align:center;font-size:0.72rem;color:var(--light);font-weight:700;margin:14px 0 2px">versión 174</div>
+      <div style="text-align:center;font-size:0.72rem;color:var(--light);font-weight:700;margin:14px 0 2px">versión 175</div>
     </div>
     <!-- <div class="quick-bar"> HIDDEN
       <div class="quick-label">💬 Pregunta rápida:</div>
@@ -6629,7 +6657,7 @@ const SEARCH_MAP = [
   // Organiza tu correo (Gmail)
   { keywords: ['organizar correo','organizar email','organizar gmail','ordenar correo','gmail','bandeja','emails sin leer','organizar emails','limpiar correo','gestionar correo','revisar correo','muchos correos'], id: 'organiza' },
   // Salud y medicamentos
-  { keywords: ['salud','medicamento','prospecto','medicina','pastilla','síntoma','sintoma','enfermedad','consulta médica','consulta medica','médico','medico','doctor','dolor','análisis','analisis','receta médica','tratamiento','me duele','tengo fiebre','estoy malo','estoy mala','me encuentro mal'], id: 'salud' },
+  { keywords: ['salud','medicamento','prospecto','medicina','pastilla','síntoma','sintoma','enfermedad','consulta médica','consulta medica','médico','medico','doctor','dolor','análisis','analisis','receta médica','tratamiento','me duele','tengo fiebre','estoy malo','estoy mala','me encuentro mal','cáncer','cancer','tiroides','diabetes','colesterol','tensión','tension','azúcar','azucar','corazón','corazon','próstata','prostata','artrosis','reuma','operación','operacion','radiografía','radiografia','ecografía','ecografia','biopsia','quimioterapia','informe médico','informe medico','resultado de análisis','resultado de analisis','diágnostico','diagnostico'], id: 'salud' },
   // Trámites y burocracia
   { keywords: ['trámite','tramite','burocracia','formulario','administración','administracion','renta','hacienda','dni','impuesto','seguridad social','papeleo','gestión','gestion','solicitud oficial','ayuntamiento','subvención','subvencion','cita previa','registro civil','pasaporte','rellenar un papel','rellenar formulario'], id: 'tramites' },
   // Usa tu móvil mejor
@@ -6688,7 +6716,7 @@ function doSearch() {
 
   // Sin coincidencia — aquí sí guardamos lo que escribió, para poder taparlo
   if (typeof gtag === 'function') gtag('event', 'busqueda_sin_resultado', {
-    event_category: 'buscador', event_label: queryRaw.slice(0, 80)
+    event_category: 'buscador', event_label: queryRaw.slice(0, 200)
   });
 
   // Sin coincidencia — ofrecer abrir la IA directamente con lo que escribió
@@ -6701,8 +6729,8 @@ function mostrarBusquedaSinResultado(texto) {
   const prompt = `Ayúdame con esto, explicándomelo de forma clara y sencilla en español: ${texto}`;
   wrap.innerHTML = `
     <div style="background:linear-gradient(145deg,#29B6E8,#4ECDC4);border-radius:18px;padding:18px;margin-top:14px;box-shadow:0 6px 20px rgba(41,182,232,0.25)">
-      <div style="color:#fff;font-weight:700;font-size:0.95rem;margin-bottom:6px">🤔 No encontramos una sección exacta para "${texto}"</div>
-      <div style="color:rgba(255,255,255,0.9);font-size:0.85rem;line-height:1.5;margin-bottom:14px">Pero no te preocupes — la IA puede ayudarte igualmente. Pulsa y le preguntamos por ti:</div>
+      <div style="color:#fff;font-weight:700;font-size:0.95rem;margin-bottom:6px">✨ Esto te lo contesta mejor la IA</div>
+      <div style="color:rgba(255,255,255,0.9);font-size:0.85rem;line-height:1.5;margin-bottom:14px">Pulsa y le hago yo la pregunta por ti, con lo que has escrito. No tienes que copiar nada.</div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button onclick="window.open('https://chatgpt.com/?q=' + encodeURIComponent(decodeURIComponent('${encodeURIComponent(prompt)}')),'_blank')" style="flex:1;min-width:130px;background:rgba(255,255,255,0.25);border:2px solid rgba(255,255,255,0.6);color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.82rem;padding:10px 14px;border-radius:100px;cursor:pointer">🟢 Preguntar a ChatGPT</button>
         <button onclick="window.open('https://claude.ai/new?q=' + encodeURIComponent(decodeURIComponent('${encodeURIComponent(prompt)}')),'_blank')" style="flex:1;min-width:130px;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.4);color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.82rem;padding:10px 14px;border-radius:100px;cursor:pointer">🤖 Preguntar a Claude</button>
@@ -7257,6 +7285,12 @@ function abrirCarta() {
 function abrirChatGPTApp() {
   window.open('https://chatgpt.com','_blank');
 }
+/* ── Aviso de estafa de la semana (prueba) ── */
+function avisoAlJuego() {
+  if (typeof gtag === 'function') gtag('event', 'aviso_estafa', { event_category: 'portada', event_label: 'al juego' });
+  irTab('juegos');
+}
+
 /* ── Bloque final del inicio ── */
 function finIr(dest) {
   if (typeof gtag === 'function') gtag('event', 'fin_inicio', { event_category: 'navegacion', event_label: dest });

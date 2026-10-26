@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · v176 · Fuera la pestaña Descubre: la barra de abajo pasa a tres botones (Inicio, Aprende, Juegos) y cada uno se hace más grande. Los vídeos se mudan a Aprende y la sección de noticias se retira, porque la abrían 4 personas al mes y solo una pulsaba una noticia; su sitio lo ocupa el aviso de estafa de la portada · 26 octubre 2026 · ANTES ERA v175 · El buscador pasa a ser "Pregúntame lo que necesites" (la gente le preguntaba a la IA, no buscaba secciones), el cuadro de "sin resultado" deja de disculparse, entran 30 palabras de salud y aparece el aviso de estafa de la semana en la portada · Actualización semanal: tres noticias nuevas (el nombre del banco falseado en la pantalla, los alojamientos inventados con IA y el filtro de llamadas de WhatsApp) y juegos ampliados: +3 mensajes en ¿Estafa o no? (dos de fiar), +2 frases en ¿Verdad o mito? y +2 preguntas del día · 26 octubre 2026 -->
+<!-- IAtorpes.com · PRUEBA PORTADA DE UNA PREGUNTA (sobre la v176) · La portada arranca con "¿Qué necesitas hoy?" y cuatro botones grandes; las 19 categorías pasan detrás de "Ver todo lo que puedo hacer" · 26 octubre 2026 · ORIGEN: v176 · Fuera la pestaña Descubre: la barra de abajo pasa a tres botones (Inicio, Aprende, Juegos) y cada uno se hace más grande. Los vídeos se mudan a Aprende y la sección de noticias se retira, porque la abrían 4 personas al mes y solo una pulsaba una noticia; su sitio lo ocupa el aviso de estafa de la portada · 26 octubre 2026 · ANTES ERA v175 · El buscador pasa a ser "Pregúntame lo que necesites" (la gente le preguntaba a la IA, no buscaba secciones), el cuadro de "sin resultado" deja de disculparse, entran 30 palabras de salud y aparece el aviso de estafa de la semana en la portada · Actualización semanal: tres noticias nuevas (el nombre del banco falseado en la pantalla, los alojamientos inventados con IA y el filtro de llamadas de WhatsApp) y juegos ampliados: +3 mensajes en ¿Estafa o no? (dos de fiar), +2 frases en ¿Verdad o mito? y +2 preguntas del día · 26 octubre 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -286,6 +286,54 @@ body.es-android .back-btn { display: none !important; }
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.7; transform: scale(1.05); }
 }
+/* ── PORTADA DE UNA PREGUNTA (prueba) ── */
+.hoy-pregunta {
+  width: 100%; max-width: 560px; box-sizing: border-box;
+  padding: 4px 0 0; margin-bottom: 26px; text-align: center;
+}
+.hoy-pregunta-tit {
+  font-family: 'Sora', sans-serif; font-weight: 900;
+  font-size: clamp(1.25rem, 5.6vw, 1.6rem); color: var(--text);
+  margin: 0 0 16px; line-height: 1.25;
+}
+.hoy-botones { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; width: 100%; }
+.hoy-btn {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 7px; min-height: 112px; padding: 14px 10px;
+  border: none; border-bottom: 5px solid rgba(0,0,0,0.18);
+  border-radius: 20px; cursor: pointer; text-align: center;
+  font-family: 'Nunito', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s, border-bottom-width 0.1s;
+}
+.hoy-btn:active { transform: translateY(3px); border-bottom-width: 2px; }
+.hoy-btn-emoji { font-size: 2.1rem; line-height: 1; }
+.hoy-btn-txt { font-size: 0.97rem; font-weight: 900; color: #fff; line-height: 1.2; }
+.hoy-btn.b1 { background: linear-gradient(145deg,#4ECDC4,#2BA69C); }
+.hoy-btn.b2 { background: linear-gradient(145deg,#5B8DEF,#3566C9); }
+.hoy-btn.b3 { background: linear-gradient(145deg,#F7A541,#E07B1F); }
+.hoy-btn.b4 { background: linear-gradient(145deg,#7BC96F,#4FA345); }
+.ver-todo-wrap { width: 100%; max-width: 560px; padding: 22px 0 6px; text-align: center; }
+.ver-todo-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; box-sizing: border-box;
+  background: linear-gradient(145deg, #29B6E8, #1B8FBF);
+  border: none; border-bottom: 5px solid #146F96;
+  color: #fff; font-family: 'Sora', sans-serif; font-weight: 800;
+  font-size: 1.02rem; padding: 16px 20px; border-radius: 16px; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(41,182,232,0.3);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s, border-bottom-width 0.1s;
+}
+.ver-todo-btn:active { transform: translateY(3px); border-bottom-width: 2px; }
+.ver-todo-btn .vt-flecha { font-size: 1.2rem; line-height: 1; transition: transform 0.25s; }
+.ver-todo-btn.abierto .vt-flecha { transform: rotate(180deg); }
+#todo-lo-demas { display: none; width: 100%; }
+#todo-lo-demas.abierto { display: block; animation: todoEntra 0.35s ease; }
+@keyframes todoEntra { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+body.dark .hoy-pregunta-tit { color: #E8E8E8; }
+@media (prefers-reduced-motion: reduce) { #todo-lo-demas.abierto { animation: none; } }
+
 /* ── Carrusel IA del día: cada tarjeta = ancho de la original ── */
 .idd-scroll {
   display: flex;
@@ -2357,6 +2405,17 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
                 <h1 class="home-hero-title">La IA fácil<br><span>para gente normal</span><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap"> — Inteligencia artificial fácil en español</span></h1>
       </div>
 
+      <!-- UNA SOLA PREGUNTA (prueba) -->
+      <div class="hoy-pregunta">
+        <h2 class="hoy-pregunta-tit">¿Qué necesitas hoy?</h2>
+        <div class="hoy-botones">
+          <button class="hoy-btn b1" onclick="hoyVoy('salud')"><span class="hoy-btn-emoji">💊</span><span class="hoy-btn-txt">Salud y<br>medicinas</span></button>
+          <button class="hoy-btn b2" onclick="hoyVoy('tramites')"><span class="hoy-btn-emoji">📋</span><span class="hoy-btn-txt">Trámites y<br>papeleo</span></button>
+          <button class="hoy-btn b3" onclick="hoyVoy('carta')"><span class="hoy-btn-emoji">✉️</span><span class="hoy-btn-txt">Entender<br>una carta</span></button>
+          <button class="hoy-btn b4" onclick="hoyVoy('consultas')"><span class="hoy-btn-emoji">💬</span><span class="hoy-btn-txt">Preguntar<br>lo que sea</span></button>
+        </div>
+      </div>
+
       <!-- IA DEL DÍA — primero que ve el usuario -->
       <div id="ia-del-dia-wrap" style="margin-bottom:6px"></div>
 
@@ -2412,12 +2471,17 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
         <div class="history-items" id="history-items"></div>
       </div>
 
-      <div class="section-divider">
-        <div class="section-divider-line"></div>
-        <div class="section-divider-text">O elige directamente una categoría</div>
-        <div class="section-divider-line"></div>
+      <div class="ver-todo-wrap">
+        <button class="ver-todo-btn" id="ver-todo-btn" onclick="verTodo()"><span id="ver-todo-txt">Ver todo lo que puedo hacer</span><span class="vt-flecha">▾</span></button>
       </div>
-      <div class="grid" id="grid"></div>
+      <div id="todo-lo-demas">
+        <div class="section-divider">
+          <div class="section-divider-line"></div>
+          <div class="section-divider-text">Todas las categorías</div>
+          <div class="section-divider-line"></div>
+        </div>
+        <div class="grid" id="grid"></div>
+      </div>
 
       <!-- Bloque final: ¿Y ahora qué te apetece? -->
       <div class="fin-bloque" id="fin-bloque">
@@ -7265,6 +7329,25 @@ function abrirCarta() {
 function abrirChatGPTApp() {
   window.open('https://chatgpt.com','_blank');
 }
+/* ── Portada de una pregunta (prueba) ── */
+function hoyVoy(id) {
+  if (typeof gtag === 'function') gtag('event', 'hoy_necesito', { event_category: 'portada', event_label: id });
+  openCard(id);
+}
+function verTodo() {
+  const caja = document.getElementById('todo-lo-demas');
+  const btn = document.getElementById('ver-todo-btn');
+  if (!caja || !btn) return;
+  const abierto = caja.classList.toggle('abierto');
+  btn.classList.toggle('abierto', abierto);
+  const txt = document.getElementById('ver-todo-txt');
+  if (txt) txt.textContent = abierto ? 'Ocultar las categor\u00edas' : 'Ver todo lo que puedo hacer';
+  if (abierto) {
+    if (typeof gtag === 'function') gtag('event', 'ver_todo', { event_category: 'portada', event_label: 'abre las categorias' });
+    caja.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
 /* ── Aviso de estafa de la semana (prueba) ── */
 function avisoAlJuego() {
   if (typeof gtag === 'function') gtag('event', 'aviso_estafa', { event_category: 'portada', event_label: 'al juego' });

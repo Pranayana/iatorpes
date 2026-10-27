@@ -371,6 +371,27 @@ body.dark .hoy-pregunta-tit { color: #E8E8E8; }
 }
 .scroll-hint .hint-arrow { font-size: 1.3rem; line-height: 1; }
 .scroll-hint.oculto { opacity: 0; pointer-events: none; }
+/* La pista antigua se retira: la sustituye la flotante */
+.scroll-hint { display: none !important; }
+
+/* Pista flotante: siempre visible en la primera pantalla */
+.bajar-pista {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 84px);
+  z-index: 60; display: flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,0.96); color: #1B8FBF;
+  border: 2px solid rgba(41,182,232,0.5); border-radius: 100px;
+  padding: 8px 16px; cursor: pointer;
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.86rem;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.18);
+  animation: bajarBote 1.7s ease-in-out infinite;
+  transition: opacity 0.35s;
+}
+.bajar-pista .bajar-flecha { font-size: 1.05rem; line-height: 1; }
+.bajar-pista.oculto { opacity: 0; pointer-events: none; }
+@keyframes bajarBote { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(5px); } }
+body.dark .bajar-pista { background: rgba(26,26,46,0.96); color: #6FD3F5; border-color: rgba(111,211,245,0.45); }
+@media (prefers-reduced-motion: reduce) { .bajar-pista { animation: none; } }
 @keyframes hintBounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(5px); }
@@ -2404,6 +2425,9 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       <div class="home-hero">
                 <h1 class="home-hero-title">La IA fácil<br><span>para gente normal</span><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap"> — Inteligencia artificial fácil en español</span></h1>
       </div>
+
+      <!-- Pista flotante de que hay mas abajo (prueba) -->
+      <button class="bajar-pista" id="bajar-pista" onclick="bajarUnPoco()"><span>Hay más abajo</span><span class="bajar-flecha">▾</span></button>
 
       <!-- UNA SOLA PREGUNTA (prueba) -->
       <div class="hoy-pregunta">
@@ -7329,6 +7353,41 @@ function abrirCarta() {
 function abrirChatGPTApp() {
   window.open('https://chatgpt.com','_blank');
 }
+/* ── Pista "hay mas abajo" (prueba) ── */
+function bajarUnPoco() {
+  const s = document.querySelector('.home-inner');
+  const alto = Math.round(window.innerHeight * 0.72);
+  if (s && s.scrollHeight > s.clientHeight) s.scrollBy({ top: alto, behavior: 'smooth' });
+  else window.scrollBy({ top: alto, behavior: 'smooth' });
+  if (typeof gtag === 'function') gtag('event', 'bajar_pista', { event_category: 'portada', event_label: 'pulsa la pista' });
+}
+(function () {
+  const pista = document.getElementById('bajar-pista');
+  if (!pista) return;
+  const scroller = document.querySelector('.home-inner');
+  let fuera = false;
+  function ocultar() {
+    if (fuera) return;
+    pista.classList.add('oculto');
+    fuera = true;
+  }
+  function comprobar() {
+    const y = (scroller ? scroller.scrollTop : 0) || window.scrollY || document.documentElement.scrollTop || 0;
+    if (y > 40) ocultar();
+  }
+  if (scroller) scroller.addEventListener('scroll', comprobar, { passive: true });
+  window.addEventListener('scroll', comprobar, { passive: true });
+  /* Si la portada no se ve (estamos dentro de una ficha), la pista tampoco */
+  setInterval(function () {
+    const home = document.getElementById('home');
+    const enPortada = home && !home.classList.contains('hidden');
+    if (!enPortada) pista.style.display = 'none';
+    else if (!fuera) pista.style.display = '';
+  }, 500);
+  /* A los 12 segundos se quita sola, para no molestar */
+  setTimeout(ocultar, 12000);
+})();
+
 /* ── Portada de una pregunta (prueba) ── */
 function hoyVoy(id) {
   if (typeof gtag === 'function') gtag('event', 'hoy_necesito', { event_category: 'portada', event_label: id });

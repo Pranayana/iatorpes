@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- IAtorpes.com · PRUEBA PORTADA DE UNA PREGUNTA (sobre la v176) · La portada arranca con "¿Qué necesitas hoy?" y cuatro botones grandes; las 19 categorías pasan detrás de "Ver todo lo que puedo hacer" · 26 octubre 2026 · ORIGEN: v176 · Fuera la pestaña Descubre: la barra de abajo pasa a tres botones (Inicio, Aprende, Juegos) y cada uno se hace más grande. Los vídeos se mudan a Aprende y la sección de noticias se retira, porque la abrían 4 personas al mes y solo una pulsaba una noticia; su sitio lo ocupa el aviso de estafa de la portada · 26 octubre 2026 · ANTES ERA v175 · El buscador pasa a ser "Pregúntame lo que necesites" (la gente le preguntaba a la IA, no buscaba secciones), el cuadro de "sin resultado" deja de disculparse, entran 30 palabras de salud y aparece el aviso de estafa de la semana en la portada · Actualización semanal: tres noticias nuevas (el nombre del banco falseado en la pantalla, los alojamientos inventados con IA y el filtro de llamadas de WhatsApp) y juegos ampliados: +3 mensajes en ¿Estafa o no? (dos de fiar), +2 frases en ¿Verdad o mito? y +2 preguntas del día · 26 octubre 2026 -->
+<!-- IAtorpes.com · v180 · La página "Quién está detrás" contesta ahora la pregunta que se hace un técnico antes de recomendar la web: adónde va lo que escribe la persona. Bloque nuevo "¿Dónde va lo que escribes?" (IAtorpes no lleva IA dentro, lo que se escribe se escribe en ChatGPT o Gemini y no pasa por aquí), párrafo dirigido a quien trabaja en un centro público y tiene que valorar si esto es recomendable, y la lista de redes que ya lo tienen ampliada con Barcelona, Zaragoza y Valencia · 28 octubre 2026 · ANTES ERA v179 · La pastilla flotante "Hay más abajo" sube 48 píxeles en los móviles de pantalla alta (desde 780 px): antes se posaba encima del título "Pregúntame lo que necesites" y lo tapaba a medias; ahora queda en el hueco bajo la tarjeta del día. En los móviles bajos se queda donde estaba, porque ahí arriba taparía el título de la tarjeta del día · 27 octubre 2026 · ANTES ERA v178 · Fuera el bloque "Visitado recientemente" de la portada: solo lo veían quienes ya habían abierto fichas antes, estaba enterrado debajo del botón de WhatsApp y no tenía ningún evento, así que llevaba meses sin darnos un solo dato; su hueco desplazaba la pantalla hacia abajo sin aportar nada · 27 octubre 2026 · ANTES ERA v177 · La portada arranca con "¿Qué necesitas hoy?" y cuatro botones grandes (salud, trámites, entender una carta y preguntar), que son las secciones más usadas según Analytics; las 19 categorías pasan detrás del botón "Ver todo lo que puedo hacer"; y una pastilla flotante "Hay más abajo" avisa de que la portada sigue, porque los cuatro botones dejaron la pista antigua fuera de pantalla · 27 octubre 2026 · Fuera la pestaña Descubre: la barra de abajo pasa a tres botones (Inicio, Aprende, Juegos) y cada uno se hace más grande. Los vídeos se mudan a Aprende y la sección de noticias se retira, porque la abrían 4 personas al mes y solo una pulsaba una noticia; su sitio lo ocupa el aviso de estafa de la portada · 26 octubre 2026 · ANTES ERA v175 · El buscador pasa a ser "Pregúntame lo que necesites" (la gente le preguntaba a la IA, no buscaba secciones), el cuadro de "sin resultado" deja de disculparse, entran 30 palabras de salud y aparece el aviso de estafa de la semana en la portada · Actualización semanal: tres noticias nuevas (el nombre del banco falseado en la pantalla, los alojamientos inventados con IA y el filtro de llamadas de WhatsApp) y juegos ampliados: +3 mensajes en ¿Estafa o no? (dos de fiar), +2 frases en ¿Verdad o mito? y +2 preguntas del día · 26 octubre 2026 -->
 <html lang="es">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -392,6 +392,8 @@ body.dark .hoy-pregunta-tit { color: #E8E8E8; }
 @keyframes bajarBote { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(5px); } }
 body.dark .bajar-pista { background: rgba(26,26,46,0.96); color: #6FD3F5; border-color: rgba(111,211,245,0.45); }
 @media (prefers-reduced-motion: reduce) { .bajar-pista { animation: none; } }
+/* En pantallas altas la pastilla se posaba encima del título del buscador: la subimos al hueco que queda bajo la tarjeta del día. En las bajas se queda donde estaba, porque ahí arriba taparía la tarjeta. */
+@media (min-height: 780px) { .bajar-pista { bottom: calc(env(safe-area-inset-bottom, 0px) + 132px); } }
 @keyframes hintBounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(5px); }
@@ -2487,14 +2489,6 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
           <span style="color:#fff;font-size:1rem;margin-left:auto">→</span>
         </button>
       </div>
-      <div class="history-section" id="history-section" style="display:none">
-        <div class="history-title">
-          🕐 Visitado recientemente
-          <button class="history-clear" onclick="clearHistory()">Borrar</button>
-        </div>
-        <div class="history-items" id="history-items"></div>
-      </div>
-
       <div class="ver-todo-wrap">
         <button class="ver-todo-btn" id="ver-todo-btn" onclick="verTodo()"><span id="ver-todo-txt">Ver todo lo que puedo hacer</span><span class="vt-flecha">▾</span></button>
       </div>
@@ -2533,7 +2527,7 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
       </button>
 
       <!-- Número de versión visible (para saber si la web está actualizada) -->
-      <div style="text-align:center;font-size:0.72rem;color:var(--light);font-weight:700;margin:14px 0 2px">versión 176</div>
+      <div style="text-align:center;font-size:0.72rem;color:var(--light);font-weight:700;margin:14px 0 2px">versión 180</div>
     </div>
     <!-- <div class="quick-bar"> HIDDEN
       <div class="quick-label">💬 Pregunta rápida:</div>
@@ -3702,6 +3696,16 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
         </div>
 
         <div class="quien-bloque">
+          <h3>¿Dónde va lo que escribes?</h3>
+          <p>Esta es la pregunta importante, y te la contesto sin rodeos:</p>
+          <ul class="quien-lista">
+            <li>✅ <strong>IAtorpes no lleva inteligencia artificial dentro.</strong> Es una guía. No hay ningún sitio en esta web donde puedas hablar con una IA.</li>
+            <li>✅ <strong>Lo que escribes, lo escribes en ChatGPT o en Gemini</strong>, que se abren en su propia página, aparte. Son de otras empresas y cada una tiene sus condiciones.</li>
+            <li>✅ <strong>Yo no veo nada de eso, y aquí no se guarda nada.</strong> Ni tus preguntas, ni tus respuestas, ni tus documentos. IAtorpes no tiene dónde guardarlos: no hay cuenta, no hay contraseña y no hay base de datos.</li>
+          </ul>
+        </div>
+
+        <div class="quien-bloque">
           <h3>Lo que sí conviene que sepas</h3>
           <p>Te lo cuento claro, para que no haya sorpresas:</p>
           <p>· <strong>IAtorpes no es una inteligencia artificial.</strong> Es una guía que te lleva de la mano hasta las que ya existen — ChatGPT, Claude o Gemini. Esas son de otras empresas, y cada una tiene sus propias condiciones y su propia política de privacidad.</p>
@@ -3717,13 +3721,16 @@ body.dark .libro-etiqueta { background: rgba(255,248,230,0.14); color: #E8C86A; 
             <li>📍 Los <strong>Espacios CyL Digital</strong> de Castilla y León.</li>
             <li>📍 Las aulas de la <strong>Rede CeMIT</strong> de Galicia.</li>
             <li>📍 La <strong>Xarxa Punt TIC</strong> y los <strong>Punts Òmnia</strong> de Cataluña.</li>
+            <li>📍 Los <strong>casals de gent gran</strong> de Barcelona, los <strong>centros de convivencia</strong> de Zaragoza y los <strong>centros municipales de mayores</strong> de Valencia.</li>
           </ul>
+          <p style="margin-top:12px">Y ya se ha dado: en octubre de 2026 un centro de Barcelona lo usó en una sesión con <strong>dieciséis personas mayores</strong>, sin un solo problema para instalarlo ni para usarlo.</p>
           <p style="margin-top:12px">El material es libre: cualquier centro, biblioteca, asociación o residencia puede usarlo sin pedirme permiso y sin avisarme. Si trabajas en uno y lo quieres, pídemelo y te lo mando.</p>
         </div>
 
         <div class="quien-bloque">
           <h3>Si has llegado aquí porque no te fiabas</h3>
           <p>Me parece bien. Es exactamente lo que hay que hacer antes de recomendar algo a una persona mayor, que son las que más engaños reciben. Compruébalo todo lo que quieras, y si algo te chirría, dímelo.</p>
+          <p>Y si trabajas en un centro público, en una biblioteca o en un ayuntamiento y <strong>tienes que decidir si esto se puede recomendar</strong>, escríbeme directamente. Te contesto lo que necesites saber, con el detalle que haga falta: no hay nada de esta web que no pueda explicar. Si algo no te convence, dímelo y lo cambio.</p>
           <p>Escribo yo las respuestas, normalmente el mismo día:</p>
           <p><a class="quien-mail" href="mailto:jcgomezmaestre@gmail.com">jcgomezmaestre@gmail.com</a></p>
         </div>
@@ -5855,7 +5862,6 @@ function openCard(id) {
     navStack = vistaId ? [vistaId] : [];
   }
   document.getElementById('inner').scrollTop = 0;
-  addToHistory(id);
 }
 
 function showVista(id) {
@@ -6644,35 +6650,9 @@ const CARD_NAMES = {
   aprende: '🎓 Aprende con la IA',
 };
 
-function addToHistory(id) {
-  let history = JSON.parse(localStorage.getItem('iatorpes_history') || '[]');
-  history = history.filter(h => h !== id);
-  history.unshift(id);
-  history = history.slice(0, 4); // max 4 items
-  localStorage.setItem('iatorpes_history', JSON.stringify(history));
-  renderHistory();
-}
-
-function renderHistory() {
-  const history = JSON.parse(localStorage.getItem('iatorpes_history') || '[]');
-  const section = document.getElementById('history-section');
-  const container = document.getElementById('history-items');
-  if (history.length === 0) { section.style.display = 'none'; return; }
-  section.style.display = 'block';
-  container.innerHTML = history.map(id => `
-    <div class="history-item" onclick="openCard('${id}')">
-      ${CARD_NAMES[id] || id}
-    </div>
-  `).join('');
-}
-
-function clearHistory() {
-  localStorage.removeItem('iatorpes_history');
-  renderHistory();
-}
-
-// Load history on start
-window.addEventListener('load', renderHistory);
+/* v178: el bloque "Visitado recientemente" se retiró de la portada.
+   Por si queda guardado algo en algún móvil, lo borramos una sola vez. */
+try { localStorage.removeItem('iatorpes_history'); } catch (e) {}
 
 // ── Ocultar la pista "desliza para ver más" cuando el usuario baja ──
 (function() {
